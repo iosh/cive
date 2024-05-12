@@ -2,11 +2,12 @@
   "name": "unit",
   "module": "index.ts",
   "type": "module",
-  "devDependencies": {},
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@scure/bip32": "^1.4.0",
+    "abitype": "^1.0.2",
     "viem": "^2.10.3"
   }
 }
