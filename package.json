@@ -2,9 +2,7 @@
   "name": "unit",
   "module": "index.ts",
   "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
+  "devDependencies": {},
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
