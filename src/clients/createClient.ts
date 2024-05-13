@@ -3,13 +3,12 @@ import type { Address } from "abitype";
 import type {
   Transport,
   Chain,
-  RpcSchema,
   CcipRequestParameters,
   Hex,
   WalletActions,
   ExactPartial,
   EIP1193RequestFn,
-  EIP1474Methods,
+  RpcSchema,
 } from "viem";
 import type { Prettify } from "viem/chains";
 import type { PublicActions } from "./decorators/public";
@@ -18,7 +17,7 @@ import type { ParseAccountErrorType } from "viem/utils";
 import type { ErrorType } from "../errors/utils";
 import { parseAccount } from "../accounts/utils/parseAccount";
 import { uid } from "../utils/uid";
-
+import type { EIP1474Methods } from "../types/eip1193";
 
 export type ClientConfig<
   transport extends Transport = Transport,
