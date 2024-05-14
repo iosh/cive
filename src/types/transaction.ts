@@ -22,10 +22,10 @@ export type TransactionBase<
   /** Hash of this transaction */
   hash: Hash;
   /**the maximum amount of storage space that can be consumed by the transaction. */
-  storageLimit: Hex;
+  storageLimit: TQuantity;
 
   /**the epoch number of the blockchain, which is used to sets an expiration time for the transaction */
-  epochHeight: TPending extends true ? null : Hash;
+  epochHeight: TPending extends true ? null : TQuantity;
 
   /** Hash of block containing this transaction or `null` if pending */
   blockHash: TPending extends true ? null : Hash;
@@ -54,6 +54,8 @@ export type TransactionLegacy<
     chainId?: TIndex | undefined;
     // yParity?: never | undefined;
     // type: TType;
+    contractCreated: Address | null;
+    status: TQuantity | null;
   };
 
 export type Transaction<

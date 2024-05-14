@@ -85,32 +85,7 @@ type ExtendableProtectedActions<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined
-> = Pick<
-  PublicActions<transport, chain, account>,
-  | "call"
-  | "createContractEventFilter"
-  | "createEventFilter"
-  | "estimateContractGas"
-  | "estimateGas"
-  | "getBlock"
-  | "getBlockNumber"
-  | "getChainId"
-  | "getContractEvents"
-  | "getEnsText"
-  | "getFilterChanges"
-  | "getGasPrice"
-  | "getLogs"
-  | "getTransaction"
-  | "getTransactionCount"
-  | "getTransactionReceipt"
-  | "prepareTransactionRequest"
-  | "readContract"
-  | "sendRawTransaction"
-  | "simulateContract"
-  | "uninstallFilter"
-  | "watchBlockNumber"
-  | "watchContractEvent"
-> &
+> = Pick<PublicActions<transport, chain, account>, "getTransaction"> &
   Pick<WalletActions<chain, account>, "sendTransaction" | "writeContract">;
 
 // TODO: Move `transport` to slot index 2 since `chain` and `account` used more frequently.
