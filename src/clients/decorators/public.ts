@@ -6,15 +6,42 @@ import {
   type GetTransactionReturnType,
   type GetTransactionParameters,
 } from "../../actions/public/getTransaction";
+import type { EpochTag } from "../../types/block";
+import {
+  getBlock,
+  type GetBlockParameters,
+  type GetBlockReturnType,
+} from "../../actions/public/getBlock";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
   TChain extends Chain | undefined = Chain | undefined,
   TAccount extends Account | undefined = Account | undefined
 > = {
+  /**
+   * Returns information about a transaction, identified by its hash.
+   * - Docs: https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionbyhash
+   * @param args {@link GetTransactionParameters}
+   * @returns {@link GetTransactionReturnType}
+   */
   getTransaction: (
     args: GetTransactionParameters
   ) => Promise<GetTransactionReturnType<TChain>>;
+
+  /**
+   * Returns information about a block, identified by its hash or number or tag
+   * - JSON-RPC Methods:
+   *  - Calls [`cfx_getblockbyhash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyhash)
+   *  - Calls [`cfx_getBlockByEpochNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyepochnumber)
+   * @param args {@link GetBlockParameters}
+   * @returns {@link GetBlockReturnType}
+   */
+  getBlock: <
+    TIncludeTransactions extends boolean = false,
+    TEpochTag extends EpochTag = "latest_state"
+  >(
+    args?: GetBlockParameters<TIncludeTransactions, TEpochTag>
+  ) => Promise<GetBlockReturnType<TChain, TIncludeTransactions, TEpochTag>>;
 };
 
 export function publicActions<
@@ -26,5 +53,6 @@ export function publicActions<
 ): PublicActions<TTransport, TChain, TAccount> {
   return {
     getTransaction: (args) => getTransaction(client, args),
+    getBlock: (args) => getBlock(client, args),
   };
 }

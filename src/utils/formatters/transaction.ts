@@ -6,14 +6,14 @@ import {
 } from "viem";
 import type { Transaction } from "../../types/transaction";
 import type { ExactPartial, UnionLooseOmit } from "../../types/utils";
-import type { EpochNumberParameters } from "../../types/epoch";
+import type { EpochTag } from "../../types/block";
 import type { RpcTransaction } from "../../types/rpc";
 
 type TransactionPendingDependencies = "blockHash";
 
 export type FormattedTransaction<
   TChain extends Chain | undefined = undefined,
-  TEpochNumber extends EpochNumberParameters = EpochNumberParameters,
+  TEpochNumber extends EpochTag = EpochTag,
   _FormatterReturnType = ExtractChainFormatterReturnType<
     TChain,
     "transaction",
