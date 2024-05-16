@@ -12,6 +12,11 @@ import {
   type GetBlockParameters,
   type GetBlockReturnType,
 } from "../../actions/public/getBlock";
+import {
+  getEpochNumber,
+  type GetEpochNumberParameters,
+  type GetEpochNumberReturnType,
+} from "../../actions/public/getEpochNumber";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -42,6 +47,16 @@ export type PublicActions<
   >(
     args?: GetBlockParameters<TIncludeTransactions, TEpochTag>
   ) => Promise<GetBlockReturnType<TChain, TIncludeTransactions, TEpochTag>>;
+
+  /**
+   * Returns the epoch number corresponding to the given tag.
+   * - JSON-RPC Methods: [`cfx_epochNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_epochnumber)
+   * @param args  {@link GetEpochNumberParameters}
+   * @returns {@link GetEpochNumberReturnType}
+   */
+  getEpochNumber: (
+    args?: GetEpochNumberParameters
+  ) => Promise<GetEpochNumberReturnType>;
 };
 
 export function publicActions<
@@ -54,5 +69,6 @@ export function publicActions<
   return {
     getTransaction: (args) => getTransaction(client, args),
     getBlock: (args) => getBlock(client, args),
+    getEpochNumber: (args) => getEpochNumber(client, args),
   };
 }

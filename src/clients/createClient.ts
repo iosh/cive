@@ -81,11 +81,16 @@ export type ClientConfig<
 // They are allowed to be extended, but must conform to their parameter & return type interfaces.
 // Example: an extended `call` action must accept `CallParameters` as parameters,
 // and conform to the `CallReturnType` return type.
+
 type ExtendableProtectedActions<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined
-> = Pick<PublicActions<transport, chain, account>, "getTransaction"> &
+> = Pick<
+  PublicActions<transport, chain, account>,
+  "getTransaction" | "getBlock" | "getEpochNumber"
+> &
+  //@ts-ignore
   Pick<WalletActions<chain, account>, "sendTransaction" | "writeContract">;
 
 // TODO: Move `transport` to slot index 2 since `chain` and `account` used more frequently.

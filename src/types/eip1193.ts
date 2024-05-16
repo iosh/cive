@@ -1,5 +1,6 @@
 import type { Address } from "abitype";
 import type { Hash } from "viem";
+import type { Quantity } from "./rpc";
 
 import type { RpcEpochNumber, RpcTransaction as Transaction } from "./rpc";
 import type { Block, EpochNumber, EpochTag } from "./block";
@@ -29,8 +30,21 @@ export type PublicRpcSchema = [
    */
   {
     Method: "cfx_getBlockByEpochNumber";
-    Parameters: [block: EpochTag | RpcEpochNumber, includeTransactions?: boolean];
+    Parameters: [
+      block: EpochTag | RpcEpochNumber,
+      includeTransactions?: boolean
+    ];
     ReturnType: Block | null;
+  },
+
+  /**
+   * @description Returns the epoch number corresponding to the given tag.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_epochnumber
+   */
+  {
+    Method: "cfx_epochNumber";
+    Parameters: [EpochTag];
+    ReturnType: Quantity;
   }
 ];
 

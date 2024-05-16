@@ -32,7 +32,6 @@ export type PublicClientConfig<
     | "transport"
   >
 >;
-const a: Register["AddressType"] = "cfx:1111";
 
 export type PublicClient<
   transport extends Transport = Transport,
