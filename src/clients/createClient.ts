@@ -88,7 +88,11 @@ type ExtendableProtectedActions<
   account extends Account | undefined = Account | undefined
 > = Pick<
   PublicActions<transport, chain, account>,
-  "getTransaction" | "getBlock" | "getEpochNumber"
+  | "getTransaction"
+  | "getBlock"
+  | "getBastBlockHash"
+  | "getEpochNumber"
+  | "getGasPrice"
 > &
   //@ts-ignore
   Pick<WalletActions<chain, account>, "sendTransaction" | "writeContract">;

@@ -17,6 +17,24 @@ import {
   type GetEpochNumberParameters,
   type GetEpochNumberReturnType,
 } from "../../actions/public/getEpochNumber";
+import {
+  getGasPrice,
+  type GetGasPriceReturnType,
+} from "../../actions/public/getGasPrice";
+import {
+  getBastBlockHash,
+  type GetBastBlockHashReturn,
+} from "../../actions/public/getBastBlockHash";
+import {
+  getBlocksByEpoch,
+  type GetBlocksByEpochParameters,
+  type GetBlocksByEpochReturnType,
+} from "../../actions/public/getBlocksByEpoch";
+import {
+  getBalance,
+  type GetBalanceParameters,
+  type GetBalanceReturnType,
+} from "../../actions/public/getBalance";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -49,6 +67,12 @@ export type PublicActions<
   ) => Promise<GetBlockReturnType<TChain, TIncludeTransactions, TEpochTag>>;
 
   /**
+   * Returns the hash of the best block.
+   * - JSON-RPC Methods: [`cfx_getbestblockhash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getbestblockhash)
+   * @returns hash of the best block. {@link GetBastBlockHashReturn}
+   */
+  getBastBlockHash: () => Promise<GetBastBlockHashReturn>;
+  /**
    * Returns the epoch number corresponding to the given tag.
    * - JSON-RPC Methods: [`cfx_epochNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_epochnumber)
    * @param args  {@link GetEpochNumberParameters}
@@ -57,6 +81,31 @@ export type PublicActions<
   getEpochNumber: (
     args?: GetEpochNumberParameters
   ) => Promise<GetEpochNumberReturnType>;
+  /**
+   * Returns the current price per gas in Drip.
+   * - JSON-RPC Method: [`cfx_gasprice`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gasprice)
+   * @returns  integer of the current gas price in Drip. {@link GetGasPriceReturnType}
+   */
+  getGasPrice: () => Promise<GetGasPriceReturnType>;
+
+  /**
+   * Returns the block hashes in the specified epoch.
+   * - JSON-RPC Methods: [`cfx_getBlocksByEpoch`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblocksbyepoch)
+   * @param args - {@link GetBlocksByEpochParameters}
+   * @returns - {@link GetBlocksByEpochReturnType}
+   */
+  getBlocksByEpoch: (
+    args: GetBlocksByEpochParameters
+  ) => Promise<GetBlocksByEpochReturnType>;
+
+  /**
+   * Returns the balance of the given account, identified by its address.
+   * - JSON-RPC Methods: [`cfx_getbalance`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getbalance)
+   * @param args - {@link GetBalanceParameters}
+   * @returns   integer of the current balance in Drip. {@link GetBalanceReturnType}
+   */
+
+  getBalance: (args: GetBalanceParameters) => Promise<GetBalanceReturnType>;
 };
 
 export function publicActions<
@@ -69,6 +118,10 @@ export function publicActions<
   return {
     getTransaction: (args) => getTransaction(client, args),
     getBlock: (args) => getBlock(client, args),
+    getBastBlockHash: () => getBastBlockHash(client),
     getEpochNumber: (args) => getEpochNumber(client, args),
+    getGasPrice: () => getGasPrice(client),
+    getBlocksByEpoch: (args) => getBlocksByEpoch(client, args),
+    getBalance: (args) => getBalance(client, args),
   };
 }

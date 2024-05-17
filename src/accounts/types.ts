@@ -1,6 +1,6 @@
 import type { CustomSource, Hex, OneOf } from "viem";
 
-export type NetworkPrefix = 'cfx' | 'cfxtest' | 'net17';
+export type NetworkPrefix = 'cfx' | 'cfxtest' | `net${string}`;
 export type AddressType = 'builtin' | 'user' | 'contract';
 export  type Address = `${NetworkPrefix}:${string}` | `${NetworkPrefix}.type.${AddressType}:${string}`;
 
