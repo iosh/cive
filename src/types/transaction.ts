@@ -43,8 +43,8 @@ export type TransactionBase<
 export type TransactionLegacy<
   TQuantity = bigint,
   TIndex = number,
-  TPending extends boolean = boolean,
-  TType = "legacy"
+  TPending extends boolean = boolean
+  // TType = "legacy"
 > = Omit<TransactionBase<TQuantity, TIndex, TPending>, "yParity"> &
   FeeValuesLegacy<TQuantity> & {
     // /** EIP-2930 Access List. */
@@ -63,3 +63,28 @@ export type Transaction<
   TIndex = number,
   TPending extends boolean = boolean
 > = TransactionLegacy<TQuantity, TIndex, TPending>;
+
+export type TransactionRequestBase<TQuantity = bigint, TIndex = number> = {
+  /** Transaction sender */
+  from: Address;
+  /** Transaction recipient */
+  to?: Address | null | undefined;
+  /** Gas provided for transaction execution */
+  gas?: TQuantity | undefined;
+
+  /** Value in wei sent with this transaction */
+  value?: TQuantity | undefined;
+
+  /** Contract code or a hashed method call with encoded args */
+  data?: Hex | undefined;
+
+  /** Unique number identifying this transaction */
+  nonce?: TIndex | undefined;
+};
+
+export type TransactionRequestLegacy<
+  TQuantity = bigint,
+  TIndex = number,
+  TTransactionType = "legacy"
+> = TransactionRequestBase<TQuantity, TIndex> &
+  ExactPartial<FeeValuesLegacy<TQuantity>>;

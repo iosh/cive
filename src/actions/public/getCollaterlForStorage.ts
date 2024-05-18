@@ -5,7 +5,7 @@ import type { EpochTag } from "../../types/block";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils";
 
-export type GetBalanceParameters = {
+export type GetCollateralForStorageParameters = {
   address: Address;
 } & (
   | {
@@ -22,23 +22,23 @@ export type GetBalanceParameters = {
     }
 );
 
-export type GetBalanceReturnType = bigint;
+export type GetCollateralForStorageReturnType = bigint;
 
-export type GetBalanceErrorType =
+export type GetCollateralForStorageErrorType =
   | RequestErrorType
   | NumberToHexErrorType
   | ErrorType;
 
-export async function getBalance<TChain extends Chain | undefined>(
+export async function getCollateralForStorage<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { address, epochNumber, epochTag = "latest_state" }: GetBalanceParameters
-):Promise<GetBalanceReturnType> {
+  { address, epochNumber, epochTag = "latest_state" }: GetCollateralForStorageParameters
+):Promise<GetCollateralForStorageReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined;
 
-  const balance = await client.request({
-    method: "cfx_getBalance",
+  const collateralForStorage = await client.request({
+    method: "cfx_getCollateralForStorage",
     params: [address, _epochNumber || epochTag],
   });
 
-  return BigInt(balance);
+  return BigInt(collateralForStorage);
 }

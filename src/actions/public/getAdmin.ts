@@ -5,40 +5,40 @@ import type { EpochTag } from "../../types/block";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils";
 
-export type GetBalanceParameters = {
+export type GetAdminParameters = {
   address: Address;
 } & (
   | {
-    /**
-     * @default 'latest_state'
-     */
+      /**
+       * @default 'latest_state'
+       */
       epochTag?: EpochTag | undefined;
       epochNumber?: never | undefined;
     }
   | {
-    
       epochTag?: never | undefined;
       epochNumber?: bigint | undefined;
     }
 );
 
-export type GetBalanceReturnType = bigint;
+export type GetAdminReturnType = Address | null;
 
-export type GetBalanceErrorType =
+export type GetAdminErrorType =
   | RequestErrorType
   | NumberToHexErrorType
   | ErrorType;
 
-export async function getBalance<TChain extends Chain | undefined>(
+export async function getAdmin<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { address, epochNumber, epochTag = "latest_state" }: GetBalanceParameters
-):Promise<GetBalanceReturnType> {
+  { address, epochNumber, epochTag = "latest_state" }: GetAdminParameters
+): Promise<GetAdminReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined;
 
-  const balance = await client.request({
-    method: "cfx_getBalance",
+  const adminAddress = await client.request({
+    method: "cfx_getAdmin",
     params: [address, _epochNumber || epochTag],
   });
 
-  return BigInt(balance);
+
+  return adminAddress
 }

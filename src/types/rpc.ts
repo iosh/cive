@@ -1,10 +1,14 @@
 import type { Index, Quantity } from "viem";
-import type { TransactionLegacy } from "./transaction";
+import type {
+  TransactionLegacy,
+  TransactionRequestLegacy,
+} from "./transaction";
 import type { Block, EpochNumber, EpochTag } from "./block";
+import type { Sponsor } from "./sponsor";
 
 export type { Quantity };
 export type RpcTransaction<TPending extends boolean = boolean> =
-  TransactionLegacy<Quantity, Index, TPending, "0x0">;
+  TransactionLegacy<Quantity, Index, TPending>;
 
 export type RpcBlock<
   TBlockTag extends EpochTag = EpochTag,
@@ -13,3 +17,11 @@ export type RpcBlock<
 > = Block<Quantity, TIncludeTransactions, TBlockTag, TTransaction>;
 
 export type RpcEpochNumber = EpochNumber<Quantity>;
+
+export type RpcSponsor = Sponsor<Quantity>;
+
+export type RpcTransactionRequest = TransactionRequestLegacy<
+  Quantity,
+  Index,
+  "0x0"
+>;
