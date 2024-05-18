@@ -5,6 +5,7 @@ import type {
 } from "./transaction";
 import type { Block, EpochNumber, EpochTag } from "./block";
 import type { Sponsor } from "./sponsor";
+import type { FeeValueLegacy } from "./fee";
 
 export type { Quantity };
 export type RpcTransaction<TPending extends boolean = boolean> =
@@ -25,3 +26,5 @@ export type RpcTransactionRequest = TransactionRequestLegacy<
   Index,
   "0x0"
 >;
+
+export type RpcFeeValue = FeeValueLegacy<Quantity>

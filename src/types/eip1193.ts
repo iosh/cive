@@ -1,6 +1,11 @@
 import type { Address } from "abitype";
 import type { ExactPartial, Hash, Hex } from "viem";
-import type { Quantity, RpcSponsor, RpcTransactionRequest } from "./rpc";
+import type {
+  Quantity,
+  RpcFeeValue,
+  RpcSponsor,
+  RpcTransactionRequest,
+} from "./rpc";
 
 import type { RpcEpochNumber, RpcTransaction as Transaction } from "./rpc";
 import type { Block, EpochNumber, EpochTag } from "./block";
@@ -190,6 +195,8 @@ export type PublicRpcSchema = [
     Parameters:
       | [transaction: RpcTransactionRequest]
       | [transaction: RpcTransactionRequest, epoch: EpochTag | RpcEpochNumber];
+
+    ReturnType: RpcFeeValue;
   }
 ];
 
