@@ -9,7 +9,7 @@ export type Block<
   TTransaction = Transaction<
     bigint,
     number,
-    TEpochTag extends "latest_state" ? false : true
+    TEpochTag extends "latest_mined" ? true : false
   >
 > = {
   /**

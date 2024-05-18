@@ -6,6 +6,7 @@ import type {
 import type { Block, EpochNumber, EpochTag } from "./block";
 import type { Sponsor } from "./sponsor";
 import type { FeeValueLegacy } from "./fee";
+import type { Log } from "./log";
 
 export type { Quantity };
 export type RpcTransaction<TPending extends boolean = boolean> =
@@ -28,3 +29,5 @@ export type RpcTransactionRequest = TransactionRequestLegacy<
 >;
 
 export type RpcFeeValue = FeeValueLegacy<Quantity>
+
+export type RpcLog = Log<Quantity>

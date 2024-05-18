@@ -1,5 +1,5 @@
 import type { Address } from "abitype";
-import type { ExactPartial, Hash, Hex } from "viem";
+import type { ExactPartial, Hash, Hex, LogTopic } from "viem";
 import type {
   Quantity,
   RpcFeeValue,
@@ -9,6 +9,7 @@ import type {
 
 import type { RpcEpochNumber, RpcTransaction as Transaction } from "./rpc";
 import type { Block, EpochNumber, EpochTag } from "./block";
+import type { Log } from "./log";
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema];
 export type PublicRpcSchema = [
   /**
@@ -197,6 +198,25 @@ export type PublicRpcSchema = [
       | [transaction: RpcTransactionRequest, epoch: EpochTag | RpcEpochNumber];
 
     ReturnType: RpcFeeValue;
+  },
+  /**
+   * @description Returns logs matching the filter provided.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getlogs
+   */
+  {
+    Method: "cfx_getLogs";
+    Parameters: [
+      {
+        fromEpoch?: EpochNumber | undefined;
+        toEpoch?: EpochNumber | undefined;
+        fromBlock?: Quantity | undefined;
+        toBlock?: Quantity | undefined;
+        blockHashes?: Hex[] | undefined;
+        address?: Address | Address[] | undefined;
+        topics?: LogTopic[] | undefined;
+      }
+    ];
+    ReturnType: Log[];
   }
 ];
 
