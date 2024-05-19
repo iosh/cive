@@ -1,6 +1,89 @@
 import type { Address } from "abitype";
 import type { FeeValuesLegacy, Hash, Hex } from "viem";
 import type { ExactPartial } from "./utils";
+import type { Log } from "./log";
+
+export type TransactionReceipt<
+  TQuantity = bigint,
+  TIndex = number,
+  TOutcomeStatus = 'success' | 'failed' | 'skipped'
+> = {
+  /**
+   * hash of the given transaction.
+   */
+  transactionHash: Hash;
+  /**
+   * transaction index within the block.
+   */
+  index: TQuantity;
+  /**
+   *  hash of the block where this transaction was in and got executed.
+   */
+  blockHash: Hex;
+
+  /**
+   * epoch number of the block where this transaction was in and got executed.
+   */
+  epochNumber: TQuantity;
+
+  from: Address;
+  to: Address;
+  /**
+   * gas used for executing the transaction.
+   */
+  gasUsed: TQuantity;
+  /**
+   *  gas charged to the sender's account. If the provided gas (gas limit) is larger than the gas used, at most 1/4 of it is refunded.
+   */
+  gasFee: TQuantity;
+
+  /**
+   *  true if this transaction's gas fee was covered by the sponsor.
+   */
+  gasCoveredBySponsor: boolean;
+  /**
+   * the amount of storage collateral this transaction required.
+   */
+  storageCollateralized: TQuantity;
+
+  /**
+   * true if this transaction's storage collateral was covered by the sponsor.
+   */
+  storageCoveredBySponsor: boolean;
+  /**
+   * array of storage change objects, each specifying an address and the corresponding amount of storage collateral released,
+   */
+  storageReleased: {
+    address: Address;
+    collaterals: TQuantity;
+  }[];
+
+  /**
+   * address of the contract created. null when it is not a contract deployment transaction.
+   */
+  contractCreated: Address | null;
+
+  /**
+   * hash of the state root after the execution of the corresponding block. 0 if the state root is not available.
+   */
+  stateRoot: Hash;
+  /**
+   * the outcome status code. 0x0 means success. 0x1 means failed. 0x2 means skipped
+   */
+  outcomeStatus: TOutcomeStatus;
+  /**
+   * bloom filter for light clients to quickly retrieve related logs.
+   */
+  logsBloom: Hex;
+  /**
+   * array of log objects that this transaction generated,
+   */
+  log: Log<TQuantity>[];
+  /**
+   * tx exec fail message, if transaction exec success this will be null.
+   */
+  txExecErrorMsg: string | null;
+};
 
 export type TransactionBase<
   TQuantity = bigint,

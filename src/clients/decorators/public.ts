@@ -70,7 +70,16 @@ import {
   type GetSponsorInfoParameters,
   type GetSponsorInfoReturnType,
 } from "../../actions/public/getSponsorInfo";
-import { getNextNonce, type GetNextNonceParameters, type GetNextNonceReturnType } from "../../actions/public/getNextNonce";
+import {
+  getNextNonce,
+  type GetNextNonceParameters,
+  type GetNextNonceReturnType,
+} from "../../actions/public/getNextNonce";
+import {
+  getTransactionReceipt,
+  type GetTransactionReceiptParameters,
+  type GetTransactionReceiptReturnType,
+} from "../../actions/public/getTransactionReceipt";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -216,7 +225,18 @@ export type PublicActions<
    * @param args - {@link GetNextNonceParameters}
    * @returns - integer of the next nonce that should be used by the given address.
    */
-  getNextNonce:(args:GetNextNonceParameters) => Promise<GetNextNonceReturnType>
+  getNextNonce: (
+    args: GetNextNonceParameters
+  ) => Promise<GetNextNonceReturnType>;
+
+  /**
+   * Returns a transaction receipt, identified by the corresponding transaction hash.
+   * @param args - {@link GetTransactionReceiptParameters}
+   * @returns a transaction receipt object, or null when no transaction was found or the transaction was not executed yet: {@link GetTransactionReceiptReturnType}
+   */
+  getTransactionReceipt: (
+    args: GetTransactionReceiptParameters
+  ) => Promise<GetTransactionReceiptReturnType>;
 };
 
 export function publicActions<
@@ -241,6 +261,7 @@ export function publicActions<
     getStorageAt: (args) => GetStorageAt(client, args),
     getStorageRoot: (args) => GetStorageRoot(client, args),
     getSponsorInfo: (args) => GetSponsorInfo(client, args),
-    getNextNonce:(args) => getNextNonce(client,args)
+    getNextNonce: (args) => getNextNonce(client, args),
+    getTransactionReceipt: (args) => getTransactionReceipt(client, args),
   };
 }

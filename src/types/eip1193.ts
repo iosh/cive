@@ -4,6 +4,7 @@ import type {
   Quantity,
   RpcFeeValue,
   RpcSponsor,
+  RpcTransactionReceipt,
   RpcTransactionRequest,
 } from "./rpc";
 
@@ -217,6 +218,11 @@ export type PublicRpcSchema = [
       }
     ];
     ReturnType: Log[];
+  },
+  {
+    Method: "cfx_getTransactionReceipt";
+    Parameters: [txHash: Hash];
+    ReturnType: RpcTransactionReceipt | null;
   }
 ];
 

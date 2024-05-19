@@ -1,6 +1,7 @@
 import type { Index, Quantity } from "viem";
 import type {
   TransactionLegacy,
+  TransactionReceipt,
   TransactionRequestLegacy,
 } from "./transaction";
 import type { Block, EpochNumber, EpochTag } from "./block";
@@ -9,6 +10,7 @@ import type { FeeValueLegacy } from "./fee";
 import type { Log } from "./log";
 
 export type { Quantity };
+export type OutcomeStatus = "0x0" | "0x1" | "0x2";
 export type RpcTransaction<TPending extends boolean = boolean> =
   TransactionLegacy<Quantity, Index, TPending>;
 
@@ -28,6 +30,8 @@ export type RpcTransactionRequest = TransactionRequestLegacy<
   "0x0"
 >;
 
-export type RpcFeeValue = FeeValueLegacy<Quantity>
+export type RpcFeeValue = FeeValueLegacy<Quantity>;
 
-export type RpcLog = Log<Quantity>
+export type RpcLog = Log<Quantity>;
+
+export type RpcTransactionReceipt = TransactionReceipt<Quantity, Index, OutcomeStatus>;
