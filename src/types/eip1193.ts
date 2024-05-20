@@ -246,6 +246,15 @@ export type PublicRpcSchema = [
     Method: "cfx_getInterestRate";
     Parameters: [epoch: EpochTag | RpcEpochNumber];
     ReturnType: Quantity;
+  },
+  /**
+   * @description Returns the accumulate interest rate at the given epoch.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccumulateinterestrate
+   */
+  {
+    Method: "cfx_getAccumulateInterestRate";
+    Parameters: [epoch: EpochTag | RpcEpochNumber];
+    ReturnType: Quantity;
   }
 ];
 

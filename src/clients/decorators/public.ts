@@ -90,6 +90,11 @@ import {
   type GetInterestRateParameters,
   type GetInterestRateReturnType,
 } from "../../actions/public/getInterestRate";
+import {
+  getAccumulateInterestRate,
+  type GetAccumulateInterestRateParameters,
+  type GetAccumulateInterestRateReturnType,
+} from "../../actions/public/getAccumulateInterestRate";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -268,6 +273,14 @@ export type PublicActions<
   getInterestRate: (
     args: GetInterestRateParameters
   ) => Promise<GetInterestRateReturnType>;
+  /**
+   * Returns the accumulate interest rate at the given epoch.
+   * @param args - {@link GetAccumulateInterestRateParameters}
+   * @returns the accumulate interest rate at the given epoch. {@link GetAccumulateInterestRateReturnType}
+   */
+  getAccumulateInterestRate: (
+    args: GetAccumulateInterestRateParameters
+  ) => Promise<GetAccumulateInterestRateReturnType>;
 };
 
 export function publicActions<
@@ -296,5 +309,6 @@ export function publicActions<
     getTransactionReceipt: (args) => getTransactionReceipt(client, args),
     getAccount: (args) => getAccount(client, args),
     getInterestRate: (args) => getInterestRate(client, args),
+    getAccumulateInterestRate:(args) => getAccumulateInterestRate(client, args),
   };
 }
