@@ -95,6 +95,11 @@ import {
   type GetAccumulateInterestRateParameters,
   type GetAccumulateInterestRateReturnType,
 } from "../../actions/public/getAccumulateInterestRate";
+import {
+  checkBalanceAgainstTransaction,
+  type CheckBalanceAgainstTransactionParameters,
+  type CheckBalanceAgainstTransactionReturnType,
+} from "../../actions/public/checkBalanceAgainstTransaction";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -275,12 +280,23 @@ export type PublicActions<
   ) => Promise<GetInterestRateReturnType>;
   /**
    * Returns the accumulate interest rate at the given epoch.
+   * - JSON-RPC Method: [`cfx_getAccumulateInterestRate`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccumulateinterestrate)
    * @param args - {@link GetAccumulateInterestRateParameters}
    * @returns the accumulate interest rate at the given epoch. {@link GetAccumulateInterestRateReturnType}
    */
   getAccumulateInterestRate: (
     args: GetAccumulateInterestRateParameters
   ) => Promise<GetAccumulateInterestRateReturnType>;
+
+  /**
+   * Check if a user's balance is enough to send a transaction with the specified gas and storage limits to the specified contract. The balance is enough if the user can cover the up-front payment of both execution and storage, or if these costs are sponsored by the contract.
+   * -JSON-RPC Method: [`cfx_checkBalanceAgainstTransaction`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_checkbalanceagainsttransaction)
+   * @param args - {@link CheckBalanceAgainstTransactionParameters}
+   * @returns - {@link CheckBalanceAgainstTransactionReturnType}
+   */
+  checkBalanceAgainstTransaction: (
+    args: CheckBalanceAgainstTransactionParameters
+  ) => Promise<CheckBalanceAgainstTransactionReturnType>;
 };
 
 export function publicActions<
@@ -309,6 +325,9 @@ export function publicActions<
     getTransactionReceipt: (args) => getTransactionReceipt(client, args),
     getAccount: (args) => getAccount(client, args),
     getInterestRate: (args) => getInterestRate(client, args),
-    getAccumulateInterestRate:(args) => getAccumulateInterestRate(client, args),
+    getAccumulateInterestRate: (args) =>
+      getAccumulateInterestRate(client, args),
+    checkBalanceAgainstTransaction: (args) =>
+      checkBalanceAgainstTransaction(client, args),
   };
 }

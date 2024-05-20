@@ -255,6 +255,22 @@ export type PublicRpcSchema = [
     Method: "cfx_getAccumulateInterestRate";
     Parameters: [epoch: EpochTag | RpcEpochNumber];
     ReturnType: Quantity;
+  },
+  {
+    Method: "cfx_checkBalanceAgainstTransaction";
+    Parameters: [
+      address: Address,
+      address: Address,
+      gasLimit: Quantity,
+      gasPrice: Quantity,
+      storageLimit: Quantity,
+      epoch: EpochTag | RpcEpochNumber
+    ];
+    ReturnType: {
+      isBalanceEnough: boolean;
+      willPayCollateral: boolean;
+      willPayTxFee: boolean;
+    };
   }
 ];
 
