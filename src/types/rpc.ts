@@ -8,6 +8,8 @@ import type { Block, EpochNumber, EpochTag } from "./block";
 import type { Sponsor } from "./sponsor";
 import type { FeeValueLegacy } from "./fee";
 import type { Log } from "./log";
+import type { ChainAccount } from "./chainAccount";
+
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";
@@ -35,3 +37,5 @@ export type RpcFeeValue = FeeValueLegacy<Quantity>;
 export type RpcLog = Log<Quantity>;
 
 export type RpcTransactionReceipt = TransactionReceipt<Quantity, Index, OutcomeStatus>;
+
+export type RpcChainAccount = ChainAccount<Quantity>

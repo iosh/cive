@@ -80,6 +80,11 @@ import {
   type GetTransactionReceiptParameters,
   type GetTransactionReceiptReturnType,
 } from "../../actions/public/getTransactionReceipt";
+import {
+  getAccount,
+  type GetChainAccountParameters,
+  type GetChainAccountReturnType,
+} from "../../actions/public/getAccount";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -222,6 +227,7 @@ export type PublicActions<
 
   /**
    * Returns the next nonce that should be used by the given account when sending a transaction.
+   * - JSON-RPC Method: [`cfx_getNextNonce`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getnextnonce)
    * @param args - {@link GetNextNonceParameters}
    * @returns - integer of the next nonce that should be used by the given address.
    */
@@ -231,12 +237,23 @@ export type PublicActions<
 
   /**
    * Returns a transaction receipt, identified by the corresponding transaction hash.
+   * - JSON-RPC Method: [`cfx_sendRawTransaction`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_sendrawtransaction)
    * @param args - {@link GetTransactionReceiptParameters}
    * @returns a transaction receipt object, or null when no transaction was found or the transaction was not executed yet: {@link GetTransactionReceiptReturnType}
    */
   getTransactionReceipt: (
     args: GetTransactionReceiptParameters
   ) => Promise<GetTransactionReceiptReturnType>;
+
+  /**
+   * Returns an account, identified by its address.
+   * - JSON-RPC Method: [`cfx_getAccount`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccount)
+   * @param args - {@link GetChainAccountParameters}
+   * @returns - the state of the given account:
+   */
+  getAccount: (
+    args: GetChainAccountParameters
+  ) => Promise<GetChainAccountReturnType>;
 };
 
 export function publicActions<
@@ -263,5 +280,6 @@ export function publicActions<
     getSponsorInfo: (args) => GetSponsorInfo(client, args),
     getNextNonce: (args) => getNextNonce(client, args),
     getTransactionReceipt: (args) => getTransactionReceipt(client, args),
+    getAccount: (args) => getAccount(client, args),
   };
 }

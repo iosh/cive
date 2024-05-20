@@ -2,6 +2,7 @@ import type { Address } from "abitype";
 import type { ExactPartial, Hash, Hex, LogTopic } from "viem";
 import type {
   Quantity,
+  RpcChainAccount,
   RpcFeeValue,
   RpcSponsor,
   RpcTransactionReceipt,
@@ -219,10 +220,23 @@ export type PublicRpcSchema = [
     ];
     ReturnType: Log[];
   },
+  /**
+   * @description Returns a transaction receipt, identified by the corresponding transaction hash.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionreceipt
+   */
   {
     Method: "cfx_getTransactionReceipt";
     Parameters: [txHash: Hash];
     ReturnType: RpcTransactionReceipt | null;
+  },
+  /**
+   * @description Returns an account, identified by its address.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccount
+   */
+  {
+    Method: "cfx_getAccount";
+    Parameters: [address: Address, epoch: EpochTag | RpcEpochNumber];
+    ReturnType: RpcChainAccount;
   }
 ];
 
