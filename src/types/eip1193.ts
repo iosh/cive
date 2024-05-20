@@ -237,6 +237,15 @@ export type PublicRpcSchema = [
     Method: "cfx_getAccount";
     Parameters: [address: Address, epoch: EpochTag | RpcEpochNumber];
     ReturnType: RpcChainAccount;
+  },
+  /**
+   * @description Returns the interest rate at the given epoch.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getinterestrate
+   */
+  {
+    Method: "cfx_getInterestRate";
+    Parameters: [epoch: EpochTag | RpcEpochNumber];
+    ReturnType: Quantity;
   }
 ];
 

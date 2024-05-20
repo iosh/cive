@@ -85,6 +85,11 @@ import {
   type GetChainAccountParameters,
   type GetChainAccountReturnType,
 } from "../../actions/public/getAccount";
+import {
+  getInterestRate,
+  type GetInterestRateParameters,
+  type GetInterestRateReturnType,
+} from "../../actions/public/getInterestRate";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -254,6 +259,15 @@ export type PublicActions<
   getAccount: (
     args: GetChainAccountParameters
   ) => Promise<GetChainAccountReturnType>;
+  /**
+   * Returns the interest rate at the given epoch.
+   * -JSON-RPC Method: [`cfx_getInterestRate`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getinterestrate)
+   * @param args - {@link GetInterestRateParameters}
+   * @returns  the interest rate at the given epoch. {@link GetInterestRateReturnType}
+   */
+  getInterestRate: (
+    args: GetInterestRateParameters
+  ) => Promise<GetInterestRateReturnType>;
 };
 
 export function publicActions<
@@ -281,5 +295,6 @@ export function publicActions<
     getNextNonce: (args) => getNextNonce(client, args),
     getTransactionReceipt: (args) => getTransactionReceipt(client, args),
     getAccount: (args) => getAccount(client, args),
+    getInterestRate: (args) => getInterestRate(client, args),
   };
 }
