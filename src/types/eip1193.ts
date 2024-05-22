@@ -6,6 +6,7 @@ import type {
   RpcChainAccount,
   RpcFeeValue,
   RpcNodeState,
+  RpcReward,
   RpcSponsor,
   RpcTransactionReceipt,
   RpcTransactionRequest,
@@ -292,9 +293,9 @@ export type PublicRpcSchema = [
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getconfirmationriskbyhash
    */
   {
-    Method: 'cfx_getConfirmationRiskByHash',
-    Parameters: [blockHash: Hash],
-    ReturnType: Quantity | null
+    Method: "cfx_getConfirmationRiskByHash";
+    Parameters: [blockHash: Hash];
+    ReturnType: Quantity | null;
   },
 
   /**
@@ -302,18 +303,27 @@ export type PublicRpcSchema = [
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getstatus
    */
   {
-    Method: 'cfx_getStatus',
-    Parameters: undefined,
-    ReturnType: RpcNodeState
+    Method: "cfx_getStatus";
+    Parameters: undefined;
+    ReturnType: RpcNodeState;
   },
   /**
    * @description Returns the conflux-rust version.
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_clientversion
    */
   {
-    Method: 'cfx_clientVersion',
-    Parameters: undefined,
-    ReturnType: string
+    Method: "cfx_clientVersion";
+    Parameters: undefined;
+    ReturnType: string;
+  },
+  /**
+   * @description Returns the reward info for all executed blocks in the specified epoch.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockrewardinfo
+   */
+  {
+    Method: "cfx_getBlockRewardInfo";
+    Parameters: [epoch: EpochTag | RpcEpochNumber];
+    ReturnType: RpcReward[];
   }
 ];
 

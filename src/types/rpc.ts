@@ -10,7 +10,7 @@ import type { FeeValueLegacy } from "./fee";
 import type { Log } from "./log";
 import type { ChainAccount } from "./chainAccount";
 import type { NodeState } from "./node";
-
+import type { Reward } from "./reward";
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";
@@ -37,8 +37,14 @@ export type RpcFeeValue = FeeValueLegacy<Quantity>;
 
 export type RpcLog = Log<Quantity>;
 
-export type RpcTransactionReceipt = TransactionReceipt<Quantity, Index, OutcomeStatus>;
+export type RpcTransactionReceipt = TransactionReceipt<
+  Quantity,
+  Index,
+  OutcomeStatus
+>;
 
-export type RpcChainAccount = ChainAccount<Quantity>
+export type RpcChainAccount = ChainAccount<Quantity>;
 
-export type RpcNodeState = NodeState<Quantity, Index>
+export type RpcNodeState = NodeState<Quantity, Index>;
+
+export type RpcReward = Reward<Quantity, Index>;

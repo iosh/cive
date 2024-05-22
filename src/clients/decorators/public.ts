@@ -114,7 +114,11 @@ import {
   getStatus,
   type GetStatusReturnType,
 } from "../../actions/public/getStatus";
-import type { ClientVersionReturnType } from "../../actions/public/clientVersion";
+import {
+  clientVersion,
+  type ClientVersionReturnType,
+} from "../../actions/public/clientVersion";
+import type { GetBlockRewardInfoParameters, GetBlockRewardInfoReturnType } from "../../actions/public/getBlockRewardInfo";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -346,6 +350,16 @@ export type PublicActions<
    * @returns - {@link ClientVersionReturnType}
    */
   clientVersion: () => Promise<ClientVersionReturnType>;
+
+  /**
+   * Returns the reward info for all executed blocks in the specified epoch.
+   * - JSON-RPC Method: [`cfx_getBlockRewardInfo`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockrewardinfo)
+   * @param args - {@link GetBlockRewardInfoParameters}
+   * @returns  array of reward info objects {@link GetBlockRewardInfoReturnType}
+   */
+  getBlockRewardInfo: (
+    args: GetBlockRewardInfoParameters
+  ) => Promise<GetBlockRewardInfoReturnType>;
 };
 
 export function publicActions<
