@@ -9,6 +9,7 @@ import type { Sponsor } from "./sponsor";
 import type { FeeValueLegacy } from "./fee";
 import type { Log } from "./log";
 import type { ChainAccount } from "./chainAccount";
+import type { NodeState } from "./node";
 
 
 export type { Quantity };
@@ -39,3 +40,5 @@ export type RpcLog = Log<Quantity>;
 export type RpcTransactionReceipt = TransactionReceipt<Quantity, Index, OutcomeStatus>;
 
 export type RpcChainAccount = ChainAccount<Quantity>
+
+export type RpcNodeState = NodeState<Quantity, Index>

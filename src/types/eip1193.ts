@@ -5,6 +5,7 @@ import type {
   RpcBlock,
   RpcChainAccount,
   RpcFeeValue,
+  RpcNodeState,
   RpcSponsor,
   RpcTransactionReceipt,
   RpcTransactionRequest,
@@ -294,6 +295,16 @@ export type PublicRpcSchema = [
     Method: 'cfx_getConfirmationRiskByHash',
     Parameters: [blockHash: Hash],
     ReturnType: Quantity | null
+  },
+
+  /**
+   * @description Returns the node status.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getstatus
+   */
+  {
+    Method: 'cfx_getStatus',
+    Parameters: undefined,
+    ReturnType: RpcNodeState
   }
 ];
 

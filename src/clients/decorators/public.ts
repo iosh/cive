@@ -110,6 +110,10 @@ import {
   type GetConfirmationRiskByHashParameters,
   type GetConfirmationRiskByHashReturnType,
 } from "../../actions/public/getConfirmationRiskByHash";
+import {
+  getStatus,
+  type GetStatusReturnType,
+} from "../../actions/public/getStatus";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -327,6 +331,13 @@ export type PublicActions<
   getConfirmationRiskByHash: (
     args: GetConfirmationRiskByHashParameters
   ) => Promise<GetConfirmationRiskByHashReturnType>;
+
+  /**
+   * Returns the node status.
+   * - JSON-RPC Method: [`cfx_getStatus`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getstatus)
+   * @returns - {@link GetStatusReturnType}
+   */
+  getStatus: () => Promise<GetStatusReturnType>;
 };
 
 export function publicActions<
@@ -362,5 +373,6 @@ export function publicActions<
     getSkippedBlocksByEpoch: (args) => getSkippedBlocksByEpoch(client, args),
     getConfirmationRiskByHash: (args) =>
       getConfirmationRiskByHash(client, args),
+    getStatus: () => getStatus(client),
   };
 }
