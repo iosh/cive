@@ -114,6 +114,7 @@ import {
   getStatus,
   type GetStatusReturnType,
 } from "../../actions/public/getStatus";
+import type { ClientVersionReturnType } from "../../actions/public/clientVersion";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -338,6 +339,13 @@ export type PublicActions<
    * @returns - {@link GetStatusReturnType}
    */
   getStatus: () => Promise<GetStatusReturnType>;
+
+  /**
+   * Returns the conflux-rust version.
+   * - JSON-RPC Method: [`cfx_clientVersion`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_clientversion)
+   * @returns - {@link ClientVersionReturnType}
+   */
+  clientVersion: () => Promise<ClientVersionReturnType>;
 };
 
 export function publicActions<
@@ -374,5 +382,6 @@ export function publicActions<
     getConfirmationRiskByHash: (args) =>
       getConfirmationRiskByHash(client, args),
     getStatus: () => getStatus(client),
+    clientVersion: () => clientVersion(client),
   };
 }

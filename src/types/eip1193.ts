@@ -305,6 +305,15 @@ export type PublicRpcSchema = [
     Method: 'cfx_getStatus',
     Parameters: undefined,
     ReturnType: RpcNodeState
+  },
+  /**
+   * @description Returns the conflux-rust version.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_clientversion
+   */
+  {
+    Method: 'cfx_clientVersion',
+    Parameters: undefined,
+    ReturnType: string
   }
 ];
 
