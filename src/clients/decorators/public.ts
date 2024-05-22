@@ -100,6 +100,11 @@ import {
   type CheckBalanceAgainstTransactionParameters,
   type CheckBalanceAgainstTransactionReturnType,
 } from "../../actions/public/checkBalanceAgainstTransaction";
+import {
+  getSkippedBlocksByEpoch,
+  type GetSkippedBlocksByEpochParameters,
+  type GetSkippedBlocksByEpochReturnType,
+} from "../../actions/public/getSkippedBlocksByEpoch";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -297,6 +302,16 @@ export type PublicActions<
   checkBalanceAgainstTransaction: (
     args: CheckBalanceAgainstTransactionParameters
   ) => Promise<CheckBalanceAgainstTransactionReturnType>;
+
+  /**
+   * Returns the list of non-executed blocks in an epoch. By default, Conflux only executes the last 200 blocks in each epoch (note that under normal circumstances, epochs should be much smaller).
+   * - JSON-RPC Method: [`cfx_getSkippedBlocksByEpoch`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getskippedblocksbyepoch)
+   * @param args - {@link GetSkippedBlocksByEpochParameters}
+   * @returns Array of block hashes {@link GetSkippedBlocksByEpochReturnType}
+   */
+  getSkippedBlocksByEpoch: (
+    args: GetSkippedBlocksByEpochParameters
+  ) => Promise<GetSkippedBlocksByEpochReturnType>;
 };
 
 export function publicActions<
@@ -329,5 +344,6 @@ export function publicActions<
       getAccumulateInterestRate(client, args),
     checkBalanceAgainstTransaction: (args) =>
       checkBalanceAgainstTransaction(client, args),
+    getSkippedBlocksByEpoch:(args) => getSkippedBlocksByEpoch(client, args),
   };
 }

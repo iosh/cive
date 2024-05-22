@@ -2,6 +2,7 @@ import type { Address } from "abitype";
 import type { ExactPartial, Hash, Hex, LogTopic } from "viem";
 import type {
   Quantity,
+  RpcBlock,
   RpcChainAccount,
   RpcFeeValue,
   RpcSponsor,
@@ -271,6 +272,11 @@ export type PublicRpcSchema = [
       willPayCollateral: boolean;
       willPayTxFee: boolean;
     };
+  },
+  {
+    Method: "cfx_getSkippedBlocksByEpoch";
+    Parameters: [epoch: EpochTag | RpcEpochNumber];
+    ReturnType: RpcBlock[];
   }
 ];
 
