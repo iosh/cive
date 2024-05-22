@@ -118,7 +118,16 @@ import {
   clientVersion,
   type ClientVersionReturnType,
 } from "../../actions/public/clientVersion";
-import type { GetBlockRewardInfoParameters, GetBlockRewardInfoReturnType } from "../../actions/public/getBlockRewardInfo";
+import {
+  getBlockRewardInfo,
+  type GetBlockRewardInfoParameters,
+  type GetBlockRewardInfoReturnType,
+} from "../../actions/public/getBlockRewardInfo";
+import {
+  getBlockByHashWithPivotAssumption,
+  type GetBlockByHashWithPivotAssumptionParameters,
+  type GetBlockByHashWithPivotAssumptionReturnType,
+} from "../../actions/public/getBlockByHashWithPivotAssumption";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -360,6 +369,15 @@ export type PublicActions<
   getBlockRewardInfo: (
     args: GetBlockRewardInfoParameters
   ) => Promise<GetBlockRewardInfoReturnType>;
+  /**
+   *Returns the requested block if the provided pivot hash is correct, returns an error otherwise.
+   - JSON-RPC Method: [`cfx_getBlockByHashWithPivotAssumption`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyhashwithpivotassumption)
+   * @param args -{@link GetBlockByHashWithPivotAssumptionParameters}
+   * @returns - {@link GetBlockByHashWithPivotAssumptionReturnType}
+   */
+  getBlockByHashWithPivotAssumption: (
+    args: GetBlockByHashWithPivotAssumptionParameters
+  ) => Promise<GetBlockByHashWithPivotAssumptionReturnType>;
 };
 
 export function publicActions<
@@ -397,5 +415,8 @@ export function publicActions<
       getConfirmationRiskByHash(client, args),
     getStatus: () => getStatus(client),
     clientVersion: () => clientVersion(client),
+    getBlockRewardInfo: (args) => getBlockRewardInfo(client, args),
+    getBlockByHashWithPivotAssumption: (args) =>
+      getBlockByHashWithPivotAssumption(client, args),
   };
 }

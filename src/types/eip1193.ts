@@ -324,6 +324,19 @@ export type PublicRpcSchema = [
     Method: "cfx_getBlockRewardInfo";
     Parameters: [epoch: EpochTag | RpcEpochNumber];
     ReturnType: RpcReward[];
+  },
+  /**
+   * @description Returns the requested block if the provided pivot hash is correct, returns an error otherwise.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyhashwithpivotassumption
+   */
+  {
+    Method: "cfx_getBlockByHashWithPivotAssumption";
+    Parameters: [
+      blockHash: Hash,
+      pivotBlockHash: Hash,
+      epochNumber: EpochNumber
+    ];
+    ReturnType: RpcBlock;
   }
 ];
 
