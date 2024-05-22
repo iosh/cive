@@ -105,6 +105,11 @@ import {
   type GetSkippedBlocksByEpochParameters,
   type GetSkippedBlocksByEpochReturnType,
 } from "../../actions/public/getSkippedBlocksByEpoch";
+import {
+  getConfirmationRiskByHash,
+  type GetConfirmationRiskByHashParameters,
+  type GetConfirmationRiskByHashReturnType,
+} from "../../actions/public/getConfirmationRiskByHash";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -312,6 +317,16 @@ export type PublicActions<
   getSkippedBlocksByEpoch: (
     args: GetSkippedBlocksByEpochParameters
   ) => Promise<GetSkippedBlocksByEpochReturnType>;
+
+  /**
+   * Returns the confirmation risk of a given block, identified by its hash.
+   * - JSON-RPC Method: [`cfx_getConfirmationRiskByHash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getconfirmationriskbyhash)
+   * @param args - the block hash. {@link GetConfirmationRiskByHashParameters}
+   * @returns  the integer confirmation risk, or undefined if the block does not exist. {@link GetConfirmationRiskByHashReturnType}
+   */
+  getConfirmationRiskByHash: (
+    args: GetConfirmationRiskByHashParameters
+  ) => Promise<GetConfirmationRiskByHashReturnType>;
 };
 
 export function publicActions<
@@ -344,6 +359,8 @@ export function publicActions<
       getAccumulateInterestRate(client, args),
     checkBalanceAgainstTransaction: (args) =>
       checkBalanceAgainstTransaction(client, args),
-    getSkippedBlocksByEpoch:(args) => getSkippedBlocksByEpoch(client, args),
+    getSkippedBlocksByEpoch: (args) => getSkippedBlocksByEpoch(client, args),
+    getConfirmationRiskByHash: (args) =>
+      getConfirmationRiskByHash(client, args),
   };
 }

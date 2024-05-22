@@ -257,6 +257,10 @@ export type PublicRpcSchema = [
     Parameters: [epoch: EpochTag | RpcEpochNumber];
     ReturnType: Quantity;
   },
+  /**
+   * @description Check if a user's balance is enough to send a transaction with the specified gas and storage limits to the specified contract. The balance is enough if the user can cover the up-front payment of both execution and storage, or if these costs are sponsored by the contract.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_checkbalanceagainsttransaction
+   */
   {
     Method: "cfx_checkBalanceAgainstTransaction";
     Parameters: [
@@ -273,10 +277,23 @@ export type PublicRpcSchema = [
       willPayTxFee: boolean;
     };
   },
+  /**
+   * @description Returns the list of non-executed blocks in an epoch. By default, Conflux only executes the last 200 blocks in each epoch (note that under normal circumstances, epochs should be much smaller).
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getskippedblocksbyepoch
+   */
   {
     Method: "cfx_getSkippedBlocksByEpoch";
     Parameters: [epoch: EpochTag | RpcEpochNumber];
     ReturnType: RpcBlock[];
+  },
+  /**
+   * @description Returns the confirmation risk of a given block, identified by its hash.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getconfirmationriskbyhash
+   */
+  {
+    Method: 'cfx_getConfirmationRiskByHash',
+    Parameters: [blockHash: Hash],
+    ReturnType: Quantity | null
   }
 ];
 
