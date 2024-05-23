@@ -138,6 +138,10 @@ import {
   type GetVoteListParameters,
   type GetVoteListReturnType,
 } from "../../actions/public/getVoteList";
+import {
+  getSupplyInfo,
+  type GetSupplyInfoReturnType,
+} from "../../actions/public/getSupplyInfo";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -406,6 +410,13 @@ export type PublicActions<
    * @returns -array of vote info object {@link GetDepositListReturnType}
    */
   getVoteList: (args: GetVoteListParameters) => Promise<GetVoteListReturnType>;
+
+  /**
+   * Returns summary supply info of the entire chain.
+   * - JSON-RPC Method: [`cfx_getSupplyInfo`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getsupplyinfo)
+   * @returns - {@link GetSupplyInfoReturnType}
+   */
+  getSupplyInfo: () => Promise<GetSupplyInfoReturnType>;
 };
 
 export function publicActions<
@@ -448,5 +459,6 @@ export function publicActions<
       getBlockByHashWithPivotAssumption(client, args),
     getDepositList: (args) => getDepositList(client, args),
     getVoteList: (args) => getVoteList(client, args),
+    getSupplyInfo: () => getSupplyInfo(client),
   };
 }

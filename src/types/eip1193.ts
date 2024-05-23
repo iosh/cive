@@ -9,6 +9,7 @@ import type {
   RpcNodeState,
   RpcReward,
   RpcSponsor,
+  RpcSupply,
   RpcTransactionReceipt,
   RpcTransactionRequest,
   RpcVote,
@@ -349,11 +350,19 @@ export type PublicRpcSchema = [
     Parameters: [address: Address, epoch: EpochTag | RpcEpochNumber];
     ReturnType: RpcDeposit[];
   },
-
+  /**
+   * @description Returns the vote list of the given account, identified by its address.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getvotelist
+   */
   {
     Method: "cfx_getVoteList";
     Parameters: [address: Address, epoch: EpochTag | RpcEpochNumber];
     ReturnType: RpcVote[];
+  },
+  {
+    Method: "cfx_getSupplyInfo";
+    Parameters: undefined;
+    ReturnType: RpcSupply
   }
 ];
 
