@@ -37,3 +37,10 @@ export type {
   LocalAccount,
 } from "../accounts/types.js";
 export type { HDKey } from "@scure/bip32";
+
+export type AccountPending<TQuantity = bigint> = {
+  localNonce: TQuantity;
+  pendingNonce: TQuantity;
+  pendingCount: TQuantity;
+  nextPendingTx: TQuantity;
+};

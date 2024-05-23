@@ -2,6 +2,7 @@ import type { Address } from "abitype";
 import type { ExactPartial, Hash, Hex, LogTopic } from "viem";
 import type {
   Quantity,
+  RpcAccountPending,
   RpcBlock,
   RpcChainAccount,
   RpcDeposit,
@@ -359,10 +360,19 @@ export type PublicRpcSchema = [
     Parameters: [address: Address, epoch: EpochTag | RpcEpochNumber];
     ReturnType: RpcVote[];
   },
+  /**
+   * @description Returns summary supply info of the entire chain.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getsupplyinfo
+   */
   {
     Method: "cfx_getSupplyInfo";
     Parameters: undefined;
-    ReturnType: RpcSupply
+    ReturnType: RpcSupply;
+  },
+  {
+    Method: "cfx_getAccountPendingInfo";
+    Parameters: [address: Address];
+    ReturnType: RpcAccountPending;
   }
 ];
 
