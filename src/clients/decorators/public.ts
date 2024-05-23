@@ -128,6 +128,11 @@ import {
   type GetBlockByHashWithPivotAssumptionParameters,
   type GetBlockByHashWithPivotAssumptionReturnType,
 } from "../../actions/public/getBlockByHashWithPivotAssumption";
+import {
+  getDepositList,
+  type GetDepositListParameters,
+  type GetDepositListReturnType,
+} from "../../actions/public/getDepositList";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -378,6 +383,16 @@ export type PublicActions<
   getBlockByHashWithPivotAssumption: (
     args: GetBlockByHashWithPivotAssumptionParameters
   ) => Promise<GetBlockByHashWithPivotAssumptionReturnType>;
+
+  /**
+   * Returns the deposit list of the given account, identified by its address.
+   * - JSON-RPC Method: [`cfx_getDepositList`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getdepositlist)
+   * @param args - {@link GetDepositListParameters}
+   * @returns - {@link GetDepositListReturnType}
+   */
+  getDepositList: (
+    args: GetDepositListParameters
+  ) => Promise<GetDepositListReturnType>;
 };
 
 export function publicActions<
@@ -418,5 +433,6 @@ export function publicActions<
     getBlockRewardInfo: (args) => getBlockRewardInfo(client, args),
     getBlockByHashWithPivotAssumption: (args) =>
       getBlockByHashWithPivotAssumption(client, args),
+    getDepositList: (args) => getDepositList(client, args),
   };
 }

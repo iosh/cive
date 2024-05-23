@@ -4,6 +4,7 @@ import type {
   Quantity,
   RpcBlock,
   RpcChainAccount,
+  RpcDeposit,
   RpcFeeValue,
   RpcNodeState,
   RpcReward,
@@ -334,9 +335,18 @@ export type PublicRpcSchema = [
     Parameters: [
       blockHash: Hash,
       pivotBlockHash: Hash,
-      epochNumber: EpochNumber
+      epochNumber: EpochNumber<Quantity>
     ];
     ReturnType: RpcBlock;
+  },
+  /**
+   * @description Returns the deposit list of the given account, identified by its address.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getdepositlist
+   */
+  {
+    Method: "cfx_getDepositList";
+    Parameters: [address: Address, epoch: EpochTag | RpcEpochNumber];
+    ReturnType: RpcDeposit[];
   }
 ];
 
