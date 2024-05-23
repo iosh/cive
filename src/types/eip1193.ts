@@ -11,6 +11,7 @@ import type {
   RpcSponsor,
   RpcTransactionReceipt,
   RpcTransactionRequest,
+  RpcVote,
 } from "./rpc";
 
 import type { RpcEpochNumber, RpcTransaction as Transaction } from "./rpc";
@@ -347,6 +348,12 @@ export type PublicRpcSchema = [
     Method: "cfx_getDepositList";
     Parameters: [address: Address, epoch: EpochTag | RpcEpochNumber];
     ReturnType: RpcDeposit[];
+  },
+
+  {
+    Method: "cfx_getVoteList";
+    Parameters: [address: Address, epoch: EpochTag | RpcEpochNumber];
+    ReturnType: RpcVote[];
   }
 ];
 

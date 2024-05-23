@@ -133,6 +133,11 @@ import {
   type GetDepositListParameters,
   type GetDepositListReturnType,
 } from "../../actions/public/getDepositList";
+import {
+  getVoteList,
+  type GetVoteListParameters,
+  type GetVoteListReturnType,
+} from "../../actions/public/getVoteList";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -393,6 +398,14 @@ export type PublicActions<
   getDepositList: (
     args: GetDepositListParameters
   ) => Promise<GetDepositListReturnType>;
+
+  /**
+   * Returns the vote list of the given account, identified by its address.
+   * - JSON-RPC Method: [`cfx_getVoteList`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getvotelist)
+   * @param args - {@link GetDepositListParameters}
+   * @returns -array of vote info object {@link GetDepositListReturnType}
+   */
+  getVoteList: (args: GetVoteListParameters) => Promise<GetVoteListReturnType>;
 };
 
 export function publicActions<
@@ -434,5 +447,6 @@ export function publicActions<
     getBlockByHashWithPivotAssumption: (args) =>
       getBlockByHashWithPivotAssumption(client, args),
     getDepositList: (args) => getDepositList(client, args),
+    getVoteList: (args) => getVoteList(client, args),
   };
 }

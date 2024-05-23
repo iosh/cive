@@ -12,6 +12,7 @@ import type { ChainAccount } from "./chainAccount";
 import type { NodeState } from "./node";
 import type { Reward } from "./reward";
 import type { Deposit } from "./deposit";
+import type { Vote } from "./vote";
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";
@@ -51,3 +52,5 @@ export type RpcNodeState = NodeState<Quantity, Index>;
 export type RpcReward = Reward<Quantity, Index>;
 
 export type RpcDeposit = Deposit<Quantity, Index>;
+
+export type RpcVote = Vote<Quantity, Index>;
