@@ -16,16 +16,25 @@ export type GetBlockParameters<
     } & (
       | {
           blockHash?: Hash | undefined;
+          blockNumber?: never | undefined;
           epochNumber?: never | undefined;
           epochTag?: never | undefined;
         }
       | {
           blockHash?: never | undefined;
+          blockNumber?: number;
+          epochNumber?: never | undefined;
+          epochTag?: never | undefined;
+        }
+      | {
+          blockHash?: never | undefined;
+          blockNumber?: never | undefined;
           epochNumber?: bigint | undefined;
           epochTag?: never | undefined;
         }
       | {
           blockHash?: never | undefined;
+          blockNumber?: never | undefined;
           epochNumber?: never | undefined;
           /**
            * the epoch tag string
@@ -49,11 +58,13 @@ export async function getBlock<
   client: Client<Transport, TChain, TAccount>,
   {
     blockHash,
+    blockNumber,
     epochNumber,
     epochTag,
     includeTransactions,
   }: GetBlockParameters<TIncludeTransactions, TEpochTag> = {}
 ): Promise<GetBlockReturnType<TChain, TIncludeTransactions, TEpochTag>> {
+  const _blockNumber = blockNumber ? numberToHex(blockNumber) : undefined;
   const _epochTag = epochTag ?? "latest_state";
   const _includeTransactions = includeTransactions ?? false;
 
@@ -66,6 +77,11 @@ export async function getBlock<
     block = await client.request({
       method: "cfx_getBlockByHash",
       params: [blockHash, _includeTransactions],
+    });
+  } else if (_blockNumber) {
+    block = await client.request({
+      method: "cfx_getBlockByBlockNumber",
+      params: [_blockNumber, _includeTransactions],
     });
   } else {
     block = await client.request({

@@ -388,6 +388,15 @@ export type PublicRpcSchema = [
     Method: "cfx_getAccountPendingTransactions";
     Parameters: [address: Address, nonce?: Quantity, limit?: Quantity];
     ReturnType: RpcAccountPendingTransaction;
+  },
+  /**
+   * @description Returns information about a block, identified by its block number (block's tree-graph order number).
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyblocknumber
+   */
+  {
+    Method: "cfx_getBlockByBlockNumber";
+    Parameters: [blockNumber: Quantity, includeTransactions: boolean];
+    ReturnType: RpcBlock;
   }
 ];
 
