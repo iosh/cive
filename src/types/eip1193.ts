@@ -397,6 +397,19 @@ export type PublicRpcSchema = [
     Method: "cfx_getBlockByBlockNumber";
     Parameters: [blockNumber: Quantity, includeTransactions: boolean];
     ReturnType: RpcBlock;
+  },
+  /**
+   * @description Returns PoS economics summary info.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getposeconomics
+   */
+  {
+    Method: 'cfx_getPoSEconomics',
+    Parameters: [epoch: EpochTag | RpcEpochNumber];
+    ReturnType: {
+      distributablePosInterest:Quantity
+      lastDistributeBlock:Quantity
+      totalPosStakingTokens:Quantity
+    }
   }
 ];
 

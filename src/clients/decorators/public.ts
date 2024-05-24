@@ -152,6 +152,11 @@ import {
   type GetAccountPendingTransactionsParameters,
   type GetAccountPendingTransactionsReturnType,
 } from "../../actions/public/getAccountPendingTransactions";
+import {
+  getPoSEconomics,
+  type GetPoSEconomicsParameters,
+  type GetPoSEconomicsReturnType,
+} from "../../actions/public/getPoSEconomics";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -447,6 +452,16 @@ export type PublicActions<
   getAccountPendingTransactions: (
     args: GetAccountPendingTransactionsParameters
   ) => Promise<GetAccountPendingTransactionsReturnType>;
+
+  /**
+   * Returns PoS economics summary info.
+   * - JSON-RPC Method: [`cfx_getPoSEconomics`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getposeconomics)
+   * @param args - {@link GetPoSEconomicsParameters}
+   * @returns - {@link GetPoSEconomicsReturnType}
+   */
+  getPoSEconomics: (
+    args: GetPoSEconomicsParameters
+  ) => Promise<GetPoSEconomicsReturnType>;
 };
 
 export function publicActions<
@@ -493,5 +508,6 @@ export function publicActions<
     getAccountPendingInfo: (args) => getAccountPendingInfo(client, args),
     getAccountPendingTransactions: (args) =>
       getAccountPendingTransactions(client, args),
+    getPoSEconomics: (args) => getPoSEconomics(client, args),
   };
 }
