@@ -3,6 +3,7 @@ import type { ExactPartial, Hash, Hex, LogTopic } from "viem";
 import type {
   Quantity,
   RpcAccountPending,
+  RpcAccountPendingTransaction,
   RpcBlock,
   RpcChainAccount,
   RpcDeposit,
@@ -369,10 +370,24 @@ export type PublicRpcSchema = [
     Parameters: undefined;
     ReturnType: RpcSupply;
   },
+  /**
+   * @description Returns transaction pool pending info of one account
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccountpendinginfo
+   */
   {
     Method: "cfx_getAccountPendingInfo";
     Parameters: [address: Address];
     ReturnType: RpcAccountPending;
+  },
+  /**
+   * @description Returns pending transactions in pool of one account
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccountpendingtransactions
+   */
+
+  {
+    Method: "cfx_getAccountPendingTransactions";
+    Parameters: [address: Address, nonce?: Quantity, limit?: Quantity];
+    ReturnType: RpcAccountPendingTransaction;
   }
 ];
 

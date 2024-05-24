@@ -4,6 +4,7 @@ import type { Account, JsonRpcAccount } from "../accounts/types.js";
 import type { Prettify } from "viem/chains";
 import type { IsUndefined } from "./utils.js";
 import type { Hex } from "viem";
+import type { Transaction } from "./transaction.js";
 
 // import type { IsUndefined, Prettify } from './utils.js'
 
@@ -43,4 +44,16 @@ export type AccountPending<TQuantity = bigint> = {
   pendingNonce: TQuantity;
   pendingCount: TQuantity;
   nextPendingTx: TQuantity;
+};
+
+export type AccountPendingTransaction<
+  TQuantity = bigint,
+  TIndex = number,
+  TPending extends boolean = boolean
+> = {
+  firstTxStatus: {
+    pending: "futureNonce" | "notEnoughCash" | "ready";
+  };
+  pendingCount: TQuantity;
+  pendingTransactions: Transaction<TQuantity, TIndex, TPending>[];
 };

@@ -147,6 +147,11 @@ import {
   type GetAccountPendingInfoParameters,
   type GetAccountPendingInfoReturnType,
 } from "../../actions/public/getAccountPendingInfo";
+import {
+  getAccountPendingTransactions,
+  type GetAccountPendingTransactionsParameters,
+  type GetAccountPendingTransactionsReturnType,
+} from "../../actions/public/getAccountPendingTransactions";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -432,6 +437,16 @@ export type PublicActions<
   getAccountPendingInfo: (
     args: GetAccountPendingInfoParameters
   ) => Promise<GetAccountPendingInfoReturnType>;
+
+  /**
+   * Returns pending transactions in pool of one account
+   * - JSON-RPC Method: [`cfx_getAccountPendingTransactions`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccountpendingtransactions)
+   * @param args
+   * @returns
+   */
+  getAccountPendingTransactions: (
+    args: GetAccountPendingTransactionsParameters
+  ) => Promise<GetAccountPendingTransactionsReturnType>;
 };
 
 export function publicActions<
@@ -476,5 +491,7 @@ export function publicActions<
     getVoteList: (args) => getVoteList(client, args),
     getSupplyInfo: () => getSupplyInfo(client),
     getAccountPendingInfo: (args) => getAccountPendingInfo(client, args),
+    getAccountPendingTransactions: (args) =>
+      getAccountPendingTransactions(client, args),
   };
 }

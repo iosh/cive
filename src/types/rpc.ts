@@ -14,7 +14,7 @@ import type { Reward } from "./reward";
 import type { Deposit } from "./deposit";
 import type { Vote } from "./vote";
 import type { Supply } from "./supply";
-import type { AccountPending } from "./account";
+import type { AccountPending, AccountPendingTransaction } from "./account";
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";
@@ -57,6 +57,11 @@ export type RpcDeposit = Deposit<Quantity, Index>;
 
 export type RpcVote = Vote<Quantity, Index>;
 
-export type RpcSupply = Supply<Quantity>
+export type RpcSupply = Supply<Quantity>;
 
-export type RpcAccountPending = AccountPending<Quantity>
+export type RpcAccountPending = AccountPending<Quantity>;
+
+export type RpcAccountPendingTransaction = AccountPendingTransaction<
+  Quantity,
+  Index
+>;
