@@ -1,5 +1,5 @@
-import type { Address } from "abitype";
 import type { Hash } from "viem";
+import type { Address } from "../accounts/types";
 
 export type Reward<TQuantity = bigint, TIndex = number> = {
   blockHash: Hash;

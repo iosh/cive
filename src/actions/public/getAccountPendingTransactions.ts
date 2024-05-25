@@ -1,8 +1,8 @@
-import type { Address } from "abitype";
 import type { AccountPendingTransaction } from "../../types/account";
 import { numberToHex, type Chain, type Transport } from "viem";
 import type { Client } from "../../clients/createClient";
 import { formatAccountPendingTransaction } from "../../utils/formatters/account";
+import type { Address } from "../../accounts/types";
 
 export type GetAccountPendingTransactionsParameters = {
   account: Address;

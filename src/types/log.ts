@@ -1,5 +1,5 @@
-import type { Address } from "abitype";
 import type { Hash, Hex } from "viem";
+import type { Address } from "../accounts/types";
 
 export type Log<TQuantity = bigint> = {
   address: Address;

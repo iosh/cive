@@ -1,9 +1,9 @@
 import { numberToHex, type Chain, type Transport } from "viem";
 import type { Client } from "../../clients/createClient";
-import type { Address } from "abitype";
 import type { EpochTag } from "../../types/block";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils";
+import type { Address } from "../../accounts/types";
 
 export type GetAdminParameters = {
   address: Address;
@@ -39,6 +39,5 @@ export async function getAdmin<TChain extends Chain | undefined>(
     params: [address, _epochNumber || epochTag],
   });
 
-
-  return adminAddress
+  return adminAddress;
 }

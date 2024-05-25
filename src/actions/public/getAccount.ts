@@ -1,4 +1,3 @@
-import type { Address } from "abitype";
 import type { EpochTag } from "../../types/block";
 import type { ChainAccount } from "../../types/chainAccount";
 import { numberToHex, type Chain, type Transport } from "viem";
@@ -6,6 +5,7 @@ import { formatChainAccount } from "../../utils/formatters/chainAccount";
 import type { Client } from "../../clients/createClient";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils";
+import type { Address } from "../../accounts/types";
 
 export type GetChainAccountParameters = {
   address: Address;

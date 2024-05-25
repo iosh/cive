@@ -1,9 +1,9 @@
-import type { Address } from "abitype";
-import type { EpochTag } from "../../types/block";
+;import type { EpochTag } from "../../types/block";
 import type { Vote } from "../../types/vote";
 import { numberToHex, type Chain, type Transport } from "viem";
 import type { Client } from "../../clients/createClient";
 import { formatVote } from "../../utils/formatters/vote";
+import type { Address } from "../../accounts/types";
 
 export type GetVoteListParameters = {
   address: Address;

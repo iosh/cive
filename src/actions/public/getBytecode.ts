@@ -1,4 +1,3 @@
-import type { Address } from "abitype";
 import type { EpochTag } from "../../types/block";
 import {
   numberToHex,
@@ -10,6 +9,7 @@ import {
 import type { RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils";
 import type { Client } from "../../clients/createClient";
+import type { Address } from "../../accounts/types";
 
 export type GetBytecodeParameters = {
   address: Address;

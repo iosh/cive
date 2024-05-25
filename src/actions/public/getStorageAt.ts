@@ -1,7 +1,7 @@
-import type { Address } from "abitype";
 import type { EpochTag } from "../../types/block";
 import { numberToHex, type Chain, type Hex, type Transport } from "viem";
 import type { Client } from "../../clients/createClient";
+import type { Address } from "../../accounts/types";
 
 export type GetStorageAtParameters = {
   address: Address;

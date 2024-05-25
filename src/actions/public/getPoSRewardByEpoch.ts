@@ -1,7 +1,7 @@
 import type { Chain, Hash, Transport } from "viem";
 import type { EpochNumber } from "../../types/block";
-import type { Address } from "abitype";
 import type { Client } from "../../clients/createClient";
+import type { Address } from "../../accounts/types";
 
 export type GetPoSRewardByEpochParameters = {
   epochNumber: EpochNumber;

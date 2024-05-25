@@ -1,4 +1,4 @@
-import type { Address } from "abitype";
+import type { Address } from "../accounts/types";
 
 export type Sponsor<TQuantity = bigint> = {
   sponsorBalanceForCollateral: TQuantity;

@@ -1,5 +1,3 @@
-import type { Address } from "abitype";
-
 import type {
   Transport,
   Chain,
@@ -12,7 +10,7 @@ import type {
 } from "viem";
 import type { Prettify } from "viem/chains";
 import type { PublicActions } from "./decorators/public";
-import type { Account, JsonRpcAccount } from "../accounts/types";
+import type { Account, Address, JsonRpcAccount } from "../accounts/types";
 import type { ParseAccountErrorType } from "viem/utils";
 import type { ErrorType } from "../errors/utils";
 import { parseAccount } from "../accounts/utils/parseAccount";

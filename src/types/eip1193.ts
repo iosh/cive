@@ -1,4 +1,3 @@
-import type { Address } from "abitype";
 import type { ExactPartial, Hash, Hex, LogTopic } from "viem";
 import type {
   Quantity,
@@ -20,6 +19,7 @@ import type {
 import type { RpcEpochNumber, RpcTransaction as Transaction } from "./rpc";
 import type { Block, EpochNumber, EpochTag } from "./block";
 import type { Log } from "./log";
+import type { Address } from "../accounts/types";
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema];
 export type PublicRpcSchema = [
   /**

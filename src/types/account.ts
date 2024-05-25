@@ -1,6 +1,4 @@
-import type { Address } from "abitype";
-
-import type { Account, JsonRpcAccount } from "../accounts/types.js";
+import type { Account, Address, JsonRpcAccount } from "../accounts/types.js";
 import type { Prettify } from "viem/chains";
 import type { IsUndefined } from "./utils.js";
 import type { Hex } from "viem";

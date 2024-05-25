@@ -1,9 +1,9 @@
-import type { Address } from "abitype";
 import type { EpochTag } from "../../types/block";
 import type { Deposit } from "../../types/deposit";
 import { numberToHex, type Chain, type Transport } from "viem";
 import type { Client } from "../../clients/createClient";
 import { formatDeposit } from "../../utils/formatters/deposit";
+import type { Address } from "../../accounts/types";
 
 export type GetDepositListParameters = {
   address: Address;
