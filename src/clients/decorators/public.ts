@@ -178,7 +178,8 @@ export type PublicActions<
    * - JSON-RPC Methods:
    *  - Calls [`cfx_getblockbyhash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyhash)
    *  - Calls [`cfx_getBlockByEpochNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyepochnumber)
-   * @param args {@link GetBlockParameters}
+   *  - Calls [`cfx_getBlockByBlockNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyblocknumber)
+   *  @param args {@link GetBlockParameters}
    * @returns {@link GetBlockReturnType}
    */
   getBlock: <
