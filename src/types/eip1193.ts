@@ -426,6 +426,20 @@ export type PublicRpcSchema = [
       }[];
       powEpochHash: Hash;
     } | null;
+  },
+
+  /**
+   * @description Returns DAO vote params info
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getparamsfromvote
+   */
+  {
+    Method: "cfx_getParamsFromVote";
+    Parameters: [epoch: EpochTag | RpcEpochNumber];
+    ReturnType: {
+      powBaseReward: Quantity;
+      interestRate: Quantity;
+      storagePointProp: Quantity;
+    };
   }
 ];
 

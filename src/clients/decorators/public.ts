@@ -162,6 +162,11 @@ import {
   type GetPoSRewardByEpochParameters,
   type GetPoSRewardByEpochReturnType,
 } from "../../actions/public/getPoSRewardByEpoch";
+import {
+  getParamsFromVote,
+  type GetParamsFormVoteParameters,
+  type GetParamsFormVoteReturnType,
+} from "../../actions/public/getParamsFromVote";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -478,6 +483,16 @@ export type PublicActions<
   getPoSRewardByEpoch: (
     args: GetPoSRewardByEpochParameters
   ) => Promise<GetPoSRewardByEpochReturnType>;
+
+  /**
+   *  Returns DAO vote params info
+   * - JSON-RPC Method: [`cfx_getParamsFromVote`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getparamsfromvote)
+   * @param args - {@link GetParamsFormVoteParameters}
+   * @returns - {@link GetParamsFormVoteReturnType}
+   */
+  getParamsFromVote: (
+    args: GetParamsFormVoteParameters
+  ) => Promise<GetParamsFormVoteReturnType>;
 };
 
 export function publicActions<
@@ -526,5 +541,6 @@ export function publicActions<
       getAccountPendingTransactions(client, args),
     getPoSEconomics: (args) => getPoSEconomics(client, args),
     getPoSRewardByEpoch: (args) => getPoSRewardByEpoch(client, args),
+    getParamsFromVote: (args) => getParamsFromVote(client, args),
   };
 }
