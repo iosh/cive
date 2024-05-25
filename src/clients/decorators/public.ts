@@ -157,6 +157,11 @@ import {
   type GetPoSEconomicsParameters,
   type GetPoSEconomicsReturnType,
 } from "../../actions/public/getPoSEconomics";
+import {
+  getPoSRewardByEpoch,
+  type GetPoSRewardByEpochParameters,
+  type GetPoSRewardByEpochReturnType,
+} from "../../actions/public/getPoSRewardByEpoch";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -463,6 +468,16 @@ export type PublicActions<
   getPoSEconomics: (
     args: GetPoSEconomicsParameters
   ) => Promise<GetPoSEconomicsReturnType>;
+
+  /**
+   * Get rewards information of a PoS epoch by it's correspond PoW epoch number. Only PoW epoch happen's at PoS epoch end will have rewards information. Others will return undefined.
+   * - JSON-RPC Method: [`cfx_getPoSRewardByEpoch`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getposrewardbyepoch)
+   * @param args - {@link GetPoSRewardByEpochParameters}
+   * @returns - {@link GetPoSRewardByEpochReturnType}
+   */
+  getPoSRewardByEpoch: (
+    args: GetPoSRewardByEpochParameters
+  ) => Promise<GetPoSRewardByEpochReturnType>;
 };
 
 export function publicActions<
@@ -510,5 +525,6 @@ export function publicActions<
     getAccountPendingTransactions: (args) =>
       getAccountPendingTransactions(client, args),
     getPoSEconomics: (args) => getPoSEconomics(client, args),
+    getPoSRewardByEpoch: (args) => getPoSRewardByEpoch(client, args),
   };
 }

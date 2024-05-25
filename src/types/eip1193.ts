@@ -403,13 +403,29 @@ export type PublicRpcSchema = [
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getposeconomics
    */
   {
-    Method: 'cfx_getPoSEconomics',
+    Method: "cfx_getPoSEconomics";
     Parameters: [epoch: EpochTag | RpcEpochNumber];
     ReturnType: {
-      distributablePosInterest:Quantity
-      lastDistributeBlock:Quantity
-      totalPosStakingTokens:Quantity
-    }
+      distributablePosInterest: Quantity;
+      lastDistributeBlock: Quantity;
+      totalPosStakingTokens: Quantity;
+    };
+  },
+  /**
+   * @description Get rewards information of a PoS epoch by it's correspond PoW epoch number. Only PoW epoch happen's at PoS epoch end will have rewards information. Others will return null.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getposrewardbyepoch
+   */
+  {
+    Method: "cfx_getPoSRewardByEpoch";
+    Parameters: [epochNumber: EpochNumber];
+    ReturnType: {
+      accountRewards: {
+        posAddress: Address;
+        powAddress: Address;
+        reward: Quantity;
+      }[];
+      powEpochHash: Hash;
+    } | null;
   }
 ];
 
