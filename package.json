@@ -1,13 +1,12 @@
 {
-  "name": "unit",
-  "module": "index.ts",
   "type": "module",
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "@scure/bip32": "^1.4.0",
-    "abitype": "^1.0.2",
-    "viem": "^2.10.3"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.4.5"
   }
 }
