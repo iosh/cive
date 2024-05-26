@@ -1,6 +1,6 @@
 import type { Chain, Transport } from "viem";
-import type { Client } from "../../clients/createClient";
-import type { EpochTag } from "../../types/block";
+import type { Client } from "../../clients/createClient.js";
+import type { EpochTag } from "../../types/block.js";
 
 export type GetEpochNumberParameters<TEpochTag extends EpochTag = "latest_mined"> = {
   tag?: TEpochTag;

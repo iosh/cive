@@ -1,5 +1,5 @@
 import type { Hash, Hex } from "viem";
-import type { Address } from "../accounts/types";
+import type { Address } from "../accounts/types.js";
 
 export type Log<TQuantity = bigint> = {
   address: Address;

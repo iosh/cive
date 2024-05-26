@@ -1,6 +1,6 @@
-import type { NodeState } from "../../types/node";
-import type { RpcNodeState } from "../../types/rpc";
-import type { ExactPartial } from "../../types/utils";
+import type { NodeState } from "../../types/node.js";
+import type { RpcNodeState } from "../../types/rpc.js";
+import type { ExactPartial } from "../../types/utils.js";
 
 export function formatNodeState(
   nodeState: ExactPartial<RpcNodeState>

@@ -9,13 +9,13 @@ import type {
   RpcSchema,
 } from "viem";
 import type { Prettify } from "viem/chains";
-import type { PublicActions } from "./decorators/public";
-import type { Account, Address, JsonRpcAccount } from "../accounts/types";
+import type { PublicActions } from "./decorators/public.js";
+import type { Account, Address, JsonRpcAccount } from "../accounts/types.js";
 import type { ParseAccountErrorType } from "viem/utils";
-import type { ErrorType } from "../errors/utils";
-import { parseAccount } from "../accounts/utils/parseAccount";
-import { uid } from "../utils/uid";
-import type { EIP1474Methods } from "../types/eip1193";
+import type { ErrorType } from "../errors/utils.js";
+import { parseAccount } from "../accounts/utils/parseAccount.js";
+import { uid } from "../utils/uid.js";
+import type { EIP1474Methods } from "../types/eip1193.js";
 
 export type ClientConfig<
   transport extends Transport = Transport,

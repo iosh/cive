@@ -1,172 +1,172 @@
 import type { Transport, Chain } from "viem";
-import type { Address, Account } from "../../accounts/types";
-import type { Client } from "../createClient";
+import type { Address, Account } from "../../accounts/types.js";
+import type { Client } from "../createClient.js";
 import {
   getTransaction,
   type GetTransactionReturnType,
   type GetTransactionParameters,
-} from "../../actions/public/getTransaction";
-import type { EpochTag } from "../../types/block";
+} from "../../actions/public/getTransaction.js";
+import type { EpochTag } from "../../types/block.js";
 import {
   getBlock,
   type GetBlockParameters,
   type GetBlockReturnType,
-} from "../../actions/public/getBlock";
+} from "../../actions/public/getBlock.js";
 import {
   getEpochNumber,
   type GetEpochNumberParameters,
   type GetEpochNumberReturnType,
-} from "../../actions/public/getEpochNumber";
+} from "../../actions/public/getEpochNumber.js";
 import {
   getGasPrice,
   type GetGasPriceReturnType,
-} from "../../actions/public/getGasPrice";
+} from "../../actions/public/getGasPrice.js";
 import {
   getBastBlockHash,
   type GetBastBlockHashReturn,
-} from "../../actions/public/getBastBlockHash";
+} from "../../actions/public/getBastBlockHash.js";
 import {
   getBlocksByEpoch,
   type GetBlocksByEpochParameters,
   type GetBlocksByEpochReturnType,
-} from "../../actions/public/getBlocksByEpoch";
+} from "../../actions/public/getBlocksByEpoch.js";
 import {
   getBalance,
   type GetBalanceParameters,
   type GetBalanceReturnType,
-} from "../../actions/public/getBalance";
+} from "../../actions/public/getBalance.js";
 import {
   getStakingBalance,
   type GetStakingBalanceParameters,
   type GetStakingBalanceReturnType,
-} from "../../actions/public/getStakingBalance";
+} from "../../actions/public/getStakingBalance.js";
 import {
   getCollateralForStorage,
   type GetCollateralForStorageParameters,
   type GetCollateralForStorageReturnType,
-} from "../../actions/public/getCollaterlForStorage";
+} from "../../actions/public/getCollaterlForStorage.js";
 import {
   getAdmin,
   type GetAdminParameters,
   type GetAdminReturnType,
-} from "../../actions/public/getAdmin";
+} from "../../actions/public/getAdmin.js";
 import {
   getBytecode,
   type GetBytecodeParameters,
   type GetBytecodeReturnType,
-} from "../../actions/public/getBytecode";
+} from "../../actions/public/getBytecode.js";
 import {
   GetStorageAt,
   type GetStorageAtParameters,
   type GetStorageAtReturnType,
-} from "../../actions/public/getStorageAt";
+} from "../../actions/public/getStorageAt.js";
 import {
   GetStorageRoot,
   type GetStorageRootParameters,
   type GetStorageRootReturnType,
-} from "../../actions/public/getStorageRoot";
+} from "../../actions/public/getStorageRoot.js";
 import {
   GetSponsorInfo,
   type GetSponsorInfoParameters,
   type GetSponsorInfoReturnType,
-} from "../../actions/public/getSponsorInfo";
+} from "../../actions/public/getSponsorInfo.js";
 import {
   getNextNonce,
   type GetNextNonceParameters,
   type GetNextNonceReturnType,
-} from "../../actions/public/getNextNonce";
+} from "../../actions/public/getNextNonce.js";
 import {
   getTransactionReceipt,
   type GetTransactionReceiptParameters,
   type GetTransactionReceiptReturnType,
-} from "../../actions/public/getTransactionReceipt";
+} from "../../actions/public/getTransactionReceipt.js";
 import {
   getAccount,
   type GetChainAccountParameters,
   type GetChainAccountReturnType,
-} from "../../actions/public/getAccount";
+} from "../../actions/public/getAccount.js";
 import {
   getInterestRate,
   type GetInterestRateParameters,
   type GetInterestRateReturnType,
-} from "../../actions/public/getInterestRate";
+} from "../../actions/public/getInterestRate.js";
 import {
   getAccumulateInterestRate,
   type GetAccumulateInterestRateParameters,
   type GetAccumulateInterestRateReturnType,
-} from "../../actions/public/getAccumulateInterestRate";
+} from "../../actions/public/getAccumulateInterestRate.js";
 import {
   checkBalanceAgainstTransaction,
   type CheckBalanceAgainstTransactionParameters,
   type CheckBalanceAgainstTransactionReturnType,
-} from "../../actions/public/checkBalanceAgainstTransaction";
+} from "../../actions/public/checkBalanceAgainstTransaction.js";
 import {
   getSkippedBlocksByEpoch,
   type GetSkippedBlocksByEpochParameters,
   type GetSkippedBlocksByEpochReturnType,
-} from "../../actions/public/getSkippedBlocksByEpoch";
+} from "../../actions/public/getSkippedBlocksByEpoch.js";
 import {
   getConfirmationRiskByHash,
   type GetConfirmationRiskByHashParameters,
   type GetConfirmationRiskByHashReturnType,
-} from "../../actions/public/getConfirmationRiskByHash";
+} from "../../actions/public/getConfirmationRiskByHash.js";
 import {
   getStatus,
   type GetStatusReturnType,
-} from "../../actions/public/getStatus";
+} from "../../actions/public/getStatus.js";
 import {
   clientVersion,
   type ClientVersionReturnType,
-} from "../../actions/public/clientVersion";
+} from "../../actions/public/clientVersion.js";
 import {
   getBlockRewardInfo,
   type GetBlockRewardInfoParameters,
   type GetBlockRewardInfoReturnType,
-} from "../../actions/public/getBlockRewardInfo";
+} from "../../actions/public/getBlockRewardInfo.js";
 import {
   getBlockByHashWithPivotAssumption,
   type GetBlockByHashWithPivotAssumptionParameters,
   type GetBlockByHashWithPivotAssumptionReturnType,
-} from "../../actions/public/getBlockByHashWithPivotAssumption";
+} from "../../actions/public/getBlockByHashWithPivotAssumption.js";
 import {
   getDepositList,
   type GetDepositListParameters,
   type GetDepositListReturnType,
-} from "../../actions/public/getDepositList";
+} from "../../actions/public/getDepositList.js";
 import {
   getVoteList,
   type GetVoteListParameters,
   type GetVoteListReturnType,
-} from "../../actions/public/getVoteList";
+} from "../../actions/public/getVoteList.js";
 import {
   getSupplyInfo,
   type GetSupplyInfoReturnType,
-} from "../../actions/public/getSupplyInfo";
+} from "../../actions/public/getSupplyInfo.js";
 import {
   getAccountPendingInfo,
   type GetAccountPendingInfoParameters,
   type GetAccountPendingInfoReturnType,
-} from "../../actions/public/getAccountPendingInfo";
+} from "../../actions/public/getAccountPendingInfo.js";
 import {
   getAccountPendingTransactions,
   type GetAccountPendingTransactionsParameters,
   type GetAccountPendingTransactionsReturnType,
-} from "../../actions/public/getAccountPendingTransactions";
+} from "../../actions/public/getAccountPendingTransactions.js";
 import {
   getPoSEconomics,
   type GetPoSEconomicsParameters,
   type GetPoSEconomicsReturnType,
-} from "../../actions/public/getPoSEconomics";
+} from "../../actions/public/getPoSEconomics.js";
 import {
   getPoSRewardByEpoch,
   type GetPoSRewardByEpochParameters,
   type GetPoSRewardByEpochReturnType,
-} from "../../actions/public/getPoSRewardByEpoch";
+} from "../../actions/public/getPoSRewardByEpoch.js";
 import {
   getParamsFromVote,
   type GetParamsFormVoteParameters,
   type GetParamsFormVoteReturnType,
-} from "../../actions/public/getParamsFromVote";
+} from "../../actions/public/getParamsFromVote.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,

@@ -1,7 +1,7 @@
 import type { FeeValuesLegacy, Hash, Hex } from "viem";
-import type { ExactPartial } from "./utils";
-import type { Log } from "./log";
-import type { Address } from "../accounts/types";
+import type { ExactPartial } from "./utils.js";
+import type { Log } from "./log.js";
+import type { Address } from "../accounts/types.js";
 
 export type TransactionReceipt<
   TQuantity = bigint,

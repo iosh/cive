@@ -1,9 +1,9 @@
-import type { EpochTag } from "../../types/block";
-import type { Deposit } from "../../types/deposit";
+import type { EpochTag } from "../../types/block.js";
+import type { Deposit } from "../../types/deposit.js";
 import { numberToHex, type Chain, type Transport } from "viem";
-import type { Client } from "../../clients/createClient";
-import { formatDeposit } from "../../utils/formatters/deposit";
-import type { Address } from "../../accounts/types";
+import type { Client } from "../../clients/createClient.js";
+import { formatDeposit } from "../../utils/formatters/deposit.js";
+import type { Address } from "../../accounts/types.js";
 
 export type GetDepositListParameters = {
   address: Address;

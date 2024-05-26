@@ -1,5 +1,5 @@
 import type { Hex } from "viem";
-import type { Address } from "../accounts/types";
+import type { Address } from "../accounts/types.js";
 
 // see:https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccount
 export type ChainAccount<TQuantity = bigint> = {

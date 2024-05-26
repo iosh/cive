@@ -1,4 +1,4 @@
-import type { Address } from "../accounts/types";
+import type { Address } from "../accounts/types.js";
 
 export type Sponsor<TQuantity = bigint> = {
   sponsorBalanceForCollateral: TQuantity;

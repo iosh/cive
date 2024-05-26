@@ -4,10 +4,10 @@ import {
   type ExtractChainFormatterExclude,
   type ExtractChainFormatterReturnType,
 } from "viem";
-import type { Transaction } from "../../types/transaction";
-import type { ExactPartial, UnionLooseOmit } from "../../types/utils";
-import type { EpochTag } from "../../types/block";
-import type { RpcTransaction } from "../../types/rpc";
+import type { Transaction } from "../../types/transaction.js";
+import type { ExactPartial, UnionLooseOmit } from "../../types/utils.js";
+import type { EpochTag } from "../../types/block.js";
+import type { RpcTransaction } from "../../types/rpc.js";
 
 type TransactionPendingDependencies = "blockHash";
 

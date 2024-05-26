@@ -1,7 +1,7 @@
 import type { Chain, Hash, Transport } from "viem";
-import type { Client } from "../../clients/createClient";
+import type { Client } from "../../clients/createClient.js";
 import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils";
+import type { ErrorType } from "../../errors/utils.js";
 
 export type GetBastBlockHashErrorType = RequestErrorType | ErrorType;
 export type GetBastBlockHashReturn = Hash;

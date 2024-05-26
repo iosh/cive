@@ -4,11 +4,11 @@ import {
   type NumberToHexErrorType,
   type Transport,
 } from "viem";
-import type { Block, EpochTag } from "../../types/block";
-import type { Client } from "../../clients/createClient";
+import type { Block, EpochTag } from "../../types/block.js";
+import type { Client } from "../../clients/createClient.js";
 import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils";
-import { formatBlock } from "../../utils/formatters/block";
+import type { ErrorType } from "../../errors/utils.js";
+import { formatBlock } from "../../utils/formatters/block.js";
 
 export type GetSkippedBlocksByEpochParameters =
   | {

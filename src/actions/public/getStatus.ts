@@ -1,9 +1,9 @@
 import type { Chain, Transport } from "viem";
-import type { NodeState } from "../../types/node";
-import type { Client } from "../../clients/createClient";
-import { formatNodeState } from "../../utils/formatters/node";
+import type { NodeState } from "../../types/node.js";
+import type { Client } from "../../clients/createClient.js";
+import { formatNodeState } from "../../utils/formatters/node.js";
 import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils";
+import type { ErrorType } from "../../errors/utils.js";
 
 export type GetStatusReturnType = NodeState;
 

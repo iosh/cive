@@ -1,9 +1,9 @@
-import type { EpochTag } from "../../types/block";
+import type { EpochTag } from "../../types/block.js";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils";
-import type { Client } from "../../clients/createClient";
+import type { ErrorType } from "../../errors/utils.js";
+import type { Client } from "../../clients/createClient.js";
 import { numberToHex, type Chain, type Transport } from "viem";
-import type { Address } from "../../accounts/types";
+import type { Address } from "../../accounts/types.js";
 export type CheckBalanceAgainstTransactionParameters = {
   accountAddress: Address;
   contractAddress: Address;

@@ -1,6 +1,6 @@
 import type { Hash, Hex } from "viem";
-import type { Transaction } from "./transaction";
-import type { Address } from "../accounts/types";
+import type { Transaction } from "./transaction.js";
+import type { Address } from "../accounts/types.js";
 
 export type Block<
   TQuantity = bigint,

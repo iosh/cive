@@ -1,8 +1,8 @@
 import type { Chain, Transport } from "viem";
-import type { Client } from "../../clients/createClient";
-import type { Account } from "../../accounts/types";
+import type { Client } from "../../clients/createClient.js";
+import type { Account } from "../../accounts/types.js";
 import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils";
+import type { ErrorType } from "../../errors/utils.js";
 
 export type GetGasPriceReturnType = bigint;
 export type GetGaspriceErrorType = RequestErrorType | ErrorType;

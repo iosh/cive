@@ -5,14 +5,14 @@ import {
   type NumberToHexErrorType,
   type Transport,
 } from "viem";
-import type { Client } from "../../clients/createClient";
-import type { Prettify } from "../../types/utils";
+import type { Client } from "../../clients/createClient.js";
+import type { Prettify } from "../../types/utils.js";
 import {
   formatTransaction,
   type FormattedTransaction,
-} from "../../utils/formatters/transaction";
+} from "../../utils/formatters/transaction.js";
 import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils";
+import type { ErrorType } from "../../errors/utils.js";
 
 export type GetTransactionParameters = {
   hash: Hash;

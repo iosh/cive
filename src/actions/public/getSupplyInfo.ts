@@ -1,7 +1,7 @@
 import type { Chain, Transport } from "viem";
-import type { Supply } from "../../types/supply";
-import type { Client } from "../../clients/createClient";
-import { formatSupply } from "../../utils/formatters/supply";
+import type { Supply } from "../../types/supply.js";
+import type { Client } from "../../clients/createClient.js";
+import { formatSupply } from "../../utils/formatters/supply.js";
 
 export type GetSupplyInfoReturnType = Supply;
 

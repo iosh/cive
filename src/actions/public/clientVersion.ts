@@ -1,7 +1,7 @@
 import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils";
+import type { ErrorType } from "../../errors/utils.js";
 import type { Chain, Transport } from "viem";
-import type { Client } from "../../clients/createClient";
+import type { Client } from "../../clients/createClient.js";
 
 export type ClientVersionReturnType = string;
 

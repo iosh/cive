@@ -1,22 +1,17 @@
 import {
   TransactionReceiptNotFoundError,
   type Chain,
-  type ExtractChainFormatterReturnType,
   type Hash,
   type TransactionReceiptNotFoundErrorType,
   type Transport,
 } from "viem";
-import type { RpcTransactionReceipt } from "../../types/rpc";
-import type { TransactionReceipt } from "../../types/transaction";
-import type { ExactPartial } from "../../types/utils";
-import { formatLog } from "../../utils/formatters/log";
 import {
   formatTransactionReceipt,
   type FormattedTransactionReceipt,
-} from "../../utils/formatters/transactionReceipt";
+} from "../../utils/formatters/transactionReceipt.js";
 import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils";
-import type { Client } from "../../clients/createClient";
+import type { ErrorType } from "../../errors/utils.js";
+import type { Client } from "../../clients/createClient.js";
 
 export type GetTransactionReceiptParameters = {
   hash: Hash;

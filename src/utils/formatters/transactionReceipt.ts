@@ -1,8 +1,8 @@
 import type { Chain, ExtractChainFormatterReturnType } from "viem";
-import type { RpcTransactionReceipt } from "../../types/rpc";
-import type { TransactionReceipt } from "../../types/transaction";
-import type { ExactPartial } from "../../types/utils";
-import { formatLog } from "./log";
+import type { RpcTransactionReceipt } from "../../types/rpc.js";
+import type { TransactionReceipt } from "../../types/transaction.js";
+import type { ExactPartial } from "../../types/utils.js";
+import { formatLog } from "./log.js";
 
 export type FormattedTransactionReceipt<
   TChain extends Chain | undefined = undefined

@@ -4,11 +4,11 @@ import type {
   ExtractChainFormatterReturnType,
   Hash,
 } from "viem";
-import type { Block, EpochTag } from "../../types/block";
-import type { ExactPartial, Prettify } from "../../types/utils";
-import { formatTransaction, type FormattedTransaction } from "./transaction";
-import type { ErrorType } from "../../errors/utils";
-import type { RpcBlock } from "../../types/rpc";
+import type { Block, EpochTag } from "../../types/block.js";
+import type { ExactPartial, Prettify } from "../../types/utils.js";
+import { formatTransaction, type FormattedTransaction } from "./transaction.js";
+import type { ErrorType } from "../../errors/utils.js";
+import type { RpcBlock } from "../../types/rpc.js";
 
 type BlockPendingDependencies = "gasUsed" | "hash" | "nonce" | "powQuality";
 export type FormattedBlock<

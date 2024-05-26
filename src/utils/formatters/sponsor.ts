@@ -1,5 +1,5 @@
-import type { RpcSponsor } from "../../types/rpc";
-import type { Sponsor } from "../../types/sponsor";
+import type { RpcSponsor } from "../../types/rpc.js";
+import type { Sponsor } from "../../types/sponsor.js";
 
 export function formatSponsor(sponsor: RpcSponsor): Sponsor {
   const data = {

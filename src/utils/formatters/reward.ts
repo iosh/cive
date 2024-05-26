@@ -1,6 +1,6 @@
-import type { Reward } from "../../types/reward";
-import type { RpcReward } from "../../types/rpc";
-import type { ExactPartial } from "../../types/utils";
+import type { Reward } from "../../types/reward.js";
+import type { RpcReward } from "../../types/rpc.js";
+import type { ExactPartial } from "../../types/utils.js";
 
 export function formatReward(reward: ExactPartial<RpcReward>): Reward {
   const result = {

@@ -3,18 +3,18 @@ import type {
   TransactionLegacy,
   TransactionReceipt,
   TransactionRequestLegacy,
-} from "./transaction";
-import type { Block, EpochNumber, EpochTag } from "./block";
-import type { Sponsor } from "./sponsor";
-import type { FeeValueLegacy } from "./fee";
-import type { Log } from "./log";
-import type { ChainAccount } from "./chainAccount";
-import type { NodeState } from "./node";
-import type { Reward } from "./reward";
-import type { Deposit } from "./deposit";
-import type { Vote } from "./vote";
-import type { Supply } from "./supply";
-import type { AccountPending, AccountPendingTransaction } from "./account";
+} from "./transaction.js";
+import type { Block, EpochNumber, EpochTag } from "./block.js";
+import type { Sponsor } from "./sponsor.js";
+import type { FeeValueLegacy } from "./fee.js";
+import type { Log } from "./log.js";
+import type { ChainAccount } from "./chainAccount.js";
+import type { NodeState } from "./node.js";
+import type { Reward } from "./reward.js";
+import type { Deposit } from "./deposit.js";
+import type { Vote } from "./vote.js";
+import type { Supply } from "./supply.js";
+import type { AccountPending, AccountPendingTransaction } from "./account.js";
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";

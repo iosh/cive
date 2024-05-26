@@ -1,6 +1,6 @@
-import type { ChainAccount } from "../../types/chainAccount";
-import type { RpcChainAccount } from "../../types/rpc";
-import type { ExactPartial } from "../../types/utils";
+import type { ChainAccount } from "../../types/chainAccount.js";
+import type { RpcChainAccount } from "../../types/rpc.js";
+import type { ExactPartial } from "../../types/utils.js";
 
 export function formatChainAccount(
   chainAccount: ExactPartial<RpcChainAccount>

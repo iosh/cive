@@ -1,6 +1,6 @@
-import type { ExactPartial } from "../../types/utils";
-import type { RpcLog } from "../../types/rpc";
-import type { Log } from "../../types/log";
+import type { ExactPartial } from "../../types/utils.js";
+import type { RpcLog } from "../../types/rpc.js";
+import type { Log } from "../../types/log.js";
 
 export function formatLog(log: ExactPartial<RpcLog>) {
   return {

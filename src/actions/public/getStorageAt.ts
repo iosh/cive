@@ -1,7 +1,7 @@
-import type { EpochTag } from "../../types/block";
+import type { EpochTag } from "../../types/block.js";
 import { numberToHex, type Chain, type Hex, type Transport } from "viem";
-import type { Client } from "../../clients/createClient";
-import type { Address } from "../../accounts/types";
+import type { Client } from "../../clients/createClient.js";
+import type { Address } from "../../accounts/types.js";
 
 export type GetStorageAtParameters = {
   address: Address;

@@ -1,6 +1,6 @@
-import type { RpcVote } from "../../types/rpc";
-import type { ExactPartial } from "../../types/utils";
-import type { Vote } from "../../types/vote";
+import type { RpcVote } from "../../types/rpc.js";
+import type { ExactPartial } from "../../types/utils.js";
+import type { Vote } from "../../types/vote.js";
 
 export function formatVote(vote: ExactPartial<RpcVote>): Vote {
   const result = {

@@ -1,13 +1,12 @@
 import { numberToHex, type Chain, type Hash, type Transport } from "viem";
-import type { Client } from "../../clients/createClient";
-import type { EpochTag } from "../../types/block";
-import type { RpcEpochNumber } from "../../types/rpc";
+import type { Client } from "../../clients/createClient.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils";
+import type { ErrorType } from "../../errors/utils.js";
 
 export type GetBlocksByEpochParameters = {} & (
   | {
-      epochNumber?: bigint;
+      epochNumber?: EpochNumber;
       epochTag?: never | undefined;
     }
   | {

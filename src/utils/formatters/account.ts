@@ -1,13 +1,13 @@
 import type {
   AccountPending,
   AccountPendingTransaction,
-} from "../../types/account";
+} from "../../types/account.js";
 import type {
   RpcAccountPending,
   RpcAccountPendingTransaction,
-} from "../../types/rpc";
-import type { ExactPartial } from "../../types/utils";
-import { formatTransaction } from "./transaction";
+} from "../../types/rpc.js";
+import type { ExactPartial } from "../../types/utils.js";
+import { formatTransaction } from "./transaction.js";
 
 export function formatAccountPending(
   accountPending: ExactPartial<RpcAccountPending>

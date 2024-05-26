@@ -14,12 +14,12 @@ import type {
   RpcTransactionReceipt,
   RpcTransactionRequest,
   RpcVote,
-} from "./rpc";
+} from "./rpc.js";
 
-import type { RpcEpochNumber, RpcTransaction as Transaction } from "./rpc";
-import type { Block, EpochNumber, EpochTag } from "./block";
-import type { Log } from "./log";
-import type { Address } from "../accounts/types";
+import type { RpcEpochNumber, RpcTransaction as Transaction } from "./rpc.js";
+import type { Block, EpochNumber, EpochTag } from "./block.js";
+import type { Log } from "./log.js";
+import type { Address } from "../accounts/types.js";
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema];
 export type PublicRpcSchema = [
   /**
