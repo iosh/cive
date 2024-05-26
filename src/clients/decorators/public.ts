@@ -320,7 +320,7 @@ export type PublicActions<
 
   /**
    * Returns a transaction receipt, identified by the corresponding transaction hash.
-   * - JSON-RPC Method: [`cfx_sendRawTransaction`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_sendrawtransaction)
+   * - JSON-RPC Method: [`cfx_getTransactionReceipt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionreceipt)
    * @param args - {@link GetTransactionReceiptParameters}
    * @returns a transaction receipt object, or null when no transaction was found or the transaction was not executed yet: {@link GetTransactionReceiptReturnType}
    */
