@@ -2,6 +2,7 @@ import type { Index, Quantity } from "viem";
 import type {
   TransactionLegacy,
   TransactionReceipt,
+  TransactionRequest,
   TransactionRequestLegacy,
 } from "./transaction.js";
 import type { Block, EpochNumber, EpochTag } from "./block.js";
@@ -15,6 +16,7 @@ import type { Deposit } from "./deposit.js";
 import type { Vote } from "./vote.js";
 import type { Supply } from "./supply.js";
 import type { AccountPending, AccountPendingTransaction } from "./account.js";
+import { OneOf } from "./utils.js";
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";
@@ -31,11 +33,7 @@ export type RpcEpochNumber = EpochNumber<Quantity>;
 
 export type RpcSponsor = Sponsor<Quantity>;
 
-export type RpcTransactionRequest = TransactionRequestLegacy<
-  Quantity,
-  Index,
-  "0x0"
->;
+export type RpcTransactionRequest = OneOf<TransactionRequest<Quantity, Index>>;
 
 export type RpcFeeValue = FeeValueLegacy<Quantity>;
 
