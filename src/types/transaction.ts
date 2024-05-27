@@ -1,4 +1,4 @@
-import type { FeeValuesLegacy, Hash, Hex } from "viem";
+import type { FeeValuesLegacy, Hash, Hex, OneOf } from "viem";
 import type { ExactPartial } from "./utils.js";
 import type { Log } from "./log.js";
 import type { Address } from "../accounts/types.js";
@@ -170,4 +170,12 @@ export type TransactionRequestLegacy<
   TIndex = number,
   TTransactionType = "legacy"
 > = TransactionRequestBase<TQuantity, TIndex> &
-  ExactPartial<FeeValuesLegacy<TQuantity>>;
+  ExactPartial<FeeValuesLegacy<TQuantity>> & {
+    storageLimit?: TQuantity;
+    accessList?: never | undefined
+    maxFeePerGas?: never | undefined
+  };
+
+export type TransactionRequest<TQuantity = bigint, TIndex = number> = OneOf<
+  TransactionRequestLegacy<TQuantity, TIndex>
+>;
