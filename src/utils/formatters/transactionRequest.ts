@@ -33,4 +33,6 @@ export function formatTransactionRequest(
 
   if (typeof request.accessList !== "undefined")
     rpcRequest.accessList = request.accessList;
+
+  return rpcRequest
 }

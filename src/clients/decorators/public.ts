@@ -167,6 +167,7 @@ import {
   type GetParamsFormVoteParameters,
   type GetParamsFormVoteReturnType,
 } from "../../actions/public/getParamsFromVote.js";
+import { CallParameters, CallReturnType, call } from "../../actions/public/call.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -318,6 +319,12 @@ export type PublicActions<
     args: GetNextNonceParameters
   ) => Promise<GetNextNonceReturnType>;
 
+  /**
+   * Virtually calls a contract, returns the output data. The transaction will not be added to the blockchain. The error message of cfx_call is similar to cfx_estimateGasAndCollateral and error solutions can be found in cfx_estimateGasAndCollateral behaviour#errors.
+   * @param args - {@link CallParameters}
+   * @returns - {@link CallReturnType}
+   */
+  call:(args: CallParameters) => Promise<CallReturnType>
   /**
    * Returns a transaction receipt, identified by the corresponding transaction hash.
    * - JSON-RPC Method: [`cfx_getTransactionReceipt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionreceipt)
@@ -518,6 +525,7 @@ export function publicActions<
     getStorageRoot: (args) => GetStorageRoot(client, args),
     getSponsorInfo: (args) => GetSponsorInfo(client, args),
     getNextNonce: (args) => getNextNonce(client, args),
+    call:(args) => call(client, args),
     getTransactionReceipt: (args) => getTransactionReceipt(client, args),
     getAccount: (args) => getAccount(client, args),
     getInterestRate: (args) => getInterestRate(client, args),
