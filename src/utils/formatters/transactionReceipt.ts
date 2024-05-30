@@ -46,6 +46,12 @@ export function formatTransactionReceipt(
       ? receiptOutcomeStatuses[transactionReceipt.outcomeStatus]
       : null,
     log: transactionReceipt.log ? transactionReceipt.log.map(formatLog) : null,
+    burntGasFee: transactionReceipt.burntGasFee
+      ? BigInt(transactionReceipt.burntGasFee)
+      : null,
+    effectiveGasPrice: transactionReceipt.effectiveGasPrice
+      ? BigInt(transactionReceipt.effectiveGasPrice)
+      : null,
   } as TransactionReceipt;
 
   return receipt;

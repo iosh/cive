@@ -50,7 +50,6 @@ export async function estimateGasAndCollateral<
     gas,
     gasPrice,
     storageLimit,
-    maxFeePerBlobGas,
     maxFeePerGas,
     maxPriorityFeePerGas,
     nonce,
@@ -72,14 +71,13 @@ export async function estimateGasAndCollateral<
     data,
     gas,
     gasPrice,
-    maxFeePerBlobGas,
     maxFeePerGas,
     maxPriorityFeePerGas,
     nonce,
     to,
     value,
     storageLimit,
-  });
+  })
 
   const result = await client.request({
     method: "cfx_estimateGasAndCollateral",

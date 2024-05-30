@@ -1,12 +1,17 @@
-import type { FeeValuesLegacy, Hash, Hex, OneOf } from "viem";
+import type { Hash, Hex, OneOf } from "viem";
 import type { ExactPartial } from "./utils.js";
 import type { Log } from "./log.js";
 import type { Address } from "../accounts/types.js";
+import { FeeValuesEIP1559, FeeValuesLegacy } from "./fee.js";
+
+export type AccessList = { address: Address; storageKeys: Hex[] }[];
+export type TransactionType = "legacy" | "eip1559" | "eip2930" | (string & {});
 
 export type TransactionReceipt<
   TQuantity = bigint,
   TIndex = number,
-  TOutcomeStatus = "success" | "failed" | "skipped"
+  TOutcomeStatus = "success" | "failed" | "skipped",
+  TType = TransactionType
 > = {
   /**
    * hash of the given transaction.
@@ -83,6 +88,13 @@ export type TransactionReceipt<
    * tx exec fail message, if transaction exec success this will be null.
    */
   txExecErrorMsg: string | null;
+  /** Transaction type */
+  type: TType;
+
+  burntGasFee: TQuantity;
+
+  /** Pre-London, it is equal to the transaction's gasPrice. Post-London, it is equal to the actual gas price paid for inclusion. */
+  effectiveGasPrice: TQuantity;
 };
 
 export type TransactionBase<
@@ -126,26 +138,58 @@ export type TransactionBase<
 export type TransactionLegacy<
   TQuantity = bigint,
   TIndex = number,
-  TPending extends boolean = boolean
-  // TType = "legacy"
+  TPending extends boolean = boolean,
+  TType = "legacy"
 > = Omit<TransactionBase<TQuantity, TIndex, TPending>, "yParity"> &
   FeeValuesLegacy<TQuantity> & {
-    // /** EIP-2930 Access List. */
-    // accessList?: never | undefined;
-    // blobVersionedHashes?: never | undefined;
-    /** Chain ID that this transaction is valid on. */
-    chainId?: TIndex | undefined;
-    // yParity?: never | undefined;
-    // type: TType;
     contractCreated: Address | null;
     status: TQuantity | null;
+    /** EIP-2930 Access List. */
+    accessList?: never | undefined;
+    /** Chain ID that this transaction is valid on. */
+    chainId?: TIndex | undefined;
+    yParity?: never | undefined;
+    type: TType;
   };
-
+export type TransactionEIP2930<
+  TQuantity = bigint,
+  TIndex = number,
+  TPending extends boolean = boolean,
+  TType = "eip2930"
+> = TransactionBase<TQuantity, TIndex, TPending> &
+  FeeValuesLegacy<TQuantity> & {
+    contractCreated: Address | null;
+    status: TQuantity | null;
+    /** EIP-2930 Access List. */
+    accessList: AccessList;
+    /** Chain ID that this transaction is valid on. */
+    chainId: TIndex;
+    type: TType;
+  };
+export type TransactionEIP1559<
+  TQuantity = bigint,
+  TIndex = number,
+  TPending extends boolean = boolean,
+  TType = "eip1559"
+> = TransactionBase<TQuantity, TIndex, TPending> &
+  FeeValuesEIP1559<TQuantity> & {
+    contractCreated: Address | null;
+    status: TQuantity | null;
+    /** EIP-2930 Access List. */
+    accessList: AccessList;
+    /** Chain ID that this transaction is valid on. */
+    chainId: TIndex;
+    type: TType;
+  };
 export type Transaction<
   TQuantity = bigint,
   TIndex = number,
   TPending extends boolean = boolean
-> = TransactionLegacy<TQuantity, TIndex, TPending>;
+> = OneOf<
+  | TransactionLegacy<TQuantity, TIndex, TPending>
+  | TransactionEIP2930<TQuantity, TIndex, TPending>
+  | TransactionEIP1559<TQuantity, TIndex, TPending>
+>;
 
 export type TransactionRequestBase<TQuantity = bigint, TIndex = number> = {
   /** Transaction sender */
@@ -163,6 +207,8 @@ export type TransactionRequestBase<TQuantity = bigint, TIndex = number> = {
 
   /** Unique number identifying this transaction */
   nonce?: TIndex | undefined;
+
+  storageLimit?: TQuantity;
 };
 
 export type TransactionRequestLegacy<
@@ -171,11 +217,30 @@ export type TransactionRequestLegacy<
   TTransactionType = "legacy"
 > = TransactionRequestBase<TQuantity, TIndex> &
   ExactPartial<FeeValuesLegacy<TQuantity>> & {
-    storageLimit?: TQuantity;
-    accessList?: never | undefined
-    maxFeePerGas?: never | undefined
+    accessList?: never | undefined;
+    type?: TTransactionType | undefined;
+  };
+export type TransactionRequestEIP2930<
+  TQuantity = bigint,
+  TIndex = number,
+  TTransactionType = "eip2930"
+> = TransactionRequestBase<TQuantity, TIndex> &
+  ExactPartial<FeeValuesLegacy<TQuantity>> & {
+    accessList?: AccessList | undefined;
+    type?: TTransactionType | undefined;
+  };
+export type TransactionRequestEIP1559<
+  TQuantity = bigint,
+  TIndex = number,
+  TTransactionType = "eip1559"
+> = TransactionRequestBase<TQuantity, TIndex> &
+  ExactPartial<FeeValuesEIP1559<TQuantity>> & {
+    accessList?: AccessList | undefined;
+    type?: TTransactionType | undefined;
   };
 
 export type TransactionRequest<TQuantity = bigint, TIndex = number> = OneOf<
-  TransactionRequestLegacy<TQuantity, TIndex>
+  | TransactionRequestLegacy<TQuantity, TIndex>
+  | TransactionRequestEIP2930<TQuantity, TIndex>
+  | TransactionRequestEIP1559<TQuantity, TIndex>
 >;

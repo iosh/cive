@@ -1,13 +1,18 @@
 import type { Index, Quantity } from "viem";
 import type {
+  TransactionEIP1559,
+  TransactionEIP2930,
   TransactionLegacy,
   TransactionReceipt,
   TransactionRequest,
+  TransactionRequestEIP1559,
+  TransactionRequestEIP2930,
   TransactionRequestLegacy,
+  TransactionType,
 } from "./transaction.js";
 import type { Block, EpochNumber, EpochTag } from "./block.js";
 import type { Sponsor } from "./sponsor.js";
-import type { FeeValue } from "./fee.js";
+import type { FeeValues } from "./fee.js";
 import type { Log } from "./log.js";
 import type { ChainAccount } from "./chainAccount.js";
 import type { NodeState } from "./node.js";
@@ -16,12 +21,20 @@ import type { Deposit } from "./deposit.js";
 import type { Vote } from "./vote.js";
 import type { Supply } from "./supply.js";
 import type { AccountPending, AccountPendingTransaction } from "./account.js";
-import { OneOf } from "./utils.js";
+import { OneOf, UnionOmit, UnionPartialBy } from "./utils.js";
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";
-export type RpcTransaction<TPending extends boolean = boolean> =
-  TransactionLegacy<Quantity, Index, TPending>;
+export type RpcTransaction<TPending extends boolean = boolean> = UnionOmit<
+  OneOf<
+    | TransactionLegacy<Quantity, Index, TPending, "0x0">
+    | TransactionEIP2930<Quantity, Index, TPending, "0x1">
+    | TransactionEIP1559<Quantity, Index, TPending, "0x2">
+  >,
+  // `yParity` is optional on the RPC type as some nodes do not return it
+  // for 1559 & 2930 transactions (they should!).
+  "yParity"
+>;
 
 export type RpcBlock<
   TBlockTag extends EpochTag = EpochTag,
@@ -33,16 +46,21 @@ export type RpcEpochNumber = EpochNumber<Quantity>;
 
 export type RpcSponsor = Sponsor<Quantity>;
 
-export type RpcTransactionRequest = OneOf<TransactionRequest<Quantity, Index>>;
+export type RpcTransactionRequest = OneOf<
+  | TransactionRequestLegacy<Quantity, Index, "0x0">
+  | TransactionRequestEIP2930<Quantity, Index, "0x1">
+  | TransactionRequestEIP1559<Quantity, Index, "0x2">
+>;
 
-export type RpcFeeValue = FeeValue<Quantity>;
+export type RpcFeeValue = FeeValues<Quantity>;
 
 export type RpcLog = Log<Quantity>;
 
 export type RpcTransactionReceipt = TransactionReceipt<
   Quantity,
   Index,
-  OutcomeStatus
+  OutcomeStatus,
+  TransactionType
 >;
 
 export type RpcChainAccount = ChainAccount<Quantity>;

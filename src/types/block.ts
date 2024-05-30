@@ -110,6 +110,9 @@ export type Block<
    * the hash of the PoS newest committed block. Added from Conflux-rust v2.0.0
    */
   posReference: Hash;
+
+  /** Base fee per gas */
+  baseFeePerGas: TQuantity | null
 };
 
 export type EpochTag =

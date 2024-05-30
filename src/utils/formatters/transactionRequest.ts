@@ -11,6 +11,12 @@ export type FormattedTransactionRequest<
   TransactionRequest
 >;
 
+export const rpcTransactionType = {
+  legacy: "0x0",
+  eip2930: "0x1",
+  eip1559: "0x2",
+} as const;
+
 export function formatTransactionRequest(
   request: ExactPartial<TransactionRequest>
 ): RpcTransactionRequest {
@@ -26,13 +32,16 @@ export function formatTransactionRequest(
   if (typeof request.data !== "undefined") rpcRequest.data = request.data;
   if (typeof request.nonce !== "undefined")
     rpcRequest.nonce = numberToHex(request.nonce);
-
   if (typeof request.storageLimit !== "undefined") {
     rpcRequest.storageLimit = numberToHex(request.storageLimit);
   }
-
   if (typeof request.accessList !== "undefined")
     rpcRequest.accessList = request.accessList;
-
+  if (typeof request.maxFeePerGas !== "undefined")
+    rpcRequest.maxFeePerGas = numberToHex(request.maxFeePerGas);
+  if (typeof request.maxPriorityFeePerGas !== "undefined")
+    rpcRequest.maxPriorityFeePerGas = numberToHex(request.maxPriorityFeePerGas);
+  if (typeof request.type !== "undefined")
+    rpcRequest.type = rpcTransactionType[request.type];
   return rpcRequest;
 }
