@@ -7,7 +7,7 @@ import type {
 } from "./transaction.js";
 import type { Block, EpochNumber, EpochTag } from "./block.js";
 import type { Sponsor } from "./sponsor.js";
-import type { FeeValueLegacy } from "./fee.js";
+import type { FeeValue } from "./fee.js";
 import type { Log } from "./log.js";
 import type { ChainAccount } from "./chainAccount.js";
 import type { NodeState } from "./node.js";
@@ -35,7 +35,7 @@ export type RpcSponsor = Sponsor<Quantity>;
 
 export type RpcTransactionRequest = OneOf<TransactionRequest<Quantity, Index>>;
 
-export type RpcFeeValue = FeeValueLegacy<Quantity>;
+export type RpcFeeValue = FeeValue<Quantity>;
 
 export type RpcLog = Log<Quantity>;
 

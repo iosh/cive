@@ -197,6 +197,21 @@ export type PublicRpcSchema = [
         ];
     ReturnType: Hex;
   },
+
+  /**
+   * @description Virtually executes a transaction, returns an estimate for the size of storage collateralized and the gas used by the transaction. The transaction will not be added to the blockchain.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_estimategasandcollateral
+   */
+  {
+    Method: "cfx_estimateGasAndCollateral";
+    Parameters:
+      | [transaction: ExactPartial<RpcTransactionRequest>]
+      | [
+          transaction: ExactPartial<RpcTransactionRequest>,
+          epoch: EpochTag | RpcEpochNumber
+        ];
+    ReturnType: RpcFeeValue;
+  },
   /**
    * @description Virtually executes a transaction, returns an estimate for the size of storage collateralized and the gas used by the transaction. The transaction will not be added to the blockchain.
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_estimategasandcollateral

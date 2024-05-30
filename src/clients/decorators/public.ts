@@ -167,7 +167,16 @@ import {
   type GetParamsFormVoteParameters,
   type GetParamsFormVoteReturnType,
 } from "../../actions/public/getParamsFromVote.js";
-import { CallParameters, CallReturnType, call } from "../../actions/public/call.js";
+import {
+  CallParameters,
+  CallReturnType,
+  call,
+} from "../../actions/public/call.js";
+import {
+  EstimateGasAndCollateralParameters,
+  EstimateGasAndCollateralReturnType,
+  estimateGasAndCollateral,
+} from "../../actions/public/estimateGasAndCollateral.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -324,7 +333,17 @@ export type PublicActions<
    * @param args - {@link CallParameters}
    * @returns - {@link CallReturnType}
    */
-  call:(args: CallParameters) => Promise<CallReturnType>
+  call: (args: CallParameters) => Promise<CallReturnType>;
+
+  /**
+   * Virtually executes a transaction, returns an estimate for the size of storage collateralized and the gas used by the transaction. The transaction will not be added to the blockchain.
+   * - JSON-RPC Method: [`cfx_estimateGasAndCollateral`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_estimategasandcollateral)
+   * @param args - {@link EstimateContractGasParameters}
+   * @returns  an estimate result object {@link EstimateContractGasReturnType}
+   */
+  estimateGasAndCollateral: (
+    args: EstimateGasAndCollateralParameters
+  ) => Promise<EstimateGasAndCollateralReturnType>;
   /**
    * Returns a transaction receipt, identified by the corresponding transaction hash.
    * - JSON-RPC Method: [`cfx_getTransactionReceipt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionreceipt)
@@ -525,7 +544,8 @@ export function publicActions<
     getStorageRoot: (args) => GetStorageRoot(client, args),
     getSponsorInfo: (args) => GetSponsorInfo(client, args),
     getNextNonce: (args) => getNextNonce(client, args),
-    call:(args) => call(client, args),
+    call: (args) => call(client, args),
+    estimateGasAndCollateral: (args) => estimateGasAndCollateral(client, args),
     getTransactionReceipt: (args) => getTransactionReceipt(client, args),
     getAccount: (args) => getAccount(client, args),
     getInterestRate: (args) => getInterestRate(client, args),

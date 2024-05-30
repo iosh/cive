@@ -13,7 +13,7 @@ export type FormattedTransactionRequest<
 
 export function formatTransactionRequest(
   request: ExactPartial<TransactionRequest>
-) {
+): RpcTransactionRequest {
   const rpcRequest = {} as RpcTransactionRequest;
   if (typeof request.from !== "undefined") rpcRequest.from = request.from;
   if (typeof request.to !== "undefined") rpcRequest.to = request.to;
@@ -34,5 +34,5 @@ export function formatTransactionRequest(
   if (typeof request.accessList !== "undefined")
     rpcRequest.accessList = request.accessList;
 
-  return rpcRequest
+  return rpcRequest;
 }
