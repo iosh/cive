@@ -3,6 +3,7 @@ import type { RpcTransactionReceipt } from "../../types/rpc.js";
 import type { TransactionReceipt } from "../../types/transaction.js";
 import type { ExactPartial } from "../../types/utils.js";
 import { formatLog } from "./log.js";
+import { transactionType } from "./transaction.js";
 
 export type FormattedTransactionReceipt<
   TChain extends Chain | undefined = undefined
@@ -51,6 +52,11 @@ export function formatTransactionReceipt(
       : null,
     effectiveGasPrice: transactionReceipt.effectiveGasPrice
       ? BigInt(transactionReceipt.effectiveGasPrice)
+      : null,
+    type: transactionReceipt.type
+      ? transactionType[
+          transactionReceipt.type as keyof typeof transactionType
+        ] || transactionReceipt.type
       : null,
   } as TransactionReceipt;
 

@@ -94,7 +94,6 @@ export async function call<TChain extends Chain | undefined>(
     gas,
     gasPrice,
     storageLimit,
-    maxFeePerBlobGas,
     maxFeePerGas,
     maxPriorityFeePerGas,
     nonce,
@@ -116,14 +115,13 @@ export async function call<TChain extends Chain | undefined>(
       data,
       gas,
       gasPrice,
-      maxFeePerBlobGas,
       maxFeePerGas,
       maxPriorityFeePerGas,
       nonce,
       to,
       value,
       storageLimit,
-    });
+    } as TransactionRequest);
 
     if (batch && shouldPerformMulticall({ request })) {
       try {

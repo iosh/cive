@@ -10,6 +10,7 @@ import { FeeValue } from "../../types/fee.js";
 import { Client } from "../../clients/createClient.js";
 import { parseAccount } from "../../accounts/utils/parseAccount.js";
 import { formatFee } from "../../utils/formatters/fee.js";
+import { TransactionRequest } from "../../types/transaction.js";
 
 export type FormattedCall<
   TChain extends Chain | undefined = Chain | undefined
@@ -77,7 +78,7 @@ export async function estimateGasAndCollateral<
     to,
     value,
     storageLimit,
-  })
+  } as TransactionRequest);
 
   const result = await client.request({
     method: "cfx_estimateGasAndCollateral",
