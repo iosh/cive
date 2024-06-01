@@ -37,6 +37,8 @@ export type GetLogsParameters<
 > = {
   /** Address or list of addresses from which logs originated */
   address?: Address | Address[] | undefined;
+  fromBlock?: bigint | undefined;
+  toBlock?: bigint | undefined;
 } & (
   | {
       event: TAbiEvent;
@@ -76,8 +78,6 @@ export type GetLogsParameters<
          */
         toEpoch?: TToEpoch | EpochNumber | EpochTag | undefined;
 
-        fromBlock?: bigint;
-        toBlock?: bigint;
         blockHashes?: never | undefined;
       }
     | {
@@ -85,8 +85,6 @@ export type GetLogsParameters<
 
         toEpoch?: never | undefined;
 
-        fromBlock?: bigint;
-        toBlock?: bigint;
         blockHashes?: Hash[];
       }
   );
@@ -149,12 +147,23 @@ export async function getLogs<
     if (event) topics = topics[0] as LogTopic[];
   }
 
+  const fromBlock_ =
+    typeof fromBlock === "bigint" ? numberToHex(fromBlock) : fromBlock;
+  const toBlock_ = typeof toBlock === "bigint" ? numberToHex(toBlock) : toBlock;
   let logs: RpcLog[];
 
   if (blockHashes) {
     logs = await client.request({
       method: "cfx_getLogs",
-      params: [{ address, topics, blockHashes }],
+      params: [
+        {
+          address,
+          topics,
+          blockHashes,
+          fromBlock: fromBlock_,
+          toBlock: toBlock_,
+        },
+      ],
     });
   } else {
     const fromEpoch_ =
@@ -162,10 +171,6 @@ export async function getLogs<
     const toEpoch_ =
       typeof toEpoch === "bigint" ? numberToHex(toEpoch) : toEpoch;
 
-    const fromBlock_ =
-      typeof fromBlock === "bigint" ? numberToHex(fromBlock) : fromBlock;
-    const toBlock_ =
-      typeof toBlock === "bigint" ? numberToHex(toBlock) : toBlock;
     logs = await client.request({
       method: "cfx_getLogs",
       params: [
