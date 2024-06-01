@@ -177,6 +177,11 @@ import {
   EstimateGasAndCollateralReturnType,
   estimateGasAndCollateral,
 } from "../../actions/public/estimateGasAndCollateral.js";
+import {
+  GetLogsParameters,
+  GetLogsReturnType,
+  getLogs,
+} from "../../actions/public/getLogs.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -344,6 +349,13 @@ export type PublicActions<
   estimateGasAndCollateral: (
     args: EstimateGasAndCollateralParameters
   ) => Promise<EstimateGasAndCollateralReturnType>;
+  /**
+   * Returns logs matching the filter provided.
+   * - JSON-RPC Method: [`cfx_getLogs`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getlogs)
+   * @param args - {@link GetLogsParameters}
+   * @returns - {@link GetLogsReturnType}
+   */
+  getLogs: (args: GetLogsParameters) => Promise<GetLogsReturnType>;
   /**
    * Returns a transaction receipt, identified by the corresponding transaction hash.
    * - JSON-RPC Method: [`cfx_getTransactionReceipt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionreceipt)
@@ -546,6 +558,7 @@ export function publicActions<
     getNextNonce: (args) => getNextNonce(client, args),
     call: (args) => call(client, args),
     estimateGasAndCollateral: (args) => estimateGasAndCollateral(client, args),
+    getLogs: (args) => getLogs(client, args),
     getTransactionReceipt: (args) => getTransactionReceipt(client, args),
     getAccount: (args) => getAccount(client, args),
     getInterestRate: (args) => getInterestRate(client, args),

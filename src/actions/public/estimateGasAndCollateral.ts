@@ -6,7 +6,7 @@ import {
 import { UnionOmit } from "../../types/utils.js";
 import { Address } from "../../accounts/types.js";
 import { EpochTag } from "../../types/block.js";
-import { FeeValue } from "../../types/fee.js";
+import { FeeValues, GasAndCollateral } from "../../types/fee.js";
 import { Client } from "../../clients/createClient.js";
 import { parseAccount } from "../../accounts/utils/parseAccount.js";
 import { formatFee } from "../../utils/formatters/fee.js";
@@ -34,7 +34,7 @@ export type EstimateGasAndCollateralParameters<
       }
   );
 
-export type EstimateGasAndCollateralReturnType = FeeValue;
+export type EstimateGasAndCollateralReturnType = GasAndCollateral;
 
 export async function estimateGasAndCollateral<
   TChain extends Chain | undefined
