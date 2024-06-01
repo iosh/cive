@@ -454,6 +454,7 @@ export type PublicRpcSchema = [
       powBaseReward: Quantity;
       interestRate: Quantity;
       storagePointProp: Quantity;
+      baseFeeShareProp:Quantity
     };
   }
 ];

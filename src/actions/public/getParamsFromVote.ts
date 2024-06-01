@@ -19,6 +19,7 @@ export type GetParamsFormVoteReturnType = {
   powBaseReward: BigInt;
   interestRate: BigInt;
   storagePointProp: BigInt;
+  baseFeeShareProp: BigInt;
 };
 
 export async function getParamsFromVote<TChain extends Chain | undefined>(
@@ -36,5 +37,6 @@ export async function getParamsFromVote<TChain extends Chain | undefined>(
     powBaseReward: BigInt(result.powBaseReward),
     interestRate: BigInt(result.interestRate),
     storagePointProp: BigInt(result.storagePointProp),
+    baseFeeShareProp: BigInt(result.baseFeeShareProp),
   };
 }
