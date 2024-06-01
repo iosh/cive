@@ -12,7 +12,7 @@ import type {
 } from "./transaction.js";
 import type { Block, EpochNumber, EpochTag } from "./block.js";
 import type { Sponsor } from "./sponsor.js";
-import type { FeeValues } from "./fee.js";
+import type { FeeValues, GasAndCollateral } from "./fee.js";
 import type { Log } from "./log.js";
 import type { ChainAccount } from "./chainAccount.js";
 import type { NodeState } from "./node.js";
@@ -53,8 +53,9 @@ export type RpcTransactionRequest = OneOf<
 >;
 
 export type RpcFeeValue = FeeValues<Quantity>;
+export type RpcGasAndCollateral = GasAndCollateral<Quantity>;
 
-export type RpcLog = Log<Quantity>;
+export type RpcLog = Log<Quantity, Index>;
 
 export type RpcTransactionReceipt = TransactionReceipt<
   Quantity,

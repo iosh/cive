@@ -7,6 +7,7 @@ import type {
   RpcChainAccount,
   RpcDeposit,
   RpcFeeValue,
+  RpcGasAndCollateral,
   RpcNodeState,
   RpcReward,
   RpcSponsor,
@@ -210,19 +211,7 @@ export type PublicRpcSchema = [
           transaction: ExactPartial<RpcTransactionRequest>,
           epoch: EpochTag | RpcEpochNumber
         ];
-    ReturnType: RpcFeeValue;
-  },
-  /**
-   * @description Virtually executes a transaction, returns an estimate for the size of storage collateralized and the gas used by the transaction. The transaction will not be added to the blockchain.
-   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_estimategasandcollateral
-   */
-  {
-    Method: "cfx_estimateGasAndCollateral";
-    Parameters:
-      | [transaction: RpcTransactionRequest]
-      | [transaction: RpcTransactionRequest, epoch: EpochTag | RpcEpochNumber];
-
-    ReturnType: RpcFeeValue;
+    ReturnType: RpcGasAndCollateral;
   },
   /**
    * @description Returns logs matching the filter provided.
@@ -232,8 +221,8 @@ export type PublicRpcSchema = [
     Method: "cfx_getLogs";
     Parameters: [
       {
-        fromEpoch?: EpochNumber | undefined;
-        toEpoch?: EpochNumber | undefined;
+        fromEpoch?: RpcEpochNumber | EpochTag | undefined;
+        toEpoch?: RpcEpochNumber | EpochTag | undefined;
         fromBlock?: Quantity | undefined;
         toBlock?: Quantity | undefined;
         blockHashes?: Hex[] | undefined;
@@ -454,7 +443,7 @@ export type PublicRpcSchema = [
       powBaseReward: Quantity;
       interestRate: Quantity;
       storagePointProp: Quantity;
-      baseFeeShareProp:Quantity
+      baseFeeShareProp: Quantity;
     };
   }
 ];

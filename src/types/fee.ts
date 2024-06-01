@@ -1,10 +1,10 @@
-// export type FeeValue<TQuantity = bigint> = {
-//     gasLimit: TQuantity
-//     gasUsed: TQuantity
-//     storageCollateralized: TQuantity
-// }
-
 import type { OneOf } from "./utils.js";
+
+export type GasAndCollateral<TQuantity = bigint> = {
+  gasLimit: TQuantity;
+  gasUsed: TQuantity;
+  storageCollateralized: TQuantity;
+};
 
 export type FeeHistory<TQuantity = bigint> = {
   /**

@@ -1,8 +1,10 @@
-import { FeeValue } from "../../types/fee.js";
-import { RpcFeeValue } from "../../types/rpc.js";
+import { GasAndCollateral } from "../../types/fee.js";
+import { RpcGasAndCollateral } from "../../types/rpc.js";
 import { ExactPartial } from "../../types/utils.js";
 
-export function formatFee(fee: ExactPartial<RpcFeeValue>): FeeValue {
+export function formatFee(
+  fee: ExactPartial<RpcGasAndCollateral>
+): GasAndCollateral {
   const result = {
     ...fee,
     gasLimit: fee.gasLimit ? BigInt(fee.gasLimit) : undefined,
@@ -10,6 +12,6 @@ export function formatFee(fee: ExactPartial<RpcFeeValue>): FeeValue {
     storageCollateralized: fee.storageCollateralized
       ? BigInt(fee.storageCollateralized)
       : undefined,
-  } as FeeValue;
+  } as GasAndCollateral;
   return result;
 }
