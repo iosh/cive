@@ -8,6 +8,8 @@ import type {
   RpcDeposit,
   RpcFeeValue,
   RpcGasAndCollateral,
+  RpcLog,
+  RpcLogFilter,
   RpcNodeState,
   RpcReward,
   RpcSponsor,
@@ -219,18 +221,8 @@ export type PublicRpcSchema = [
    */
   {
     Method: "cfx_getLogs";
-    Parameters: [
-      {
-        fromEpoch?: RpcEpochNumber | EpochTag | undefined;
-        toEpoch?: RpcEpochNumber | EpochTag | undefined;
-        fromBlock?: Quantity | undefined;
-        toBlock?: Quantity | undefined;
-        blockHashes?: Hex[] | undefined;
-        address?: Address | Address[] | undefined;
-        topics?: LogTopic[] | undefined;
-      }
-    ];
-    ReturnType: Log[];
+    Parameters: [filter: ExactPartial<RpcLogFilter>];
+    ReturnType: RpcLog[];
   },
   /**
    * @description Returns a transaction receipt, identified by the corresponding transaction hash.
@@ -445,6 +437,16 @@ export type PublicRpcSchema = [
       storagePointProp: Quantity;
       baseFeeShareProp: Quantity;
     };
+  },
+
+  /**
+   *@description This function creates a log filter for tracking usage. It returns a log filter ID, which can be employed through the cfx_getFilterChanges command to retrieve logs newly generated from recently executed transactions. The from* field in this context will be disregarded by this RPC (Remote Procedure Call). This function can also be used via cfx_getFilterLogs to retrieve all logs that match the filter criteria. In this instance, the from* fields are considered.
+   *@link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_newfilter
+   */
+  {
+    Method: "cfx_newFilter";
+    Parameters: [filter: ExactPartial<RpcLogFilter>];
+    ReturnType: Quantity;
   }
 ];
 

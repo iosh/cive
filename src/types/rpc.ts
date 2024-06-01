@@ -22,6 +22,7 @@ import type { Vote } from "./vote.js";
 import type { Supply } from "./supply.js";
 import type { AccountPending, AccountPendingTransaction } from "./account.js";
 import { OneOf, UnionOmit, UnionPartialBy } from "./utils.js";
+import { LogFilter } from "./filter.js";
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";
@@ -82,3 +83,5 @@ export type RpcAccountPendingTransaction = AccountPendingTransaction<
   Quantity,
   Index
 >;
+
+export type RpcLogFilter = LogFilter<Quantity>;
