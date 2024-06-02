@@ -1,5 +1,5 @@
 import { numberToHex, type Chain, type Transport } from "viem";
-import type { EpochTag } from "../../types/block.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { Client } from "../../clients/createClient.js";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
@@ -14,7 +14,7 @@ export type GetAccumulateInterestRateParameters =
     }
   | {
       epochTag?: never | undefined;
-      epochNumber?: bigint | undefined;
+      epochNumber?: EpochNumber | undefined;
     };
 
 export type GetAccumulateInterestRateReturnType = bigint;

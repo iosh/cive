@@ -1,4 +1,4 @@
-import type { EpochTag } from "../../types/block.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import { numberToHex, type Chain, type Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
@@ -17,7 +17,7 @@ export type GetNextNonceParameters = {
     }
   | {
       epochTag?: never | undefined;
-      epochNumber?: bigint | undefined;
+      epochNumber?: EpochNumber | undefined;
     }
 );
 

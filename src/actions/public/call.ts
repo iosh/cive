@@ -28,7 +28,7 @@ import {
 } from "../../utils/formatters/transactionRequest.js";
 import { ExactPartial, UnionOmit } from "../../types/utils.js";
 import { Address } from "../../accounts/types.js";
-import { EpochTag } from "../../types/block.js";
+import { EpochNumber, EpochTag } from "../../types/block.js";
 import {
   GetCallErrorReturnType,
   RequestErrorType,
@@ -67,7 +67,7 @@ export type CallParameters<
       }
     | {
         epochTag?: never | undefined;
-        epochNumber?: bigint | undefined;
+        epochNumber?: EpochNumber | undefined;
       }
   );
 

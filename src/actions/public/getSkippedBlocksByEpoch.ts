@@ -4,7 +4,7 @@ import {
   type NumberToHexErrorType,
   type Transport,
 } from "viem";
-import type { Block, EpochTag } from "../../types/block.js";
+import type { Block, EpochNumber, EpochTag } from "../../types/block.js";
 import type { Client } from "../../clients/createClient.js";
 import type { RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
@@ -20,7 +20,7 @@ export type GetSkippedBlocksByEpochParameters =
     }
   | {
       epochTag?: never | undefined;
-      epochNumber?: bigint | undefined;
+      epochNumber?: EpochNumber | undefined;
     };
 
 export type GetSkippedBlocksByEpochReturnType = Block[];

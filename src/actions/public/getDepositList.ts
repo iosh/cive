@@ -1,4 +1,4 @@
-import type { EpochTag } from "../../types/block.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { Deposit } from "../../types/deposit.js";
 import { numberToHex, type Chain, type Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
@@ -17,7 +17,7 @@ export type GetDepositListParameters = {
     }
   | {
       epochTag?: never | undefined;
-      epochNumber?: bigint | undefined;
+      epochNumber?: EpochNumber | undefined;
     }
 );
 

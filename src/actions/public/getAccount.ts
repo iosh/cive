@@ -1,4 +1,4 @@
-import type { EpochTag } from "../../types/block.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { ChainAccount } from "../../types/chainAccount.js";
 import { numberToHex, type Chain, type Transport } from "viem";
 import { formatChainAccount } from "../../utils/formatters/chainAccount.js";
@@ -19,7 +19,7 @@ export type GetChainAccountParameters = {
     }
   | {
       epochTag?: never | undefined;
-      epochNumber?: bigint | undefined;
+      epochNumber?: EpochNumber | undefined;
     }
 );
 

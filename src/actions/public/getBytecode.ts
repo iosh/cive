@@ -1,4 +1,4 @@
-import type { EpochTag } from "../../types/block.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import {
   numberToHex,
   type Chain,
@@ -23,7 +23,7 @@ export type GetBytecodeParameters = {
     }
   | {
       epochTag?: never | undefined;
-      epochNumber?: bigint | undefined;
+      epochNumber?: EpochNumber | undefined;
     }
 );
 

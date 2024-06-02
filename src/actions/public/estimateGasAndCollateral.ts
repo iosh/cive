@@ -5,7 +5,7 @@ import {
 } from "../../utils/formatters/transactionRequest.js";
 import { UnionOmit } from "../../types/utils.js";
 import { Address } from "../../accounts/types.js";
-import { EpochTag } from "../../types/block.js";
+import { EpochNumber, EpochTag } from "../../types/block.js";
 import { FeeValues, GasAndCollateral } from "../../types/fee.js";
 import { Client } from "../../clients/createClient.js";
 import { parseAccount } from "../../accounts/utils/parseAccount.js";
@@ -30,7 +30,7 @@ export type EstimateGasAndCollateralParameters<
       }
     | {
         epochTag?: never | undefined;
-        epochNumber?: bigint | undefined;
+        epochNumber?: EpochNumber | undefined;
       }
   );
 

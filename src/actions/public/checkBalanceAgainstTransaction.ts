@@ -1,4 +1,4 @@
-import type { EpochTag } from "../../types/block.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
 import type { Client } from "../../clients/createClient.js";
@@ -20,7 +20,7 @@ export type CheckBalanceAgainstTransactionParameters = {
     }
   | {
       epochTag?: never | undefined;
-      epochNumber?: bigint | undefined;
+      epochNumber?: EpochNumber | undefined;
     }
 );
 

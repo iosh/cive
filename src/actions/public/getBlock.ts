@@ -1,6 +1,6 @@
 import { numberToHex, type Chain, type Hash, type Transport } from "viem";
 import type { Account } from "../../accounts/types.js";
-import type { EpochTag } from "../../types/block.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { Client } from "../../clients/createClient.js";
 import type { RpcBlock } from "../../types/rpc.js";
 import { BlockNotFoundError } from "../../errors/block.js";
@@ -29,7 +29,7 @@ export type GetBlockParameters<
       | {
           blockHash?: never | undefined;
           blockNumber?: never | undefined;
-          epochNumber?: bigint | undefined;
+          epochNumber?: EpochNumber | undefined;
           epochTag?: never | undefined;
         }
       | {

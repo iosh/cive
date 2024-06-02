@@ -1,4 +1,4 @@
-;import type { EpochTag } from "../../types/block.js";
+;import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { Vote } from "../../types/vote.js";
 import { numberToHex, type Chain, type Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
@@ -17,7 +17,7 @@ export type GetVoteListParameters = {
     }
   | {
       epochTag?: never | undefined;
-      epochNumber?: bigint | undefined;
+      epochNumber?: EpochNumber | undefined;
     }
 );
 
