@@ -465,6 +465,12 @@ export type PublicRpcSchema = [
     Method: "cfx_newPendingTransactionFilter";
     Parameters: undefined;
     ReturnType: Quantity;
+  },
+
+  {
+    Method: "cfx_getFilterChanges";
+    Parameters: [filterId: Quantity];
+    ReturnType: RpcLog[] | Hex[];
   }
 ];
 

@@ -197,7 +197,15 @@ import {
   createEventFilter,
 } from "../../actions/public/createEventFilter.js";
 import { AbiEvent } from "abitype";
-import { CreatePendingTransactionFilterReturnType, createPendingTransactionFilter } from "../../actions/public/createPendingTransactionFilter.js";
+import {
+  CreatePendingTransactionFilterReturnType,
+  createPendingTransactionFilter,
+} from "../../actions/public/createPendingTransactionFilter.js";
+import {
+  GetFilterChangesParameters,
+  GetFilterChangesReturnType,
+  getFilterChanges,
+} from "../../actions/public/getFilterChanges.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -601,6 +609,17 @@ export type PublicActions<
    * @returns - {@link CreatePendingTransactionFilterReturnType}
    */
   createPendingTransactionFilter: () => Promise<CreatePendingTransactionFilterReturnType>;
+  /**
+   * Get filter changes since last retrieve. Return value depends on which type of filter id is provided. Filter id can be returned from current RPCs:
+   * cfx_newFilter: new logs generated from newly executed transactions matching the filter. Noting that from* fields will be ignored by this RPC.
+   * cfx_newBlockFilter: new executed blocks.
+   * cfx_newPendingTransactionFilter: new pending transactions which are ready to execute.
+   * @param args - {@link GetFilterChangesParameters}
+   * @returns - {@link GetFilterChangesReturnType}
+   */
+  getFilterChanges: (
+    args: GetFilterChangesParameters
+  ) => Promise<GetFilterChangesReturnType>;
 };
 
 export function publicActions<
@@ -655,6 +674,8 @@ export function publicActions<
     getParamsFromVote: (args) => getParamsFromVote(client, args),
     createEventFilter: (args) => createEventFilter(client, args),
     createBlockFilter: () => createBlockFilter(client),
-    createPendingTransactionFilter:() =>createPendingTransactionFilter(client),
+    createPendingTransactionFilter: () =>
+      createPendingTransactionFilter(client),
+    getFilterChanges:(args) => getFilterChanges(client, args),
   };
 }
