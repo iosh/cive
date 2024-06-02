@@ -24,7 +24,7 @@ type FilterRpcSchema = Filter<
 
 type CreateFilterRequestScopeReturnType = (
   id: Hex
-) => EIP1193Parameters<FilterRpcSchema>;
+) => EIP1193RequestFn<FilterRpcSchema>;
 
 /**
  * Scopes `request` to the filter ID. If the client is a fallback, it will

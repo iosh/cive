@@ -466,11 +466,24 @@ export type PublicRpcSchema = [
     Parameters: undefined;
     ReturnType: Quantity;
   },
+  /**
+   * @description Get filter changes since last retrieve. Return value depends on which type of filter id is provided. Filter id can be returned from current RPCs:
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getfilterchanges
+   */
 
   {
     Method: "cfx_getFilterChanges";
     Parameters: [filterId: Quantity];
     ReturnType: RpcLog[] | Hex[];
+  },
+  /**
+   * @description Returns all logs matching the log filter (Unlike cfx_getFilterChanges, from* fields still work).
+   * @link 
+   */
+  {
+    Method: "cfx_getFilterLogs";
+    Parameters: [filterId: Quantity];
+    ReturnType: RpcLog[];
   }
 ];
 

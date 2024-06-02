@@ -206,6 +206,11 @@ import {
   GetFilterChangesReturnType,
   getFilterChanges,
 } from "../../actions/public/getFilterChanges.js";
+import {
+  GetFilterLogsParameters,
+  GetFilterLogsReturnType,
+  getFilterLogs,
+} from "../../actions/public/getFilterLogs.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -620,6 +625,16 @@ export type PublicActions<
   getFilterChanges: (
     args: GetFilterChangesParameters
   ) => Promise<GetFilterChangesReturnType>;
+
+  /**
+   * Returns all logs matching the log filter (Unlike cfx_getFilterChanges, from* fields still work).
+   * - JSON-RPC Method: [`cfx_getFilterLogs`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getfilterlogs)
+   * @param args - {@link GetFilterLogsParameters}
+   * @returns - {@link GetFilterLogsReturnType}
+   */
+  getFilterLogs: (
+    args: GetFilterLogsParameters
+  ) => Promise<GetFilterLogsReturnType>;
 };
 
 export function publicActions<
@@ -676,6 +691,7 @@ export function publicActions<
     createBlockFilter: () => createBlockFilter(client),
     createPendingTransactionFilter: () =>
       createPendingTransactionFilter(client),
-    getFilterChanges:(args) => getFilterChanges(client, args),
+    getFilterChanges: (args) => getFilterChanges(client, args),
+    getFilterLogs: (args) => getFilterLogs(client, args),
   };
 }
