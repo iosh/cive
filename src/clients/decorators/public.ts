@@ -211,6 +211,7 @@ import {
   GetFilterLogsReturnType,
   getFilterLogs,
 } from "../../actions/public/getFilterLogs.js";
+import { UninstallFilterParameters, UninstallFilterReturnType, uninstallFilter } from "../../actions/public/uninstallFilter.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -635,6 +636,13 @@ export type PublicActions<
   getFilterLogs: (
     args: GetFilterLogsParameters
   ) => Promise<GetFilterLogsReturnType>;
+  /**
+   * Uninstall the specified filter. Returns a bool whether the uninstallation succeeds.
+   * - JSON-RPC Method: [`cfx_uninstallFilter`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_uninstallfilter)
+   * @param args - {@link UninstallFilterParameters}
+   * @returns - {@link UninstallFilterReturnType}
+   */
+  uninstallFilter:(args: UninstallFilterParameters) => Promise<UninstallFilterReturnType>
 };
 
 export function publicActions<
@@ -693,5 +701,6 @@ export function publicActions<
       createPendingTransactionFilter(client),
     getFilterChanges: (args) => getFilterChanges(client, args),
     getFilterLogs: (args) => getFilterLogs(client, args),
+    uninstallFilter:(args) => uninstallFilter(client, args),
   };
 }

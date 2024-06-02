@@ -478,12 +478,21 @@ export type PublicRpcSchema = [
   },
   /**
    * @description Returns all logs matching the log filter (Unlike cfx_getFilterChanges, from* fields still work).
-   * @link 
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getfilterlogs
    */
   {
     Method: "cfx_getFilterLogs";
     Parameters: [filterId: Quantity];
     ReturnType: RpcLog[];
+  },
+  /**
+   * @description Uninstall the specified filter. Returns a bool whether the uninstallation succeeds.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_uninstallfilter
+   */
+  {
+    Method: "cfx_uninstallFilter";
+    Parameters: [filterId: Quantity];
+    ReturnType: boolean;
   }
 ];
 
