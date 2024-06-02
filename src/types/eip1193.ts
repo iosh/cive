@@ -20,7 +20,7 @@ import type {
 } from "./rpc.js";
 
 import type { RpcEpochNumber, RpcTransaction as Transaction } from "./rpc.js";
-import type { Block, EpochNumber, EpochTag } from "./block.js";
+import type { Block, EpochTag } from "./block.js";
 import type { Log } from "./log.js";
 import type { Address } from "../accounts/types.js";
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema];
@@ -335,7 +335,7 @@ export type PublicRpcSchema = [
     Parameters: [
       blockHash: Hash,
       pivotBlockHash: Hash,
-      epochNumber: EpochNumber<Quantity>
+      epochNumber: RpcEpochNumber
     ];
     ReturnType: RpcBlock;
   },
@@ -413,7 +413,7 @@ export type PublicRpcSchema = [
    */
   {
     Method: "cfx_getPoSRewardByEpoch";
-    Parameters: [epochNumber: EpochNumber];
+    Parameters: [epochNumber: RpcEpochNumber];
     ReturnType: {
       accountRewards: {
         posAddress: Address;
@@ -493,6 +493,19 @@ export type PublicRpcSchema = [
     Method: "cfx_uninstallFilter";
     Parameters: [filterId: Quantity];
     ReturnType: boolean;
+  },
+  /**
+   * @description Returns current chain collateral status info.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getcollateralinfo
+   */
+  {
+    Method: "cfx_getCollateralInfo";
+    Parameters: [epoch: RpcEpochNumber | EpochTag];
+    ReturnType: {
+      totalStorageTokens: Quantity;
+      convertedStoragePoints: Quantity;
+      usedStoragePoints: Quantity;
+    };
   }
 ];
 

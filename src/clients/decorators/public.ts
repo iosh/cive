@@ -211,7 +211,16 @@ import {
   GetFilterLogsReturnType,
   getFilterLogs,
 } from "../../actions/public/getFilterLogs.js";
-import { UninstallFilterParameters, UninstallFilterReturnType, uninstallFilter } from "../../actions/public/uninstallFilter.js";
+import {
+  UninstallFilterParameters,
+  UninstallFilterReturnType,
+  uninstallFilter,
+} from "../../actions/public/uninstallFilter.js";
+import {
+  GetCollateralInfoParameters,
+  GetCollateralInfoReturnType,
+  getCollateralInfo,
+} from "../../actions/public/getCollateralInfo.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -642,7 +651,19 @@ export type PublicActions<
    * @param args - {@link UninstallFilterParameters}
    * @returns - {@link UninstallFilterReturnType}
    */
-  uninstallFilter:(args: UninstallFilterParameters) => Promise<UninstallFilterReturnType>
+  uninstallFilter: (
+    args: UninstallFilterParameters
+  ) => Promise<UninstallFilterReturnType>;
+
+  /**
+   * Returns current chain collateral status info.
+   * - JSON-RPC Method: [`cfx_getCollateralInfo`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getcollateralinfo)
+   * @param args - {@link GetCollateralInfoParameters}
+   * @returns - {@link GetCollateralForStorageReturnType}
+   */
+  getCollateralInfo: (
+    args: GetCollateralInfoParameters
+  ) => Promise<GetCollateralInfoReturnType>;
 };
 
 export function publicActions<
@@ -701,6 +722,7 @@ export function publicActions<
       createPendingTransactionFilter(client),
     getFilterChanges: (args) => getFilterChanges(client, args),
     getFilterLogs: (args) => getFilterLogs(client, args),
-    uninstallFilter:(args) => uninstallFilter(client, args),
+    uninstallFilter: (args) => uninstallFilter(client, args),
+    getCollateralInfo: (args) => getCollateralInfo(client, args),
   };
 }
