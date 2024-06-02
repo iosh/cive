@@ -1,4 +1,9 @@
-import type { Transport, Chain } from "viem";
+import type {
+  Transport,
+  Chain,
+  MaybeAbiEventName,
+  MaybeExtractEventArgsFromAbi,
+} from "viem";
 import type { Address, Account } from "../../accounts/types.js";
 import type { Client } from "../createClient.js";
 import {
@@ -6,7 +11,7 @@ import {
   type GetTransactionReturnType,
   type GetTransactionParameters,
 } from "../../actions/public/getTransaction.js";
-import type { EpochTag } from "../../types/block.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import {
   getBlock,
   type GetBlockParameters,
@@ -182,6 +187,16 @@ import {
   GetLogsReturnType,
   getLogs,
 } from "../../actions/public/getLogs.js";
+import {
+  CreateBlockFilterReturnType,
+  createBlockFilter,
+} from "../../actions/public/createBlockFilter.js";
+import {
+  CreateEventFilterParameters,
+  CreateEventFilterReturnType,
+  createEventFilter,
+} from "../../actions/public/createEventFilter.js";
+import { AbiEvent } from "abitype";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -531,6 +546,54 @@ export type PublicActions<
   getParamsFromVote: (
     args: GetParamsFormVoteParameters
   ) => Promise<GetParamsFormVoteReturnType>;
+
+  /**
+   * This function creates a log filter for tracking usage. It returns a log filter ID, which can be employed through the cfx_getFilterChanges command to retrieve logs newly generated from recently executed transactions. The from* field in this context will be disregarded by this RPC (Remote Procedure Call). This function can also be used via cfx_getFilterLogs to retrieve all logs that match the filter criteria. In this instance, the from* fields are considered.
+   * - JSON-RPC Method: [`cfx_newFilter`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_newfilter)
+   * @param args - {@link CreateEventFilterParameters}
+   * @returns - {@link CreateEventFilterReturnType}
+   */
+  createEventFilter: <
+    const TAbiEvent extends AbiEvent | undefined = undefined,
+    const TAbiEvents extends
+      | readonly AbiEvent[]
+      | readonly unknown[]
+      | undefined = TAbiEvent extends AbiEvent ? [TAbiEvent] : undefined,
+    TStrict extends boolean | undefined = undefined,
+    TFromEpoch extends EpochNumber | EpochTag | undefined = undefined,
+    TToEpoch extends EpochNumber | EpochTag | undefined = undefined,
+    _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>,
+    _Args extends
+      | MaybeExtractEventArgsFromAbi<TAbiEvents, _EventName>
+      | undefined = undefined
+  >(
+    args?:
+      | CreateEventFilterParameters<
+          TAbiEvent,
+          TAbiEvents,
+          TStrict,
+          _EventName,
+          _Args
+        >
+      | undefined
+  ) => Promise<
+    CreateEventFilterReturnType<
+      TAbiEvent,
+      TAbiEvents,
+      TStrict,
+      TFromEpoch,
+      TToEpoch,
+      _EventName,
+      _Args
+    >
+  >;
+  /**
+  /**
+   * Create a block filter for following up usage. Returns the block filter id which can be used via cfx_getFilterChanges to retrieve latest executed blocks.
+   * - JSON-RPC Method: [`cfx_newBlockFilter`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_newblockfilter)
+   * @returns - {@link CreateBlockFilterReturnType}
+   */
+  createBlockFilter: () => Promise<CreateBlockFilterReturnType>;
 };
 
 export function publicActions<
@@ -583,5 +646,7 @@ export function publicActions<
     getPoSEconomics: (args) => getPoSEconomics(client, args),
     getPoSRewardByEpoch: (args) => getPoSRewardByEpoch(client, args),
     getParamsFromVote: (args) => getParamsFromVote(client, args),
+    createEventFilter: (args) => createEventFilter(client, args),
+    createBlockFilter: () => createBlockFilter(client),
   };
 }

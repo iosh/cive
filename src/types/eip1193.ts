@@ -447,6 +447,15 @@ export type PublicRpcSchema = [
     Method: "cfx_newFilter";
     Parameters: [filter: ExactPartial<RpcLogFilter>];
     ReturnType: Quantity;
+  },
+  /**
+   * @description Create a block filter for following up usage. Returns the block filter id which can be used via cfx_getFilterChanges to retrieve latest executed blocks.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_newblockfilter
+   */
+  {
+    Method: "cfx_newBlockFilter";
+    Parameters: undefined;
+    ReturnType: Quantity;
   }
 ];
 
