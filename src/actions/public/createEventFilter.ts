@@ -37,76 +37,65 @@ export type CreateEventFilterParameters<
   address?: Address | Address[] | undefined;
   fromBlock?: bigint | undefined;
   toBlock?: bigint | undefined;
-} & (
-  | {
-      /**
-       * @default latest_checkpoint
-       */
-      fromEpoch?: EpochNumber | EpochTag | undefined;
-      /**
-       * @default latest_checkpoint
-       */
-      toEpoch?: EpochNumber | EpochTag | undefined;
+  /**
+   * @default latest_checkpoint
+   */
+  fromEpoch?: EpochNumber | EpochTag | undefined;
+  /**
+   * @default latest_checkpoint
+   */
+  toEpoch?: EpochNumber | EpochTag | undefined;
 
-      blockHashes?: never | undefined;
-    }
-  | {
-      fromEpoch?: never | undefined;
-
-      toEpoch?: never | undefined;
-
-      blockHashes?: Hash[];
-    }
-) &
-  (MaybeExtractEventArgsFromAbi<
-    TAbiEvents,
-    _EventName
-  > extends infer TEventFilterArgs
-    ?
-        | {
-            args:
-              | TEventFilterArgs
-              | (_Args extends TEventFilterArgs ? _Args : never);
-            event: TAbiEvent;
-            events?: never | undefined;
-            /**
-             * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
-             * @default false
-             */
-            strict?: TStrict | undefined;
-          }
-        | {
-            args?: never | undefined;
-            event?: TAbiEvent | undefined;
-            events?: never | undefined;
-            /**
-             * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
-             * @default false
-             */
-            strict?: TStrict | undefined;
-          }
-        | {
-            args?: never | undefined;
-            event?: never | undefined;
-            events: TAbiEvents | undefined;
-            /**
-             * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
-             * @default false
-             */
-            strict?: TStrict | undefined;
-          }
-        | {
-            args?: never | undefined;
-            event?: never | undefined;
-            events?: never | undefined;
-            strict?: never | undefined;
-          }
-    : {
-        args?: never | undefined;
-        event?: never | undefined;
-        events?: never | undefined;
-        strict?: never | undefined;
-      });
+  blockHashes?: Hash[] | undefined;
+} & (MaybeExtractEventArgsFromAbi<
+  TAbiEvents,
+  _EventName
+> extends infer TEventFilterArgs
+  ?
+      | {
+          args:
+            | TEventFilterArgs
+            | (_Args extends TEventFilterArgs ? _Args : never);
+          event: TAbiEvent;
+          events?: never | undefined;
+          /**
+           * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
+           * @default false
+           */
+          strict?: TStrict | undefined;
+        }
+      | {
+          args?: never | undefined;
+          event?: TAbiEvent | undefined;
+          events?: never | undefined;
+          /**
+           * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
+           * @default false
+           */
+          strict?: TStrict | undefined;
+        }
+      | {
+          args?: never | undefined;
+          event?: never | undefined;
+          events: TAbiEvents | undefined;
+          /**
+           * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
+           * @default false
+           */
+          strict?: TStrict | undefined;
+        }
+      | {
+          args?: never | undefined;
+          event?: never | undefined;
+          events?: never | undefined;
+          strict?: never | undefined;
+        }
+  : {
+      args?: never | undefined;
+      event?: never | undefined;
+      events?: never | undefined;
+      strict?: never | undefined;
+    });
 
 export type CreateEventFilterReturnType<
   TAbiEvent extends AbiEvent | undefined = undefined,
@@ -115,11 +104,15 @@ export type CreateEventFilterReturnType<
     | readonly unknown[]
     | undefined = TAbiEvent extends AbiEvent ? [TAbiEvent] : undefined,
   TStrict extends boolean | undefined = undefined,
+  TFromEpoch extends EpochNumber | EpochTag | undefined = undefined,
+  TToEpoch extends EpochNumber | EpochTag | undefined = undefined,
   _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>,
   _Args extends
     | MaybeExtractEventArgsFromAbi<TAbiEvents, _EventName>
     | undefined = undefined
-> = Prettify<Filter<"event", TAbiEvents, _EventName, _Args, TStrict>>;
+> = Prettify<
+  Filter<"event", TAbiEvents, _EventName, _Args, TStrict, TFromEpoch, TToEpoch>
+>;
 export type CreateEventFilterErrorType =
   | EncodeEventTopicsErrorType
   | RequestErrorType
@@ -134,6 +127,8 @@ export async function createEventFilter<
     | readonly unknown[]
     | undefined = TAbiEvent extends AbiEvent ? [TAbiEvent] : undefined,
   TStrict extends boolean | undefined = undefined,
+  TFromEpoch extends EpochNumber | EpochTag | undefined = undefined,
+  TToEpoch extends EpochNumber | EpochTag | undefined = undefined,
   _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>,
   _Args extends
     | MaybeExtractEventArgsFromAbi<TAbiEvents, _EventName>
@@ -159,7 +154,15 @@ export async function createEventFilter<
     _Args
   > = {} as any
 ): Promise<
-  CreateEventFilterReturnType<TAbiEvent, TAbiEvents, TStrict, _EventName, _Args>
+  CreateEventFilterReturnType<
+    TAbiEvent,
+    TAbiEvents,
+    TStrict,
+    TFromEpoch,
+    TToEpoch,
+    _EventName,
+    _Args
+  >
 > {
   const events = events_ ?? (event ? [event] : undefined);
 
@@ -235,6 +238,8 @@ export async function createEventFilter<
     TAbiEvent,
     TAbiEvents,
     TStrict,
+    TFromEpoch,
+    TToEpoch,
     _EventName,
     _Args
   >;
