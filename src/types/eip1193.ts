@@ -456,6 +456,15 @@ export type PublicRpcSchema = [
     Method: "cfx_newBlockFilter";
     Parameters: undefined;
     ReturnType: Quantity;
+  },
+  /**
+   * @description Create a pending transaction filter for following up usage. Returns the transaction filter id which can be used via cfx_getFilterChanges to retrieve ready but not executed transactions.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_newpendingtransactionfilter
+   */
+  {
+    Method: "cfx_newPendingTransactionFilter";
+    Parameters: undefined;
+    ReturnType: Quantity;
   }
 ];
 

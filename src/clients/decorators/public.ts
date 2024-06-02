@@ -197,6 +197,7 @@ import {
   createEventFilter,
 } from "../../actions/public/createEventFilter.js";
 import { AbiEvent } from "abitype";
+import { CreatePendingTransactionFilterReturnType, createPendingTransactionFilter } from "../../actions/public/createPendingTransactionFilter.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -594,6 +595,12 @@ export type PublicActions<
    * @returns - {@link CreateBlockFilterReturnType}
    */
   createBlockFilter: () => Promise<CreateBlockFilterReturnType>;
+  /**
+   * Create a pending transaction filter for following up usage. Returns the transaction filter id which can be used via cfx_getFilterChanges to retrieve ready but not executed transactions.
+   * - JSON-RPC Method: [`cfx_newPendingTransactionFilter`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_newpendingtransactionfilter)
+   * @returns - {@link CreatePendingTransactionFilterReturnType}
+   */
+  createPendingTransactionFilter: () => Promise<CreatePendingTransactionFilterReturnType>;
 };
 
 export function publicActions<
@@ -648,5 +655,6 @@ export function publicActions<
     getParamsFromVote: (args) => getParamsFromVote(client, args),
     createEventFilter: (args) => createEventFilter(client, args),
     createBlockFilter: () => createBlockFilter(client),
+    createPendingTransactionFilter:() =>createPendingTransactionFilter(client),
   };
 }
