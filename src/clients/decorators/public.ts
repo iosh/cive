@@ -3,6 +3,7 @@ import type {
   Chain,
   MaybeAbiEventName,
   MaybeExtractEventArgsFromAbi,
+  GetProofReturnType,
 } from "viem";
 import type { Address, Account } from "../../accounts/types.js";
 import type { Client } from "../createClient.js";
@@ -230,6 +231,11 @@ import {
   GetPoSStatusReturnType,
   getPoSStatus,
 } from "../../actions/public/getPoSStatus.js";
+import {
+  GetPoSAccountParameters,
+  GetPoSAccountReturnType,
+  getPoSAccount,
+} from "../../actions/public/getPoSAccount..js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -689,6 +695,13 @@ export type PublicActions<
    * @returns  - {@link GetPoSStatusReturnType}
    */
   getPoSStatus: () => Promise<GetPoSStatusReturnType>;
+  /**
+   * Get the PoS account information
+   * - JSON-RPC Method: [`pos_getAccount`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getaccount)
+   * @param args - {@link GetPoSAccountParameters}
+   * @returns - {@link GetPoSAccountReturnType}
+   */
+  getPoSAccount: (args: GetPoSAccountParameters) => Promise<GetPoSAccountReturnType>;
 };
 
 export function publicActions<
@@ -751,5 +764,6 @@ export function publicActions<
     getCollateralInfo: (args) => getCollateralInfo(client, args),
     txPoolNextNonce: (args) => txPoolNextNonce(client, args),
     getPoSStatus: () => getPoSStatus(client),
+    getPoSAccount: (args) => getPoSAccount(client, args),
   };
 }

@@ -11,6 +11,7 @@ import type {
   RpcLog,
   RpcLogFilter,
   RpcNodeState,
+  RpcPoSAccount,
   RpcPoSStatus,
   RpcReward,
   RpcSponsor,
@@ -528,9 +529,9 @@ export type PublicRpcSchema = [
     ReturnType: RpcPoSStatus;
   },
   {
-    Method: "pos_getAccount",
+    Method: "pos_getAccount";
     Parameters: [address: Address];
-    ReturnType: undefined
+    ReturnType: RpcPoSAccount;
   }
 ];
 
