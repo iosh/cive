@@ -1,6 +1,12 @@
-import type { PoSAccount, PoSCommittee, PoSStatus } from "../../types/pos.js";
+import type {
+  PoSAccount,
+  PoSBlock,
+  PoSCommittee,
+  PoSStatus,
+} from "../../types/pos.js";
 import type {
   RpcPoSAccount,
+  RpcPoSBlock,
   RpcPoSCommittee,
   RpcPoSStatus,
 } from "../../types/rpc.js";
@@ -80,12 +86,14 @@ export function formatPoSCommittee(
       epochNumber: currentCommittee?.epochNumber
         ? BigInt(currentCommittee.epochNumber)
         : undefined,
-      nodes: currentCommittee?.nodes?.map((node) => ({
-        ...node,
-        votingPower: node?.votingPower
-          ? BigInt(node.votingPower)
-          : undefined,
-      })): undefined,
+      nodes: currentCommittee?.nodes
+        ? currentCommittee?.nodes?.map((node) => ({
+            ...node,
+            votingPower: node?.votingPower
+              ? BigInt(node.votingPower)
+              : undefined,
+          }))
+        : undefined,
       quorumVotingPower: currentCommittee?.quorumVotingPower
         ? BigInt(currentCommittee.quorumVotingPower)
         : undefined,
@@ -93,17 +101,47 @@ export function formatPoSCommittee(
         ? BigInt(currentCommittee.totalVotingPower)
         : undefined,
     },
-    elections: committee?.elections? committee?.elections?.map((election) => ({
-      ...election,
-      startBlockNumber: election?.startBlockNumber?BigInt(election.startBlockNumber):undefined,
-      topElectingNodes:election?.topElectingNodes ? election?.topElectingNodes?.map((node) => ({
-        ...node,
-        votingPower: node?.votingPower
-          ? BigInt(node.votingPower)
-          : undefined,
-      })): undefined
-    })): undefined
+    elections: committee?.elections
+      ? committee?.elections?.map((election) => ({
+          ...election,
+          startBlockNumber: election?.startBlockNumber
+            ? BigInt(election.startBlockNumber)
+            : undefined,
+          topElectingNodes: election?.topElectingNodes
+            ? election?.topElectingNodes?.map((node) => ({
+                ...node,
+                votingPower: node?.votingPower
+                  ? BigInt(node.votingPower)
+                  : undefined,
+              }))
+            : undefined,
+        }))
+      : undefined,
   } as PoSCommittee;
+
+  return result;
+}
+
+export function formatPoSBlock(block: ExactPartial<RpcPoSBlock>): PoSBlock {
+  const { pivotDecision } = block;
+  const result = {
+    ...block,
+    epoch: block.epoch ? BigInt(block.epoch) : undefined,
+    hight: block.hight ? BigInt(block.hight) : undefined,
+    lastTxNumber: block?.lastTxNumber ? BigInt(block.lastTxNumber) : undefined,
+    pivotDecision: {
+      ...pivotDecision,
+      height: pivotDecision?.height ? BigInt(pivotDecision.height) : undefined,
+    },
+    round: block?.round ? BigInt(block.round) : undefined,
+    signatures: block?.signatures
+      ? block.signatures.map((signature) => ({
+          ...signature,
+          votes: signature?.votes ? BigInt(signature.votes) : undefined,
+        }))
+      : undefined,
+    timestamp: block?.timestamp ? BigInt(block.timestamp) : undefined,
+  } as PoSBlock;
 
   return result;
 }

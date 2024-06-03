@@ -53,3 +53,21 @@ export type PoSCommittee<TQuantity = bigint> = {
   currentCommittee: PoSCurrentCommittee;
   elections: PoSElection<TQuantity>[];
 };
+
+export type PoSSignature<TQuantity = bigint> = {
+  account: Address;
+  votes: TQuantity;
+};
+
+export type PoSBlock<TQuantity = bigint> = {
+  hash: Hash;
+  hight: TQuantity;
+  epoch: TQuantity;
+  round: TQuantity;
+  miner: Address | null;
+  lastTxNumber: TQuantity;
+  parentHash: Hash;
+  pivotDecision: Decision<TQuantity>;
+  timestamp: TQuantity;
+  signatures: PoSSignature<TQuantity>[];
+};

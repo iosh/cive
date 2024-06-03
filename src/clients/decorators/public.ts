@@ -241,6 +241,11 @@ import {
   GetPosCommitteeReturnType,
   getPosCommittee,
 } from "../../actions/public/getPoSCommittee.js";
+import {
+  GetPoSBlockParameters,
+  GetPosBlockReturnType,
+  getPoSBlock,
+} from "../../actions/public/getPoSBlock.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -718,6 +723,14 @@ export type PublicActions<
   getPosCommittee: (
     args: GetPosCommitteeParameters
   ) => Promise<GetPosCommitteeReturnType>;
+
+  /**
+   * Get block information by its hash value
+   * - JSON-RPC Method: [`pos_getBlockByHash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getblockbyhash)
+   * @param args - {@link GetPosBlockParameters}
+   * @returns - {@link GetPosBlockReturnType}
+   */
+  getPoSBlock: (args: GetPoSBlockParameters) => Promise<GetPosBlockReturnType>;
 };
 
 export function publicActions<
@@ -782,5 +795,6 @@ export function publicActions<
     getPoSStatus: () => getPoSStatus(client),
     getPoSAccount: (args) => getPoSAccount(client, args),
     getPosCommittee: (args) => getPosCommittee(client, args),
+    getPoSBlock: (args) => getPoSBlock(client, args),
   };
 }

@@ -12,6 +12,7 @@ import type {
   RpcLogFilter,
   RpcNodeState,
   RpcPoSAccount,
+  RpcPoSBlock,
   RpcPoSCommittee,
   RpcPoSStatus,
   RpcReward,
@@ -547,6 +548,11 @@ export type PublicRpcSchema = [
     Method: "pos_getCommittee";
     Parameters: [blockNumber?: Quantity];
     ReturnType: RpcPoSCommittee;
+  },
+  {
+    Method: "pos_getBlockByHash",
+    Parameters: [blockHash: Hash];
+    ReturnType: RpcPoSBlock | null;
   }
 ];
 
