@@ -23,7 +23,7 @@ import type { Supply } from "./supply.js";
 import type { AccountPending, AccountPendingTransaction } from "./account.js";
 import { OneOf, UnionOmit, UnionPartialBy } from "./utils.js";
 import { LogFilter } from "./filter.js";
-import { PoSAccount, PoSAccountStatus, PoSStatus } from "./pos.js";
+import { PoSAccount, PoSAccountStatus, PoSCommittee, PoSStatus } from "./pos.js";
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";
@@ -90,3 +90,5 @@ export type RpcLogFilter = LogFilter<Quantity>;
 export type RpcPoSStatus = PoSStatus<Quantity>;
 
 export type RpcPoSAccount = PoSAccount<Quantity>
+
+export type RpcPoSCommittee = PoSCommittee<Quantity> 

@@ -32,3 +32,24 @@ export type PoSAccount<TQuantity = bigint> = {
   blockNumber: TQuantity;
   status: PoSAccountStatus<TQuantity>;
 };
+
+export type PoSCommitteeNode<TQuantity = bigint> = {
+  address: Address;
+  votingPower: TQuantity;
+};
+export type PoSElection<TQuantity = bigint> = {
+  isFinalized: boolean;
+  startBlockNumber: TQuantity;
+  topElectingNodes: PoSCommitteeNode<TQuantity>[];
+};
+export type PoSCurrentCommittee<TQuantity = bigint> = {
+  epochNumber: TQuantity;
+  nodes: PoSCommitteeNode<TQuantity>[];
+  quorumVotingPower: TQuantity;
+  totalVotingPower: TQuantity;
+};
+
+export type PoSCommittee<TQuantity = bigint> = {
+  currentCommittee: PoSCurrentCommittee;
+  elections: PoSElection<TQuantity>[];
+};

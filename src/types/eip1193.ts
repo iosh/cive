@@ -12,6 +12,7 @@ import type {
   RpcLogFilter,
   RpcNodeState,
   RpcPoSAccount,
+  RpcPoSCommittee,
   RpcPoSStatus,
   RpcReward,
   RpcSponsor,
@@ -528,10 +529,24 @@ export type PublicRpcSchema = [
     Parameters: undefined;
     ReturnType: RpcPoSStatus;
   },
+  /**
+   * @description Get the PoS account information
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getaccount
+   */
   {
     Method: "pos_getAccount";
     Parameters: [address: Address];
     ReturnType: RpcPoSAccount;
+  },
+
+  /**
+   * @description Get the current PoS committee information in default. It is also able to get the committee information for a block in history by specifying the blockNumber.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getcommittee
+   */
+  {
+    Method: "pos_getCommittee";
+    Parameters: [blockNumber?: Quantity];
+    ReturnType: RpcPoSCommittee;
   }
 ];
 

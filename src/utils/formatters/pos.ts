@@ -1,5 +1,9 @@
-import type { PoSAccount, PoSStatus } from "../../types/pos.js";
-import type { RpcPoSAccount, RpcPoSStatus } from "../../types/rpc.js";
+import type { PoSAccount, PoSCommittee, PoSStatus } from "../../types/pos.js";
+import type {
+  RpcPoSAccount,
+  RpcPoSCommittee,
+  RpcPoSStatus,
+} from "../../types/rpc.js";
 import { ExactPartial } from "../../types/utils.js";
 
 export function formatPoSStatus(status: ExactPartial<RpcPoSStatus>): PoSStatus {
@@ -61,6 +65,45 @@ export function formatPoSAccount(
       unlocked: status?.unlocked ? BigInt(status.unlocked) : undefined,
     },
   } as PoSAccount;
+
+  return result;
+}
+
+export function formatPoSCommittee(
+  committee: ExactPartial<RpcPoSCommittee>
+): PoSCommittee {
+  const { currentCommittee } = committee;
+  const result = {
+    ...committee,
+    currentCommittee: {
+      ...currentCommittee,
+      epochNumber: currentCommittee?.epochNumber
+        ? BigInt(currentCommittee.epochNumber)
+        : undefined,
+      nodes: currentCommittee?.nodes?.map((node) => ({
+        ...node,
+        votingPower: node?.votingPower
+          ? BigInt(node.votingPower)
+          : undefined,
+      })): undefined,
+      quorumVotingPower: currentCommittee?.quorumVotingPower
+        ? BigInt(currentCommittee.quorumVotingPower)
+        : undefined,
+      totalVotingPower: currentCommittee?.totalVotingPower
+        ? BigInt(currentCommittee.totalVotingPower)
+        : undefined,
+    },
+    elections: committee?.elections? committee?.elections?.map((election) => ({
+      ...election,
+      startBlockNumber: election?.startBlockNumber?BigInt(election.startBlockNumber):undefined,
+      topElectingNodes:election?.topElectingNodes ? election?.topElectingNodes?.map((node) => ({
+        ...node,
+        votingPower: node?.votingPower
+          ? BigInt(node.votingPower)
+          : undefined,
+      })): undefined
+    })): undefined
+  } as PoSCommittee;
 
   return result;
 }
