@@ -226,6 +226,10 @@ import {
   TxPoolNextNonceReturnType,
   txPoolNextNonce,
 } from "../../actions/public/txPoolNextNonce.js";
+import {
+  GetPoSStatusReturnType,
+  getPoSStatus,
+} from "../../actions/public/getPoSStatus.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -679,6 +683,12 @@ export type PublicActions<
   txPoolNextNonce: (
     args: TxPoolNextNonceParameters
   ) => Promise<TxPoolNextNonceReturnType>;
+  /**
+   * Returns the current status of the PoS chain
+   * - JSON-RPC Method: [`pos_getStatus`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getstatus)
+   * @returns  - {@link GetPoSStatusReturnType}
+   */
+  getPoSStatus: () => Promise<GetPoSStatusReturnType>;
 };
 
 export function publicActions<
@@ -739,6 +749,7 @@ export function publicActions<
     getFilterLogs: (args) => getFilterLogs(client, args),
     uninstallFilter: (args) => uninstallFilter(client, args),
     getCollateralInfo: (args) => getCollateralInfo(client, args),
-    txPoolNextNonce:(args) => txPoolNextNonce(client, args),
+    txPoolNextNonce: (args) => txPoolNextNonce(client, args),
+    getPoSStatus: () => getPoSStatus(client),
   };
 }

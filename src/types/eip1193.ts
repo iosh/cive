@@ -11,6 +11,7 @@ import type {
   RpcLog,
   RpcLogFilter,
   RpcNodeState,
+  RpcPoSStatus,
   RpcReward,
   RpcSponsor,
   RpcSupply,
@@ -516,6 +517,15 @@ export type PublicRpcSchema = [
     Method: "txpool_nextNonce";
     Parameters: [address: Address];
     ReturnType: Quantity;
+  },
+  /**
+   * @description Returns the current status of the PoS chain.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getstatus
+   */
+  {
+    Method: "pos_getStatus";
+    Parameters: undefined;
+    ReturnType: RpcPoSStatus;
   }
 ];
 
