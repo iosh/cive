@@ -526,6 +526,11 @@ export type PublicRpcSchema = [
     Method: "pos_getStatus";
     Parameters: undefined;
     ReturnType: RpcPoSStatus;
+  },
+  {
+    Method: "pos_getAccount",
+    Parameters: [address: Address];
+    ReturnType: undefined
   }
 ];
 
