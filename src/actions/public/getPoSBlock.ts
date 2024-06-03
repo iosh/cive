@@ -1,27 +1,55 @@
 import { Chain, Hash, Transport, numberToHex } from "viem";
-import { PoSBlock } from "../../types/pos.js";
-import { Client } from "../../clients/createClient.js";
+import type { PoSBlock } from "../../types/pos.js";
+import type { Client } from "../../clients/createClient.js";
 import { formatPoSBlock } from "../../utils/formatters/pos.js";
 import { BlockNotFoundError } from "../../errors/block.js";
+import type { RpcPoSBlock } from "../../types/rpc.js";
 
-export type GetPoSBlockParameters = {
-  blockHash: Hash;
-};
+export type GetPoSBlockParameters =
+  | {
+      blockHash?: Hash;
+      blockTag?: never | undefined;
+      blockNumber?: never | undefined;
+    }
+  | {
+      blockHash?: never | undefined;
+      blockTag?: "latest_committed" | "latest_voted";
+      blockNumber?: never | undefined;
+    }
+  | {
+      blockHash?: never | undefined;
+      blockTag?: never | undefined;
+      blockNumber?: bigint;
+    };
 
 export type GetPosBlockReturnType = PoSBlock;
 
 export async function getPoSBlock<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { blockHash }: GetPoSBlockParameters
+  {
+    blockHash,
+    blockNumber,
+    blockTag = "latest_committed",
+  }: GetPoSBlockParameters
 ): Promise<GetPosBlockReturnType> {
-  const result = await client.request({
-    method: "pos_getBlockByHash",
-    params: [blockHash],
-  });
+  let block: RpcPoSBlock | undefined;
 
-  if (!result) {
-    throw new BlockNotFoundError({ blockHash: undefined });
+  if (blockHash) {
+    block = await client.request({
+      method: "pos_getBlockByHash",
+      params: [blockHash],
+    });
+  } else {
+    const _blockNumber = blockNumber ? numberToHex(blockNumber) : undefined;
+    block = await client.request({
+      method: "pos_getBlockByHash",
+      params: [_blockNumber ? _blockNumber : blockTag],
+    });
   }
 
-  return formatPoSBlock(result);
+  if (!block) {
+    throw new BlockNotFoundError({ blockHash, blockNumber });
+  }
+
+  return formatPoSBlock(block);
 }

@@ -549,9 +549,18 @@ export type PublicRpcSchema = [
     Parameters: [blockNumber?: Quantity];
     ReturnType: RpcPoSCommittee;
   },
+  /**
+   * @description Get block information by its hash value
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getblockbyhash
+   */
   {
-    Method: "pos_getBlockByHash",
+    Method: "pos_getBlockByHash";
     Parameters: [blockHash: Hash];
+    ReturnType: RpcPoSBlock | null;
+  },
+  {
+    Method: "pos_getBlockByHash";
+    Parameters: [blockNumber: Quantity | "latest_committed" | "latest_voted"];
     ReturnType: RpcPoSBlock | null;
   }
 ];
