@@ -221,6 +221,11 @@ import {
   GetCollateralInfoReturnType,
   getCollateralInfo,
 } from "../../actions/public/getCollateralInfo.js";
+import {
+  TxPoolNextNonceParameters,
+  TxPoolNextNonceReturnType,
+  txPoolNextNonce,
+} from "../../actions/public/txPoolNextNonce.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -664,6 +669,16 @@ export type PublicActions<
   getCollateralInfo: (
     args: GetCollateralInfoParameters
   ) => Promise<GetCollateralInfoReturnType>;
+  /**
+   * These RPC methods require node's public_rpc_apis config set to safe or all, or the namespace include txpool
+   * Return one address's next usable nonce in transaction pool.
+   * - JSON-RPC Method: [`txpool_nextNonce`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/txpool_rpc#txpool_nextnonce)
+   * @param args - {@link TxPoolNextNonceParameters}
+   * @returns - {@link TxPoolNextNonceReturnType}
+   */
+  txPoolNextNonce: (
+    args: TxPoolNextNonceParameters
+  ) => Promise<TxPoolNextNonceReturnType>;
 };
 
 export function publicActions<
@@ -724,5 +739,6 @@ export function publicActions<
     getFilterLogs: (args) => getFilterLogs(client, args),
     uninstallFilter: (args) => uninstallFilter(client, args),
     getCollateralInfo: (args) => getCollateralInfo(client, args),
+    txPoolNextNonce:(args) => txPoolNextNonce(client, args),
   };
 }

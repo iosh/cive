@@ -506,6 +506,16 @@ export type PublicRpcSchema = [
       convertedStoragePoints: Quantity;
       usedStoragePoints: Quantity;
     };
+  },
+
+  /**
+   * @description  Return one address's next usable nonce in transaction pool.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/txpool_rpc#rpcs
+   */
+  {
+    Method: "txpool_nextNonce";
+    Parameters: [address: Address];
+    ReturnType: Quantity;
   }
 ];
 
