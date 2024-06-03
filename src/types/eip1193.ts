@@ -558,6 +558,10 @@ export type PublicRpcSchema = [
     Parameters: [blockHash: Hash];
     ReturnType: RpcPoSBlock | null;
   },
+  /**
+   * @descriptionGet block information by its block number
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getblockbynumber
+   */
   {
     Method: "pos_getBlockByHash";
     Parameters: [blockNumber: Quantity | "latest_committed" | "latest_voted"];

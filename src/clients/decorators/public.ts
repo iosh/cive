@@ -727,6 +727,7 @@ export type PublicActions<
   /**
    * Get block information by its hash value
    * - JSON-RPC Method: [`pos_getBlockByHash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getblockbyhash)
+   * - JSON-RPC Method: [`pos_getBlockByNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getblockbynumber)
    * @param args - {@link GetPosBlockParameters}
    * @returns - {@link GetPosBlockReturnType}
    */
