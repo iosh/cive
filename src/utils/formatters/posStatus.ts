@@ -1,4 +1,4 @@
-import type { PoSStatus } from "../../types/pos.js";
+import type { PoSStatus } from "../../types/posStatus.js";
 import type { RpcPoSStatus } from "../../types/rpc.js";
 import { ExactPartial } from "../../types/utils.js";
 
