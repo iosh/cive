@@ -260,6 +260,11 @@ import {
   GetEpochReceiptsReturnType,
   getEpochReceipts,
 } from "../../actions/public/getEpochReceipts.js";
+import {
+  TraceBlockParameters,
+  TraceBlockReturnType,
+  traceBlock,
+} from "../../actions/public/traceBlock.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -777,6 +782,13 @@ export type PublicActions<
   getEpochReceipts: (
     args: GetEpochReceiptsParameters
   ) => Promise<GetEpochReceiptsReturnType>;
+  /**
+   * Get block traces by block hash
+   * -JSON-RPC Method: [`trace_block`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/trace_rpc#trace_block)
+   * @param args
+   * @returns
+   */
+  traceBlock: (args: TraceBlockParameters) => Promise<TraceBlockReturnType>;
 };
 
 export function publicActions<
@@ -846,5 +858,6 @@ export function publicActions<
     getPoSTransactionByNumber: (args) =>
       getPoSTransactionByNumber(client, args),
     getEpochReceipts: (args) => getEpochReceipts(client, args),
+    traceBlock: (args) => traceBlock(client, args),
   };
 }

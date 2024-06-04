@@ -32,6 +32,7 @@ import {
   PoSStatus,
   PoSTransaction,
 } from "./pos.js";
+import { TraceBlock } from "./tract.js";
 
 export type { Quantity };
 export type OutcomeStatus = "0x0" | "0x1" | "0x2";
@@ -103,6 +104,8 @@ export type RpcPoSCommittee = PoSCommittee<Quantity>;
 
 export type RpcPoSBlock = PoSBlock<Quantity>;
 
-export type RpcPoSRewards = PoSRewards<Quantity>
+export type RpcPoSRewards = PoSRewards<Quantity>;
 
-export type RpcPoSTransaction = PoSTransaction<Quantity>
+export type RpcPoSTransaction = PoSTransaction<Quantity>;
+
+export type RpcTraceBlock = TraceBlock<Quantity>;

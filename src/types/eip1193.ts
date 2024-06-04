@@ -20,6 +20,7 @@ import type {
   RpcReward,
   RpcSponsor,
   RpcSupply,
+  RpcTraceBlock,
   RpcTransactionReceipt,
   RpcTransactionRequest,
   RpcVote,
@@ -588,13 +589,22 @@ export type PublicRpcSchema = [
     ReturnType: RpcPoSTransaction | null;
   },
   /**
-   * @description Get one epoch's all receipts in one RPC call 
+   * @description Get one epoch's all receipts in one RPC call
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/debug_rpc#cfx_getepochreceipts
    */
   {
     Method: "cfx_getEpochReceipts";
     Parameters: [epoch: Quantity];
     ReturnType: RpcTransactionReceipt[];
+  },
+  /**
+   * @description Get block traces by block hash
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/trace_rpc#trace_block
+   */
+  {
+    Method: "trace_block";
+    Parameters: [blockHash: Hash];
+    ReturnType: RpcTraceBlock;
   }
 ];
 
