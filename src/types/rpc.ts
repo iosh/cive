@@ -28,6 +28,7 @@ import {
   PoSAccountStatus,
   PoSBlock,
   PoSCommittee,
+  PoSRewards,
   PoSStatus,
 } from "./pos.js";
 
@@ -100,3 +101,5 @@ export type RpcPoSAccount = PoSAccount<Quantity>;
 export type RpcPoSCommittee = PoSCommittee<Quantity>;
 
 export type RpcPoSBlock = PoSBlock<Quantity>;
+
+export type RpcPoSRewards = PoSRewards<Quantity>

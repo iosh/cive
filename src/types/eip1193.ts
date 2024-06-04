@@ -14,6 +14,7 @@ import type {
   RpcPoSAccount,
   RpcPoSBlock,
   RpcPoSCommittee,
+  RpcPoSRewards,
   RpcPoSStatus,
   RpcReward,
   RpcSponsor,
@@ -559,13 +560,22 @@ export type PublicRpcSchema = [
     ReturnType: RpcPoSBlock | null;
   },
   /**
-   * @descriptionGet block information by its block number
+   * @description Get block information by its block number
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getblockbynumber
    */
   {
     Method: "pos_getBlockByHash";
     Parameters: [blockNumber: Quantity | "latest_committed" | "latest_voted"];
     ReturnType: RpcPoSBlock | null;
+  },
+  /**
+   * @description returns the rewards information of a PoS epoch
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getrewardsbyepoch
+   */
+  {
+    Method: "pos_getRewardsByEpoch",
+    Parameters: [epoch: Quantity];
+    ReturnType: RpcPoSRewards;
   }
 ];
 

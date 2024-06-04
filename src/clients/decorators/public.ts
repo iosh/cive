@@ -246,6 +246,10 @@ import {
   GetPosBlockReturnType,
   getPoSBlock,
 } from "../../actions/public/getPoSBlock.js";
+import {
+  GetPoSRewardsParameters,
+  getPoSRewards,
+} from "../../actions/public/getPoSRewards.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -732,6 +736,16 @@ export type PublicActions<
    * @returns - {@link GetPosBlockReturnType}
    */
   getPoSBlock: (args: GetPoSBlockParameters) => Promise<GetPosBlockReturnType>;
+
+  /**
+   * returns the rewards information of a PoS epoch
+   * - JSON-RPC Method: [`pos_getRewardsByEpoch`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getrewardsbyepoch)
+   * @param args - {@link GetPoSRewardsParameters}
+   * @returns - {@link GetPoSRewardsReturnType}
+   */
+  getPoSRewards: (
+    args: GetPoSRewardsParameters
+  ) => Promise<GetPoSRewardByEpochReturnType>;
 };
 
 export function publicActions<
@@ -797,5 +811,6 @@ export function publicActions<
     getPoSAccount: (args) => getPoSAccount(client, args),
     getPosCommittee: (args) => getPosCommittee(client, args),
     getPoSBlock: (args) => getPoSBlock(client, args),
+    getPoSRewards: (args) => getPoSRewards(client, args),
   };
 }

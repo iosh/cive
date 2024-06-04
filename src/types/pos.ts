@@ -71,3 +71,14 @@ export type PoSBlock<TQuantity = bigint> = {
   timestamp: TQuantity;
   signatures: PoSSignature<TQuantity>[];
 };
+
+
+export type PoSAccountRewards<TQuantity = bigint> = {
+  posAddress: Address;
+  powAddress: Address;
+  reward: TQuantity;
+}
+export type PoSRewards<TQuantity = bigint> = {
+  accountRewards: PoSAccountRewards<TQuantity>[];
+  powEpochHash: Hash;
+};

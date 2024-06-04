@@ -2,12 +2,14 @@ import type {
   PoSAccount,
   PoSBlock,
   PoSCommittee,
+  PoSRewards,
   PoSStatus,
 } from "../../types/pos.js";
 import type {
   RpcPoSAccount,
   RpcPoSBlock,
   RpcPoSCommittee,
+  RpcPoSRewards,
   RpcPoSStatus,
 } from "../../types/rpc.js";
 import { ExactPartial } from "../../types/utils.js";
@@ -142,6 +144,22 @@ export function formatPoSBlock(block: ExactPartial<RpcPoSBlock>): PoSBlock {
       : undefined,
     timestamp: block?.timestamp ? BigInt(block.timestamp) : undefined,
   } as PoSBlock;
+
+  return result;
+}
+
+export function formatPosRewards(
+  rewards: ExactPartial<RpcPoSRewards>
+): PoSRewards {
+  const result = {
+    ...rewards,
+    accountRewards: rewards?.accountRewards
+      ? rewards.accountRewards.map((reward) => ({
+          ...reward,
+          reward: reward?.reward ? BigInt(reward.reward) : undefined,
+        }))
+      : undefined,
+  } as PoSRewards;
 
   return result;
 }
