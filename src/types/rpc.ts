@@ -30,6 +30,7 @@ import {
   PoSCommittee,
   PoSRewards,
   PoSStatus,
+  PoSTransaction,
 } from "./pos.js";
 
 export type { Quantity };
@@ -103,3 +104,5 @@ export type RpcPoSCommittee = PoSCommittee<Quantity>;
 export type RpcPoSBlock = PoSBlock<Quantity>;
 
 export type RpcPoSRewards = PoSRewards<Quantity>
+
+export type RpcPoSTransaction = PoSTransaction<Quantity>

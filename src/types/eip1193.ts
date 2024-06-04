@@ -16,6 +16,7 @@ import type {
   RpcPoSCommittee,
   RpcPoSRewards,
   RpcPoSStatus,
+  RpcPoSTransaction,
   RpcReward,
   RpcSponsor,
   RpcSupply,
@@ -575,7 +576,12 @@ export type PublicRpcSchema = [
   {
     Method: "pos_getRewardsByEpoch",
     Parameters: [epoch: Quantity];
-    ReturnType: RpcPoSRewards;
+    ReturnType: RpcPoSRewards | null;
+  },
+  {
+    Method: "pos_getTransactionByNumber",
+    Parameters: [epoch: Quantity];
+    ReturnType: RpcPoSTransaction | null;
   }
 ];
 

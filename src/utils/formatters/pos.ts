@@ -4,6 +4,7 @@ import type {
   PoSCommittee,
   PoSRewards,
   PoSStatus,
+  PoSTransaction,
 } from "../../types/pos.js";
 import type {
   RpcPoSAccount,
@@ -11,6 +12,7 @@ import type {
   RpcPoSCommittee,
   RpcPoSRewards,
   RpcPoSStatus,
+  RpcPoSTransaction,
 } from "../../types/rpc.js";
 import { ExactPartial } from "../../types/utils.js";
 
@@ -160,6 +162,47 @@ export function formatPosRewards(
         }))
       : undefined,
   } as PoSRewards;
+
+  return result;
+}
+
+export function formatPoSTransaction(
+  tx: ExactPartial<RpcPoSTransaction>
+): PoSTransaction {
+  const result = {
+    ...tx,
+    number: tx?.number ? BigInt(tx.number) : undefined,
+    blockNumber: tx?.blockNumber ? BigInt(tx.blockNumber) : undefined,
+    timestamp: tx?.timestamp ? BigInt(tx.timestamp) : undefined,
+  } as PoSTransaction;
+
+  if (result.type === "Election") {
+    result.payload = {
+      ...result.payload,
+      targetTerm: BigInt(result.payload.targetTerm),
+    };
+  }
+
+  if (result.type === "UpdateVotingPower") {
+    result.payload = {
+      ...result.payload,
+      votingPower: BigInt(result.payload.votingPower),
+    };
+  }
+
+  if (result.type === "Retire") {
+    result.payload = {
+      ...result.payload,
+      votingPower: BigInt(result.payload.votingPower),
+    };
+  }
+
+  if (result.type === "PivotDecision") {
+    result.payload = {
+      ...result.payload,
+      height: BigInt(result.payload.height),
+    };
+  }
 
   return result;
 }

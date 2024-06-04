@@ -250,6 +250,11 @@ import {
   GetPoSRewardsParameters,
   getPoSRewards,
 } from "../../actions/public/getPoSRewards.js";
+import {
+  GetPoSTransactionParameters,
+  GetPoSTransactionReturnType,
+  getPoSTransactionByNumber,
+} from "../../actions/public/getPoSTransactionByNumber.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -746,6 +751,17 @@ export type PublicActions<
   getPoSRewards: (
     args: GetPoSRewardsParameters
   ) => Promise<GetPoSRewardByEpochReturnType>;
+
+  /**
+   * Get the transaction information by transaction number
+   * - JSON-RPC Method: [`pos_getTransactionByNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_gettransactionbynumber)
+   * @param args - {@link GetPoSTransactionParameters}
+   * @returns - {@link GetPoSTransactionReturnType}
+   */
+
+  getPoSTransactionByNumber: (
+    args: GetPoSTransactionParameters
+  ) => Promise<GetPoSTransactionReturnType>;
 };
 
 export function publicActions<
@@ -812,5 +828,7 @@ export function publicActions<
     getPosCommittee: (args) => getPosCommittee(client, args),
     getPoSBlock: (args) => getPoSBlock(client, args),
     getPoSRewards: (args) => getPoSRewards(client, args),
+    getPoSTransactionByNumber: (args) =>
+      getPoSTransactionByNumber(client, args),
   };
 }

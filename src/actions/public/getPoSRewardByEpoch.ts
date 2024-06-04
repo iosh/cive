@@ -1,4 +1,4 @@
-import type { Chain, Hash, Transport } from "viem";
+import { numberToHex, type Chain, type Hash, type Transport } from "viem";
 import type { EpochNumber } from "../../types/block.js";
 import type { Client } from "../../clients/createClient.js";
 import type { Address } from "../../accounts/types.js";
@@ -16,7 +16,7 @@ export type GetPoSRewardByEpochReturnType =
       }[];
       powEpochHash: Hash;
     }
-  | undefined;
+  | null;
 
 export async function getPoSRewardByEpoch<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
@@ -24,10 +24,10 @@ export async function getPoSRewardByEpoch<TChain extends Chain | undefined>(
 ): Promise<GetPoSRewardByEpochReturnType> {
   const result = await client.request({
     method: "cfx_getPoSRewardByEpoch",
-    params: [epochNumber],
+    params: [numberToHex(epochNumber)],
   });
 
-  if (result === null) return undefined;
+  if (result === null) return null;
 
   return {
     ...result,

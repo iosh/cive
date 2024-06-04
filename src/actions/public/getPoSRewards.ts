@@ -7,7 +7,7 @@ export type GetPoSRewardsParameters = {
   epochNumber: bigint;
 };
 
-export type GetPoSRewardsReturnType = PoSRewards;
+export type GetPoSRewardsReturnType = PoSRewards | null;
 
 export async function getPoSRewards<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
@@ -17,5 +17,7 @@ export async function getPoSRewards<TChain extends Chain | undefined>(
     method: "pos_getRewardsByEpoch",
     params: [numberToHex(epochNumber)],
   });
+
+  if (!result) return null;
   return formatPosRewards(result);
 }
