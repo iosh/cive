@@ -255,6 +255,11 @@ import {
   GetPoSTransactionReturnType,
   getPoSTransactionByNumber,
 } from "../../actions/public/getPoSTransactionByNumber.js";
+import {
+  GetEpochReceiptsParameters,
+  GetEpochReceiptsReturnType,
+  getEpochReceipts,
+} from "../../actions/public/getEpochReceipts.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -762,6 +767,16 @@ export type PublicActions<
   getPoSTransactionByNumber: (
     args: GetPoSTransactionParameters
   ) => Promise<GetPoSTransactionReturnType>;
+
+  /**
+   * Get one epoch's all receipts in one RPC call
+   * - JSON-RPC Method: [`cfx_getEpochReceipts`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/debug_rpc#cfx_getepochreceipts)
+   * @param args - {@link GetEpochReceiptsParameters}
+   * @returns - {@link GetEpochReceiptsReturnType}
+   */
+  getEpochReceipts: (
+    args: GetEpochReceiptsParameters
+  ) => Promise<GetEpochReceiptsReturnType>;
 };
 
 export function publicActions<
@@ -830,5 +845,6 @@ export function publicActions<
     getPoSRewards: (args) => getPoSRewards(client, args),
     getPoSTransactionByNumber: (args) =>
       getPoSTransactionByNumber(client, args),
+    getEpochReceipts: (args) => getEpochReceipts(client, args),
   };
 }

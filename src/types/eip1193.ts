@@ -574,14 +574,27 @@ export type PublicRpcSchema = [
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getrewardsbyepoch
    */
   {
-    Method: "pos_getRewardsByEpoch",
+    Method: "pos_getRewardsByEpoch";
     Parameters: [epoch: Quantity];
     ReturnType: RpcPoSRewards | null;
   },
+  /**
+   * @description Get the transaction information by transaction number
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_gettransactionbynumber
+   */
   {
-    Method: "pos_getTransactionByNumber",
+    Method: "pos_getTransactionByNumber";
     Parameters: [epoch: Quantity];
     ReturnType: RpcPoSTransaction | null;
+  },
+  /**
+   * @description Get one epoch's all receipts in one RPC call 
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/debug_rpc#cfx_getepochreceipts
+   */
+  {
+    Method: "cfx_getEpochReceipts";
+    Parameters: [epoch: Quantity];
+    ReturnType: RpcTransactionReceipt[];
   }
 ];
 
