@@ -607,11 +607,14 @@ export type PublicRpcSchema = [
     Parameters: [blockHash: Hash];
     ReturnType: RpcTraceBlock;
   },
-
+  /**
+   * @description Get transaction's trace by it's hash
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/trace_rpc#trace_transaction
+   */
   {
-   Method: "trace_transaction",
-   Parameters: [txHash: Hash],
-   ReturnType: RpcTrace
+    Method: "trace_transaction";
+    Parameters: [txHash: Hash];
+    ReturnType: RpcTrace;
   }
 ];
 
