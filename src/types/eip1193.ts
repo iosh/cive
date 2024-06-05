@@ -605,6 +605,12 @@ export type PublicRpcSchema = [
     Method: "trace_block";
     Parameters: [blockHash: Hash];
     ReturnType: RpcTraceBlock;
+  },
+
+  {
+   Method: "trace_transaction",
+   Parameters: [txHash: Hash],
+   ReturnType: RpcTraceBlock
   }
 ];
 

@@ -265,6 +265,11 @@ import {
   TraceBlockReturnType,
   traceBlock,
 } from "../../actions/public/traceBlock.js";
+import {
+  TraceTransactionParameters,
+  TraceTransactionReturnType,
+  traceTransaction,
+} from "../../actions/public/traceTransaction.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -789,6 +794,16 @@ export type PublicActions<
    * @returns
    */
   traceBlock: (args: TraceBlockParameters) => Promise<TraceBlockReturnType>;
+
+  /**
+   * Get transaction's trace by it's hash
+   * - JSON-RPC Method: [`trace_transaction`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/trace_rpc#trace_transaction)
+   * @param args - {@link TraceTransactionParameters}
+   * @returns - {@link TraceTransactionReturnType}
+   */
+  traceTransaction: (
+    args: TraceTransactionParameters
+  ) => Promise<TraceTransactionReturnType>;
 };
 
 export function publicActions<
@@ -859,5 +874,6 @@ export function publicActions<
       getPoSTransactionByNumber(client, args),
     getEpochReceipts: (args) => getEpochReceipts(client, args),
     traceBlock: (args) => traceBlock(client, args),
+    traceTransaction: (args) => traceTransaction(client, args),
   };
 }
