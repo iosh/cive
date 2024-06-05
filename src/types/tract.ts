@@ -1,7 +1,7 @@
 import { Hash, Hex } from "viem";
 import { Address } from "../accounts/types.js";
 
-export type TractCallAction<TQuantity = bigint> = {
+export type TraceCallAction<TQuantity = bigint> = {
   from: Address;
   to: Address;
   value: TQuantity;
@@ -10,7 +10,7 @@ export type TractCallAction<TQuantity = bigint> = {
   callType: "call" | "callCode" | "delegateCall" | "staticCall";
 };
 
-export type TractCreateAction<TQuantity = bigint> = {
+export type TraceCreateAction<TQuantity = bigint> = {
   from: Address;
   value: TQuantity;
   gas: TQuantity;
@@ -18,19 +18,19 @@ export type TractCreateAction<TQuantity = bigint> = {
   createType: "create" | "create2";
 };
 
-export type TractCallResultActon<TQuantity = bigint> = {
+export type TraceCallResultActon<TQuantity = bigint> = {
   outcome: "success" | "reverted" | "fail";
   gasLeft: TQuantity;
   returnData: Hex;
 };
 
-export type TractCreateResultAction<TQuantity = bigint> = {
+export type TraceCreateResultAction<TQuantity = bigint> = {
   outcome: "success" | "reverted" | "fail";
   addr: Address;
   gasLeft: TQuantity;
   returnData: Hex;
 };
-export type TractInternalTransferActionAction = {
+export type TraceInternalTransferActionAction = {
   from: Address;
   fromPocket: Hex;
   fromSpace: Hex;
@@ -40,15 +40,15 @@ export type TractInternalTransferActionAction = {
   value: Hex;
 };
 
-export type TractActions<TQuantity = bigint> =
-  | TractCallAction<TQuantity>
-  | TractCreateAction<TQuantity>
-  | TractCallResultActon<TQuantity>
-  | TractCreateResultAction<TQuantity>
-  | TractInternalTransferActionAction;
+export type TraceActions<TQuantity = bigint> =
+  | TraceCallAction<TQuantity>
+  | TraceCreateAction<TQuantity>
+  | TraceCallResultActon<TQuantity>
+  | TraceCreateResultAction<TQuantity>
+  | TraceInternalTransferActionAction;
 
-export type Tract<TQuantity = bigint> = {
-  action: TractActions;
+export type Trace<TQuantity = bigint> = {
+  action: TraceActions;
   valid: boolean;
   epochHash: Hash;
   epochNumber: TQuantity;
@@ -60,11 +60,17 @@ export type Tract<TQuantity = bigint> = {
 export type transactionTraces<TQuantity = bigint> = {
   transactionHash: Hash;
   transactionPosition: TQuantity;
-  traces: Tract[];
+  traces: Trace<TQuantity>[];
 };
 export type TraceBlock<TQuantity = bigint> = {
   blockHash: Hash;
   epochHash: Hash;
   epochNumber: TQuantity;
   transactionTraces: transactionTraces<TQuantity>[];
+};
+
+export type TraceEpoch<TQuantity = bigint> = {
+  cfx_traces: Trace<TQuantity>;
+  eth_traces: {};
+  mirror_address_map: {};
 };

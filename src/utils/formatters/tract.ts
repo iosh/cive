@@ -1,15 +1,9 @@
-import { RpcTraceBlock } from "../../types/rpc.js";
-import {
-  TraceBlock,
-  TractCallAction,
-  TractCallResultActon,
-} from "../../types/tract.js";
+import { RpcTrace, RpcTraceBlock } from "../../types/rpc.js";
+import { TraceBlock } from "../../types/tract.js";
 import { ExactPartial } from "../../types/utils.js";
 
 export function formatTract(
-  trace: ExactPartial<
-    RpcTraceBlock["transactionTraces"][number]["traces"][number]
-  >
+  trace: ExactPartial<RpcTrace>
 ): TraceBlock["transactionTraces"][number]["traces"][number] {
   const result = {
     ...trace,
@@ -29,7 +23,7 @@ export function formatTract(
   if ("gasLeft" in result.action) {
     result.action.gasLeft = BigInt(result.action.gasLeft);
   }
-  
+
   return result;
 }
 

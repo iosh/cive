@@ -20,6 +20,7 @@ import type {
   RpcReward,
   RpcSponsor,
   RpcSupply,
+  RpcTrace,
   RpcTraceBlock,
   RpcTransactionReceipt,
   RpcTransactionRequest,
@@ -610,7 +611,7 @@ export type PublicRpcSchema = [
   {
    Method: "trace_transaction",
    Parameters: [txHash: Hash],
-   ReturnType: RpcTraceBlock
+   ReturnType: RpcTrace
   }
 ];
 
