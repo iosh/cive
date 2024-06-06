@@ -1,11 +1,24 @@
 import type { CustomSource, Hex, OneOf } from "viem";
 import type { HDKey } from "@scure/bip32";
+import {
+  mainNetworkIdType,
+  testNetworkIdType,
+} from "../utils/network/networkId.js";
 
-export type NetworkPrefix = "cfx" | "cfxtest" | `net${string}`;
+export type NetworkPrefix = "cfx" | "cfxtest" | `net${number}`;
+
 export type AddressType = "builtin" | "user" | "contract";
-export type Address =
-  | `${NetworkPrefix}:${string}`
-  | `${NetworkPrefix}.type.${AddressType}:${string}`;
+
+export type AddressWithNetworkPrefix<TNetworkPrefix extends NetworkPrefix> =
+  | `${TNetworkPrefix}:${string}`
+  | `${TNetworkPrefix}.type.${AddressType}:${string}`;
+
+export type Address<TNetworkId extends number = number> =
+  TNetworkId extends mainNetworkIdType
+    ? AddressWithNetworkPrefix<"cfx">
+    : TNetworkId extends testNetworkIdType
+    ? AddressWithNetworkPrefix<"cfxtest">
+    : AddressWithNetworkPrefix<`net${TNetworkId}`>;
 
 export type Account<TAddress extends Address = Address> = OneOf<
   JsonRpcAccount<TAddress> | LocalAccount<string, TAddress>
