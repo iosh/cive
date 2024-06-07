@@ -9,16 +9,21 @@ export type NetworkPrefix = "cfx" | "cfxtest" | `net${number}`;
 
 export type AddressType = "builtin" | "user" | "contract";
 
-export type AddressWithNetworkPrefix<TNetworkPrefix extends NetworkPrefix> =
+export type AddressWithNetworkPrefix<
+  TNetworkPrefix extends NetworkPrefix,
+  TAddressType extends AddressType = AddressType
+> =
   | `${TNetworkPrefix}:${string}`
-  | `${TNetworkPrefix}.type.${AddressType}:${string}`;
+  | `${TNetworkPrefix}.type.${TAddressType}:${string}`;
 
-export type Address<TNetworkId extends number = number> =
-  TNetworkId extends mainNetworkIdType
-    ? AddressWithNetworkPrefix<"cfx">
-    : TNetworkId extends testNetworkIdType
-    ? AddressWithNetworkPrefix<"cfxtest">
-    : AddressWithNetworkPrefix<`net${TNetworkId}`>;
+export type Address<
+  TNetworkId extends number = mainNetworkIdType | testNetworkIdType,
+  TAddressType extends AddressType = AddressType
+> = TNetworkId extends mainNetworkIdType
+  ? AddressWithNetworkPrefix<"cfx", TAddressType>
+  : TNetworkId extends testNetworkIdType
+  ? AddressWithNetworkPrefix<"cfxtest", TAddressType>
+  : AddressWithNetworkPrefix<`net${TNetworkId}`, TAddressType>;
 
 export type Account<TAddress extends Address = Address> = OneOf<
   JsonRpcAccount<TAddress> | LocalAccount<string, TAddress>
