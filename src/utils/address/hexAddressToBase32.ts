@@ -10,7 +10,7 @@ export const VERSION_BYTE = 0;
 const typeMapToHex: Record<AddressType, string> = {
   builtin: "0x0",
   user: "0x1",
-  contract: "0x2",
+  contract: "0x8",
   null: "0x0",
 };
 

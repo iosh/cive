@@ -55,8 +55,8 @@ describe("cover hex address to base32", () => {
   test("contract address and main network", () => {
     for (let index = 0; index < addresses.length; index++) {
       const hexAddress = addresses[index];
-      const userHexAddress = `2${hexAddress.slice(3)}`;
-      const hexBuffer = Buffer.from(userHexAddress, "hex");
+      const contractHexAddress = `8${hexAddress.slice(3)}`;
+      const hexBuffer = Buffer.from(contractHexAddress, "hex");
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
@@ -70,8 +70,9 @@ describe("cover hex address to base32", () => {
   test("contract address and test network", () => {
     for (let index = 0; index < addresses.length; index++) {
       const hexAddress = addresses[index];
-      const userHexAddress = `2${hexAddress.slice(3)}`;
-      const hexBuffer = Buffer.from(userHexAddress, "hex");
+      const contractHexAddress = `8${hexAddress.slice(3)}`;
+      const hexBuffer = Buffer.from(contractHexAddress, "hex");
+
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
@@ -79,6 +80,71 @@ describe("cover hex address to base32", () => {
           addressType: "contract",
         })
       ).toEqual(encode(hexBuffer, TEST_NETWORK_ID));
+    }
+  });
+});
+
+describe("cover hex address to base32 with verbose", () => {
+  test("user address and main network", () => {
+    for (let index = 0; index < addresses.length; index++) {
+      const hexAddress = addresses[index];
+      const userHexAddress = `1${hexAddress.slice(3)}`;
+      const hexBuffer = Buffer.from(userHexAddress, "hex");
+      expect(
+        hexAddressToBase32({
+          hexAddress: hexAddress,
+          networkId: MAIN_NETWORK_ID,
+          addressType: "user",
+          verbose: true,
+        })
+      ).toEqual(encode(hexBuffer, MAIN_NETWORK_ID, true));
+    }
+  });
+
+  test("user address and test network", () => {
+    for (let index = 0; index < addresses.length; index++) {
+      const hexAddress = addresses[index];
+      const userHexAddress = `1${hexAddress.slice(3)}`;
+      const hexBuffer = Buffer.from(userHexAddress, "hex");
+      expect(
+        hexAddressToBase32({
+          hexAddress: hexAddress,
+          networkId: TEST_NETWORK_ID,
+          addressType: "user",
+          verbose: true,
+        })
+      ).toEqual(encode(hexBuffer, TEST_NETWORK_ID, true));
+    }
+  });
+
+  test("contract address and main network", () => {
+    for (let index = 0; index < addresses.length; index++) {
+      const hexAddress = addresses[index];
+      const contractHexAddress = `8${hexAddress.slice(3)}`;
+      const hexBuffer = Buffer.from(contractHexAddress, "hex");
+      expect(
+        hexAddressToBase32({
+          hexAddress: hexAddress,
+          networkId: MAIN_NETWORK_ID,
+          addressType: "contract",
+          verbose: true,
+        })
+      ).toEqual(encode(hexBuffer, MAIN_NETWORK_ID, true));
+    }
+  });
+  test("contract address and test network", () => {
+    for (let index = 0; index < addresses.length; index++) {
+      const hexAddress = addresses[index];
+      const contractHexAddress = `8${hexAddress.slice(3)}`;
+      const hexBuffer = Buffer.from(contractHexAddress, "hex");
+      expect(
+        hexAddressToBase32({
+          hexAddress: hexAddress,
+          networkId: TEST_NETWORK_ID,
+          addressType: "contract",
+          verbose: true,
+        })
+      ).toEqual(encode(hexBuffer, TEST_NETWORK_ID, true));
     }
   });
 });
