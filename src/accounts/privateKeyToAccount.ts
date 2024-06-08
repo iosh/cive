@@ -8,13 +8,13 @@ import { hexAddressToBase32 } from "../utils/address/hexAddressToBase32.js";
  *
  * @returns A Private Key Account.
  */
-export function privateKeyToAccount(
+export function privateKeyToAccount<TNetworkId extends number = number>(
   privateKey: Hex,
-  networkId: number
+  networkId: TNetworkId
 ): PrivateKeyAccount {
   const publicKey = toHex(secp256k1.getPublicKey(privateKey.slice(2), false));
   const hexAddress = publicKeyToAddress(publicKey);
-  const base32Address = hexAddressToBase32({ hexAddress, networkId });
+  const base32Address = hexAddressToBase32<TNetworkId>({ hexAddress, networkId });
   const account = toAccount({
     address: base32Address,
     async experimental_signAuthMessage(parameters) {

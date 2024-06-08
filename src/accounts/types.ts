@@ -7,23 +7,37 @@ import {
 
 export type NetworkPrefix = "cfx" | "cfxtest" | `net${number}`;
 
-export type AddressType = "builtin" | "user" | "contract" | "null"
+export type AddressTypeUser = "user";
+export type AddressTypeContract = "contract";
+export type AddressTypeBuiltin = "builtin";
+export type AddressTypeNull = "null";
+
+export type AddressType =
+  | AddressTypeUser
+  | AddressTypeContract
+  | AddressTypeBuiltin
+  | AddressTypeNull;
+
+type Prefix<TNetworkId extends number = number> =
+  TNetworkId extends mainNetworkIdType
+    ? "cfx"
+    : TNetworkId extends testNetworkIdType
+    ? "cfxtest"
+    : `net${TNetworkId}`;
 
 export type AddressWithNetworkPrefix<
-  TNetworkPrefix extends NetworkPrefix,
-  TAddressType extends AddressType = AddressType
-> =
-  | `${TNetworkPrefix}:${string}`
-  | `${TNetworkPrefix}.type.${TAddressType}:${string}`;
+  TNetworkId extends number = number,
+  TAddressType extends AddressType = AddressType,
+  TVerbose extends boolean = boolean
+> = TVerbose extends true
+  ? `${Prefix<TNetworkId>}.type.${TAddressType}:${string}`
+  : `${Prefix<TNetworkId>}:${string}`;
 
 export type Address<
-  TNetworkId extends number = mainNetworkIdType | testNetworkIdType | number,
-  TAddressType extends AddressType = AddressType
-> = TNetworkId extends mainNetworkIdType
-  ? AddressWithNetworkPrefix<"cfx", TAddressType>
-  : TNetworkId extends testNetworkIdType
-  ? AddressWithNetworkPrefix<"cfxtest", TAddressType>
-  : AddressWithNetworkPrefix<`net${TNetworkId}`, TAddressType>;
+  TNetworkId extends number = number,
+  TAddressType extends AddressType = AddressType,
+  TVerbose extends boolean = boolean
+> = AddressWithNetworkPrefix<TNetworkId, TAddressType, TVerbose>;
 
 export type Account<TAddress extends Address = Address> = OneOf<
   JsonRpcAccount<TAddress> | LocalAccount<string, TAddress>

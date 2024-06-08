@@ -1,5 +1,5 @@
 import { hexToBytes } from "@noble/curves/abstract/utils";
-import { Address, AddressType } from "../../accounts/types.js";
+import { Address, AddressType, AddressTypeUser } from "../../accounts/types.js";
 import { stringToBytes, toHex, padHex, Hex } from "viem";
 import { convertBit } from "./convertBit.js";
 import { polyMod } from "./polyMod.js";
@@ -22,23 +22,32 @@ export function replaceHexPrefixByType(
   return typeHex + address.slice(3);
 }
 
-export type HexAddressToBase32Parameters<TNetworkId extends number = number> = {
+export type HexAddressToBase32Parameters<
+  TNetworkId extends number = number,
+  TAddressType extends AddressType = AddressType,
+  TVerbose extends boolean = boolean
+> = {
   hexAddress: Hex;
   networkId: TNetworkId;
-  addressType?: AddressType;
-  verbose?: boolean;
+  addressType?: TAddressType;
+  verbose?: TVerbose;
 };
 
 const ALPHABET = "ABCDEFGHJKMNPRSTUVWXYZ0123456789";
 
-export function hexAddressToBase32<TNetworkId extends number = number>({
+export function hexAddressToBase32<
+  TNetworkId extends number = number,
+  TAddressType extends AddressType = AddressType,
+  TVerbose extends boolean = boolean
+>({
   hexAddress,
   networkId,
   addressType = "user",
   verbose = false,
 }: HexAddressToBase32Parameters<TNetworkId>): Address<
   TNetworkId,
-  typeof addressType
+  TAddressType,
+  TVerbose
 > {
   const typedAddress = replaceHexPrefixByType(hexAddress, addressType);
   const hexBuffer = hexToBytes(typedAddress.slice(2));
