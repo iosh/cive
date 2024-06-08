@@ -1,6 +1,6 @@
 import { hexToBytes } from "@noble/curves/abstract/utils";
 import { Address, AddressType } from "../../accounts/types.js";
-import { stringToBytes, toHex, padHex } from "viem";
+import { stringToBytes, toHex, padHex, Hex } from "viem";
 import { convertBit } from "./convertBit.js";
 import { polyMod } from "./polyMod.js";
 import { getAddressPrefixByNetworkId } from "./getAddressPrefixByNetworkId.js";
@@ -23,7 +23,7 @@ export function replaceHexPrefixByType(
 }
 
 export type HexAddressToBase32Parameters<TNetworkId extends number = number> = {
-  hexAddress: string;
+  hexAddress: Hex;
   networkId: TNetworkId;
   addressType?: AddressType;
   verbose?: boolean;
@@ -41,10 +41,10 @@ export function hexAddressToBase32<TNetworkId extends number = number>({
   typeof addressType
 > {
   const typedAddress = replaceHexPrefixByType(hexAddress, addressType);
-  const hexBuffer = stringToBytes(typedAddress.slice(2));
+  const hexBuffer = hexToBytes(typedAddress.slice(2));
   const netName = getAddressPrefixByNetworkId(networkId).toUpperCase();
 
-  const addressPrefix5Bits = stringToBytes(netName).map((_byte) => _byte & 31);
+  const netName5Bits = stringToBytes(netName).map((_byte) => _byte & 31);
 
   const payload5Bits = convertBit(
     new Uint8Array([VERSION_BYTE, ...hexBuffer]),
@@ -54,7 +54,7 @@ export function hexAddressToBase32<TNetworkId extends number = number>({
   );
   const checksumBigInt = polyMod(
     new Uint8Array([
-      ...addressPrefix5Bits,
+      ...netName5Bits,
       0,
       ...payload5Bits,
       0,
@@ -71,7 +71,8 @@ export function hexAddressToBase32<TNetworkId extends number = number>({
   if (checksumHex.length < 12) {
     checksumHex = padHex(checksumHex, { dir: "left", size: 5 });
   }
-  const checksumBytes = hexToBytes(checksumHex);
+
+  const checksumBytes = hexToBytes(checksumHex.replace(/0x/, ""));
   const checksum5Bits = convertBit(checksumBytes, 8, 5, true);
 
   const payload = payload5Bits
@@ -87,11 +88,7 @@ export function hexAddressToBase32<TNetworkId extends number = number>({
 
   return (
     verbose
-      ? ""
-          .concat(netName, ":TYPE.")
-          .concat(addressType, ":")
-          .concat(payload)
-          .concat(checksum)
-      : "".concat(netName, ":").concat(payload).concat(checksum).toLowerCase()
+      ? `${netName}:TYPE.${addressType.toUpperCase()}:${payload}${checksum}`
+      : `${netName}:${payload}${checksum}`.toLowerCase()
   ) as Address<TNetworkId, typeof addressType>;
 }
