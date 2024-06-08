@@ -7,7 +7,7 @@ import {
 
 export type NetworkPrefix = "cfx" | "cfxtest" | `net${number}`;
 
-export type AddressType = "builtin" | "user" | "contract";
+export type AddressType = "builtin" | "user" | "contract" | "null"
 
 export type AddressWithNetworkPrefix<
   TNetworkPrefix extends NetworkPrefix,
@@ -17,7 +17,7 @@ export type AddressWithNetworkPrefix<
   | `${TNetworkPrefix}.type.${TAddressType}:${string}`;
 
 export type Address<
-  TNetworkId extends number = mainNetworkIdType | testNetworkIdType,
+  TNetworkId extends number = mainNetworkIdType | testNetworkIdType | number,
   TAddressType extends AddressType = AddressType
 > = TNetworkId extends mainNetworkIdType
   ? AddressWithNetworkPrefix<"cfx", TAddressType>
