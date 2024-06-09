@@ -99,5 +99,5 @@ export function hexAddressToBase32<
     verbose
       ? `${netName}:TYPE.${addressType.toUpperCase()}:${payload}${checksum}`
       : `${netName}:${payload}${checksum}`.toLowerCase()
-  ) as Address<TNetworkId, typeof addressType>;
+  ) as Address<TNetworkId, TAddressType, TVerbose>;
 }
