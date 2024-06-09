@@ -6,8 +6,14 @@ export type InvalidNetworkIdErrorType = InvalidNetworkIdError & {
 
 export class InvalidNetworkIdError extends BaseError {
   override name = "InvalidNetworkIdError";
-  constructor({ networkId }: { networkId: number }) {
-    super(`Invalid network id: ${networkId}.`);
+  constructor({
+    networkId,
+    message,
+  }: {
+    networkId: number | string;
+    message?: string;
+  }) {
+    super(`Invalid network id: ${networkId}. ${message || ""}`);
   }
 }
 
@@ -31,5 +37,27 @@ export class ConvertBitNonZeroPaddingError extends BaseError {
   override name = "ConvertBitNonZeroPaddingError";
   constructor() {
     super(`Non-zero padding`);
+  }
+}
+
+export type MixedCaseAddressErrorType = MixedCaseAddressError & {
+  name: "MixedCaseAddressError";
+};
+
+export class MixedCaseAddressError extends BaseError {
+  override name = "MixedCaseAddressError";
+  constructor({ address }: { address: string }) {
+    super(`Mixed case address ${address}`);
+  }
+}
+
+export type InvalidAddressVersionErrorType = InvalidAddressVersionError & {
+  name: "InvalidAddressVersionError";
+};
+
+export class InvalidAddressVersionError extends BaseError {
+  override name = "InvalidAddressVersionError";
+  constructor({ address }: { address: string }) {
+    super(`Invalid address version ${address}`);
   }
 }
