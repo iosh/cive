@@ -3,9 +3,17 @@ import type { HDKey } from "@scure/bip32";
 import {
   mainNetworkIdType,
   testNetworkIdType,
-} from "../utils/network/networkId.js";
+} from "../constants/networkId.js";
+import {
+  mainNetworkNameType,
+  otherNetworkNameType,
+  testNetworkNameType,
+} from "../constants/networkName.js";
 
-export type NetworkPrefix = "cfx" | "cfxtest" | `net${number}`;
+export type NetworkPrefix =
+  | mainNetworkNameType
+  | testNetworkNameType
+  | `${otherNetworkNameType}${number}`;
 
 export type AddressTypeUser = "user";
 export type AddressTypeContract = "contract";
