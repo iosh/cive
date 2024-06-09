@@ -1,14 +1,26 @@
-import type { CustomSource, Hex, OneOf } from "viem";
+import type {
+  GetTransactionType,
+  Hash,
+  Hex,
+  OneOf,
+  SerializeTransactionFn,
+  SignableMessage,
+  TransactionSerializable,
+  TransactionSerialized,
+  TypedData,
+  TypedDataDefinition,
+} from "viem";
 import type { HDKey } from "@scure/bip32";
-import {
+import type {
   mainNetworkIdType,
   testNetworkIdType,
 } from "../constants/networkId.js";
-import {
+import type {
   mainNetworkNameType,
   otherNetworkNameType,
   testNetworkNameType,
 } from "../constants/networkName.js";
+import type { IsNarrowable } from "../types/utils.js";
 
 export type NetworkNameType =
   | mainNetworkNameType
@@ -68,6 +80,37 @@ export type Account<TAddress extends Address = Address> = OneOf<
   JsonRpcAccount<TAddress> | LocalAccount<string, TAddress>
 >;
 
+export type AccountSource = Address | CustomSource;
+
+export type CustomSource = {
+  address: Address;
+  signMessage: ({ message }: { message: SignableMessage }) => Promise<Hash>;
+  signTransaction: <
+    serializer extends SerializeTransactionFn<TransactionSerializable> = SerializeTransactionFn<TransactionSerializable>,
+    transaction extends Parameters<serializer>[0] = Parameters<serializer>[0]
+  >(
+    transaction: transaction,
+    args?:
+      | {
+          serializer?: serializer | undefined;
+        }
+      | undefined
+  ) => Promise<
+    IsNarrowable<
+      TransactionSerialized<GetTransactionType<transaction>>,
+      Hash
+    > extends true
+      ? TransactionSerialized<GetTransactionType<transaction>>
+      : Hash
+  >;
+  signTypedData: <
+    const typedData extends TypedData | Record<string, unknown>,
+    primaryType extends keyof typedData | "EIP712Domain" = keyof typedData
+  >(
+    typedDataDefinition: TypedDataDefinition<typedData, primaryType>
+  ) => Promise<Hash>;
+};
+
 export type JsonRpcAccount<TAddress extends Address = Address> = {
   address: TAddress;
   type: "json-rpc";
@@ -104,3 +147,5 @@ export type HDOptions =
       /** The HD path. */
       path: `m/44'/503'/${string}`;
     };
+
+export type PrivateKeyAccount = LocalAccount<"privateKey">;
