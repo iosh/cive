@@ -1,27 +1,49 @@
 import { secp256k1 } from "@noble/curves/secp256k1";
 import { toHex, type Hex } from "viem";
-import { publicKeyToAddress, signMessage, signTypedData } from "viem/accounts";
-import { hexAddressToBase32 } from "../utils/address/hexAddressToBase32.js";
+import { signMessage, signTypedData } from "viem/accounts";
 import { toAccount } from "./toAccount.js";
-import { PrivateKeyAccount } from "./types.js";
+import { AddressType, PrivateKeyAccount } from "./types.js";
+import { publicKeyToAddress } from "./utils/publicKeyToAddress.js";
+
+export type PrivateKeyToAccountParameters<
+  TNetworkId extends number = number,
+  TAddressType extends AddressType | undefined = undefined,
+  TVerbose extends boolean | undefined = undefined
+> = {
+  privateKey: Hex;
+  networkId: TNetworkId;
+  addressType?: TAddressType | undefined;
+  verbose?: TVerbose | undefined;
+};
 
 /**
  * @description Creates an Account from a private key.
  *
  * @returns A Private Key Account.
  */
-export function privateKeyToAccount<TNetworkId extends number = number>(
-  privateKey: Hex,
-  networkId: TNetworkId
-): PrivateKeyAccount {
+export function privateKeyToAccount<
+  TNetworkId extends number = number,
+  TAddressType extends AddressType | undefined = undefined,
+  TVerbose extends boolean | undefined = undefined
+>({
+  privateKey,
+  networkId,
+  addressType = "user",
+  verbose = false,
+}: PrivateKeyToAccountParameters<
+  TNetworkId,
+  TAddressType,
+  TVerbose
+>): PrivateKeyAccount {
   const publicKey = toHex(secp256k1.getPublicKey(privateKey.slice(2), false));
-  const hexAddress = publicKeyToAddress(publicKey);
-  const base32Address = hexAddressToBase32<TNetworkId>({
-    hexAddress,
+  const address = publicKeyToAddress({
+    publicKey,
     networkId,
+    addressType,
+    verbose,
   });
   const account = toAccount({
-    address: base32Address,
+    address: address,
 
     async signMessage({ message }) {
       return signMessage({ message, privateKey });
