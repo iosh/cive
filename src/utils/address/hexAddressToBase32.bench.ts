@@ -10,7 +10,7 @@ bench("hexAddressToBase32", () => {
     networkId: mainNetworkId,
   });
 });
-bench("conflux-address-js", () => {
+bench("conflux-address-js encode", () => {
   const hexAddress = "1a2f80341409639ea6a35bbcab8299066109aa55";
   const hexBuffer = Buffer.from(hexAddress, "hex");
   encode(hexBuffer, mainNetworkId);

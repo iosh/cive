@@ -61,3 +61,14 @@ export class InvalidAddressVersionError extends BaseError {
     super(`Invalid address version ${address}`);
   }
 }
+
+export type AddressTypeNotMatchErrorType = AddressTypeNotMatchError & {
+  name: "AddressTypeNotMatchError";
+};
+
+export class AddressTypeNotMatchError extends BaseError {
+  override name = "AddressTypeNotMatchError";
+  constructor({ address }: { address: string }) {
+    super(`Address type not match ${address}`);
+  }
+}
