@@ -2,7 +2,7 @@ import { test, expect, describe } from "vitest";
 
 import { encode } from "@conflux-dev/conflux-address-js";
 import { hexAddressToBase32 } from "./hexAddressToBase32.js";
-import { MAIN_NETWORK_ID, TEST_NETWORK_ID } from "../network/networkId.js";
+import { mainNetworkId, testNetworkId } from "../../constants/networkId.js";
 
 const addresses = [
   "0xe7c45500C993103B6f55d1f80b98C951EdA35B3c",
@@ -30,10 +30,10 @@ describe("cover hex address to base32", () => {
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
-          networkId: MAIN_NETWORK_ID,
+          networkId: mainNetworkId,
           addressType: "user",
         })
-      ).toEqual(encode(hexBuffer, MAIN_NETWORK_ID));
+      ).toEqual(encode(hexBuffer, mainNetworkId));
     }
   });
 
@@ -45,10 +45,10 @@ describe("cover hex address to base32", () => {
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
-          networkId: TEST_NETWORK_ID,
+          networkId: testNetworkId,
           addressType: "user",
         })
-      ).toEqual(encode(hexBuffer, TEST_NETWORK_ID));
+      ).toEqual(encode(hexBuffer, testNetworkId));
     }
   });
 
@@ -60,10 +60,10 @@ describe("cover hex address to base32", () => {
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
-          networkId: MAIN_NETWORK_ID,
+          networkId: mainNetworkId,
           addressType: "contract",
         })
-      ).toEqual(encode(hexBuffer, MAIN_NETWORK_ID));
+      ).toEqual(encode(hexBuffer, mainNetworkId));
     }
   });
 
@@ -76,10 +76,10 @@ describe("cover hex address to base32", () => {
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
-          networkId: TEST_NETWORK_ID,
+          networkId: testNetworkId,
           addressType: "contract",
         })
-      ).toEqual(encode(hexBuffer, TEST_NETWORK_ID));
+      ).toEqual(encode(hexBuffer, testNetworkId));
     }
   });
 });
@@ -93,11 +93,11 @@ describe("cover hex address to base32 with verbose", () => {
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
-          networkId: MAIN_NETWORK_ID,
+          networkId: mainNetworkId,
           addressType: "user",
           verbose: true,
         })
-      ).toEqual(encode(hexBuffer, MAIN_NETWORK_ID, true));
+      ).toEqual(encode(hexBuffer, mainNetworkId, true));
     }
   });
 
@@ -109,11 +109,11 @@ describe("cover hex address to base32 with verbose", () => {
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
-          networkId: TEST_NETWORK_ID,
+          networkId: testNetworkId,
           addressType: "user",
           verbose: true,
         })
-      ).toEqual(encode(hexBuffer, TEST_NETWORK_ID, true));
+      ).toEqual(encode(hexBuffer, testNetworkId, true));
     }
   });
 
@@ -125,11 +125,11 @@ describe("cover hex address to base32 with verbose", () => {
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
-          networkId: MAIN_NETWORK_ID,
+          networkId: mainNetworkId,
           addressType: "contract",
           verbose: true,
         })
-      ).toEqual(encode(hexBuffer, MAIN_NETWORK_ID, true));
+      ).toEqual(encode(hexBuffer, mainNetworkId, true));
     }
   });
   test("contract address and test network", () => {
@@ -140,11 +140,11 @@ describe("cover hex address to base32 with verbose", () => {
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
-          networkId: TEST_NETWORK_ID,
+          networkId: testNetworkId,
           addressType: "contract",
           verbose: true,
         })
-      ).toEqual(encode(hexBuffer, TEST_NETWORK_ID, true));
+      ).toEqual(encode(hexBuffer, testNetworkId, true));
     }
   });
 });
