@@ -24,27 +24,27 @@ export function replaceHexPrefixByType(
 
 export type HexAddressToBase32Parameters<
   TNetworkId extends number = number,
-  TAddressType extends AddressType = AddressType,
-  TVerbose extends boolean = boolean
+  TAddressType extends AddressType | undefined = undefined,
+  TVerbose extends boolean | undefined = undefined
 > = {
   hexAddress: Hex;
   networkId: TNetworkId;
-  addressType?: TAddressType;
-  verbose?: TVerbose;
+  addressType?: TAddressType | undefined;
+  verbose?: TVerbose | undefined;
 };
 
 const ALPHABET = "ABCDEFGHJKMNPRSTUVWXYZ0123456789";
 
 export function hexAddressToBase32<
   TNetworkId extends number = number,
-  TAddressType extends AddressType = AddressType,
-  TVerbose extends boolean = boolean
+  TAddressType extends AddressType | undefined = undefined,
+  TVerbose extends boolean | undefined = undefined
 >({
   hexAddress,
   networkId,
   addressType = "user",
   verbose = false,
-}: HexAddressToBase32Parameters<TNetworkId>): Address<
+}: HexAddressToBase32Parameters<TNetworkId, TAddressType, TVerbose>): Address<
   TNetworkId,
   TAddressType,
   TVerbose
