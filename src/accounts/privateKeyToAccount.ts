@@ -1,6 +1,6 @@
 import { secp256k1 } from "@noble/curves/secp256k1";
 import { toHex, type Hex } from "viem";
-import { publicKeyToAddress } from "viem/accounts";
+import { publicKeyToAddress, signMessage, signTypedData } from "viem/accounts";
 import { hexAddressToBase32 } from "../utils/address/hexAddressToBase32.js";
 import { toAccount } from "./toAccount.js";
 import { PrivateKeyAccount } from "./types.js";
