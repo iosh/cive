@@ -10,7 +10,7 @@ import {
   testNetworkNameType,
 } from "../constants/networkName.js";
 
-export type NetworkPrefix =
+export type NetworkNameType =
   | mainNetworkNameType
   | testNetworkNameType
   | `${otherNetworkNameType}${number}`;
@@ -26,27 +26,44 @@ export type AddressType =
   | AddressTypeBuiltin
   | AddressTypeNull;
 
-type Prefix<TNetworkId extends number = number> =
-  TNetworkId extends mainNetworkIdType
-    ? "cfx"
+type NetworkName<TNetworkId extends number | undefined = undefined> =
+  TNetworkId extends undefined
+    ?
+        | mainNetworkNameType
+        | testNetworkNameType
+        | `${otherNetworkNameType}${string}`
+    : TNetworkId extends mainNetworkIdType
+    ? mainNetworkNameType
     : TNetworkId extends testNetworkIdType
-    ? "cfxtest"
-    : `net${TNetworkId}`;
+    ? testNetworkNameType
+    : `${otherNetworkNameType}${string}`;
 
-export type AddressWithNetworkPrefix<
-  TNetworkId extends number = number,
-  TAddressType extends AddressType = AddressType,
-  TVerbose extends boolean = boolean
-> = TVerbose extends true
-  ? `${Prefix<TNetworkId>}.type.${TAddressType}:${string}`
-  : `${Prefix<TNetworkId>}:${string}`;
+type FullAddressType<
+  TNetworkId extends number | undefined = undefined,
+  TAddressType extends AddressType | undefined = undefined
+> = `${Uppercase<`${NetworkName<TNetworkId>}.type.${TAddressType extends undefined
+  ? AddressType
+  : TAddressType extends AddressTypeUser
+  ? Uppercase<AddressTypeUser>
+  : TAddressType extends AddressTypeContract
+  ? Uppercase<AddressTypeContract>
+  : TAddressType extends AddressTypeBuiltin
+  ? Uppercase<AddressTypeBuiltin>
+  : TAddressType extends AddressTypeNull
+  ? Uppercase<AddressTypeNull>
+  : never}`>}:${string}`;
 
 export type Address<
-  TNetworkId extends number = number,
-  TAddressType extends AddressType = AddressType,
-  TVerbose extends boolean = boolean
-> = AddressWithNetworkPrefix<TNetworkId, TAddressType, TVerbose>;
-
+  TNetworkId extends number | undefined = undefined,
+  TAddressType extends AddressType | undefined = undefined,
+  TVerbose extends boolean | undefined = undefined
+> = TVerbose extends undefined
+  ?
+      | FullAddressType<TNetworkId, TAddressType>
+      | `${NetworkName<TNetworkId>}:${string}`
+  : TVerbose extends true
+  ? FullAddressType<TNetworkId, TAddressType>
+  : `${NetworkName<TNetworkId>}:${string}`;
 export type Account<TAddress extends Address = Address> = OneOf<
   JsonRpcAccount<TAddress> | LocalAccount<string, TAddress>
 >;
