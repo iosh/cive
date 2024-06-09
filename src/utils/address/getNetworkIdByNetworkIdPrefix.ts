@@ -8,14 +8,15 @@ import {
 } from "../../constants/networkName.js";
 
 export function getNetworkIdByNetworkIdPrefix(networkName: string): number {
-  if (networkName === mainNetworkName) {
+  const lowerCaseNetworkName = networkName.toLowerCase();
+  if (lowerCaseNetworkName === mainNetworkName) {
     return mainNetworkId;
   }
-  if (networkName === testNetworkName) {
+  if (lowerCaseNetworkName === testNetworkName) {
     return testNetworkId;
   }
-  const netPrefix = networkName.slice(0, 3);
-  const strNetId = networkName.slice(3);
+  const netPrefix = lowerCaseNetworkName.slice(0, 3);
+  const strNetId = lowerCaseNetworkName.slice(3);
 
   if (!isValidNetworkId(strNetId)) {
     throw new InvalidNetworkIdError({ networkId: strNetId });

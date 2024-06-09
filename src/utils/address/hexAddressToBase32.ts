@@ -3,7 +3,7 @@ import { Address, AddressType, AddressTypeUser } from "../../accounts/types.js";
 import { stringToBytes, toHex, padHex, Hex } from "viem";
 import { convertBit } from "./convertBit.js";
 import { polyMod } from "./polyMod.js";
-import { getAddressPrefixByNetworkId } from "./getAddressPrefixByNetworkId.js";
+import { getNetworkPrefixByNetworkId } from "./getNetworkIdPrefixByNetworkId.js";
 
 export const VERSION_BYTE = 0;
 
@@ -51,7 +51,7 @@ export function hexAddressToBase32<
 > {
   const typedAddress = replaceHexPrefixByType(hexAddress, addressType);
   const hexBuffer = hexToBytes(typedAddress.slice(2));
-  const netName = getAddressPrefixByNetworkId(networkId).toUpperCase();
+  const netName = getNetworkPrefixByNetworkId(networkId).toUpperCase();
 
   const netName5Bits = stringToBytes(netName).map((_byte) => _byte & 31);
 
