@@ -20,7 +20,7 @@ export type HDKeyToAccountErrorType =
  */
 export function hdKeyToAccount(
   hdKey_: HDKey,
-  networkId: number,
+  chainId: number,
   {
     accountIndex = 0,
     addressIndex = 0,
@@ -39,7 +39,7 @@ export function hdKeyToAccount(
   );
   const account = privateKeyToAccount({
     privateKey: toHex(hdKey.privateKey!),
-    networkId,
+    chainId: chainId,
     addressType,
     verbose,
   });
