@@ -113,7 +113,7 @@ function serializeTransactionLegacy(
   if (signature) {
     return toRlp([
       [...serializedTransaction, toHex(chainId), data ?? "0x"],
-      toHex(signature.v),
+      signature.v ? toHex(signature.v) : "0x",
       signature.r,
       signature.s,
     ]) as TransactionSerializedLegacy;

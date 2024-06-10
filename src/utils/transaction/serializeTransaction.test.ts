@@ -8,7 +8,7 @@ import { sign } from "../../accounts/utils/sign.js";
 const base = {
   to: "cfxtest:aak39z1fdm02v71y33znvaxwthh99skcp2s48zasbp",
   nonce: 785,
-  value: parseEther("1"),
+  value: parseEther("0"),
   storageLimit: 100,
   epochHeight: 100,
   gas: 21000,
