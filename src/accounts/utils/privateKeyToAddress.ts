@@ -14,18 +14,18 @@ export type PrivateKeyToAddressErrorType =
 
 export type PrivateKeyToAddressParameters = {
   privateKey: Hex;
-  chainId: number;
+  networkId: number;
   addressType?: AddressType | undefined;
   verbose?: boolean | undefined;
 };
 
 export function privateKeyToAddress<
-  TChainId extends number = number,
+  TNetworkId extends number = number,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined
 >({
   privateKey,
-  chainId,
+  networkId,
   addressType = "user",
   verbose = false,
 }: PrivateKeyToAddressParameters) {
@@ -34,8 +34,8 @@ export function privateKeyToAddress<
   );
   return publicKeyToAddress({
     publicKey,
-    chainId,
+    networkId,
     addressType,
     verbose,
-  }) as Address<TChainId, TAddressType, TVerbose>;
+  }) as Address<TNetworkId, TAddressType, TVerbose>;
 }

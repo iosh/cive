@@ -6,12 +6,12 @@ import { AddressType, PrivateKeyAccount } from "./types.js";
 import { publicKeyToAddress } from "./utils/publicKeyToAddress.js";
 
 export type PrivateKeyToAccountParameters<
-  TChainId extends number = number,
+  TNetworkId extends number = number,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined
 > = {
   privateKey: Hex;
-  chainId: TChainId;
+  networkId: TNetworkId;
   addressType?: TAddressType | undefined;
   verbose?: TVerbose | undefined;
 };
@@ -22,23 +22,23 @@ export type PrivateKeyToAccountParameters<
  * @returns A Private Key Account.
  */
 export function privateKeyToAccount<
-  TChainId extends number = number,
+  TNetworkId extends number = number,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined
 >({
   privateKey,
-  chainId: chainId,
+  networkId,
   addressType = "user",
   verbose = false,
 }: PrivateKeyToAccountParameters<
-  TChainId,
+  TNetworkId,
   TAddressType,
   TVerbose
 >): PrivateKeyAccount {
   const publicKey = toHex(secp256k1.getPublicKey(privateKey.slice(2), false));
   const address = publicKeyToAddress({
     publicKey,
-    chainId: chainId,
+    networkId,
     addressType,
     verbose,
   });

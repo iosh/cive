@@ -45,23 +45,23 @@ const ALPHABET_MAP: Record<string, number> = {
   Z: 21,
 };
 export type Base32AddressToHexParameters<
-  TChainId extends number | undefined = undefined,
+  TNetworkId extends number | undefined = undefined,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined
 > = {
-  address: Address<TChainId, TAddressType, TVerbose>;
+  address: Address<TNetworkId, TAddressType, TVerbose>;
   strict?: boolean;
 };
 
 export function base32AddressToHex<
-  TChainId extends number | undefined = undefined,
+  TNetworkId extends number | undefined = undefined,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined
 >({
   address,
   strict = true,
 }: Base32AddressToHexParameters<
-  TChainId,
+  TNetworkId,
   TAddressType,
   TVerbose
 >): HexAddress {

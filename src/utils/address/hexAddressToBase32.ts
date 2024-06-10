@@ -3,7 +3,7 @@ import { Address, AddressType, AddressTypeUser } from "../../accounts/types.js";
 import { stringToBytes, toHex, padHex, Hex } from "viem";
 import { convertBit } from "./convertBit.js";
 import { polyMod } from "./polyMod.js";
-import { getChainNameByChainName } from "./getChainNameByChainId.js";
+import { getNetworkPrefixByNetworkId } from "./getNetworkIdPrefixByNetworkId.js";
 
 export const VERSION_BYTE = 0;
 
@@ -23,12 +23,12 @@ export function replaceHexPrefixByType(
 }
 
 export type HexAddressToBase32Parameters<
-  TChainId extends number = number,
+  TNetworkId extends number = number,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined
 > = {
   hexAddress: Hex;
-  chainId: TChainId;
+  networkId: TNetworkId;
   addressType?: TAddressType | undefined;
   verbose?: TVerbose | undefined;
 };
@@ -36,22 +36,22 @@ export type HexAddressToBase32Parameters<
 const ALPHABET = "ABCDEFGHJKMNPRSTUVWXYZ0123456789";
 
 export function hexAddressToBase32<
-  TChainId extends number = number,
+  TNetworkId extends number = number,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined
 >({
   hexAddress,
-  chainId,
+  networkId,
   addressType = "user",
   verbose = false,
-}: HexAddressToBase32Parameters<TChainId, TAddressType, TVerbose>): Address<
-  TChainId,
+}: HexAddressToBase32Parameters<TNetworkId, TAddressType, TVerbose>): Address<
+  TNetworkId,
   TAddressType,
   TVerbose
 > {
   const typedAddress = replaceHexPrefixByType(hexAddress, addressType);
   const hexBuffer = hexToBytes(typedAddress.slice(2));
-  const netName = getChainNameByChainName(chainId).toUpperCase();
+  const netName = getNetworkPrefixByNetworkId(networkId).toUpperCase();
 
   const netName5Bits = stringToBytes(netName).map((_byte) => _byte & 31);
 
@@ -99,5 +99,5 @@ export function hexAddressToBase32<
     verbose
       ? `${netName}:TYPE.${addressType.toUpperCase()}:${payload}${checksum}`
       : `${netName}:${payload}${checksum}`.toLowerCase()
-  ) as Address<TChainId, TAddressType, TVerbose>;
+  ) as Address<TNetworkId, TAddressType, TVerbose>;
 }

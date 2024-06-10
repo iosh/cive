@@ -1,10 +1,9 @@
-import { chainIdLimit } from "../../constants/chain.js";
+export const NET_ID_LIMIT = 0xffffffff;
 
-
-export function isValidChainId(chainId: string | number) {
-  if (typeof chainId === "string") {
-    return /^([1-9]\d*)$/.test(chainId) && Number(chainId) <= chainIdLimit;
+export function isValidNetworkId(networkId: string | number) {
+  if (typeof networkId === "string") {
+    return /^([1-9]\d*)$/.test(networkId) && Number(networkId) <= NET_ID_LIMIT;
   } else {
-    return chainId > 0 && chainId < chainIdLimit;
+    return networkId > 0 && networkId < NET_ID_LIMIT;
   }
 }

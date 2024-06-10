@@ -1,5 +1,21 @@
 import { BaseError } from "viem";
 
+export type InvalidNetworkIdErrorType = InvalidNetworkIdError & {
+  name: "InvalidNetworkIdError";
+};
+
+export class InvalidNetworkIdError extends BaseError {
+  override name = "InvalidNetworkIdError";
+  constructor({
+    networkId,
+    message,
+  }: {
+    networkId: number | string;
+    message?: string;
+  }) {
+    super(`Invalid network id: ${networkId}. ${message || ""}`);
+  }
+}
 
 export type ConvertBitExcessPaddingErrorType = ConvertBitExcessPaddingError & {
   name: "ConvertBitExcessPaddingError";

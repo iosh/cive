@@ -12,19 +12,20 @@ import type {
 } from "viem";
 import type { HDKey } from "@scure/bip32";
 import type {
-  mainChainIdType,
-  mainChainNameType,
-  otherChainNameType,
-  testChainIdType,
-  testChainNameType,
-} from "../constants/chain.js";
-
+  mainNetworkIdType,
+  testNetworkIdType,
+} from "../constants/networkId.js";
+import type {
+  mainNetworkNameType,
+  otherNetworkNameType,
+  testNetworkNameType,
+} from "../constants/networkName.js";
 import type { IsNarrowable } from "../types/utils.js";
 
-export type ChainNameType =
-  | mainChainNameType
-  | testChainNameType
-  | `${otherChainNameType}${number}`;
+export type NetworkNameType =
+  | mainNetworkNameType
+  | testNetworkNameType
+  | `${otherNetworkNameType}${number}`;
 
 export type AddressTypeUser = "user";
 export type AddressTypeContract = "contract";
@@ -37,22 +38,22 @@ export type AddressType =
   | AddressTypeBuiltin
   | AddressTypeNull;
 
-type ChainName<TChain extends number | undefined = undefined> =
-  TChain extends undefined
+type NetworkName<TNetworkId extends number | undefined = undefined> =
+  TNetworkId extends undefined
     ?
-        | mainChainNameType
-        | testChainNameType
-        | `${otherChainNameType}${string}`
-    : TChain extends mainChainIdType
-    ? mainChainNameType
-    : TChain extends testChainIdType
-    ? testChainNameType
-    : `${otherChainNameType}${string}`;
+        | mainNetworkNameType
+        | testNetworkNameType
+        | `${otherNetworkNameType}${string}`
+    : TNetworkId extends mainNetworkIdType
+    ? mainNetworkNameType
+    : TNetworkId extends testNetworkIdType
+    ? testNetworkNameType
+    : `${otherNetworkNameType}${string}`;
 
 type FullAddressType<
-  TChain extends number | undefined = undefined,
+  TNetworkId extends number | undefined = undefined,
   TAddressType extends AddressType | undefined = undefined
-> = `${Uppercase<`${ChainName<TChain>}.type.${TAddressType extends undefined
+> = `${Uppercase<`${NetworkName<TNetworkId>}.type.${TAddressType extends undefined
   ? AddressType
   : TAddressType extends AddressTypeUser
   ? Uppercase<AddressTypeUser>
@@ -65,16 +66,16 @@ type FullAddressType<
   : never}`>}:${string}`;
 
 export type Address<
-  TChainId extends number | undefined = undefined,
+  TNetworkId extends number | undefined = undefined,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined
 > = TVerbose extends undefined
   ?
-      | FullAddressType<TChainId, TAddressType>
-      | `${ChainName<TChainId>}:${string}`
+      | FullAddressType<TNetworkId, TAddressType>
+      | `${NetworkName<TNetworkId>}:${string}`
   : TVerbose extends true
-  ? FullAddressType<TChainId, TAddressType>
-  : `${ChainName<TChainId>}:${string}`;
+  ? FullAddressType<TNetworkId, TAddressType>
+  : `${NetworkName<TNetworkId>}:${string}`;
 export type Account<TAddress extends Address = Address> = OneOf<
   JsonRpcAccount<TAddress> | LocalAccount<string, TAddress>
 >;
