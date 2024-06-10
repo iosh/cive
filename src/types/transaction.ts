@@ -1,5 +1,5 @@
-import type { Hash, Hex, OneOf } from "viem";
-import type { ExactPartial } from "./utils.js";
+import type { Hash, Hex, OneOf, Signature } from "viem";
+import type { Branded, ExactPartial, IsNever } from "./utils.js";
 import type { Log } from "./log.js";
 import type { Address } from "../accounts/types.js";
 import { FeeValuesEIP1559, FeeValuesLegacy } from "./fee.js";
@@ -197,7 +197,7 @@ export type TransactionRequestBase<TQuantity = bigint, TIndex = number> = {
   /** Transaction recipient */
   to?: Address | null | undefined;
   /** Gas provided for transaction execution */
-  gas?: TQuantity | undefined;
+  gas?: TIndex | undefined;
 
   /** Value in wei sent with this transaction */
   value?: TQuantity | undefined;
@@ -207,8 +207,10 @@ export type TransactionRequestBase<TQuantity = bigint, TIndex = number> = {
 
   /** Unique number identifying this transaction */
   nonce?: TIndex | undefined;
-
-  storageLimit?: TQuantity;
+  /**the maximum amount of storage space that can be consumed by the transaction. */
+  storageLimit?: TIndex | undefined;
+  /** the epoch number of the blockchain, which is used to sets an expiration time for the transaction */
+  epochHeight?: TIndex | undefined;
 };
 
 export type TransactionRequestLegacy<
@@ -239,8 +241,90 @@ export type TransactionRequestEIP1559<
     type?: TTransactionType | undefined;
   };
 
+export type TransactionRequestGeneric<
+  TQuantity = bigint,
+  TIndex = number
+> = TransactionRequestBase<TQuantity, TIndex> & {
+  accessList?: AccessList | undefined;
+  gasPrice?: TQuantity | undefined;
+  maxFeePerBlobGas?: TQuantity | undefined;
+  maxFeePerGas?: TQuantity | undefined;
+  maxPriorityFeePerGas?: TQuantity | undefined;
+  type?: string | undefined;
+};
+
 export type TransactionRequest<TQuantity = bigint, TIndex = number> = OneOf<
   | TransactionRequestLegacy<TQuantity, TIndex>
   | TransactionRequestEIP2930<TQuantity, TIndex>
   | TransactionRequestEIP1559<TQuantity, TIndex>
+>;
+
+export type TransactionSerializedEIP1559 = `0x02${string}`;
+export type TransactionSerializedEIP2930 = `0x01${string}`;
+export type TransactionSerializedLegacy = Branded<`0x${string}`, "legacy">;
+export type TransactionSerializedGeneric = `0x${string}`;
+export type TransactionSerialized<
+  TType extends TransactionType = TransactionType,
+  result =
+    | (TType extends "eip1559" ? TransactionSerializedEIP1559 : never)
+    | (TType extends "eip2930" ? TransactionSerializedEIP2930 : never)
+    | (TType extends "legacy" ? TransactionSerializedLegacy : never)
+> = IsNever<result> extends true ? TransactionSerializedGeneric : result;
+
+export type TransactionSerializableBase<
+  TQuantity = bigint,
+  TIndex = number
+> = Omit<TransactionRequestBase<TQuantity, TIndex>, "from"> &
+  ExactPartial<Signature>;
+
+export type TransactionSerializableLegacy<
+  TQuantity = bigint,
+  TIndex = number
+> = TransactionSerializableBase<TQuantity, TIndex> &
+  ExactPartial<FeeValuesLegacy<TQuantity>> & {
+    accessList?: undefined;
+    chainId?: number | undefined;
+    type?: "legacy" | undefined;
+  };
+export type TransactionSerializableEIP2930<
+  TQuantity = bigint,
+  TIndex = number
+> = TransactionSerializableBase<TQuantity, TIndex> &
+  ExactPartial<FeeValuesLegacy<TQuantity>> & {
+    accessList?: AccessList | undefined;
+    chainId: number;
+    type?: "eip2930" | undefined;
+    yParity?: number | undefined;
+  };
+export type TransactionSerializableEIP1559<
+  TQuantity = bigint,
+  TIndex = number
+> = TransactionSerializableBase<TQuantity, TIndex> &
+  ExactPartial<FeeValuesEIP1559<TQuantity>> & {
+    accessList?: AccessList | undefined;
+    chainId: number;
+    type?: "eip1559" | undefined;
+    yParity?: number | undefined;
+  };
+
+export type TransactionSerializableGeneric<
+  TQuantity = bigint,
+  TIndex = number
+> = TransactionSerializableBase<TQuantity, TIndex> & {
+  accessList?: AccessList | undefined;
+  chainId?: number | undefined;
+  gasPrice?: TQuantity | undefined;
+  maxFeePerBlobGas?: TQuantity | undefined;
+  maxFeePerGas?: TQuantity | undefined;
+  maxPriorityFeePerGas?: TQuantity | undefined;
+  type?: string | undefined;
+};
+
+export type TransactionSerializable<
+  TQuantity = bigint,
+  TIndex = number
+> = OneOf<
+  | TransactionSerializableLegacy<TQuantity, TIndex>
+  | TransactionSerializableEIP2930<TQuantity, TIndex>
+  | TransactionSerializableEIP1559<TQuantity, TIndex>
 >;
