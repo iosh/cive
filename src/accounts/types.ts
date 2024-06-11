@@ -53,7 +53,7 @@ type NetworkName<TNetworkId extends number | undefined = undefined> =
 type FullAddressType<
   TNetworkId extends number | undefined = undefined,
   TAddressType extends AddressType | undefined = undefined
-> = `${Uppercase<`${NetworkName<TNetworkId>}.type.${TAddressType extends undefined
+> = `${Uppercase<`${NetworkName<TNetworkId>}:type.${TAddressType extends undefined
   ? AddressType
   : TAddressType extends AddressTypeUser
   ? Uppercase<AddressTypeUser>
