@@ -5,7 +5,6 @@ import {
   FeeCapTooHighErrorType,
   TipAboveFeeCapError,
   TipAboveFeeCapErrorType,
-  TransactionSerializableEIP1559,
 } from "viem";
 import { IsAddressErrorType, isAddress } from "../address/isAddress.js";
 import { ErrorType } from "../../errors/utils.js";
@@ -18,14 +17,13 @@ import {
   InvalidChainIdErrorType,
 } from "../errors/chain.js";
 import {
+  TransactionSerializableEIP1559,
   TransactionSerializableEIP2930,
   TransactionSerializableLegacy,
 } from "../../types/transaction.js";
 
 export type AssertTransactionEIP4844ErrorType =
   | AssertTransactionEIP1559ErrorType
-  | InvalidVersionedHashSizeErrorType
-  | InvalidVersionedHashVersionErrorType
   | ErrorType;
 
 export type AssertTransactionEIP1559ErrorType =
