@@ -1,5 +1,31 @@
+import { Hex, keccak256 } from "viem";
+import { sign } from "./sign.js";
+import {
+  SerializeTransactionFn,
+  serializeTransaction,
+} from "../../utils/transaction/serializeTransaction.js";
+import {
+  TransactionSerializable,
+  TransactionSerialized,
+} from "../../types/transaction.js";
+import { GetTransactionType } from "../../utils/transaction/getTransactionType.js";
+
+export type SignTransactionParameters<
+  serializer extends SerializeTransactionFn<TransactionSerializable> = SerializeTransactionFn<TransactionSerializable>,
+  transaction extends Parameters<serializer>[0] = Parameters<serializer>[0]
+> = {
+  privateKey: Hex;
+  transaction: transaction;
+  serializer?: serializer | undefined;
+};
+
+export type SignTransactionReturnType<
+  serializer extends SerializeTransactionFn<TransactionSerializable> = SerializeTransactionFn<TransactionSerializable>,
+  transaction extends Parameters<serializer>[0] = Parameters<serializer>[0]
+> = TransactionSerialized<GetTransactionType<transaction>>;
+
 export async function signTransaction<
-  serializer extends Ser<TransactionSerializable> = SerializeTransactionFn<TransactionSerializable>,
+  serializer extends SerializeTransactionFn<TransactionSerializable> = SerializeTransactionFn<TransactionSerializable>,
   transaction extends Parameters<serializer>[0] = Parameters<serializer>[0]
 >(
   parameters: SignTransactionParameters<serializer, transaction>
@@ -10,19 +36,8 @@ export async function signTransaction<
     serializer = serializeTransaction,
   } = parameters;
 
-  const signableTransaction = (() => {
-    // For EIP-4844 Transactions, we want to sign the transaction payload body (tx_payload_body) without the sidecars (ie. without the network wrapper).
-    // See: https://github.com/ethereum/EIPs/blob/e00f4daa66bd56e2dbd5f1d36d09fd613811a48b/EIPS/eip-4844.md#networking
-    if (transaction.type === "eip4844")
-      return {
-        ...transaction,
-        sidecars: false,
-      };
-    return transaction;
-  })();
-
   const signature = await sign({
-    hash: keccak256(serializer(signableTransaction)),
+    hash: keccak256(serializer(transaction)),
     privateKey,
   });
   return serializer(transaction, signature) as SignTransactionReturnType<
