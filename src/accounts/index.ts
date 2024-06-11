@@ -1,4 +1,8 @@
-import { generateMnemonic, generatePrivateKey } from "viem/accounts";
+import {
+  generateMnemonic,
+  generatePrivateKey,
+  serializeSignature,
+} from "viem/accounts";
 import type {
   PrivateKeyToAccountErrorType,
   GeneratePrivateKeyErrorType,
@@ -18,3 +22,55 @@ export { wordlist as traditionalChinese } from "@scure/bip39/wordlists/tradition
 export { generateMnemonic, type GeneratePrivateKeyErrorType };
 
 export { generatePrivateKey, type PrivateKeyToAccountErrorType };
+
+export {
+  type HDKeyToAccountErrorType,
+  hdKeyToAccount,
+} from "./hdKeyToAccount.js";
+
+export {
+  MnemonicToAccountErrorType,
+  mnemonicToAccount,
+} from "./mnemonicToAccount.js";
+
+export { privateKeyToAccount } from "./privateKeyToAccount.js";
+
+export { type ToAccountErrorType, toAccount } from "./toAccount.js";
+
+export type {
+  Account,
+  AccountSource,
+  CustomSource,
+  HDOptions,
+  JsonRpcAccount,
+  LocalAccount,
+  HDAccount,
+  PrivateKeyAccount,
+} from "./types.js";
+export {
+  type SignErrorType,
+  type SignParameters,
+  type SignReturnType,
+  sign,
+} from "./utils/sign.js";
+
+export { serializeSignature };
+
+export {
+  type SignTransactionParameters,
+  type SignTransactionReturnType,
+  signTransaction,
+} from "./utils/signTransaction.js";
+
+export {
+  type ParseAccountErrorType,
+  parseAccount,
+} from "./utils/parseAccount.js";
+export {
+  type PublicKeyToAddressErrorType,
+  publicKeyToAddress,
+} from "./utils/publicKeyToAddress.js";
+export {
+  type PrivateKeyToAddressErrorType,
+  privateKeyToAddress,
+} from "./utils/privateKeyToAddress.js";

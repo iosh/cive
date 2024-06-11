@@ -4,6 +4,7 @@ import { signMessage, signTypedData } from "viem/accounts";
 import { toAccount } from "./toAccount.js";
 import { AddressType, PrivateKeyAccount } from "./types.js";
 import { publicKeyToAddress } from "./utils/publicKeyToAddress.js";
+import { signTransaction } from "./utils/signTransaction.js";
 
 export type PrivateKeyToAccountParameters<
   TNetworkId extends number = number,

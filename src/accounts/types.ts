@@ -1,11 +1,8 @@
 import type {
-  GetTransactionType,
   Hash,
   Hex,
   OneOf,
-  SerializeTransactionFn,
   SignableMessage,
-  TransactionSerializable,
   TransactionSerialized,
   TypedData,
   TypedDataDefinition,
@@ -21,6 +18,9 @@ import type {
   testNetworkNameType,
 } from "../constants/networkName.js";
 import type { IsNarrowable } from "../types/utils.js";
+import { SerializeTransactionFn } from "../utils/transaction/serializeTransaction.js";
+import { TransactionSerializable } from "../types/transaction.js";
+import { GetTransactionType } from "../utils/transaction/getTransactionType.js";
 
 export type NetworkNameType =
   | mainNetworkNameType
