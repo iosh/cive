@@ -38,22 +38,32 @@ export type AddressType =
   | AddressTypeBuiltin
   | AddressTypeNull;
 
-type NetworkName<TNetworkId extends number | undefined = undefined> =
-  TNetworkId extends undefined
-    ?
-        | mainNetworkNameType
-        | testNetworkNameType
-        | `${otherNetworkNameType}${string}`
-    : TNetworkId extends mainNetworkIdType
-    ? mainNetworkNameType
-    : TNetworkId extends testNetworkIdType
-    ? testNetworkNameType
-    : `${otherNetworkNameType}${string}`;
+type SingleNetworkTypeName<
+  T extends mainNetworkNameType | testNetworkNameType | otherNetworkNameType,
+  Upcase extends boolean | undefined = undefined
+> = Upcase extends undefined ? T : Uppercase<T>;
+
+type NetworkName<
+  TNetworkId extends number | undefined = undefined,
+  Upcase extends boolean | undefined = undefined
+> = TNetworkId extends undefined
+  ?
+      | SingleNetworkTypeName<mainNetworkNameType, Upcase>
+      | SingleNetworkTypeName<testNetworkNameType, Upcase>
+      | `${SingleNetworkTypeName<otherNetworkNameType, Upcase>}${TNetworkId}`
+  : TNetworkId extends mainNetworkIdType
+  ? SingleNetworkTypeName<mainNetworkNameType, Upcase>
+  : TNetworkId extends testNetworkIdType
+  ? SingleNetworkTypeName<testNetworkNameType, Upcase>
+  : `${SingleNetworkTypeName<otherNetworkNameType, Upcase>}${TNetworkId}`;
 
 type FullAddressType<
   TNetworkId extends number | undefined = undefined,
   TAddressType extends AddressType | undefined = undefined
-> = `${Uppercase<`${NetworkName<TNetworkId>}:type.${TAddressType extends undefined
+> = `${NetworkName<
+  TNetworkId,
+  true
+>}:${Uppercase<`TYPE.${TAddressType extends undefined
   ? AddressType
   : TAddressType extends AddressTypeUser
   ? Uppercase<AddressTypeUser>
