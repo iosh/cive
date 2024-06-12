@@ -50,12 +50,18 @@ type NetworkName<
   ?
       | SingleNetworkTypeName<mainNetworkNameType, Upcase>
       | SingleNetworkTypeName<testNetworkNameType, Upcase>
-      | `${SingleNetworkTypeName<otherNetworkNameType, Upcase>}${TNetworkId}`
+      | `${SingleNetworkTypeName<
+          otherNetworkNameType,
+          Upcase
+        >}${TNetworkId extends undefined ? string : TNetworkId}`
   : TNetworkId extends mainNetworkIdType
   ? SingleNetworkTypeName<mainNetworkNameType, Upcase>
   : TNetworkId extends testNetworkIdType
   ? SingleNetworkTypeName<testNetworkNameType, Upcase>
-  : `${SingleNetworkTypeName<otherNetworkNameType, Upcase>}${TNetworkId}`;
+  : `${SingleNetworkTypeName<
+      otherNetworkNameType,
+      Upcase
+    >}${TNetworkId extends undefined ? string : TNetworkId}`;
 
 type FullAddressType<
   TNetworkId extends number | undefined = undefined,
