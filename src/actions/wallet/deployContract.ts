@@ -12,6 +12,7 @@ import {
   SendTransactionErrorType,
   SendTransactionParameters,
   SendTransactionReturnType,
+  sendTransaction,
 } from "./sendTransaction.js";
 import { ErrorType } from "../../errors/utils.js";
 import { Chain, GetChainParameter } from "../../types/chain.js";
