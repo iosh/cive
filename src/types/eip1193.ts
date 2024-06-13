@@ -92,7 +92,15 @@ export type PublicRpcSchema = [
     Parameters: undefined;
     ReturnType: Quantity;
   },
-
+  /**
+   * @description Returns the current priority fee per gas in Drip.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_maxpriorityfeepergas
+   */
+  {
+    Method: "cfx_maxPriorityFeePerGas";
+    Parameters: undefined;
+    ReturnType: Quantity;
+  },
   /**
    * @description Returns the block hashes in the specified epoch.
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblocksbyepoch

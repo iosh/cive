@@ -270,6 +270,7 @@ import {
   TraceTransactionReturnType,
   traceTransaction,
 } from "../../actions/public/traceTransaction.js";
+import { EstimateMaxPriorityFeePerGasReturnType, estimateMaxPriorityFeePerGas } from "../../actions/public/estimateMaxPriorityFeePerGas.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,
@@ -323,6 +324,12 @@ export type PublicActions<
    * @returns  integer of the current gas price in Drip. {@link GetGasPriceReturnType}
    */
   getGasPrice: () => Promise<GetGasPriceReturnType>;
+
+  /**
+   * Returns the current priority fee per gas in Drip.
+   * - JSON-RPC Method: [`cfx_maxPriorityFeePerGas`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_maxPriorityFeePerGas)
+   */
+  estimateMaxPriorityFeePerGas: () => Promise<EstimateMaxPriorityFeePerGasReturnType>;
 
   /**
    * Returns the block hashes in the specified epoch.
@@ -819,6 +826,7 @@ export function publicActions<
     getBastBlockHash: () => getBastBlockHash(client),
     getEpochNumber: (args) => getEpochNumber(client, args),
     getGasPrice: () => getGasPrice(client),
+    estimateMaxPriorityFeePerGas: () => estimateMaxPriorityFeePerGas(client),
     getBlocksByEpoch: (args) => getBlocksByEpoch(client, args),
     getBalance: (args) => getBalance(client, args),
     getStakingBalance: (args) => getStakingBalance(client, args),
