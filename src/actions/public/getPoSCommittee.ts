@@ -1,7 +1,8 @@
-import { Chain, Transport, numberToHex } from "viem";
+import { Transport, numberToHex } from "viem";
 import { PoSCommittee } from "../../types/pos.js";
 import { Client } from "../../clients/createClient.js";
 import { formatPoSCommittee } from "../../utils/formatters/pos.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetPosCommitteeParameters = {
   blockNumber?: bigint;

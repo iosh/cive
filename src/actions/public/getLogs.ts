@@ -1,7 +1,6 @@
 import { AbiEvent } from "abitype";
 import { EpochNumber, EpochTag } from "../../types/block.js";
 import {
-  Chain,
   DecodeEventLogErrorType,
   EncodeEventTopicsErrorType,
   EncodeEventTopicsParameters,
@@ -23,6 +22,7 @@ import { Client } from "../../clients/createClient.js";
 import { RpcLog } from "../../types/rpc.js";
 import { formatLog } from "../../utils/formatters/log.js";
 import { parseEventLogs } from "../../utils/abi/parseEventLogs.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetLogsParameters<
   TAbiEvent extends AbiEvent | undefined = undefined,

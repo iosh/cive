@@ -1,8 +1,9 @@
 import { RequestErrorType } from "viem/utils";
 import { Filter } from "../../types/filter.js";
 import { ErrorType } from "../../errors/utils.js";
-import { Chain, Transport } from "viem";
+import { Transport } from "viem";
 import { Client } from "../../clients/createClient.js";
+import { Chain } from "../../types/chain.js";
 
 export type UninstallFilterParameters = {
   filter: Filter<any>;

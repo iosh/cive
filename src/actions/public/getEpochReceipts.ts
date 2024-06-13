@@ -1,7 +1,8 @@
-import { Chain, Transport, numberToHex } from "viem";
+import {  Transport, numberToHex } from "viem";
 import { TransactionReceipt } from "../../types/transaction.js";
 import { Client } from "../../clients/createClient.js";
 import { formatTransactionReceipt } from "../../utils/formatters/transactionReceipt.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetEpochReceiptsParameters = {
   epochNumber: bigint;

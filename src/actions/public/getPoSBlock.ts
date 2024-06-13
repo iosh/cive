@@ -1,9 +1,10 @@
-import { Chain, Hash, Transport, numberToHex } from "viem";
+import { Hash, Transport, numberToHex } from "viem";
 import type { PoSBlock } from "../../types/pos.js";
 import type { Client } from "../../clients/createClient.js";
 import { formatPoSBlock } from "../../utils/formatters/pos.js";
 import { BlockNotFoundError } from "../../errors/block.js";
 import type { RpcPoSBlock } from "../../types/rpc.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetPoSBlockParameters =
   | {

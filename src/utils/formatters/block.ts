@@ -1,14 +1,14 @@
-import type {
-  Chain,
-  ExtractChainFormatterExclude,
-  ExtractChainFormatterReturnType,
-  Hash,
-} from "viem";
+import type { Hash } from "viem";
 import type { Block, EpochTag } from "../../types/block.js";
 import type { ExactPartial, Prettify } from "../../types/utils.js";
 import { formatTransaction, type FormattedTransaction } from "./transaction.js";
 import type { ErrorType } from "../../errors/utils.js";
 import type { RpcBlock } from "../../types/rpc.js";
+import {
+  Chain,
+  ExtractChainFormatterExclude,
+  ExtractChainFormatterReturnType,
+} from "../../types/chain.js";
 
 type BlockPendingDependencies = "gasUsed" | "hash" | "nonce" | "powQuality";
 export type FormattedBlock<

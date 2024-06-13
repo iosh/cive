@@ -1,11 +1,12 @@
 import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { Sponsor } from "../../types/sponsor.js";
-import { numberToHex, type Chain, type Transport } from "viem";
+import { numberToHex,  type Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
 import { formatSponsor } from "../../utils/formatters/sponsor.js";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
 import type { Address } from "../../accounts/types.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetSponsorInfoParameters = {
   address: Address;

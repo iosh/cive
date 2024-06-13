@@ -1,11 +1,12 @@
 import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { ChainAccount } from "../../types/chainAccount.js";
-import { numberToHex, type Chain, type Transport } from "viem";
+import { numberToHex, type Transport } from "viem";
 import { formatChainAccount } from "../../utils/formatters/chainAccount.js";
 import type { Client } from "../../clients/createClient.js";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
 import type { Address } from "../../accounts/types.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetChainAccountParameters = {
   address: Address;

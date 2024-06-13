@@ -1,7 +1,8 @@
-import { Chain, ExtractChainFormatterParameters, numberToHex } from "viem";
+import { numberToHex } from "viem";
 import { TransactionRequest } from "../../types/transaction.js";
 import { ExactPartial } from "../../types/utils.js";
 import { RpcTransactionRequest } from "../../types/rpc.js";
+import { Chain, ExtractChainFormatterParameters } from "../../types/chain.js";
 
 export type FormattedTransactionRequest<
   TChain extends Chain | undefined = Chain | undefined

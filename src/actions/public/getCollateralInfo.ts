@@ -1,6 +1,7 @@
-import { Chain, Transport, numberToHex } from "viem";
+import {  Transport, numberToHex } from "viem";
 import { EpochNumber, EpochTag } from "../../types/block.js";
 import { Client } from "../../clients/createClient.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetCollateralInfoParameters =
   | {

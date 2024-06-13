@@ -1,8 +1,9 @@
-import { numberToHex, type Chain, type Hash, type Transport } from "viem";
+import { numberToHex,  type Hash, type Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
 import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetBlocksByEpochParameters = {} & (
   | {

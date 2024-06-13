@@ -1,6 +1,7 @@
-import { numberToHex, type Chain, type Transport } from "viem";
+import { numberToHex,  type Transport } from "viem";
 import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { Client } from "../../clients/createClient.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetPoSEconomicsParameters =
   | {

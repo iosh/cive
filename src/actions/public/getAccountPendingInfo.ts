@@ -1,8 +1,9 @@
-import type { Chain, Transport } from "viem";
+import type {  Transport } from "viem";
 import type { Address } from "../../accounts/types.js";
 import type { AccountPending } from "../../types/account.js";
 import type { Client } from "../../clients/createClient.js";
 import { formatAccountPending } from "../../utils/formatters/account.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetAccountPendingInfoParameters = {
   address: Address;

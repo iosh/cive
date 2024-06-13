@@ -1,4 +1,4 @@
-import { numberToHex, type Chain, type Hash, type Transport } from "viem";
+import { numberToHex, type Hash, type Transport } from "viem";
 import type { Account } from "../../accounts/types.js";
 import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { Client } from "../../clients/createClient.js";
@@ -6,6 +6,7 @@ import type { RpcBlock } from "../../types/rpc.js";
 import { BlockNotFoundError } from "../../errors/block.js";
 import { formatBlock, type FormattedBlock } from "../../utils/formatters/block.js";
 import type { Prettify } from "../../types/utils.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetBlockParameters<
   TIncludeTransactions extends boolean = false,

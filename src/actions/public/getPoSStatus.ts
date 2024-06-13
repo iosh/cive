@@ -1,7 +1,8 @@
-import { Chain, Transport } from "viem";
+import {  Transport } from "viem";
 import { PoSStatus } from "../../types/pos.js";
 import { Client } from "../../clients/createClient.js";
 import { formatPoSStatus } from "../../utils/formatters/pos.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetPoSStatusReturnType = PoSStatus;
 

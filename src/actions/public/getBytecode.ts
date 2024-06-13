@@ -1,7 +1,6 @@
 import type { EpochNumber, EpochTag } from "../../types/block.js";
 import {
   numberToHex,
-  type Chain,
   type Hex,
   type NumberToHexErrorType,
   type Transport,
@@ -10,6 +9,7 @@ import type { RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
 import type { Client } from "../../clients/createClient.js";
 import type { Address } from "../../accounts/types.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetBytecodeParameters = {
   address: Address;

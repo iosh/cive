@@ -1,9 +1,10 @@
-;import type { EpochNumber, EpochTag } from "../../types/block.js";
+import type { EpochNumber, EpochTag } from "../../types/block.js";
 import type { Vote } from "../../types/vote.js";
-import { numberToHex, type Chain, type Transport } from "viem";
+import { numberToHex, type Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
 import { formatVote } from "../../utils/formatters/vote.js";
 import type { Address } from "../../accounts/types.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetVoteListParameters = {
   address: Address;

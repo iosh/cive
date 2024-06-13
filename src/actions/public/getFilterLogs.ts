@@ -2,7 +2,6 @@ import { Abi, AbiEvent, ExtractAbiEvent } from "abitype";
 import { Filter, FilterType } from "../../types/filter.js";
 import { Log } from "../../types/log.js";
 import {
-  Chain,
   DecodeEventLogErrorType,
   FormatLogErrorType,
   Transport,
@@ -13,6 +12,7 @@ import { Client } from "../../clients/createClient.js";
 import { formatLog } from "../../utils/formatters/log.js";
 
 import { parseEventLogs } from "../../utils/abi/parseEventLogs.js";
+import { Chain } from "../../types/chain.js";
 export type GetFilterLogsParameters<
   TAbi extends Abi | readonly unknown[] | undefined = undefined,
   TEventName extends string | undefined = undefined,

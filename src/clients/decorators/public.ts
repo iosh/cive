@@ -1,6 +1,5 @@
 import type {
   Transport,
-  Chain,
   MaybeAbiEventName,
   MaybeExtractEventArgsFromAbi,
   GetProofReturnType,
@@ -270,7 +269,11 @@ import {
   TraceTransactionReturnType,
   traceTransaction,
 } from "../../actions/public/traceTransaction.js";
-import { EstimateMaxPriorityFeePerGasReturnType, estimateMaxPriorityFeePerGas } from "../../actions/public/estimateMaxPriorityFeePerGas.js";
+import {
+  EstimateMaxPriorityFeePerGasReturnType,
+  estimateMaxPriorityFeePerGas,
+} from "../../actions/public/estimateMaxPriorityFeePerGas.js";
+import { Chain } from "../../types/chain.js";
 
 export type PublicActions<
   TTransport extends Transport = Transport,

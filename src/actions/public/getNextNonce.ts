@@ -1,9 +1,10 @@
 import type { EpochNumber, EpochTag } from "../../types/block.js";
-import { numberToHex, type Chain, type Transport } from "viem";
+import { numberToHex, type Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
 import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
 import type { Address } from "../../accounts/types.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetNextNonceParameters = {
   address: Address;
@@ -21,7 +22,7 @@ export type GetNextNonceParameters = {
     }
 );
 
-export type GetNextNonceReturnType = bigint;
+export type GetNextNonceReturnType = number;
 
 export type GetNextNonceErrorType =
   | RequestErrorType
@@ -37,5 +38,5 @@ export async function getNextNonce<TChain extends Chain | undefined>(
     method: "cfx_getNextNonce",
     params: [address, _epochNumber || epochTag],
   });
-  return BigInt(nonce);
+  return Number(nonce);
 }

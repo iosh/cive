@@ -1,7 +1,8 @@
-import { numberToHex, type Chain, type Hash, type Transport } from "viem";
+import { numberToHex, type Hash, type Transport } from "viem";
 import type { Block, EpochNumber } from "../../types/block.js";
 import type { Client } from "../../clients/createClient.js";
 import { formatBlock } from "../../utils/formatters/block.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetBlockByHashWithPivotAssumptionParameters = {
   blockHash: Hash;

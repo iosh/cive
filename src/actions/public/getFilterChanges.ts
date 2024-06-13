@@ -2,7 +2,6 @@ import { Abi, AbiEvent, ExtractAbiEvent } from "abitype";
 import { Filter, FilterType } from "../../types/filter.js";
 import { Log } from "../../types/log.js";
 import {
-  Chain,
   DecodeEventLogErrorType,
   FormatLogErrorType,
   Hash,
@@ -14,6 +13,7 @@ import { Client } from "../../clients/createClient.js";
 import { formatLog } from "../../utils/formatters/log.js";
 import { RpcLog } from "../../types/rpc.js";
 import { parseEventLogs } from "../../utils/abi/parseEventLogs.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetFilterChangesParameters<
   TFilterType extends FilterType = FilterType,

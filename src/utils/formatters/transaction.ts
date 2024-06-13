@@ -1,14 +1,13 @@
-import {
-  Hex,
-  hexToNumber,
-  type Chain,
-  type ExtractChainFormatterExclude,
-  type ExtractChainFormatterReturnType,
-} from "viem";
+import { Hex, hexToNumber } from "viem";
 import type { Transaction, TransactionType } from "../../types/transaction.js";
 import type { ExactPartial, UnionLooseOmit } from "../../types/utils.js";
 import type { EpochTag } from "../../types/block.js";
 import type { RpcTransaction } from "../../types/rpc.js";
+import {
+  Chain,
+  ExtractChainFormatterExclude,
+  ExtractChainFormatterReturnType,
+} from "../../types/chain.js";
 
 type TransactionPendingDependencies = "blockHash";
 

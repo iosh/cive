@@ -83,7 +83,7 @@ export type TransactionReceipt<
   /**
    * array of log objects that this transaction generated,
    */
-  log: Log<TQuantity>[];
+  log: Log<TQuantity, TIndex>[];
   /**
    * tx exec fail message, if transaction exec success this will be null.
    */

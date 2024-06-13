@@ -1,6 +1,5 @@
 import {
   numberToHex,
-  type Chain,
   type NumberToHexErrorType,
   type Transport,
 } from "viem";
@@ -9,6 +8,7 @@ import type { Client } from "../../clients/createClient.js";
 import type { RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
 import { formatBlock } from "../../utils/formatters/block.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetSkippedBlocksByEpochParameters =
   | {

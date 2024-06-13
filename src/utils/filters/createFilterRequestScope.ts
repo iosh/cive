@@ -1,14 +1,9 @@
-import {
-  Chain,
-  EIP1193Parameters,
-  EIP1193RequestFn,
-  Hex,
-  Transport,
-} from "viem";
+import { EIP1193Parameters, EIP1193RequestFn, Hex, Transport } from "viem";
 import type { Filter } from "../../types/utils.js";
 import { Client } from "../../clients/createClient.js";
 import { PublicRpcSchema } from "../../types/eip1193.js";
 import { OnResponseFn } from "../../clients/transports/fallback.js";
+import { Chain } from "../../types/chain.js";
 
 type CreateFilterRequestScopeParameters = {
   method:

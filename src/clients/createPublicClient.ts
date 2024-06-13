@@ -1,4 +1,4 @@
-import type { Transport, Chain, RpcSchema, CreateClientErrorType } from "viem";
+import type { Transport, RpcSchema, CreateClientErrorType } from "viem";
 
 import { publicActions, type PublicActions } from "./decorators/public.js";
 import type { Account, Address } from "../accounts/types.js";
@@ -12,6 +12,7 @@ import {
 } from "./createClient.js";
 import type { ParseAccount } from "../types/account.js";
 import type { PublicRpcSchema } from "../types/eip1193.js";
+import { Chain } from "../types/chain.js";
 
 export type PublicClientConfig<
   transport extends Transport = Transport,

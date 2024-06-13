@@ -1,6 +1,5 @@
 import type {
   Transport,
-  Chain,
   CcipRequestParameters,
   Hex,
   WalletActions,
@@ -16,6 +15,7 @@ import type { ErrorType } from "../errors/utils.js";
 import { parseAccount } from "../accounts/utils/parseAccount.js";
 import { uid } from "../utils/uid.js";
 import type { EIP1474Methods } from "../types/eip1193.js";
+import { Chain } from "../types/chain.js";
 
 export type ClientConfig<
   transport extends Transport = Transport,

@@ -1,8 +1,9 @@
-import type { Chain, Transport } from "viem";
+import type {  Transport } from "viem";
 import type { Address } from "../../accounts/types.js";
 import type { PoSAccount } from "../../types/pos.js";
 import type { Client } from "../../clients/createClient.js";
 import { formatPoSAccount } from "../../utils/formatters/pos.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetPoSAccountParameters = {
   address: Address;

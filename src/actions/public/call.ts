@@ -1,7 +1,6 @@
 import {
   AssertRequestErrorType,
   BaseError,
-  Chain,
   ChainDoesNotSupportContract,
   ClientChainNotConfiguredError,
   DecodeFunctionResultErrorType,
@@ -47,6 +46,7 @@ import {
   CreateBatchSchedulerErrorType,
   createBatchScheduler,
 } from "../../utils/promise/createBatchScheduler.js";
+import { Chain } from "../../types/chain.js";
 
 export type FormattedCall<
   TChain extends Chain | undefined = Chain | undefined

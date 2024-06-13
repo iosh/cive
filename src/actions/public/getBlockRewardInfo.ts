@@ -1,10 +1,11 @@
 import type { RequestErrorType } from "viem/utils";
 import type { Reward } from "../../types/reward.js";
 import type { ErrorType } from "../../errors/utils.js";
-import { numberToHex, type Chain, type Transport } from "viem";
+import { numberToHex,  type Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
 import { formatReward } from "../../utils/formatters/reward.js";
 import { EpochNumber } from "../../types/block.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetBlockRewardInfoParameters =
   | {

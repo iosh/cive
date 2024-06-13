@@ -1,8 +1,9 @@
 import type { AccountPendingTransaction } from "../../types/account.js";
-import { numberToHex, type Chain, type Transport } from "viem";
+import { numberToHex, type Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
 import { formatAccountPendingTransaction } from "../../utils/formatters/account.js";
 import type { Address } from "../../accounts/types.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetAccountPendingTransactionsParameters = {
   account: Address;

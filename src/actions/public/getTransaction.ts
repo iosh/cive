@@ -1,6 +1,5 @@
 import {
   TransactionNotFoundError,
-  type Chain,
   type Hash,
   type NumberToHexErrorType,
   type Transport,
@@ -13,6 +12,7 @@ import {
 } from "../../utils/formatters/transaction.js";
 import type { RequestErrorType } from "viem/utils";
 import type { ErrorType } from "../../errors/utils.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetTransactionParameters = {
   hash: Hash;

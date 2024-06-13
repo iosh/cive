@@ -1,6 +1,7 @@
-import { Chain, Transport } from "viem";
+import { Transport } from "viem";
 import { Address } from "../../accounts/types.js";
 import { Client } from "../../clients/createClient.js";
+import { Chain } from "../../types/chain.js";
 
 export type TxPoolNextNonceParameters = {
   address: Address;

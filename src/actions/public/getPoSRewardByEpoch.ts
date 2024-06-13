@@ -1,22 +1,21 @@
-import { numberToHex, type Chain, type Hash, type Transport } from "viem";
+import { numberToHex, type Hash, type Transport } from "viem";
 import type { EpochNumber } from "../../types/block.js";
 import type { Client } from "../../clients/createClient.js";
 import type { Address } from "../../accounts/types.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetPoSRewardByEpochParameters = {
   epochNumber: EpochNumber;
 };
 
-export type GetPoSRewardByEpochReturnType =
-  | {
-      accountRewards: {
-        posAddress: Address;
-        powAddress: Address;
-        reward: BigInt;
-      }[];
-      powEpochHash: Hash;
-    }
-  | null;
+export type GetPoSRewardByEpochReturnType = {
+  accountRewards: {
+    posAddress: Address;
+    powAddress: Address;
+    reward: BigInt;
+  }[];
+  powEpochHash: Hash;
+} | null;
 
 export async function getPoSRewardByEpoch<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,

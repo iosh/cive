@@ -123,4 +123,4 @@ export type EpochTag =
   | "latest_state"
   | "latest_mined";
 
-export type EpochNumber<TQuantity = bigint> = TQuantity;
+export type EpochNumber<TQuantity = number> = TQuantity;

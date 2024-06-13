@@ -1,12 +1,15 @@
-import type { Chain, Transport } from "viem";
+import type { Transport } from "viem";
 import type { Client } from "../../clients/createClient.js";
 import type { EpochTag } from "../../types/block.js";
+import { Chain } from "../../types/chain.js";
 
-export type GetEpochNumberParameters<TEpochTag extends EpochTag = "latest_mined"> = {
+export type GetEpochNumberParameters<
+  TEpochTag extends EpochTag = "latest_mined"
+> = {
   tag?: TEpochTag;
 };
 
-export type GetEpochNumberReturnType = bigint;
+export type GetEpochNumberReturnType = number;
 
 export async function getEpochNumber<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
@@ -17,5 +20,5 @@ export async function getEpochNumber<TChain extends Chain | undefined>(
     params: [tag],
   });
 
-  return BigInt(epochNumber);
+  return Number(epochNumber);
 }

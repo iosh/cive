@@ -1,4 +1,4 @@
-import { Chain, Transport, numberToHex } from "viem";
+import { Transport, numberToHex } from "viem";
 import {
   FormattedTransactionRequest,
   formatTransactionRequest,
@@ -11,6 +11,7 @@ import { Client } from "../../clients/createClient.js";
 import { parseAccount } from "../../accounts/utils/parseAccount.js";
 import { formatFee } from "../../utils/formatters/fee.js";
 import { TransactionRequest } from "../../types/transaction.js";
+import { Chain } from "../../types/chain.js";
 
 export type FormattedCall<
   TChain extends Chain | undefined = Chain | undefined

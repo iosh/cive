@@ -1,5 +1,6 @@
-import { Chain, Transport } from "viem";
+import {  Transport } from "viem";
 import { Client } from "../../clients/createClient.js";
+import { Chain } from "../../types/chain.js";
 
 export type EstimateMaxPriorityFeePerGasReturnType = bigint;
 

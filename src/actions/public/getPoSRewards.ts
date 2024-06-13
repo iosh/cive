@@ -1,7 +1,8 @@
-import { Chain, Transport, numberToHex } from "viem";
+import { Transport, numberToHex } from "viem";
 import { PoSRewards } from "../../types/pos.js";
 import { Client } from "../../clients/createClient.js";
 import { formatPosRewards } from "../../utils/formatters/pos.js";
+import { Chain } from "../../types/chain.js";
 
 export type GetPoSRewardsParameters = {
   epochNumber: bigint;

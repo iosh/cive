@@ -1,7 +1,6 @@
 import { AbiEvent } from "abitype";
 import { EpochNumber, EpochTag } from "../../types/block.js";
 import {
-  Chain,
   EncodeEventTopicsErrorType,
   EncodeEventTopicsParameters,
   Hash,
@@ -21,6 +20,7 @@ import { RequestErrorType } from "viem/utils";
 import { ErrorType } from "../../errors/utils.js";
 import { Client } from "../../clients/createClient.js";
 import { createFilterRequestScope } from "../../utils/filters/createFilterRequestScope.js";
+import { Chain } from "../../types/chain.js";
 
 export type CreateEventFilterParameters<
   TAbiEvent extends AbiEvent | undefined = undefined,

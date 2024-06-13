@@ -1,7 +1,8 @@
-import { Chain, Hash, Transport } from "viem";
+import { Hash, Transport } from "viem";
 import { Trace } from "../../types/tract.js";
 import { Client } from "../../clients/createClient.js";
 import { formatTract } from "../../utils/formatters/tract.js";
+import { Chain } from "../../types/chain.js";
 
 export type TraceTransactionParameters = {
   transactionHash: Hash;
