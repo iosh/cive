@@ -1,10 +1,9 @@
 import {
   BaseFeeScalarError,
   BaseFeeScalarErrorType,
-  ChainEstimateFeesPerGasFnParameters,
+  Eip1559FeesNotSupportedError,
   Eip1559FeesNotSupportedErrorType,
   EstimateMaxPriorityFeePerGasErrorType,
-  GetChainParameter,
   Transport,
 } from "viem";
 import {
@@ -12,13 +11,20 @@ import {
   FeeValuesLegacy,
   FeeValuesType,
 } from "../../types/fee.js";
-import { GetGaspriceErrorType } from "./getGasPrice.js";
+import { GetGaspriceErrorType, getGasPrice } from "./getGasPrice.js";
 import { ErrorType } from "../../errors/utils.js";
 import { Client } from "../../clients/createClient.js";
 import { getAction } from "../../utils/getAction.js";
 import { getBlock } from "./getBlock.js";
 import { Block } from "../../types/block.js";
-import { Chain, ChainFeesFnParameters } from "../../types/chain.js";
+import {
+  Chain,
+  ChainEstimateFeesPerGasFnParameters,
+  ChainFeesFnParameters,
+  GetChainParameter,
+} from "../../types/chain.js";
+import { PrepareTransactionRequestParameters } from "../wallet/prepareTransactionRequest.js";
+import { estimateMaxPriorityFeePerGas } from "./estimateMaxPriorityFeePerGas.js";
 
 export type EstimateFeesPerGasParameters<
   chain extends Chain | undefined = Chain | undefined,
@@ -118,14 +124,11 @@ export async function internal_estimateFeesPerGas<
     const maxPriorityFeePerGas =
       typeof request?.maxPriorityFeePerGas === "bigint"
         ? request.maxPriorityFeePerGas
-        : await internal_estimateMaxPriorityFeePerGas(
-            client as Client<Transport, Chain>,
-            {
-              block: block as Block,
-              chain,
-              request,
-            }
-          );
+        : await getAction(
+            client,
+            estimateMaxPriorityFeePerGas,
+            "estimateMaxPriorityFeePerGas"
+          )({});
 
     const baseFeePerGas = multiply(block.baseFeePerGas);
     const maxFeePerGas =
