@@ -4,7 +4,7 @@ import {
   formatTransactionRequest,
 } from "../../utils/formatters/transactionRequest.js";
 import { UnionOmit } from "../../types/utils.js";
-import { Address } from "../../accounts/types.js";
+import { Account, Address } from "../../accounts/types.js";
 import { EpochNumber, EpochTag } from "../../types/block.js";
 import { FeeValues, GasAndCollateral } from "../../types/fee.js";
 import { Client } from "../../clients/createClient.js";
@@ -19,7 +19,7 @@ export type FormattedCall<
 export type EstimateGasAndCollateralParameters<
   TChain extends Chain | undefined = Chain | undefined
 > = UnionOmit<FormattedCall<TChain>, "from"> & {
-  account?: Address | Address | undefined;
+  account?: Address | Account | undefined;
   batch?: boolean | undefined;
 } & (
     | {
