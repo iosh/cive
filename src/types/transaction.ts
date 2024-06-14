@@ -197,7 +197,7 @@ export type TransactionRequestBase<TQuantity = bigint, TIndex = number> = {
   /** Transaction recipient */
   to?: Address | null | undefined;
   /** Gas provided for transaction execution */
-  gas?: TIndex | undefined;
+  gas?: bigint | undefined;
 
   /** Value in wei sent with this transaction */
   value?: TQuantity | undefined;
@@ -208,7 +208,7 @@ export type TransactionRequestBase<TQuantity = bigint, TIndex = number> = {
   /** Unique number identifying this transaction */
   nonce?: TIndex | undefined;
   /**the maximum amount of storage space that can be consumed by the transaction. */
-  storageLimit?: TIndex | undefined;
+  storageLimit?: TQuantity | undefined;
   /** the epoch number of the blockchain, which is used to sets an expiration time for the transaction */
   epochHeight?: TIndex | undefined;
 };
