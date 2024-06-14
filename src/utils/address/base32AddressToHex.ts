@@ -9,6 +9,7 @@ import { convertBit } from "./convertBit.js";
 import { VERSION_BYTE } from "./hexAddressToBase32.js";
 import { getAddressTypeByHexAddress } from "./getAddressType.js";
 import { polyMod } from "./polyMod.js";
+import { decodeBase32Address } from "./decodeBase32Address.js";
 
 const ALPHABET_MAP: Record<string, number> = {
   "0": 22,
@@ -68,40 +69,6 @@ export function base32AddressToHex<
   if (address !== address.toLowerCase() && address !== address.toUpperCase()) {
     throw new MixedCaseAddressError({ address });
   }
-
-  const [, netName, shouldHaveType, payload, checksum] = address
-    .toUpperCase()
-    .match(/^([^:]+):(.+:)?(.{34})(.{8})$/) || ["", "", "", "", ""];
-
-  const netName5Bits = stringToBytes(netName).map((_byte) => _byte & 0b11111);
-  const payload5Bits = Array.from(payload, (char) => ALPHABET_MAP[char]);
-  const checksum5Bits = Array.from(checksum, (char) => ALPHABET_MAP[char]);
-
-  const [version, ...addressBytes] = convertBit(
-    new Uint8Array([...payload5Bits]),
-    5,
-    8
-  );
-  if (version !== VERSION_BYTE) {
-    throw new InvalidAddressVersionError({ address });
-  }
-  const byteAddress = new Uint8Array([...addressBytes]);
-
-  const type = getAddressTypeByHexAddress(byteAddress);
-
-  if (shouldHaveType && `type.${type}:` !== shouldHaveType.toLowerCase()) {
-    throw new AddressTypeNotMatchError({ address });
-  }
-
-  if (strict) {
-    const valid = polyMod(
-      new Uint8Array([...netName5Bits, 0, ...payload5Bits, ...checksum5Bits])
-    );
-
-    if (valid) {
-      throw new InvalidAddressVersionError({ address });
-    }
-  }
-
-  return bytesToHex(byteAddress);
+  const addressInfo = decodeBase32Address({ address, strict });
+  return addressInfo.address;
 }

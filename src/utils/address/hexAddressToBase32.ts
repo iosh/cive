@@ -1,13 +1,12 @@
-import { hexToBytes } from "@noble/curves/abstract/utils";
 import { Address, AddressType, AddressTypeUser } from "../../accounts/types.js";
-import { stringToBytes, toHex, padHex, Hex } from "viem";
+import { stringToBytes, toHex, padHex, Hex, hexToBytes } from "viem";
 import { convertBit } from "./convertBit.js";
 import { polyMod } from "./polyMod.js";
 import { getNetworkPrefixByNetworkId } from "./getNetworkIdPrefixByNetworkId.js";
 
 export const VERSION_BYTE = 0;
 
-const typeMapToHex: Record<AddressType, string> = {
+const typeMapToHex: Record<AddressType, `0x${string}`> = {
   builtin: "0x0",
   user: "0x1",
   contract: "0x8",
@@ -17,9 +16,9 @@ const typeMapToHex: Record<AddressType, string> = {
 export function replaceHexPrefixByType(
   address: string,
   type: AddressType
-): string {
+): Hex {
   const typeHex = typeMapToHex[type];
-  return typeHex + address.slice(3);
+  return `${typeHex}${address.slice(3)}`;
 }
 
 export type HexAddressToBase32Parameters<
@@ -50,7 +49,7 @@ export function hexAddressToBase32<
   TVerbose
 > {
   const typedAddress = replaceHexPrefixByType(hexAddress, addressType);
-  const hexBuffer = hexToBytes(typedAddress.slice(2));
+  const hexBuffer = hexToBytes(typedAddress);
   const netName = getNetworkPrefixByNetworkId(networkId).toUpperCase();
 
   const netName5Bits = stringToBytes(netName).map((_byte) => _byte & 31);
@@ -81,7 +80,7 @@ export function hexAddressToBase32<
     checksumHex = padHex(checksumHex, { dir: "left", size: 5 });
   }
 
-  const checksumBytes = hexToBytes(checksumHex.replace(/0x/, ""));
+  const checksumBytes = hexToBytes(checksumHex);
   const checksum5Bits = convertBit(checksumBytes, 8, 5, true);
 
   const payload = payload5Bits
