@@ -638,3 +638,11 @@ export type WalletRpcSchema = [
     ReturnType: Hash;
   }
 ];
+
+export type DebugRpcSchema = [
+  {
+    Method: "txpool_clear";
+    Parameters: undefined;
+    ReturnType: undefined;
+  }
+];
