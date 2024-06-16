@@ -660,5 +660,13 @@ export type LocalNodeRpcSchema = [
     Method: "new_account";
     Parameters: [password: string];
     ReturnType: Address;
+  },
+  /**
+   * @description Unlocks an account in the local node.
+   */
+  {
+    Method: "unlock_account";
+    Parameters: [address: Address, password: string, duration?: Quantity];
+    ReturnType: boolean;
   }
 ];
