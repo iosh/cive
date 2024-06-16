@@ -4,13 +4,13 @@ import { Account } from "../../accounts/types.js";
 import { Client } from "../createClient.js";
 import { clearTxpool } from "../../actions/localNode/clearTxpool.js";
 import {
-  GetAddressesLocalNodeReturnType,
-  getAddressesLocalNode,
-} from "../../actions/localNode/getAddressesLocalNode.js";
+  GetLocalNodeAddressesReturnType,
+  getLocalNodeAddresses,
+} from "../../actions/localNode/getLocalNodeAddresses.js";
 
 export type LocalNodeActions = {
   clearTxpool: () => Promise<void>;
-  getAddressesLocalNode: () => Promise<GetAddressesLocalNodeReturnType>;
+  getLocalNodeAddresses: () => Promise<GetLocalNodeAddressesReturnType>;
 };
 
 export function localNodeActions<
@@ -20,6 +20,6 @@ export function localNodeActions<
 >(client: Client<TTransport, TChain, TAccount>): LocalNodeActions {
   return {
     clearTxpool: () => clearTxpool(client),
-    getAddressesLocalNode: () => getAddressesLocalNode(client),
+    getLocalNodeAddresses: () => getLocalNodeAddresses(client),
   };
 }

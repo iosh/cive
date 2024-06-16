@@ -9,7 +9,7 @@ import {
   createClient,
 } from "./createClient.js";
 import { LocalNodeRpcSchema } from "../types/eip1193.js";
-import { LocalNodeActions, localNodeActions } from "./decorators/local.js";
+import { LocalNodeActions, localNodeActions } from "./decorators/localNode.js";
 import { ErrorType } from "../errors/utils.js";
 import { ParseAccount } from "../types/account.js";
 
@@ -35,7 +35,7 @@ export type LocalClientConfig<
   >
 >;
 
-export type LocalClient<
+export type LocalNodeClient<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
@@ -53,16 +53,16 @@ export type LocalClient<
   >
 >;
 
-export type CreateTestClientErrorType = CreateClientErrorType | ErrorType;
+export type CreateLocalNodeClientErrorType = CreateClientErrorType | ErrorType;
 
-export function createLocalClient<
+export function createLocalNodeClient<
   transport extends Transport,
   chain extends Chain | undefined = undefined,
   accountOrAddress extends Account | Address | undefined = undefined,
   rpcSchema extends RpcSchema | undefined = undefined
 >(
   parameters: LocalClientConfig<transport, chain, accountOrAddress, rpcSchema>
-): LocalClient<
+): LocalNodeClient<
   transport,
   chain,
   ParseAccount<accountOrAddress>,
@@ -70,13 +70,15 @@ export function createLocalClient<
   rpcSchema
 >;
 
-export function createLocalClient(parameters: LocalClientConfig): LocalClient {
-  const { key = "local", name = "Local Client" } = parameters;
+export function createLocalNodeClient(
+  parameters: LocalClientConfig
+): LocalNodeClient {
+  const { key = "localNode", name = "Local Node Client" } = parameters;
   const client = createClient({
     ...parameters,
     key,
     name,
-    type: "LocalClient",
+    type: "LocalNodeClient",
   });
   return client.extend((config) => ({
     ...localNodeActions(config),
