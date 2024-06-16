@@ -22,9 +22,9 @@ export async function unlockLocalNodeAccount<
   { address, password, duration = 300 }: UnlockLocalNodeAccountParameters
 ): Promise<UnlockLocalNodeAccountReturnType> {
   const duration_ = numberToHex(duration);
-  const bl = await client.request({
+  const result = await client.request({
     method: "unlock_account",
     params: [address, password, duration_],
   });
-  return bl;
+  return result;
 }

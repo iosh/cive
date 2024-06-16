@@ -17,6 +17,7 @@ import {
   UnlockLocalNodeAccountReturnType,
   unlockLocalNodeAccount,
 } from "../../actions/localNode/UnlockLocalNodeAccount.js";
+import { LockLocalNodeAccountParameters, LockLocalNodeAccountReturnType, lockLocalNodeAccount } from "../../actions/localNode/LockLocalNodeAccount.js";
 
 export type LocalNodeActions = {
   clearTxpool: () => Promise<void>;
@@ -27,6 +28,7 @@ export type LocalNodeActions = {
   unlockLocalNodeAccount: (
     args: UnlockLocalNodeAccountParameters
   ) => Promise<UnlockLocalNodeAccountReturnType>;
+  lockLocalNodeAccount:(args: LockLocalNodeAccountParameters) => Promise<LockLocalNodeAccountReturnType
 };
 
 export function localNodeActions<
@@ -39,5 +41,6 @@ export function localNodeActions<
     getLocalNodeAddresses: () => getLocalNodeAddresses(client),
     createLocalNodeAccount: (args) => createLocalNodeAccount(client, args),
     unlockLocalNodeAccount: (args) => unlockLocalNodeAccount(client, args),
+    lockLocalNodeAccount: (args) => lockLocalNodeAccount(client, args),
   };
 }
