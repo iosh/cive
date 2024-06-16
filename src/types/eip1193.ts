@@ -639,7 +639,7 @@ export type WalletRpcSchema = [
   }
 ];
 
-export type DebugRpcSchema = [
+export type LocalNodeRpcSchema = [
   {
     Method: "txpool_clear";
     Parameters: undefined;

@@ -8,12 +8,12 @@ import {
   CreateClientErrorType,
   createClient,
 } from "./createClient.js";
-import { DebugRpcSchema } from "../types/eip1193.js";
-import { DebugActions, debugActions } from "./decorators/debug.js";
+import { LocalNodeRpcSchema } from "../types/eip1193.js";
+import { localNodeActions } from "./decorators/localNode.js";
 import { ErrorType } from "../errors/utils.js";
 import { ParseAccount } from "../types/account.js";
 
-export type DebugClientConfig<
+export type LocalNodeClientConfig<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   accountOrAddress extends Account | Address | undefined =
@@ -35,7 +35,7 @@ export type DebugClientConfig<
   >
 >;
 
-export type TestClient<
+export type LocalNodeClient<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
@@ -46,37 +46,44 @@ export type TestClient<
     chain,
     account,
     rpcSchema extends RpcSchema
-      ? [...DebugRpcSchema, ...rpcSchema]
-      : DebugRpcSchema,
-    DebugActions
+      ? [...LocalNodeRpcSchema, ...rpcSchema]
+      : LocalNodeRpcSchema,
+    LocalNodeActions
   >
 >;
 
 export type CreateTestClientErrorType = CreateClientErrorType | ErrorType;
 
-export function createTestClient<
+export function createLocalNodeClient<
   transport extends Transport,
   chain extends Chain | undefined = undefined,
   accountOrAddress extends Account | Address | undefined = undefined,
   rpcSchema extends RpcSchema | undefined = undefined
 >(
-  parameters: DebugClientConfig<transport, chain, accountOrAddress, rpcSchema>
-): DebugClientConfig<
+  parameters: LocalNodeClientConfig<
+    transport,
+    chain,
+    accountOrAddress,
+    rpcSchema
+  >
+): LocalNodeClientConfig<
   transport,
   chain,
   ParseAccount<accountOrAddress>,
   rpcSchema
 >;
 
-export function createTestClient(parameters: DebugClientConfig): TestClient {
-  const { key = "debug", name = "Debug Client" } = parameters;
+export function createLocalNodeClient(
+  parameters: LocalNodeClientConfig
+): LocalNodeClient {
+  const { key = "localNode", name = "Local Node Client" } = parameters;
   const client = createClient({
     ...parameters,
     key,
     name,
-    type: "DebugClient",
+    type: "LocalNodeClient",
   });
   return client.extend((config) => ({
-    ...debugActions(config),
+    ...localNodeActions(config),
   }));
 }
