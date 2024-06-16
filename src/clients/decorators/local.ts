@@ -6,7 +6,7 @@ import { clearTxpool } from "../../actions/localNode/clearTxpool.js";
 import {
   GetAddressesLocalNodeReturnType,
   getAddressesLocalNode,
-} from "../../actions/localNode/getAccountsFromLocal.js";
+} from "../../actions/localNode/getAddressesLocalNode.js";
 
 export type LocalNodeActions = {
   clearTxpool: () => Promise<void>;
