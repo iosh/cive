@@ -644,5 +644,13 @@ export type LocalNodeRpcSchema = [
     Method: "txpool_clear";
     Parameters: undefined;
     ReturnType: undefined;
+  },
+  /**
+   * @description Returns the list of accounts in the local node.
+   */
+  {
+    Method: "accounts";
+    Parameters: undefined;
+    ReturnType: Address[];
   }
 ];

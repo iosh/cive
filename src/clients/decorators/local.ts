@@ -3,9 +3,14 @@ import { Chain } from "../../types/chain.js";
 import { Account } from "../../accounts/types.js";
 import { Client } from "../createClient.js";
 import { clearTxpool } from "../../actions/localNode/clearTxpool.js";
+import {
+  GetAddressesLocalNodeReturnType,
+  getAddressesLocalNode,
+} from "../../actions/localNode/getAccountsFromLocal.js";
 
 export type LocalNodeActions = {
-  abc: () => Promise<void>;
+  clearTxpool: () => Promise<void>;
+  getAddressesLocalNode: () => Promise<GetAddressesLocalNodeReturnType>;
 };
 
 export function localNodeActions<
@@ -14,6 +19,7 @@ export function localNodeActions<
   TAccount extends Account | undefined = Account | undefined
 >(client: Client<TTransport, TChain, TAccount>): LocalNodeActions {
   return {
-    abc: () => clearTxpool(client),
+    clearTxpool: () => clearTxpool(client),
+    getAddressesLocalNode: () => getAddressesLocalNode(client),
   };
 }
