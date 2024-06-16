@@ -646,11 +646,19 @@ export type LocalNodeRpcSchema = [
     ReturnType: undefined;
   },
   /**
-   * @description Returns the list of accounts in the local node.
+   * @description Returns the list of addresses in the local node.
    */
   {
     Method: "accounts";
     Parameters: undefined;
     ReturnType: Address[];
+  },
+  /**
+   * @description Creates a new account in the local node.
+   */
+  {
+    Method: "new_account";
+    Parameters: [password: string];
+    ReturnType: Address;
   }
 ];
