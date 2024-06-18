@@ -676,5 +676,10 @@ export type LocalNodeRpcSchema = [
     Method: "lock_account";
     Parameters: [address: Address];
     ReturnType: boolean;
+  },
+  {
+    Method: "generateoneblock";
+    Parameters: [numTxs: Quantity, blockSizeLimit: Quantity];
+    ReturnType: Hash;
   }
 ];
