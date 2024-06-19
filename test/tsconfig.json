@@ -3,10 +3,10 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "target": "ESNext",
-    "types": ["@types/bun"],
+    "types": ["@types/node"],
     "baseUrl": ".",
     "paths": {
-      "@*": ["../src/*"]
+      "~unit/*": ["../src/*"],
     }
   }
 }
