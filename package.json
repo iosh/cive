@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest -c ./test/vitest.config.ts dev"
   },
   "keywords": [],
   "author": "",

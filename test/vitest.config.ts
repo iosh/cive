@@ -6,5 +6,6 @@ export default defineConfig({
     alias: {
       "@": join(__dirname, "../src"),
     },
+    setupFiles: [join(__dirname, './setup.ts')],
   },
 });
