@@ -70,4 +70,4 @@ export const accounts = [
     netId: 201029,
     base32Address: 'net201029:aasx0w0rxyyv9esazsz27c29a7jujttj4j007me0pv'
   },
-];
+] as const

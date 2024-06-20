@@ -8,6 +8,7 @@ import { ParseAccount } from "~unit/types/account.js";
 import { ExactPartial } from "~unit/types/utils.js";
 import { Account, Address } from "~unit/accounts/types.js";
 import { Transport, http, webSocket } from "~unit/clients/transports/index.js";
+import { accounts } from "./accounts.js";
 
 
 
@@ -41,7 +42,7 @@ type DefineConfluxReturnType<chain extends Chain> = {
       : config["account"] extends Account
       ? config["account"]
       : config["account"] extends true
-      ? ParseAccount<(typeof accounts)[0]["address"]>
+      ? ParseAccount<(typeof accounts)[0]['base32Address']>
       : undefined,
     undefined,
     { mode: "anvil" }
@@ -98,9 +99,6 @@ function defineConflux<const chain extends Chain>(
       return {
         config,
         async request({ method, params }: any, opts: any = {}) {
-          if (method === "eth_requestAccounts") {
-            return [accounts[0].address] as any;
-          }
           return request({ method, params }, opts);
         },
         value,
@@ -119,7 +117,7 @@ function defineConflux<const chain extends Chain>(
           ...clientConfig,
           ...config,
           account:
-            config?.account === true ? accounts[0].address : config?.account,
+            config?.account === true ? accounts[0].base32Address : config?.account,
           chain: config?.chain === false ? undefined : chain,
           transport: clientConfig.transport,
         }) as any
