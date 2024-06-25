@@ -6,18 +6,18 @@ import {
 } from "~unit/clients/createClient.js";
 import { ParseAccount } from "~unit/types/account.js";
 import { ExactPartial } from "~unit/types/utils.js";
+import { confluxCoreSpaceTest } from '~unit/chains/index.js'
 import { Account, Address } from "~unit/accounts/types.js";
 import { Transport, http, webSocket } from "~unit/clients/transports/index.js";
 import { accounts } from "./accounts.js";
-
-
-
+import { recreateNode, createNode } from "./docker.js";
 
 type DefineConfluxParameters<chain extends Chain> = {
   chain: chain;
   forkBlockNumber: bigint;
   forkUrl: string;
   port: number;
+  wsPort: number;
 };
 
 type DefineConfluxReturnType<chain extends Chain> = {
@@ -42,18 +42,17 @@ type DefineConfluxReturnType<chain extends Chain> = {
       : config["account"] extends Account
       ? config["account"]
       : config["account"] extends true
-      ? ParseAccount<(typeof accounts)[0]['base32Address']>
+      ? ParseAccount<(typeof accounts)[0]["base32Address"]>
       : undefined,
     undefined,
-    { mode: "anvil" }
+    { mode: "conflux" }
   >;
   rpcUrl: {
     http: string;
-    ipc: string;
     ws: string;
   };
   restart(): Promise<void>;
-  start(): Promise<() => Promise<void>>;
+  start(): Promise<void>;
 };
 
 function defineConflux<const chain extends Chain>(
@@ -64,12 +63,13 @@ function defineConflux<const chain extends Chain>(
     forkUrl,
     forkBlockNumber,
     port,
+    wsPort,
     ...options
   } = parameters;
+
   const rpcUrl = {
-    http: `http://127.0.0.1:${port}/${poolId}`,
-    ipc: `/tmp/anvil-${poolId}.ipc`,
-    ws: `ws://127.0.0.1:${port}/${poolId}`,
+    http: `http://127.0.0.1:${port}`,
+    ws: `ws://127.0.0.1:${wsPort}`,
   } as const;
 
   const chain = {
@@ -117,18 +117,27 @@ function defineConflux<const chain extends Chain>(
           ...clientConfig,
           ...config,
           account:
-            config?.account === true ? accounts[0].base32Address : config?.account,
+            config?.account === true
+              ? accounts[0].base32Address
+              : config?.account,
           chain: config?.chain === false ? undefined : chain,
           transport: clientConfig.transport,
         }) as any
-      ).extend(() => ({ mode: "anvil" })) as never;
+      ).extend(() => ({ mode: "conflux" })) as never;
     },
     rpcUrl,
     async restart() {
-      await fetch(`${rpcUrl.http}/restart`);
+      await recreateNode();
     },
     async start() {
-      // TODO
+      return createNode();
     },
   } as const;
 }
+
+
+export const devConflux = defineConflux({
+  chain: confluxCoreSpaceTest,
+  port: 12539,
+  wsPort: 12540
+})
