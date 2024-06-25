@@ -3,9 +3,11 @@
   "private": true,
   "type": "module",
   "devDependencies": {
+    "@types/dockerode": "^3.3.29",
     "@types/node": "^20.14.5"
   },
   "dependencies": {
+    "dockerode": "^4.0.2",
     "execa": "^9.2.0"
   }
 }
