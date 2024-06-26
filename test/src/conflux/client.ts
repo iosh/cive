@@ -6,11 +6,11 @@ import {
 } from "~unit/clients/createClient.js";
 import { ParseAccount } from "~unit/types/account.js";
 import { ExactPartial } from "~unit/types/utils.js";
-import { confluxCoreSpaceTest } from '~unit/chains/index.js'
+import { confluxCoreSpaceTest } from "~unit/chains/index.js";
 import { Account, Address } from "~unit/accounts/types.js";
 import { Transport, http, webSocket } from "~unit/clients/transports/index.js";
 import { accounts } from "./accounts.js";
-import { recreateNode, createNode } from "./docker.js";
+import { remove, createNode } from "./docker.js";
 
 type DefineConfluxParameters<chain extends Chain> = {
   chain: chain;
@@ -51,7 +51,7 @@ type DefineConfluxReturnType<chain extends Chain> = {
     http: string;
     ws: string;
   };
-  restart(): Promise<void>;
+  stop(): Promise<void>;
   start(): Promise<void>;
 };
 
@@ -126,18 +126,22 @@ function defineConflux<const chain extends Chain>(
       ).extend(() => ({ mode: "conflux" })) as never;
     },
     rpcUrl,
-    async restart() {
-      await recreateNode();
+    async stop() {
+      await remove();
     },
     async start() {
-      return createNode();
+      return createNode({
+        httpPort: port,
+        wsPort,
+      });
     },
   } as const;
 }
 
+export const poolId = Number(process.env.VITEST_POOL_ID ?? 1);
 
 export const devConflux = defineConflux({
   chain: confluxCoreSpaceTest,
-  port: 12539,
-  wsPort: 12540
-})
+  port: 12539 + poolId * 10,
+  wsPort: 12540 + poolId * 10,
+});

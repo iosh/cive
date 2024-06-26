@@ -12,37 +12,34 @@ export const DockerImageName = "confluxchain/conflux-rust:2.3.5";
 
 export let currentNode: Docker.Container | null = null;
 
-export async function createNode() {
+export async function createNode({ httpPort, wsPort }: NodeOptions) {
   const node = await docker.createContainer({
     Image: DockerImageName,
-    name: `cfx-node`,
+    name: `cfx-node-${httpPort}-${wsPort}`,
     HostConfig: {
-      NetworkMode: "host",
       Binds: [
-        `${path.join(path.resolve(), "./conflux.toml")}:/root/run/conflux.toml`,
         `${path.join(
           path.resolve(),
-          "./genesis_secrets.txt"
-        )}:/root/run/genesis_secret.txt`,
+          "./test/src/conflux/conflux.toml"
+        )}:/root/run/conflux.toml`,
+        `${path.join(
+          path.resolve(),
+          "./test/src/conflux/genesis_secrets.txt"
+        )}:/root/run/genesis_secrets.txt`,
       ],
+      PortBindings: {
+        "12537/tcp": [{ HostPort: `${httpPort}` }],
+        "12535/tcp": [{ HostPort: `${wsPort}` }],
+      },
     },
   });
-  await node.start()
+  await node.start();
   currentNode = node;
 }
 
 export async function remove() {
-  console.log("has current node", currentNode);
   if (currentNode) {
-    await currentNode.stop();
-    await currentNode.remove();
-    currentNode = null
+    await currentNode.remove({ force: true });
+    currentNode = null;
   }
-}
-
-export async function recreateNode() {
-  console.log("try remove");
-  await remove();
-  console.log("try create");
-  await createNode();
 }
