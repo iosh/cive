@@ -142,12 +142,12 @@ log_conf="log.yaml"
 # Note that to serve transaction-related RPCs, `persist_tx_index` should also be set to `true` or
 # the node will only be able to handle very recent transactions.
 #
-# jsonrpc_ws_port=12535
+jsonrpc_ws_port=12535
 # jsonrpc_tcp_port=12536
-# jsonrpc_http_port=12537
+jsonrpc_http_port=12537
 # jsonrpc_local_tcp_port=12538
-jsonrpc_local_http_port=12539
-jsonrpc_local_ws_port=12540
+# jsonrpc_local_http_port=12539
+# jsonrpc_local_ws_port=12540
 # jsonrpc_http_eth_port=8545
 # jsonrpc_ws_eth_port=8546
 
@@ -559,3 +559,5 @@ chain_id = 201029
 evm_chain_id = 201030
 
 dev_pos_private_key_encryption_password="CFXV50"
+
+genesis_secrets = "./genesis_secrets.txt"
