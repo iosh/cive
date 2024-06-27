@@ -4,7 +4,7 @@ import {
   type UnlockLocalNodeAccountParameters,
   type UnlockLocalNodeAccountReturnType,
   unlockLocalNodeAccount,
-} from '../../actions/localNode/UnlockLocalNodeAccount.js'
+} from '../../actions/localNode/unlockLocalNodeAccount.js'
 import { clearTxpool } from '../../actions/localNode/clearTxpool.js'
 import {
   type CreateLocalNodeAccountParameters,
@@ -27,6 +27,11 @@ import {
 } from '../../actions/localNode/lockLocalNodeAccount.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
+import {
+  createEmptyBlocks,
+  type CreateEmptyBlocksParameters,
+  type CreateEmptyBlocksReturnType,
+} from '../../actions/localNode/createEmptyBlocks.js'
 
 export type LocalNodeActions = {
   clearTxpool: () => Promise<void>
@@ -43,6 +48,9 @@ export type LocalNodeActions = {
   generateLocalNodeBlock: (
     args: GenerateLocalNodeBlockParameters,
   ) => Promise<GenerateLocalNodeBlockReturnTYpe>
+  createEmptyBlocks: (
+    args: CreateEmptyBlocksParameters,
+  ) => Promise<CreateEmptyBlocksReturnType>
 }
 
 export function localNodeActions<
@@ -57,5 +65,6 @@ export function localNodeActions<
     unlockLocalNodeAccount: (args) => unlockLocalNodeAccount(client, args),
     lockLocalNodeAccount: (args) => lockLocalNodeAccount(client, args),
     generateLocalNodeBlock: (args) => generateLocalNodeBlock(client, args),
+    createEmptyBlocks: (args) => createEmptyBlocks(client, args),
   }
 }
