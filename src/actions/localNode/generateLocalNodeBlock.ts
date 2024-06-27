@@ -18,11 +18,9 @@ export async function generateLocalNodeBlock<
   client: LocalNodeClient<Transport, TChain, TAccount, false>,
   { numTxs, blockSizeLimit }: GenerateLocalNodeBlockParameters,
 ): Promise<GenerateLocalNodeBlockReturnTYpe> {
-  const _numTsx = numberToHex(numTxs)
-  const _blockSizeLimit = numberToHex(blockSizeLimit)
   const result = await client.request({
     method: 'generateoneblock',
-    params: [_numTsx, _blockSizeLimit],
+    params: [numTxs, blockSizeLimit],
   })
   return result
 }
