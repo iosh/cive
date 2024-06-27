@@ -67,6 +67,5 @@ export function localNodeActions<
     generateLocalNodeBlock: (args) => generateLocalNodeBlock(client, args),
     generateEmptyLocalNodeBlocks: (args) =>
       generateEmptyLocalNodeBlocks(client, args),
-    generateLocalNodeBlocks: (args) => generateLocalNodeBlocks(client, args),
   }
 }
