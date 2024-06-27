@@ -1,58 +1,58 @@
 import {
-  InvalidSerializableTransactionError,
   type FeeValuesEIP1559,
+  InvalidSerializableTransactionError,
   type InvalidSerializableTransactionErrorType,
-} from "viem";
-import type { FeeValuesLegacy } from "../../types/fee.js";
+} from 'viem'
+import type { ErrorType } from '../../errors/utils.js'
+import type { FeeValuesLegacy } from '../../types/fee.js'
 import type {
-  TransactionRequestGeneric,
-  TransactionRequestLegacy,
-  TransactionSerializableGeneric,
-  TransactionSerializableLegacy,
-  TransactionSerializableEIP1559,
   TransactionRequestEIP1559,
   TransactionRequestEIP2930,
+  TransactionRequestGeneric,
+  TransactionRequestLegacy,
+  TransactionSerializableEIP1559,
   TransactionSerializableEIP2930,
-} from "../../types/transaction.js";
+  TransactionSerializableGeneric,
+  TransactionSerializableLegacy,
+} from '../../types/transaction.js'
 import type {
   Assign,
   ExactPartial,
   IsNever,
   OneOf,
   Opaque,
-} from "../../types/utils.js";
-import { ErrorType } from "../../errors/utils.js";
+} from '../../types/utils.js'
 
 type BaseProperties = {
-  accessList?: undefined;
-  gasPrice?: undefined;
-  maxFeePerBlobGas?: undefined;
-  maxFeePerGas?: undefined;
-  maxPriorityFeePerGas?: undefined;
-};
+  accessList?: undefined
+  gasPrice?: undefined
+  maxFeePerBlobGas?: undefined
+  maxFeePerGas?: undefined
+  maxPriorityFeePerGas?: undefined
+}
 
-type LegacyProperties = Assign<BaseProperties, FeeValuesLegacy>;
+type LegacyProperties = Assign<BaseProperties, FeeValuesLegacy>
 
 type EIP1559Properties = Assign<
   BaseProperties,
   OneOf<
     | {
-        maxFeePerGas: FeeValuesEIP1559["maxFeePerGas"];
+        maxFeePerGas: FeeValuesEIP1559['maxFeePerGas']
       }
     | {
-        maxPriorityFeePerGas: FeeValuesEIP1559["maxPriorityFeePerGas"];
+        maxPriorityFeePerGas: FeeValuesEIP1559['maxPriorityFeePerGas']
       },
     FeeValuesEIP1559
   > & {
-    accessList?: TransactionSerializableEIP1559["accessList"] | undefined;
+    accessList?: TransactionSerializableEIP1559['accessList'] | undefined
   }
->;
+>
 type EIP2930Properties = Assign<
   BaseProperties,
   ExactPartial<FeeValuesLegacy> & {
-    accessList: TransactionSerializableEIP2930["accessList"];
+    accessList: TransactionSerializableEIP2930['accessList']
   }
->;
+>
 
 export type GetTransactionType<
   transaction extends OneOf<
@@ -63,46 +63,46 @@ export type GetTransactionType<
         | Opaque<TransactionSerializableLegacy, transaction>
         | Opaque<TransactionRequestLegacy, transaction>
         | LegacyProperties
-        ? "legacy"
+        ? 'legacy'
         : never)
     | (transaction extends
         | Opaque<TransactionSerializableEIP1559, transaction>
         | Opaque<TransactionRequestEIP1559, transaction>
         | EIP1559Properties
-        ? "eip1559"
+        ? 'eip1559'
         : never)
     | (transaction extends
         | Opaque<TransactionSerializableEIP2930, transaction>
         | Opaque<TransactionRequestEIP2930, transaction>
         | EIP2930Properties
-        ? "eip2930"
+        ? 'eip2930'
         : never)
-    | (transaction["type"] extends string ? transaction["type"] : never)
-> = IsNever<result> extends false ? result : string;
+    | (transaction['type'] extends string ? transaction['type'] : never),
+> = IsNever<result> extends false ? result : string
 
 export type GetTransitionTypeErrorType =
   | InvalidSerializableTransactionErrorType
-  | ErrorType;
+  | ErrorType
 
 export function getTransactionType<
   const transaction extends OneOf<
     TransactionSerializableGeneric | TransactionRequestGeneric
-  >
+  >,
 >(transaction: transaction): GetTransactionType<transaction> {
   if (transaction.type)
-    return transaction.type as GetTransactionType<transaction>;
+    return transaction.type as GetTransactionType<transaction>
 
   if (
-    typeof transaction.maxFeePerGas !== "undefined" ||
-    typeof transaction.maxPriorityFeePerGas !== "undefined"
+    typeof transaction.maxFeePerGas !== 'undefined' ||
+    typeof transaction.maxPriorityFeePerGas !== 'undefined'
   ) {
-    return "eip1559" as any;
+    return 'eip1559' as any
   }
 
-  if (typeof transaction.gasPrice !== "undefined") {
-    if (typeof transaction.accessList !== "undefined") return "eip2930" as any;
-    return "legacy" as any;
+  if (typeof transaction.gasPrice !== 'undefined') {
+    if (typeof transaction.accessList !== 'undefined') return 'eip2930' as any
+    return 'legacy' as any
   }
 
-  throw new InvalidSerializableTransactionError({ transaction });
+  throw new InvalidSerializableTransactionError({ transaction })
 }

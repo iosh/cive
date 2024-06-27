@@ -1,21 +1,21 @@
 import {
-  Abi,
-  ContractConstructorArgs,
-  Hex,
-  Transport,
+  type Abi,
+  type ContractConstructorArgs,
+  type Hex,
+  type Transport,
   encodeDeployData,
-} from "viem";
-import { Account } from "../../accounts/types.js";
-import { Client } from "../../clients/createClient.js";
-import { UnionEvaluate, UnionOmit } from "../../types/utils.js";
+} from 'viem'
+import type { Account } from '../../accounts/types.js'
+import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { Chain, GetChainParameter } from '../../types/chain.js'
+import type { UnionEvaluate, UnionOmit } from '../../types/utils.js'
 import {
-  SendTransactionErrorType,
-  SendTransactionParameters,
-  SendTransactionReturnType,
+  type SendTransactionErrorType,
+  type SendTransactionParameters,
+  type SendTransactionReturnType,
   sendTransaction,
-} from "./sendTransaction.js";
-import { ErrorType } from "../../errors/utils.js";
-import { Chain, GetChainParameter } from "../../types/chain.js";
+} from './sendTransaction.js'
 
 export type DeployContractParameters<
   abi extends Abi | readonly unknown[] = Abi,
@@ -23,10 +23,10 @@ export type DeployContractParameters<
   account extends Account | undefined = Account | undefined,
   chainOverride extends Chain | undefined = Chain | undefined,
   ///
-  allArgs = ContractConstructorArgs<abi>
+  allArgs = ContractConstructorArgs<abi>,
 > = UnionOmit<
   SendTransactionParameters<chain, account, chainOverride>,
-  "accessList" | "chain" | "to" | "data"
+  'accessList' | 'chain' | 'to' | 'data'
 > &
   GetChainParameter<chain, chainOverride> &
   UnionEvaluate<
@@ -34,28 +34,28 @@ export type DeployContractParameters<
       ? { args?: allArgs | undefined }
       : { args: allArgs }
   > & {
-    abi: abi;
-    bytecode: Hex;
-  };
+    abi: abi
+    bytecode: Hex
+  }
 
-export type DeployContractReturnType = SendTransactionReturnType;
+export type DeployContractReturnType = SendTransactionReturnType
 
-export type DeployContractErrorType = SendTransactionErrorType | ErrorType;
+export type DeployContractErrorType = SendTransactionErrorType | ErrorType
 
 export function deployContract<
   const abi extends Abi | readonly unknown[],
   chain extends Chain | undefined,
   account extends Account | undefined,
-  chainOverride extends Chain | undefined
+  chainOverride extends Chain | undefined,
 >(
   walletClient: Client<Transport, chain, account>,
-  parameters: DeployContractParameters<abi, chain, account, chainOverride>
+  parameters: DeployContractParameters<abi, chain, account, chainOverride>,
 ): Promise<DeployContractReturnType> {
   const { abi, args, bytecode, ...request } =
-    parameters as DeployContractParameters;
-  const calldata = encodeDeployData({ abi, args, bytecode });
+    parameters as DeployContractParameters
+  const calldata = encodeDeployData({ abi, args, bytecode })
   return sendTransaction(walletClient, {
     ...request,
     data: calldata,
-  } as unknown as SendTransactionParameters<chain, account, chainOverride>);
+  } as unknown as SendTransactionParameters<chain, account, chainOverride>)
 }

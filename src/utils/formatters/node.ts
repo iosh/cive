@@ -1,9 +1,9 @@
-import type { NodeState } from "../../types/node.js";
-import type { RpcNodeState } from "../../types/rpc.js";
-import type { ExactPartial } from "../../types/utils.js";
+import type { NodeState } from '../../types/node.js'
+import type { RpcNodeState } from '../../types/rpc.js'
+import type { ExactPartial } from '../../types/utils.js'
 
 export function formatNodeState(
-  nodeState: ExactPartial<RpcNodeState>
+  nodeState: ExactPartial<RpcNodeState>,
 ): NodeState {
   const result = {
     ...nodeState,
@@ -33,7 +33,7 @@ export function formatNodeState(
     pendingTxNumber: nodeState.pendingTxNumber
       ? Number(nodeState.pendingTxNumber)
       : undefined,
-  } as NodeState;
+  } as NodeState
 
-  return result;
+  return result
 }

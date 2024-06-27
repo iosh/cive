@@ -1,16 +1,16 @@
-import {  Transport } from "viem";
-import { Client } from "../../clients/createClient.js";
-import { Chain } from "../../types/chain.js";
+import type { Transport } from 'viem'
+import type { Client } from '../../clients/createClient.js'
+import type { Chain } from '../../types/chain.js'
 
-export type EstimateMaxPriorityFeePerGasReturnType = bigint;
+export type EstimateMaxPriorityFeePerGasReturnType = bigint
 
 export async function estimateMaxPriorityFeePerGas<
-  chain extends Chain | undefined
+  chain extends Chain | undefined,
 >(
-  client: Client<Transport, chain>
+  client: Client<Transport, chain>,
 ): Promise<EstimateMaxPriorityFeePerGasReturnType> {
   const maxPriorityFeePerGasHex = await client.request({
-    method: "cfx_maxPriorityFeePerGas",
-  });
-  return BigInt(maxPriorityFeePerGasHex);
+    method: 'cfx_maxPriorityFeePerGas',
+  })
+  return BigInt(maxPriorityFeePerGasHex)
 }

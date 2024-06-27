@@ -5,7 +5,7 @@ import type {
   PoSRewards,
   PoSStatus,
   PoSTransaction,
-} from "../../types/pos.js";
+} from '../../types/pos.js'
 import type {
   RpcPoSAccount,
   RpcPoSBlock,
@@ -13,8 +13,8 @@ import type {
   RpcPoSRewards,
   RpcPoSStatus,
   RpcPoSTransaction,
-} from "../../types/rpc.js";
-import { ExactPartial } from "../../types/utils.js";
+} from '../../types/rpc.js'
+import type { ExactPartial } from '../../types/utils.js'
 
 export function formatPoSStatus(status: ExactPartial<RpcPoSStatus>): PoSStatus {
   const result = {
@@ -34,15 +34,15 @@ export function formatPoSStatus(status: ExactPartial<RpcPoSStatus>): PoSStatus {
             : undefined,
         }
       : undefined,
-  } as PoSStatus;
+  } as PoSStatus
 
-  return result;
+  return result
 }
 
 export function formatPoSAccount(
-  account: ExactPartial<RpcPoSAccount>
+  account: ExactPartial<RpcPoSAccount>,
 ): PoSAccount {
-  const { status } = account;
+  const { status } = account
   const result = {
     ...account,
     blockNumber: account.blockNumber ? BigInt(account.blockNumber) : undefined,
@@ -74,15 +74,15 @@ export function formatPoSAccount(
         : undefined,
       unlocked: status?.unlocked ? BigInt(status.unlocked) : undefined,
     },
-  } as PoSAccount;
+  } as PoSAccount
 
-  return result;
+  return result
 }
 
 export function formatPoSCommittee(
-  committee: ExactPartial<RpcPoSCommittee>
+  committee: ExactPartial<RpcPoSCommittee>,
 ): PoSCommittee {
-  const { currentCommittee } = committee;
+  const { currentCommittee } = committee
   const result = {
     ...committee,
     currentCommittee: {
@@ -121,13 +121,13 @@ export function formatPoSCommittee(
             : undefined,
         }))
       : undefined,
-  } as PoSCommittee;
+  } as PoSCommittee
 
-  return result;
+  return result
 }
 
 export function formatPoSBlock(block: ExactPartial<RpcPoSBlock>): PoSBlock {
-  const { pivotDecision } = block;
+  const { pivotDecision } = block
   const result = {
     ...block,
     epoch: block.epoch ? BigInt(block.epoch) : undefined,
@@ -145,13 +145,13 @@ export function formatPoSBlock(block: ExactPartial<RpcPoSBlock>): PoSBlock {
         }))
       : undefined,
     timestamp: block?.timestamp ? BigInt(block.timestamp) : undefined,
-  } as PoSBlock;
+  } as PoSBlock
 
-  return result;
+  return result
 }
 
 export function formatPosRewards(
-  rewards: ExactPartial<RpcPoSRewards>
+  rewards: ExactPartial<RpcPoSRewards>,
 ): PoSRewards {
   const result = {
     ...rewards,
@@ -161,48 +161,48 @@ export function formatPosRewards(
           reward: reward?.reward ? BigInt(reward.reward) : undefined,
         }))
       : undefined,
-  } as PoSRewards;
+  } as PoSRewards
 
-  return result;
+  return result
 }
 
 export function formatPoSTransaction(
-  tx: ExactPartial<RpcPoSTransaction>
+  tx: ExactPartial<RpcPoSTransaction>,
 ): PoSTransaction {
   const result = {
     ...tx,
     number: tx?.number ? BigInt(tx.number) : undefined,
     blockNumber: tx?.blockNumber ? BigInt(tx.blockNumber) : undefined,
     timestamp: tx?.timestamp ? BigInt(tx.timestamp) : undefined,
-  } as PoSTransaction;
+  } as PoSTransaction
 
-  if (result.type === "Election") {
+  if (result.type === 'Election') {
     result.payload = {
       ...result.payload,
       targetTerm: BigInt(result.payload.targetTerm),
-    };
+    }
   }
 
-  if (result.type === "UpdateVotingPower") {
+  if (result.type === 'UpdateVotingPower') {
     result.payload = {
       ...result.payload,
       votingPower: BigInt(result.payload.votingPower),
-    };
+    }
   }
 
-  if (result.type === "Retire") {
+  if (result.type === 'Retire') {
     result.payload = {
       ...result.payload,
       votingPower: BigInt(result.payload.votingPower),
-    };
+    }
   }
 
-  if (result.type === "PivotDecision") {
+  if (result.type === 'PivotDecision') {
     result.payload = {
       ...result.payload,
       height: BigInt(result.payload.height),
-    };
+    }
   }
 
-  return result;
+  return result
 }

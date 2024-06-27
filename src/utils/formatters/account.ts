@@ -1,16 +1,16 @@
 import type {
   AccountPending,
   AccountPendingTransaction,
-} from "../../types/account.js";
+} from '../../types/account.js'
 import type {
   RpcAccountPending,
   RpcAccountPendingTransaction,
-} from "../../types/rpc.js";
-import type { ExactPartial } from "../../types/utils.js";
-import { formatTransaction } from "./transaction.js";
+} from '../../types/rpc.js'
+import type { ExactPartial } from '../../types/utils.js'
+import { formatTransaction } from './transaction.js'
 
 export function formatAccountPending(
-  accountPending: ExactPartial<RpcAccountPending>
+  accountPending: ExactPartial<RpcAccountPending>,
 ): AccountPending {
   const result = {
     ...accountPending,
@@ -26,13 +26,13 @@ export function formatAccountPending(
     nextPendingTx: accountPending.nextPendingTx
       ? BigInt(accountPending.nextPendingTx)
       : undefined,
-  } as AccountPending;
+  } as AccountPending
 
-  return result;
+  return result
 }
 
 export function formatAccountPendingTransaction(
-  accountPendingTransaction: ExactPartial<RpcAccountPendingTransaction>
+  accountPendingTransaction: ExactPartial<RpcAccountPendingTransaction>,
 ): AccountPendingTransaction {
   const result = {
     ...accountPendingTransaction,
@@ -42,7 +42,7 @@ export function formatAccountPendingTransaction(
     pendingTransactions: accountPendingTransaction.pendingTransactions
       ? accountPendingTransaction.pendingTransactions.map(formatTransaction)
       : undefined,
-  } as AccountPendingTransaction;
+  } as AccountPendingTransaction
 
-  return result;
+  return result
 }

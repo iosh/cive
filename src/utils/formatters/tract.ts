@@ -1,35 +1,35 @@
-import { RpcTrace, RpcTraceBlock } from "../../types/rpc.js";
-import { TraceBlock } from "../../types/tract.js";
-import { ExactPartial } from "../../types/utils.js";
+import type { RpcTrace, RpcTraceBlock } from '../../types/rpc.js'
+import type { TraceBlock } from '../../types/tract.js'
+import type { ExactPartial } from '../../types/utils.js'
 
 export function formatTract(
-  trace: ExactPartial<RpcTrace>
-): TraceBlock["transactionTraces"][number]["traces"][number] {
+  trace: ExactPartial<RpcTrace>,
+): TraceBlock['transactionTraces'][number]['traces'][number] {
   const result = {
     ...trace,
     epochNumber: trace?.epochNumber ? BigInt(trace.epochNumber) : undefined,
     transactionPosition: trace?.transactionPosition
       ? BigInt(trace.transactionPosition)
       : undefined,
-  } as TraceBlock["transactionTraces"][number]["traces"][number];
+  } as TraceBlock['transactionTraces'][number]['traces'][number]
 
-  if ("value" in result.action) {
-    result.action.value = BigInt(result.action.value);
+  if ('value' in result.action) {
+    result.action.value = BigInt(result.action.value)
   }
 
-  if ("gas" in result.action) {
-    result.action.gas = BigInt(result.action.gas);
+  if ('gas' in result.action) {
+    result.action.gas = BigInt(result.action.gas)
   }
-  if ("gasLeft" in result.action) {
-    result.action.gasLeft = BigInt(result.action.gasLeft);
+  if ('gasLeft' in result.action) {
+    result.action.gasLeft = BigInt(result.action.gasLeft)
   }
 
-  return result;
+  return result
 }
 
 export function formatTransactionTraces(
-  transactionTraces: ExactPartial<RpcTraceBlock["transactionTraces"][number]>
-): TraceBlock["transactionTraces"][number] {
+  transactionTraces: ExactPartial<RpcTraceBlock['transactionTraces'][number]>,
+): TraceBlock['transactionTraces'][number] {
   const result = {
     ...transactionTraces,
     transactionPosition: transactionTraces?.transactionPosition
@@ -38,13 +38,13 @@ export function formatTransactionTraces(
     traces: transactionTraces?.traces
       ? transactionTraces.traces.map(formatTract)
       : undefined,
-  } as TraceBlock["transactionTraces"][number];
+  } as TraceBlock['transactionTraces'][number]
 
-  return result;
+  return result
 }
 
 export function formatTraceBlock(
-  block: ExactPartial<RpcTraceBlock>
+  block: ExactPartial<RpcTraceBlock>,
 ): TraceBlock {
   const result = {
     ...block,
@@ -52,7 +52,7 @@ export function formatTraceBlock(
     transactionTraces: block?.transactionTraces
       ? block.transactionTraces.map(formatTransactionTraces)
       : undefined,
-  } as TraceBlock;
+  } as TraceBlock
 
-  return result;
+  return result
 }

@@ -5,10 +5,10 @@ export {
   type MulticallBatchOptions,
   createClient,
   rpcSchema,
-} from "./clients/createClient.js";
+} from './clients/createClient.js'
 export {
   type PublicClient,
   type PublicClientConfig,
   type CreatePublicClientErrorType,
   createPublicClient,
-} from "./clients/createPublicClient.js";
+} from './clients/createPublicClient.js'

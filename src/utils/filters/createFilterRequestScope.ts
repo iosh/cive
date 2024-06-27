@@ -1,25 +1,30 @@
-import { EIP1193Parameters, EIP1193RequestFn, Hex, Transport } from "viem";
-import type { Filter } from "../../types/utils.js";
-import { Client } from "../../clients/createClient.js";
-import { PublicRpcSchema } from "../../types/eip1193.js";
-import { OnResponseFn } from "../../clients/transports/fallback.js";
-import { Chain } from "../../types/chain.js";
+import {
+  EIP1193Parameters,
+  type EIP1193RequestFn,
+  type Hex,
+  type Transport,
+} from 'viem'
+import type { Client } from '../../clients/createClient.js'
+import type { OnResponseFn } from '../../clients/transports/fallback.js'
+import type { Chain } from '../../types/chain.js'
+import type { PublicRpcSchema } from '../../types/eip1193.js'
+import type { Filter } from '../../types/utils.js'
 
 type CreateFilterRequestScopeParameters = {
   method:
-    | "cfx_newFilter"
-    | "cfx_newBlockFilter"
-    | "cfx_newPendingTransactionFilter";
-};
+    | 'cfx_newFilter'
+    | 'cfx_newBlockFilter'
+    | 'cfx_newPendingTransactionFilter'
+}
 
 type FilterRpcSchema = Filter<
   PublicRpcSchema,
-  { Method: "cfx_getFilterLogs" | "cfx_getFilterChanges" }
->;
+  { Method: 'cfx_getFilterLogs' | 'cfx_getFilterChanges' }
+>
 
 type CreateFilterRequestScopeReturnType = (
-  id: Hex
-) => EIP1193RequestFn<FilterRpcSchema>;
+  id: Hex,
+) => EIP1193RequestFn<FilterRpcSchema>
 
 /**
  * Scopes `request` to the filter ID. If the client is a fallback, it will
@@ -28,11 +33,11 @@ type CreateFilterRequestScopeReturnType = (
  */
 export function createFilterRequestScope<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { method }: CreateFilterRequestScopeParameters
+  { method }: CreateFilterRequestScopeParameters,
 ): CreateFilterRequestScopeReturnType {
-  const requestMap: Record<Hex, EIP1193RequestFn> = {};
+  const requestMap: Record<Hex, EIP1193RequestFn> = {}
 
-  if (client.transport.type === "fallback")
+  if (client.transport.type === 'fallback')
     client.transport.onResponse?.(
       ({
         method: method_,
@@ -40,11 +45,11 @@ export function createFilterRequestScope<TChain extends Chain | undefined>(
         status,
         transport,
       }: Parameters<OnResponseFn>[0]) => {
-        if (status === "success" && method === method_)
-          requestMap[id as Hex] = transport.request;
-      }
-    );
+        if (status === 'success' && method === method_)
+          requestMap[id as Hex] = transport.request
+      },
+    )
 
   return ((id) =>
-    requestMap[id] || client.request) as CreateFilterRequestScopeReturnType;
+    requestMap[id] || client.request) as CreateFilterRequestScopeReturnType
 }

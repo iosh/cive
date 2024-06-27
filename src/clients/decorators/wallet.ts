@@ -1,42 +1,42 @@
-import { Transport } from "viem";
-import { Account, Address } from "../../accounts/types.js";
-import { Client } from "../createClient.js";
-import { Chain } from "../../types/chain.js";
+import type { Abi } from 'abitype'
+import type { Transport } from 'viem'
+import type { Account, Address } from '../../accounts/types.js'
 import {
-  SendRawTransactionParameters,
-  SendRawTransactionReturnType,
-  sendRawTransaction,
-} from "../../actions/wallet/sendRawTransaction.js";
-import {
-  PrepareTransactionRequestParameters,
-  PrepareTransactionRequestRequest,
-  PrepareTransactionRequestReturnType,
-  prepareTransactionRequest,
-} from "../../actions/wallet/prepareTransactionRequest.js";
-import { Abi } from "abitype";
-import {
-  DeployContractParameters,
-  DeployContractReturnType,
+  type DeployContractParameters,
+  type DeployContractReturnType,
   deployContract,
-} from "../../actions/wallet/deployContract.js";
+} from '../../actions/wallet/deployContract.js'
+import {
+  type PrepareTransactionRequestParameters,
+  type PrepareTransactionRequestRequest,
+  type PrepareTransactionRequestReturnType,
+  prepareTransactionRequest,
+} from '../../actions/wallet/prepareTransactionRequest.js'
+import {
+  type SendRawTransactionParameters,
+  type SendRawTransactionReturnType,
+  sendRawTransaction,
+} from '../../actions/wallet/sendRawTransaction.js'
+import type { Chain } from '../../types/chain.js'
+import type { Client } from '../createClient.js'
 
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,
-  TAccount extends Account | undefined = Account | undefined
+  TAccount extends Account | undefined = Account | undefined,
 > = {
   deployContract: <
     const abi extends Abi | readonly unknown[],
-    chainOverride extends Chain | undefined
+    chainOverride extends Chain | undefined,
   >(
-    args: DeployContractParameters<abi, TChain, TAccount, chainOverride>
-  ) => Promise<DeployContractReturnType>;
+    args: DeployContractParameters<abi, TChain, TAccount, chainOverride>,
+  ) => Promise<DeployContractReturnType>
   prepareTransactionRequest: <
     const TRequest extends PrepareTransactionRequestRequest<
       TChain,
       TChainOverride
     >,
     TChainOverride extends Chain | undefined = undefined,
-    TAccountOverride extends Account | Address | undefined = undefined
+    TAccountOverride extends Account | Address | undefined = undefined,
   >(
     args: PrepareTransactionRequestParameters<
       TChain,
@@ -44,7 +44,7 @@ export type WalletActions<
       TChainOverride,
       TAccountOverride,
       TRequest
-    >
+    >,
   ) => Promise<
     PrepareTransactionRequestReturnType<
       Chain,
@@ -54,23 +54,23 @@ export type WalletActions<
       // @ts-expect-error
       TRequest
     >
-  >;
+  >
   sendRawTransaction: (
-    args: SendRawTransactionParameters
-  ) => Promise<SendRawTransactionReturnType>;
-};
+    args: SendRawTransactionParameters,
+  ) => Promise<SendRawTransactionReturnType>
+}
 
 export function walletActions<
   TTransport extends Transport,
   TChain extends Chain | undefined = Chain | undefined,
-  TAccount extends Account | undefined = Account | undefined
+  TAccount extends Account | undefined = Account | undefined,
 >(
-  client: Client<TTransport, TChain, TAccount>
+  client: Client<TTransport, TChain, TAccount>,
 ): WalletActions<TChain, TAccount> {
   return {
     deployContract: (args) => deployContract(client, args),
     prepareTransactionRequest: (args) =>
       prepareTransactionRequest(client, args) as any,
     sendRawTransaction: (args) => sendRawTransaction(client, args),
-  };
+  }
 }

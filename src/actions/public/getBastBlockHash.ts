@@ -1,11 +1,11 @@
-import type {  Hash, Transport } from "viem";
-import type { Client } from "../../clients/createClient.js";
-import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils.js";
-import { Chain } from "../../types/chain.js";
+import type { Hash, Transport } from 'viem'
+import type { RequestErrorType } from 'viem/utils'
+import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { Chain } from '../../types/chain.js'
 
-export type GetBastBlockHashErrorType = RequestErrorType | ErrorType;
-export type GetBastBlockHashReturn = Hash;
+export type GetBastBlockHashErrorType = RequestErrorType | ErrorType
+export type GetBastBlockHashReturn = Hash
 
 /**
  * Returns the hash of the best block.
@@ -15,11 +15,11 @@ export type GetBastBlockHashReturn = Hash;
  * @returns
  */
 export function getBastBlockHash<TChain extends Chain | undefined>(
-  client: Client<Transport, TChain>
+  client: Client<Transport, TChain>,
 ): Promise<GetBastBlockHashReturn> {
   const blockHash = client.request({
-    method: "cfx_getBestBlockHash",
-  });
+    method: 'cfx_getBestBlockHash',
+  })
 
-  return blockHash;
+  return blockHash
 }

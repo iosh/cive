@@ -1,9 +1,9 @@
-import { GasAndCollateral } from "../../types/fee.js";
-import { RpcGasAndCollateral } from "../../types/rpc.js";
-import { ExactPartial } from "../../types/utils.js";
+import type { GasAndCollateral } from '../../types/fee.js'
+import type { RpcGasAndCollateral } from '../../types/rpc.js'
+import type { ExactPartial } from '../../types/utils.js'
 
 export function formatFee(
-  fee: ExactPartial<RpcGasAndCollateral>
+  fee: ExactPartial<RpcGasAndCollateral>,
 ): GasAndCollateral {
   const result = {
     ...fee,
@@ -12,6 +12,6 @@ export function formatFee(
     storageCollateralized: fee.storageCollateralized
       ? BigInt(fee.storageCollateralized)
       : undefined,
-  } as GasAndCollateral;
-  return result;
+  } as GasAndCollateral
+  return result
 }

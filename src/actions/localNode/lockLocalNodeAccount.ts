@@ -3,23 +3,23 @@ import type { Account, Address } from '../../accounts/types.js'
 import type { LocalNodeClient } from '../../clients/createLocalClient.js'
 import type { Chain } from '../../types/chain.js'
 
-export type CreateLocalNodeAccountParameters = {
-  password: string
+export type LockLocalNodeAccountParameters = {
+  address: Address
 }
 
-export type CreateLocalNodeAccountReturnType = Address
+export type LockLocalNodeAccountReturnType = boolean
 
-export async function createLocalNodeAccount<
+export async function lockLocalNodeAccount<
   TChain extends Chain | undefined,
   TAccount extends Account | undefined,
 >(
   client: LocalNodeClient<Transport, TChain, TAccount, false>,
-  { password }: CreateLocalNodeAccountParameters,
-): Promise<CreateLocalNodeAccountReturnType> {
-  const address = await client.request({
-    method: 'new_account',
-    params: [password],
+  { address }: LockLocalNodeAccountParameters,
+): Promise<LockLocalNodeAccountReturnType> {
+  const result = await client.request({
+    method: 'lock_account',
+    params: [address],
   })
 
-  return address
+  return result
 }

@@ -1,27 +1,30 @@
-import type {} from "viem";
-import type { RpcTransactionReceipt } from "../../types/rpc.js";
-import type { TransactionReceipt } from "../../types/transaction.js";
-import type { ExactPartial } from "../../types/utils.js";
-import { formatLog } from "./log.js";
-import { transactionType } from "./transaction.js";
-import { Chain, ExtractChainFormatterReturnType } from "../../types/chain.js";
+import type {} from 'viem'
+import type {
+  Chain,
+  ExtractChainFormatterReturnType,
+} from '../../types/chain.js'
+import type { RpcTransactionReceipt } from '../../types/rpc.js'
+import type { TransactionReceipt } from '../../types/transaction.js'
+import type { ExactPartial } from '../../types/utils.js'
+import { formatLog } from './log.js'
+import { transactionType } from './transaction.js'
 
 export type FormattedTransactionReceipt<
-  TChain extends Chain | undefined = undefined
+  TChain extends Chain | undefined = undefined,
 > = ExtractChainFormatterReturnType<
   TChain,
-  "transactionReceipt",
+  'transactionReceipt',
   RpcTransactionReceipt
->;
+>
 
 export const receiptOutcomeStatuses = {
-  "0x0": "success",
-  "0x1": "failed",
-  "0x2": "skipped",
-} as const;
+  '0x0': 'success',
+  '0x1': 'failed',
+  '0x2': 'skipped',
+} as const
 
 export function formatTransactionReceipt(
-  transactionReceipt: ExactPartial<RpcTransactionReceipt>
+  transactionReceipt: ExactPartial<RpcTransactionReceipt>,
 ) {
   const receipt = {
     ...transactionReceipt,
@@ -59,7 +62,7 @@ export function formatTransactionReceipt(
           transactionReceipt.type as keyof typeof transactionType
         ] || transactionReceipt.type
       : null,
-  } as TransactionReceipt;
+  } as TransactionReceipt
 
-  return receipt;
+  return receipt
 }

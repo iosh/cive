@@ -1,6 +1,6 @@
-import type { RpcSupply } from "../../types/rpc.js";
-import type { Supply } from "../../types/supply.js";
-import type { ExactPartial } from "../../types/utils.js";
+import type { RpcSupply } from '../../types/rpc.js'
+import type { Supply } from '../../types/supply.js'
+import type { ExactPartial } from '../../types/utils.js'
 
 export function formatSupply(supply: ExactPartial<RpcSupply>): Supply {
   const result = {
@@ -16,7 +16,7 @@ export function formatSupply(supply: ExactPartial<RpcSupply>): Supply {
     totalEspaceTokens: supply.totalEspaceTokens
       ? BigInt(supply.totalEspaceTokens)
       : undefined,
-  } as Supply;
+  } as Supply
 
-  return result;
+  return result
 }

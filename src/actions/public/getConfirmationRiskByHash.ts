@@ -1,30 +1,30 @@
-import type { Hash, Transport } from "viem";
-import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils.js";
-import type { Client } from "../../clients/createClient.js";
-import { Chain } from "../../types/chain.js";
+import type { Hash, Transport } from 'viem'
+import type { RequestErrorType } from 'viem/utils'
+import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { Chain } from '../../types/chain.js'
 
 export type GetConfirmationRiskByHashParameters = {
-  blockHash: Hash;
-};
+  blockHash: Hash
+}
 
-export type GetConfirmationRiskByHashReturnType = BigInt | undefined;
+export type GetConfirmationRiskByHashReturnType = BigInt | undefined
 
-export type GetConfirmationRiskByHashErrorType = RequestErrorType | ErrorType;
+export type GetConfirmationRiskByHashErrorType = RequestErrorType | ErrorType
 
 export async function getConfirmationRiskByHash<
-  TChain extends Chain | undefined
+  TChain extends Chain | undefined,
 >(
   client: Client<Transport, TChain>,
-  { blockHash }: GetConfirmationRiskByHashParameters
+  { blockHash }: GetConfirmationRiskByHashParameters,
 ): Promise<GetConfirmationRiskByHashReturnType> {
   const confirmationRisk = await client.request({
-    method: "cfx_getConfirmationRiskByHash",
+    method: 'cfx_getConfirmationRiskByHash',
     params: [blockHash],
-  });
+  })
 
   if (confirmationRisk) {
-    return BigInt(confirmationRisk);
+    return BigInt(confirmationRisk)
   }
-  return undefined;
+  return undefined
 }

@@ -1,44 +1,44 @@
 import {
-  TransactionReceiptNotFoundError,
   type Hash,
+  TransactionReceiptNotFoundError,
   type TransactionReceiptNotFoundErrorType,
   type Transport,
-} from "viem";
+} from 'viem'
+import type { RequestErrorType } from 'viem/utils'
+import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { Chain } from '../../types/chain.js'
 import {
-  formatTransactionReceipt,
   type FormattedTransactionReceipt,
-} from "../../utils/formatters/transactionReceipt.js";
-import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils.js";
-import type { Client } from "../../clients/createClient.js";
-import { Chain } from "../../types/chain.js";
+  formatTransactionReceipt,
+} from '../../utils/formatters/transactionReceipt.js'
 
 export type GetTransactionReceiptParameters = {
-  hash: Hash;
-};
+  hash: Hash
+}
 
 export type GetTransactionReceiptReturnType<
-  TChain extends Chain | undefined = undefined
-> = FormattedTransactionReceipt<TChain>;
+  TChain extends Chain | undefined = undefined,
+> = FormattedTransactionReceipt<TChain>
 
 export type GetTransactionReceiptErrorType =
   | RequestErrorType
   | TransactionReceiptNotFoundErrorType
-  | ErrorType;
+  | ErrorType
 
 export async function getTransactionReceipt<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { hash }: GetTransactionReceiptParameters
+  { hash }: GetTransactionReceiptParameters,
 ) {
   const receipt = await client.request({
-    method: "cfx_getTransactionReceipt",
+    method: 'cfx_getTransactionReceipt',
     params: [hash],
-  });
+  })
 
-  if (!receipt) throw new TransactionReceiptNotFoundError({ hash });
+  if (!receipt) throw new TransactionReceiptNotFoundError({ hash })
 
   const format =
     client.chain?.formatters?.transactionReceipt?.format ||
-    formatTransactionReceipt;
-  return format(receipt) as GetTransactionReceiptReturnType<TChain>;
+    formatTransactionReceipt
+  return format(receipt) as GetTransactionReceiptReturnType<TChain>
 }

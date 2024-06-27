@@ -1,30 +1,30 @@
 import {
   FeeCapTooHighError,
-  FeeCapTooHighErrorType,
+  type FeeCapTooHighErrorType,
   FeeConflictError,
-  FeeConflictErrorType,
+  type FeeConflictErrorType,
   TipAboveFeeCapError,
-  TipAboveFeeCapErrorType,
-} from "viem";
+  type TipAboveFeeCapErrorType,
+} from 'viem'
 import {
   type ParseAccountErrorType,
   parseAccount,
-} from "../../accounts/utils/parseAccount.js";
-import type { SendTransactionParameters } from "../../actions/wallet/sendTransaction.js";
+} from '../../accounts/utils/parseAccount.js'
+import type { SendTransactionParameters } from '../../actions/wallet/sendTransaction.js'
 
-import type { ErrorType } from "../../errors/utils.js";
+import type { ErrorType } from '../../errors/utils.js'
 
-import type { ExactPartial } from "../../types/utils.js";
-import { isAddress } from "../address/isAddress.js";
+import type { Chain } from '../../types/chain.js'
+import type { ExactPartial } from '../../types/utils.js'
+import { isAddress } from '../address/isAddress.js'
 import {
   InvalidAddressError,
-  InvalidAddressErrorType,
-} from "../errors/address.js";
-import { Chain } from "../../types/chain.js";
+  type InvalidAddressErrorType,
+} from '../errors/address.js'
 
 export type AssertRequestParameters = ExactPartial<
   SendTransactionParameters<Chain>
->;
+>
 
 export type AssertRequestErrorType =
   | InvalidAddressErrorType
@@ -32,7 +32,7 @@ export type AssertRequestErrorType =
   | FeeCapTooHighErrorType
   | ParseAccountErrorType
   | TipAboveFeeCapErrorType
-  | ErrorType;
+  | ErrorType
 
 export function assertRequest(args: AssertRequestParameters) {
   const {
@@ -41,24 +41,24 @@ export function assertRequest(args: AssertRequestParameters) {
     maxFeePerGas,
     maxPriorityFeePerGas,
     to,
-  } = args;
-  const account = account_ ? parseAccount(account_) : undefined;
+  } = args
+  const account = account_ ? parseAccount(account_) : undefined
   if (account && !isAddress(account.address))
-    throw new InvalidAddressError({ address: account.address });
-  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to });
+    throw new InvalidAddressError({ address: account.address })
+  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to })
   if (
-    typeof gasPrice !== "undefined" &&
-    (typeof maxFeePerGas !== "undefined" ||
-      typeof maxPriorityFeePerGas !== "undefined")
+    typeof gasPrice !== 'undefined' &&
+    (typeof maxFeePerGas !== 'undefined' ||
+      typeof maxPriorityFeePerGas !== 'undefined')
   )
-    throw new FeeConflictError();
+    throw new FeeConflictError()
 
   if (maxFeePerGas && maxFeePerGas > 2n ** 256n - 1n)
-    throw new FeeCapTooHighError({ maxFeePerGas });
+    throw new FeeCapTooHighError({ maxFeePerGas })
   if (
     maxPriorityFeePerGas &&
     maxFeePerGas &&
     maxPriorityFeePerGas > maxFeePerGas
   )
-    throw new TipAboveFeeCapError({ maxFeePerGas, maxPriorityFeePerGas });
+    throw new TipAboveFeeCapError({ maxFeePerGas, maxPriorityFeePerGas })
 }

@@ -1,12 +1,12 @@
-import type { Transport } from "viem";
-import type { Client } from "../../clients/createClient.js";
-import type { Account } from "../../accounts/types.js";
-import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils.js";
-import { Chain } from "../../types/chain.js";
+import type { Transport } from 'viem'
+import type { RequestErrorType } from 'viem/utils'
+import type { Account } from '../../accounts/types.js'
+import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { Chain } from '../../types/chain.js'
 
-export type GetGasPriceReturnType = bigint;
-export type GetGaspriceErrorType = RequestErrorType | ErrorType;
+export type GetGasPriceReturnType = bigint
+export type GetGaspriceErrorType = RequestErrorType | ErrorType
 
 /**
  * Returns the current price per gas in Drip.
@@ -18,11 +18,11 @@ export type GetGaspriceErrorType = RequestErrorType | ErrorType;
 
 export async function getGasPrice<
   TChain extends Chain | undefined,
-  TAccount extends Account | undefined
+  TAccount extends Account | undefined,
 >(client: Client<Transport, TChain, TAccount>): Promise<GetGasPriceReturnType> {
   const gasPrice = await client.request({
     method: 'cfx_gasPrice',
-  });
+  })
 
-  return BigInt(gasPrice);
+  return BigInt(gasPrice)
 }

@@ -1,26 +1,26 @@
-import { AbiEvent } from "abitype";
-import { EpochNumber, EpochTag } from "../../types/block.js";
+import type { AbiEvent } from 'abitype'
 import {
-  EncodeEventTopicsErrorType,
-  EncodeEventTopicsParameters,
-  Hash,
-  Hex,
-  LogTopic,
-  MaybeAbiEventName,
-  MaybeExtractEventArgsFromAbi,
-  NumberToHexErrorType,
-  Transport,
+  type EncodeEventTopicsErrorType,
+  type EncodeEventTopicsParameters,
+  type Hash,
+  type Hex,
+  type LogTopic,
+  type MaybeAbiEventName,
+  type MaybeExtractEventArgsFromAbi,
+  type NumberToHexErrorType,
+  type Transport,
   encodeEventTopics,
   numberToHex,
-} from "viem";
-import { Address } from "../../accounts/types.js";
-import { Filter } from "../../types/filter.js";
-import { Prettify } from "../../types/utils.js";
-import { RequestErrorType } from "viem/utils";
-import { ErrorType } from "../../errors/utils.js";
-import { Client } from "../../clients/createClient.js";
-import { createFilterRequestScope } from "../../utils/filters/createFilterRequestScope.js";
-import { Chain } from "../../types/chain.js";
+} from 'viem'
+import type { RequestErrorType } from 'viem/utils'
+import type { Address } from '../../accounts/types.js'
+import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { EpochNumber, EpochTag } from '../../types/block.js'
+import type { Chain } from '../../types/chain.js'
+import type { Filter } from '../../types/filter.js'
+import type { Prettify } from '../../types/utils.js'
+import { createFilterRequestScope } from '../../utils/filters/createFilterRequestScope.js'
 
 export type CreateEventFilterParameters<
   TAbiEvent extends AbiEvent | undefined = undefined,
@@ -32,21 +32,21 @@ export type CreateEventFilterParameters<
   _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>,
   _Args extends
     | MaybeExtractEventArgsFromAbi<TAbiEvents, _EventName>
-    | undefined = undefined
+    | undefined = undefined,
 > = {
-  address?: Address | Address[] | undefined;
-  fromBlock?: bigint | undefined;
-  toBlock?: bigint | undefined;
+  address?: Address | Address[] | undefined
+  fromBlock?: bigint | undefined
+  toBlock?: bigint | undefined
   /**
    * @default latest_checkpoint
    */
-  fromEpoch?: EpochNumber | EpochTag | undefined;
+  fromEpoch?: EpochNumber | EpochTag | undefined
   /**
    * @default latest_checkpoint
    */
-  toEpoch?: EpochNumber | EpochTag | undefined;
+  toEpoch?: EpochNumber | EpochTag | undefined
 
-  blockHashes?: Hash[] | undefined;
+  blockHashes?: Hash[] | undefined
 } & (MaybeExtractEventArgsFromAbi<
   TAbiEvents,
   _EventName
@@ -55,47 +55,47 @@ export type CreateEventFilterParameters<
       | {
           args:
             | TEventFilterArgs
-            | (_Args extends TEventFilterArgs ? _Args : never);
-          event: TAbiEvent;
-          events?: never | undefined;
+            | (_Args extends TEventFilterArgs ? _Args : never)
+          event: TAbiEvent
+          events?: never | undefined
           /**
            * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
            * @default false
            */
-          strict?: TStrict | undefined;
+          strict?: TStrict | undefined
         }
       | {
-          args?: never | undefined;
-          event?: TAbiEvent | undefined;
-          events?: never | undefined;
+          args?: never | undefined
+          event?: TAbiEvent | undefined
+          events?: never | undefined
           /**
            * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
            * @default false
            */
-          strict?: TStrict | undefined;
+          strict?: TStrict | undefined
         }
       | {
-          args?: never | undefined;
-          event?: never | undefined;
-          events: TAbiEvents | undefined;
+          args?: never | undefined
+          event?: never | undefined
+          events: TAbiEvents | undefined
           /**
            * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
            * @default false
            */
-          strict?: TStrict | undefined;
+          strict?: TStrict | undefined
         }
       | {
-          args?: never | undefined;
-          event?: never | undefined;
-          events?: never | undefined;
-          strict?: never | undefined;
+          args?: never | undefined
+          event?: never | undefined
+          events?: never | undefined
+          strict?: never | undefined
         }
   : {
-      args?: never | undefined;
-      event?: never | undefined;
-      events?: never | undefined;
-      strict?: never | undefined;
-    });
+      args?: never | undefined
+      event?: never | undefined
+      events?: never | undefined
+      strict?: never | undefined
+    })
 
 export type CreateEventFilterReturnType<
   TAbiEvent extends AbiEvent | undefined = undefined,
@@ -109,15 +109,15 @@ export type CreateEventFilterReturnType<
   _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>,
   _Args extends
     | MaybeExtractEventArgsFromAbi<TAbiEvents, _EventName>
-    | undefined = undefined
+    | undefined = undefined,
 > = Prettify<
-  Filter<"event", TAbiEvents, _EventName, _Args, TStrict, TFromEpoch, TToEpoch>
->;
+  Filter<'event', TAbiEvents, _EventName, _Args, TStrict, TFromEpoch, TToEpoch>
+>
 export type CreateEventFilterErrorType =
   | EncodeEventTopicsErrorType
   | RequestErrorType
   | NumberToHexErrorType
-  | ErrorType;
+  | ErrorType
 
 export async function createEventFilter<
   TChain extends Chain | undefined,
@@ -132,7 +132,7 @@ export async function createEventFilter<
   _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>,
   _Args extends
     | MaybeExtractEventArgsFromAbi<TAbiEvents, _EventName>
-    | undefined = undefined
+    | undefined = undefined,
 >(
   client: Client<Transport, TChain>,
   {
@@ -152,7 +152,7 @@ export async function createEventFilter<
     TStrict,
     _EventName,
     _Args
-  > = {} as any
+  > = {} as any,
 ): Promise<
   CreateEventFilterReturnType<
     TAbiEvent,
@@ -164,13 +164,13 @@ export async function createEventFilter<
     _Args
   >
 > {
-  const events = events_ ?? (event ? [event] : undefined);
+  const events = events_ ?? (event ? [event] : undefined)
 
   const getRequest = createFilterRequestScope(client, {
-    method: "cfx_newFilter",
-  });
+    method: 'cfx_newFilter',
+  })
 
-  let topics: LogTopic[] = [];
+  let topics: LogTopic[] = []
   if (events) {
     topics = [
       (events as AbiEvent[]).flatMap((event) =>
@@ -178,20 +178,20 @@ export async function createEventFilter<
           abi: [event],
           eventName: (event as AbiEvent).name,
           args,
-        } as EncodeEventTopicsParameters)
+        } as EncodeEventTopicsParameters),
       ),
-    ];
-    if (event) topics = topics[0] as LogTopic[];
+    ]
+    if (event) topics = topics[0] as LogTopic[]
   }
 
   const fromBlock_ =
-    typeof fromBlock === "bigint" ? numberToHex(fromBlock) : fromBlock;
-  const toBlock_ = typeof toBlock === "bigint" ? numberToHex(toBlock) : toBlock;
+    typeof fromBlock === 'bigint' ? numberToHex(fromBlock) : fromBlock
+  const toBlock_ = typeof toBlock === 'bigint' ? numberToHex(toBlock) : toBlock
 
-  let id: Hex;
+  let id: Hex
   if (blockHashes) {
     id = await client.request({
-      method: "cfx_newFilter",
+      method: 'cfx_newFilter',
       params: [
         {
           fromBlock: fromBlock_,
@@ -201,15 +201,15 @@ export async function createEventFilter<
           ...(topics.length ? { topics } : {}),
         },
       ],
-    });
+    })
   } else {
     const fromEpoch_ =
-      typeof fromEpoch === "bigint" ? numberToHex(fromEpoch) : fromEpoch;
+      typeof fromEpoch === 'bigint' ? numberToHex(fromEpoch) : fromEpoch
     const toEpoch_ =
-      typeof toEpoch === "bigint" ? numberToHex(toEpoch) : toEpoch;
+      typeof toEpoch === 'bigint' ? numberToHex(toEpoch) : toEpoch
 
     id = await client.request({
-      method: "cfx_newFilter",
+      method: 'cfx_newFilter',
       params: [
         {
           fromEpoch: fromEpoch_,
@@ -221,7 +221,7 @@ export async function createEventFilter<
           ...(topics.length ? { topics } : {}),
         },
       ],
-    });
+    })
   }
 
   return {
@@ -233,7 +233,7 @@ export async function createEventFilter<
     request: getRequest(id),
     strict: Boolean(strict),
     toBlock,
-    type: "event",
+    type: 'event',
   } as unknown as CreateEventFilterReturnType<
     TAbiEvent,
     TAbiEvents,
@@ -242,5 +242,5 @@ export async function createEventFilter<
     TToEpoch,
     _EventName,
     _Args
-  >;
+  >
 }

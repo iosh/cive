@@ -1,30 +1,30 @@
 import {
   BaseError,
-  BaseErrorType,
+  type BaseErrorType,
   FeeCapTooHighError,
-  FeeCapTooHighErrorType,
+  type FeeCapTooHighErrorType,
   TipAboveFeeCapError,
-  TipAboveFeeCapErrorType,
-} from "viem";
-import { IsAddressErrorType, isAddress } from "../address/isAddress.js";
-import { ErrorType } from "../../errors/utils.js";
-import {
-  InvalidAddressError,
-  InvalidAddressErrorType,
-} from "../errors/address.js";
-import {
-  InvalidChainIdError,
-  InvalidChainIdErrorType,
-} from "../errors/chain.js";
-import {
+  type TipAboveFeeCapErrorType,
+} from 'viem'
+import type { ErrorType } from '../../errors/utils.js'
+import type {
   TransactionSerializableEIP1559,
   TransactionSerializableEIP2930,
   TransactionSerializableLegacy,
-} from "../../types/transaction.js";
+} from '../../types/transaction.js'
+import { type IsAddressErrorType, isAddress } from '../address/isAddress.js'
+import {
+  InvalidAddressError,
+  type InvalidAddressErrorType,
+} from '../errors/address.js'
+import {
+  InvalidChainIdError,
+  type InvalidChainIdErrorType,
+} from '../errors/chain.js'
 
 export type AssertTransactionEIP4844ErrorType =
   | AssertTransactionEIP1559ErrorType
-  | ErrorType;
+  | ErrorType
 
 export type AssertTransactionEIP1559ErrorType =
   | BaseErrorType
@@ -33,22 +33,22 @@ export type AssertTransactionEIP1559ErrorType =
   | InvalidChainIdErrorType
   | FeeCapTooHighErrorType
   | TipAboveFeeCapErrorType
-  | ErrorType;
+  | ErrorType
 
 export function assertTransactionEIP1559(
-  transaction: TransactionSerializableEIP1559
+  transaction: TransactionSerializableEIP1559,
 ) {
-  const { chainId, maxPriorityFeePerGas, maxFeePerGas, to } = transaction;
-  if (chainId <= 0) throw new InvalidChainIdError({ chainId });
-  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to });
+  const { chainId, maxPriorityFeePerGas, maxFeePerGas, to } = transaction
+  if (chainId <= 0) throw new InvalidChainIdError({ chainId })
+  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to })
   if (maxFeePerGas && maxFeePerGas > 2n ** 256n - 1n)
-    throw new FeeCapTooHighError({ maxFeePerGas });
+    throw new FeeCapTooHighError({ maxFeePerGas })
   if (
     maxPriorityFeePerGas &&
     maxFeePerGas &&
     maxPriorityFeePerGas > maxFeePerGas
   )
-    throw new TipAboveFeeCapError({ maxFeePerGas, maxPriorityFeePerGas });
+    throw new TipAboveFeeCapError({ maxFeePerGas, maxPriorityFeePerGas })
 }
 
 export type AssertTransactionEIP2930ErrorType =
@@ -57,21 +57,21 @@ export type AssertTransactionEIP2930ErrorType =
   | InvalidAddressErrorType
   | InvalidChainIdErrorType
   | FeeCapTooHighErrorType
-  | ErrorType;
+  | ErrorType
 
 export function assertTransactionEIP2930(
-  transaction: TransactionSerializableEIP2930
+  transaction: TransactionSerializableEIP2930,
 ) {
   const { chainId, maxPriorityFeePerGas, gasPrice, maxFeePerGas, to } =
-    transaction;
-  if (chainId <= 0) throw new InvalidChainIdError({ chainId });
-  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to });
+    transaction
+  if (chainId <= 0) throw new InvalidChainIdError({ chainId })
+  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to })
   if (maxPriorityFeePerGas || maxFeePerGas)
     throw new BaseError(
-      "`maxFeePerGas`/`maxPriorityFeePerGas` is not a valid EIP-2930 Transaction attribute."
-    );
+      '`maxFeePerGas`/`maxPriorityFeePerGas` is not a valid EIP-2930 Transaction attribute.',
+    )
   if (gasPrice && gasPrice > 2n ** 256n - 1n)
-    throw new FeeCapTooHighError({ maxFeePerGas: gasPrice });
+    throw new FeeCapTooHighError({ maxFeePerGas: gasPrice })
 }
 
 export type AssertTransactionLegacyErrorType =
@@ -80,10 +80,10 @@ export type AssertTransactionLegacyErrorType =
   | InvalidAddressErrorType
   | InvalidChainIdErrorType
   | FeeCapTooHighErrorType
-  | ErrorType;
+  | ErrorType
 
 export function assertTransactionLegacy(
-  transaction: TransactionSerializableLegacy
+  transaction: TransactionSerializableLegacy,
 ) {
   const {
     chainId,
@@ -92,18 +92,18 @@ export function assertTransactionLegacy(
     maxFeePerGas,
     to,
     accessList,
-  } = transaction;
-  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to });
-  if (typeof chainId !== "undefined" && chainId <= 0)
-    throw new InvalidChainIdError({ chainId });
+  } = transaction
+  if (to && !isAddress(to)) throw new InvalidAddressError({ address: to })
+  if (typeof chainId !== 'undefined' && chainId <= 0)
+    throw new InvalidChainIdError({ chainId })
   if (maxPriorityFeePerGas || maxFeePerGas)
     throw new BaseError(
-      "`maxFeePerGas`/`maxPriorityFeePerGas` is not a valid Legacy Transaction attribute."
-    );
+      '`maxFeePerGas`/`maxPriorityFeePerGas` is not a valid Legacy Transaction attribute.',
+    )
   if (gasPrice && gasPrice > 2n ** 256n - 1n)
-    throw new FeeCapTooHighError({ maxFeePerGas: gasPrice });
+    throw new FeeCapTooHighError({ maxFeePerGas: gasPrice })
   if (accessList)
     throw new BaseError(
-      "`accessList` is not a valid Legacy Transaction attribute."
-    );
+      '`accessList` is not a valid Legacy Transaction attribute.',
+    )
 }

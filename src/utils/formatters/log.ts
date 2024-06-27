@@ -1,13 +1,13 @@
-import type { ExactPartial } from "../../types/utils.js";
-import type { RpcLog } from "../../types/rpc.js";
-import type { Log } from "../../types/log.js";
+import type { Log } from '../../types/log.js'
+import type { RpcLog } from '../../types/rpc.js'
+import type { ExactPartial } from '../../types/utils.js'
 
 export function formatLog(
   log: ExactPartial<RpcLog>,
   {
     args,
     eventName,
-  }: { args?: unknown | undefined; eventName?: string | undefined } = {}
+  }: { args?: unknown | undefined; eventName?: string | undefined } = {},
 ) {
   return {
     ...log,
@@ -20,5 +20,5 @@ export function formatLog(
       ? BigInt(log.transactionIndex)
       : null,
     ...(eventName ? { args, eventName } : {}),
-  } as Log;
+  } as Log
 }

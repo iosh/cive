@@ -1,54 +1,54 @@
-import { Transport } from "viem";
-import { Chain } from "../../types/chain.js";
-import { Account } from "../../accounts/types.js";
-import { Client } from "../createClient.js";
-import { clearTxpool } from "../../actions/localNode/clearTxpool.js";
+import type { Transport } from 'viem'
+import type { Account } from '../../accounts/types.js'
 import {
-  GetLocalNodeAddressesReturnType,
-  getLocalNodeAddresses,
-} from "../../actions/localNode/getLocalNodeAddresses.js";
-import {
-  CreateLocalNodeAccountParameters,
-  CreateLocalNodeAccountReturnType,
-  createLocalNodeAccount,
-} from "../../actions/localNode/createLocalNodeAccount.js";
-import {
-  UnlockLocalNodeAccountParameters,
-  UnlockLocalNodeAccountReturnType,
+  type UnlockLocalNodeAccountParameters,
+  type UnlockLocalNodeAccountReturnType,
   unlockLocalNodeAccount,
-} from "../../actions/localNode/UnlockLocalNodeAccount.js";
+} from '../../actions/localNode/UnlockLocalNodeAccount.js'
+import { clearTxpool } from '../../actions/localNode/clearTxpool.js'
 import {
-  LockLocalNodeAccountParameters,
-  LockLocalNodeAccountReturnType,
-  lockLocalNodeAccount,
-} from "../../actions/localNode/LockLocalNodeAccount.js";
+  type CreateLocalNodeAccountParameters,
+  type CreateLocalNodeAccountReturnType,
+  createLocalNodeAccount,
+} from '../../actions/localNode/createLocalNodeAccount.js'
 import {
-  GenerateLocalNodeBlockParameters,
-  GenerateLocalNodeBlockReturnTYpe,
+  type GenerateLocalNodeBlockParameters,
+  type GenerateLocalNodeBlockReturnTYpe,
   generateLocalNodeBlock,
-} from "../../actions/localNode/generateLocalNodeBlock.js";
+} from '../../actions/localNode/generateLocalNodeBlock.js'
+import {
+  type GetLocalNodeAddressesReturnType,
+  getLocalNodeAddresses,
+} from '../../actions/localNode/getLocalNodeAddresses.js'
+import {
+  type LockLocalNodeAccountParameters,
+  type LockLocalNodeAccountReturnType,
+  lockLocalNodeAccount,
+} from '../../actions/localNode/lockLocalNodeAccount.js'
+import type { Chain } from '../../types/chain.js'
+import type { Client } from '../createClient.js'
 
 export type LocalNodeActions = {
-  clearTxpool: () => Promise<void>;
-  getLocalNodeAddresses: () => Promise<GetLocalNodeAddressesReturnType>;
+  clearTxpool: () => Promise<void>
+  getLocalNodeAddresses: () => Promise<GetLocalNodeAddressesReturnType>
   createLocalNodeAccount: (
-    args: CreateLocalNodeAccountParameters
-  ) => Promise<CreateLocalNodeAccountReturnType>;
+    args: CreateLocalNodeAccountParameters,
+  ) => Promise<CreateLocalNodeAccountReturnType>
   unlockLocalNodeAccount: (
-    args: UnlockLocalNodeAccountParameters
-  ) => Promise<UnlockLocalNodeAccountReturnType>;
+    args: UnlockLocalNodeAccountParameters,
+  ) => Promise<UnlockLocalNodeAccountReturnType>
   lockLocalNodeAccount: (
-    args: LockLocalNodeAccountParameters
-  ) => Promise<LockLocalNodeAccountReturnType>;
+    args: LockLocalNodeAccountParameters,
+  ) => Promise<LockLocalNodeAccountReturnType>
   generateLocalNodeBlock: (
-    args: GenerateLocalNodeBlockParameters
-  ) => Promise<GenerateLocalNodeBlockReturnTYpe>;
-};
+    args: GenerateLocalNodeBlockParameters,
+  ) => Promise<GenerateLocalNodeBlockReturnTYpe>
+}
 
 export function localNodeActions<
   TTransport extends Transport = Transport,
   TChain extends Chain | undefined = Chain | undefined,
-  TAccount extends Account | undefined = Account | undefined
+  TAccount extends Account | undefined = Account | undefined,
 >(client: Client<TTransport, TChain, TAccount>): LocalNodeActions {
   return {
     clearTxpool: () => clearTxpool(client),
@@ -57,5 +57,5 @@ export function localNodeActions<
     unlockLocalNodeAccount: (args) => unlockLocalNodeAccount(client, args),
     lockLocalNodeAccount: (args) => lockLocalNodeAccount(client, args),
     generateLocalNodeBlock: (args) => generateLocalNodeBlock(client, args),
-  };
+  }
 }

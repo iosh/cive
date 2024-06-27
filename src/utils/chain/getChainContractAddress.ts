@@ -1,28 +1,28 @@
 import {
-  Chain,
-  ChainContract,
+  type Chain,
+  type ChainContract,
   ChainDoesNotSupportContract,
-  ChainDoesNotSupportContractErrorType,
-} from "viem";
+  type ChainDoesNotSupportContractErrorType,
+} from 'viem'
 
 export type GetChainContractAddressErrorType =
-  ChainDoesNotSupportContractErrorType;
+  ChainDoesNotSupportContractErrorType
 
 export function getChainContractAddress({
   blockNumber,
   chain,
   contract: name,
 }: {
-  blockNumber?: bigint | undefined;
-  chain: Chain;
-  contract: string;
+  blockNumber?: bigint | undefined
+  chain: Chain
+  contract: string
 }) {
-  const contract = (chain?.contracts as Record<string, ChainContract>)?.[name];
+  const contract = (chain?.contracts as Record<string, ChainContract>)?.[name]
   if (!contract)
     throw new ChainDoesNotSupportContract({
       chain,
       contract: { name },
-    });
+    })
 
   if (
     blockNumber &&
@@ -36,7 +36,7 @@ export function getChainContractAddress({
         name,
         blockCreated: contract.blockCreated,
       },
-    });
+    })
 
-  return contract.address;
+  return contract.address
 }

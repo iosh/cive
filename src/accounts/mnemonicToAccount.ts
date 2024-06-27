@@ -1,14 +1,14 @@
-import { HDKey } from "@scure/bip32";
-import { mnemonicToSeedSync } from "@scure/bip39";
+import { HDKey } from '@scure/bip32'
+import { mnemonicToSeedSync } from '@scure/bip39'
 
-import type { ErrorType } from "../errors/utils.js";
+import type { ErrorType } from '../errors/utils.js'
 import {
   type HDKeyToAccountErrorType,
   hdKeyToAccount,
-} from "./hdKeyToAccount.js";
-import type { HDAccount, HDOptions } from "./types.js";
+} from './hdKeyToAccount.js'
+import type { HDAccount, HDOptions } from './types.js'
 
-export type MnemonicToAccountErrorType = HDKeyToAccountErrorType | ErrorType;
+export type MnemonicToAccountErrorType = HDKeyToAccountErrorType | ErrorType
 
 /**
  * @description Creates an Account from a mnemonic phrase.
@@ -18,8 +18,8 @@ export type MnemonicToAccountErrorType = HDKeyToAccountErrorType | ErrorType;
 export function mnemonicToAccount(
   mnemonic: string,
   networkId: number,
-  opts: HDOptions = {}
+  opts: HDOptions = {},
 ): HDAccount {
-  const seed = mnemonicToSeedSync(mnemonic);
-  return hdKeyToAccount(HDKey.fromMasterSeed(seed), networkId, opts);
+  const seed = mnemonicToSeedSync(mnemonic)
+  return hdKeyToAccount(HDKey.fromMasterSeed(seed), networkId, opts)
 }

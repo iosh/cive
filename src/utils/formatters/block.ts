@@ -1,47 +1,47 @@
-import type { Hash } from "viem";
-import type { Block, EpochTag } from "../../types/block.js";
-import type { ExactPartial, Prettify } from "../../types/utils.js";
-import { formatTransaction, type FormattedTransaction } from "./transaction.js";
-import type { ErrorType } from "../../errors/utils.js";
-import type { RpcBlock } from "../../types/rpc.js";
-import {
+import type { Hash } from 'viem'
+import type { ErrorType } from '../../errors/utils.js'
+import type { Block, EpochTag } from '../../types/block.js'
+import type {
   Chain,
   ExtractChainFormatterExclude,
   ExtractChainFormatterReturnType,
-} from "../../types/chain.js";
+} from '../../types/chain.js'
+import type { RpcBlock } from '../../types/rpc.js'
+import type { ExactPartial, Prettify } from '../../types/utils.js'
+import { type FormattedTransaction, formatTransaction } from './transaction.js'
 
-type BlockPendingDependencies = "gasUsed" | "hash" | "nonce" | "powQuality";
+type BlockPendingDependencies = 'gasUsed' | 'hash' | 'nonce' | 'powQuality'
 export type FormattedBlock<
   TChain extends Chain | undefined = undefined,
   TIncludeTransactions extends boolean = boolean,
   TEpochTag extends EpochTag = EpochTag,
   _FormatterReturnType = ExtractChainFormatterReturnType<
     TChain,
-    "block",
+    'block',
     Block<bigint, TIncludeTransactions>
   >,
   _ExcludedPendingDependencies extends string = BlockPendingDependencies &
-    ExtractChainFormatterExclude<TChain, "block">,
+    ExtractChainFormatterExclude<TChain, 'block'>,
   _Formatted = Omit<_FormatterReturnType, BlockPendingDependencies> & {
-    [_key in _ExcludedPendingDependencies]: never;
+    [_key in _ExcludedPendingDependencies]: never
   } & Pick<
       Block<bigint, TIncludeTransactions, TEpochTag>,
       BlockPendingDependencies
     >,
   _Transactions = TIncludeTransactions extends true
     ? Prettify<FormattedTransaction<TChain, TEpochTag>>[]
-    : Hash[]
-> = Omit<_Formatted, "transactions"> & {
-  transactions: _Transactions;
-};
+    : Hash[],
+> = Omit<_Formatted, 'transactions'> & {
+  transactions: _Transactions
+}
 
-export type FormatBlockErrorType = ErrorType;
+export type FormatBlockErrorType = ErrorType
 
 export function formatBlock(block: ExactPartial<RpcBlock>) {
   const transactions = block.transactions?.map((transaction) => {
-    if (typeof transaction === "string") return transaction;
-    return formatTransaction(transaction);
-  });
+    if (typeof transaction === 'string') return transaction
+    return formatTransaction(transaction)
+  })
 
   const _block = {
     ...block,
@@ -55,7 +55,7 @@ export function formatBlock(block: ExactPartial<RpcBlock>) {
     timestamp: block.timestamp ? BigInt(block.timestamp) : undefined,
     blockNumber: block.blockNumber ? BigInt(block.blockNumber) : null,
     transactions,
-  } as Block;
+  } as Block
 
-  return _block;
+  return _block
 }

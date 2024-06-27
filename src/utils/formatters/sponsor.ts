@@ -1,5 +1,5 @@
-import type { RpcSponsor } from "../../types/rpc.js";
-import type { Sponsor } from "../../types/sponsor.js";
+import type { RpcSponsor } from '../../types/rpc.js'
+import type { Sponsor } from '../../types/sponsor.js'
 
 export function formatSponsor(sponsor: RpcSponsor): Sponsor {
   const data = {
@@ -9,7 +9,7 @@ export function formatSponsor(sponsor: RpcSponsor): Sponsor {
     sponsorGasBound: BigInt(sponsor.sponsorGasBound),
     usedStoragePoints: BigInt(sponsor.usedStoragePoints),
     availableStoragePoints: BigInt(sponsor.availableStoragePoints),
-  };
+  }
 
-  return data;
+  return data
 }

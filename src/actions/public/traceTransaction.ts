@@ -1,23 +1,23 @@
-import { Hash, Transport } from "viem";
-import { Trace } from "../../types/tract.js";
-import { Client } from "../../clients/createClient.js";
-import { formatTract } from "../../utils/formatters/tract.js";
-import { Chain } from "../../types/chain.js";
+import type { Hash, Transport } from 'viem'
+import type { Client } from '../../clients/createClient.js'
+import type { Chain } from '../../types/chain.js'
+import type { Trace } from '../../types/tract.js'
+import { formatTract } from '../../utils/formatters/tract.js'
 
 export type TraceTransactionParameters = {
-  transactionHash: Hash;
-};
+  transactionHash: Hash
+}
 
-export type TraceTransactionReturnType = Trace;
+export type TraceTransactionReturnType = Trace
 
 export async function traceTransaction<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { transactionHash }: TraceTransactionParameters
+  { transactionHash }: TraceTransactionParameters,
 ): Promise<TraceTransactionReturnType> {
   const result = await client.request({
-    method: "trace_transaction",
+    method: 'trace_transaction',
     params: [transactionHash],
-  });
+  })
 
-  return formatTract(result);
+  return formatTract(result)
 }

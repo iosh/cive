@@ -1,24 +1,24 @@
 import {
-  InvalidStorageKeySizeErrorType,
   InvalidStorageKeySizeError,
-} from "viem";
-import type { ErrorType } from "../../errors/utils.js";
-import type { Hex } from "../../types/misc.js";
-import type { AccessList } from "../../types/transaction.js";
-import { base32AddressToHex } from "../address/base32AddressToHex.js";
-import { type IsAddressErrorType, isAddress } from "../address/isAddress.js";
+  type InvalidStorageKeySizeErrorType,
+} from 'viem'
+import type { ErrorType } from '../../errors/utils.js'
+import type { Hex } from '../../types/misc.js'
+import type { AccessList } from '../../types/transaction.js'
+import { base32AddressToHex } from '../address/base32AddressToHex.js'
+import { type IsAddressErrorType, isAddress } from '../address/isAddress.js'
 
 import {
   InvalidAddressError,
-  InvalidAddressErrorType,
-} from "../errors/address.js";
+  type InvalidAddressErrorType,
+} from '../errors/address.js'
 
-export type RecursiveArray<T> = T | readonly RecursiveArray<T>[];
+export type RecursiveArray<T> = T | readonly RecursiveArray<T>[]
 export type SerializeAccessListErrorType =
   | InvalidStorageKeySizeErrorType
   | InvalidAddressErrorType
   | IsAddressErrorType
-  | ErrorType;
+  | ErrorType
 
 /*
  * Serialize an  EIP-2930 access list
@@ -30,25 +30,25 @@ export type SerializeAccessListErrorType =
  * @returns Array of hex strings
  */
 export function serializeAccessList(
-  accessList?: AccessList | undefined
+  accessList?: AccessList | undefined,
 ): RecursiveArray<Hex> {
-  if (!accessList || accessList.length === 0) return [];
+  if (!accessList || accessList.length === 0) return []
 
-  const serializedAccessList = [];
+  const serializedAccessList = []
   for (let i = 0; i < accessList.length; i++) {
-    const { address, storageKeys } = accessList[i];
+    const { address, storageKeys } = accessList[i]
 
     for (let j = 0; j < storageKeys.length; j++) {
       if (storageKeys[j].length - 2 !== 64) {
-        throw new InvalidStorageKeySizeError({ storageKey: storageKeys[j] });
+        throw new InvalidStorageKeySizeError({ storageKey: storageKeys[j] })
       }
     }
 
     if (!isAddress(address)) {
-      throw new InvalidAddressError({ address });
+      throw new InvalidAddressError({ address })
     }
 
-    serializedAccessList.push([base32AddressToHex({ address }), storageKeys]);
+    serializedAccessList.push([base32AddressToHex({ address }), storageKeys])
   }
-  return serializedAccessList;
+  return serializedAccessList
 }

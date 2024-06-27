@@ -1,16 +1,22 @@
 import {
-  AssertTransactionLegacyErrorType,
-  ConcatHexErrorType,
-  GetTransationTypeErrorType as GetTransactionTypeErrorType,
-  InvalidLegacyVErrorType,
-  Signature,
-  ToHexErrorType,
-  ToRlpErrorType,
+  type AssertTransactionLegacyErrorType,
+  type ConcatHexErrorType,
+  type GetTransationTypeErrorType as GetTransactionTypeErrorType,
+  type InvalidLegacyVErrorType,
+  type Signature,
+  type ToHexErrorType,
+  type ToRlpErrorType,
   concatHex,
   toHex,
   toRlp,
-} from "viem";
+} from 'viem'
 import {
+  rlpTransaction1559Type,
+  rlpTransaction2930Type,
+} from '../../constants/transaction.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { SignatureLegacy } from '../../types/misc.js'
+import type {
   TransactionSerializable,
   TransactionSerializableEIP1559,
   TransactionSerializableEIP2930,
@@ -21,78 +27,73 @@ import {
   TransactionSerializedEIP2930,
   TransactionSerializedLegacy,
   TransactionType,
-} from "../../types/transaction.js";
-import { OneOf } from "../../types/utils.js";
+} from '../../types/transaction.js'
+import type { OneOf } from '../../types/utils.js'
+import { base32AddressToHex } from '../address/base32AddressToHex.js'
 import {
-  GetTransactionType,
-  getTransactionType,
-} from "./getTransactionType.js";
-import { ErrorType } from "../../errors/utils.js";
-import { SignatureLegacy } from "../../types/misc.js";
-import {
-  AssertTransactionEIP1559ErrorType,
-  AssertTransactionEIP2930ErrorType,
+  type AssertTransactionEIP1559ErrorType,
+  type AssertTransactionEIP2930ErrorType,
   assertTransactionEIP1559,
   assertTransactionEIP2930,
   assertTransactionLegacy,
-} from "./assertTransaction.js";
-import { base32AddressToHex } from "../address/base32AddressToHex.js";
+} from './assertTransaction.js'
 import {
-  SerializeAccessListErrorType,
+  type GetTransactionType,
+  getTransactionType,
+} from './getTransactionType.js'
+import {
+  type SerializeAccessListErrorType,
   serializeAccessList,
-} from "./serializeAccessList.js";
-import {
-  rlpTransaction1559Type,
-  rlpTransaction2930Type,
-} from "../../constants/transaction.js";
+} from './serializeAccessList.js'
 
 export type SerializedTransactionReturnType<
   transaction extends TransactionSerializable = TransactionSerializable,
-  _transactionSerialized extends TransactionType = GetTransactionType<transaction>
-> = TransactionSerialized<_transactionSerialized>;
+  _transactionSerialized extends
+    TransactionType = GetTransactionType<transaction>,
+> = TransactionSerialized<_transactionSerialized>
 
 export type SerializeTransactionFn<
   transaction extends TransactionSerializableGeneric = TransactionSerializable,
   ///
-  _transactionType extends TransactionType = never
+  _transactionType extends TransactionType = never,
 > = typeof serializeTransaction<
   OneOf<TransactionSerializable | transaction>,
   _transactionType
->;
+>
 
 export type SerializeTransactionErrorType =
   | GetTransactionTypeErrorType
   | SerializeTransactionEIP1559ErrorType
   | SerializeTransactionEIP2930ErrorType
   | SerializeTransactionLegacyErrorType
-  | ErrorType;
+  | ErrorType
 
 export function serializeTransaction<
   const transaction extends TransactionSerializable,
   ///
-  _transactionType extends TransactionType = GetTransactionType<transaction>
+  _transactionType extends TransactionType = GetTransactionType<transaction>,
 >(
   transaction: transaction,
-  signature?: Signature | undefined
+  signature?: Signature | undefined,
 ): SerializedTransactionReturnType<transaction, _transactionType> {
-  const type = getTransactionType(transaction) as GetTransactionType;
+  const type = getTransactionType(transaction) as GetTransactionType
 
-  if (type === "eip1559")
+  if (type === 'eip1559')
     return serializeTransactionEIP1559(
       transaction as TransactionSerializableEIP1559,
-      signature
-    ) as SerializedTransactionReturnType<transaction>;
+      signature,
+    ) as SerializedTransactionReturnType<transaction>
 
-  if (type === "eip2930")
+  if (type === 'eip2930')
     return serializeTransactionEIP2930(
       transaction as TransactionSerializableEIP2930,
-      signature
-    ) as SerializedTransactionReturnType<transaction>;
+      signature,
+    ) as SerializedTransactionReturnType<transaction>
 
   return serializeTransactionLegacy(
     transaction as TransactionSerializableLegacy,
-    signature as SignatureLegacy
-  ) as SerializedTransactionReturnType<transaction>;
+    signature as SignatureLegacy,
+  ) as SerializedTransactionReturnType<transaction>
 }
 
 type SerializeTransactionEIP1559ErrorType =
@@ -102,11 +103,11 @@ type SerializeTransactionEIP1559ErrorType =
   | ToHexErrorType
   | ToRlpErrorType
   | SerializeAccessListErrorType
-  | ErrorType;
+  | ErrorType
 
 function serializeTransactionEIP1559(
   transaction: TransactionSerializableEIP1559,
-  signature?: Signature | undefined
+  signature?: Signature | undefined,
 ): TransactionSerializedEIP1559 {
   const {
     chainId,
@@ -120,43 +121,43 @@ function serializeTransactionEIP1559(
     data,
     storageLimit,
     epochHeight,
-  } = transaction;
+  } = transaction
 
-  assertTransactionEIP1559(transaction);
-  const serializedAccessList = serializeAccessList(accessList);
-  const toHexAddress = to ? base32AddressToHex({ address: to }) : undefined;
+  assertTransactionEIP1559(transaction)
+  const serializedAccessList = serializeAccessList(accessList)
+  const toHexAddress = to ? base32AddressToHex({ address: to }) : undefined
 
   //[nonce, maxPriorityFeePerGas, maxFeePerGas, gas, to, value, storageLimit, epochHeight, chainId, data, accessList]
   const serializedTransaction = [
-    nonce ? toHex(nonce) : "0x",
-    maxPriorityFeePerGas ? toHex(maxPriorityFeePerGas) : "0x",
-    maxFeePerGas ? toHex(maxFeePerGas) : "0x",
-    gas ? toHex(gas) : "0x",
-    toHexAddress ?? "0x",
-    value ? toHex(value) : "0x",
-    storageLimit ? toHex(storageLimit) : "0x",
-    epochHeight ? toHex(epochHeight) : "0x",
+    nonce ? toHex(nonce) : '0x',
+    maxPriorityFeePerGas ? toHex(maxPriorityFeePerGas) : '0x',
+    maxFeePerGas ? toHex(maxFeePerGas) : '0x',
+    gas ? toHex(gas) : '0x',
+    toHexAddress ?? '0x',
+    value ? toHex(value) : '0x',
+    storageLimit ? toHex(storageLimit) : '0x',
+    epochHeight ? toHex(epochHeight) : '0x',
     toHex(chainId),
-    data ?? "0x",
+    data ?? '0x',
     serializedAccessList,
-  ];
+  ]
 
   if (signature) {
     return concatHex([
       rlpTransaction1559Type,
       toRlp([
         serializedTransaction,
-        signature.v ? toHex(signature.v) : "0x",
+        signature.v ? toHex(signature.v) : '0x',
         signature.r,
         signature.s,
       ]),
-    ]) as TransactionSerializedEIP1559;
+    ]) as TransactionSerializedEIP1559
   }
 
   return concatHex([
     rlpTransaction1559Type,
     toRlp(serializedTransaction),
-  ]) as TransactionSerializedEIP1559;
+  ]) as TransactionSerializedEIP1559
 }
 
 type SerializeTransactionEIP2930ErrorType =
@@ -166,11 +167,11 @@ type SerializeTransactionEIP2930ErrorType =
   | ToHexErrorType
   | ToRlpErrorType
   | SerializeAccessListErrorType
-  | ErrorType;
+  | ErrorType
 
 function serializeTransactionEIP2930(
   transaction: TransactionSerializableEIP2930,
-  signature?: Signature | undefined
+  signature?: Signature | undefined,
 ): TransactionSerializedEIP2930 {
   const {
     chainId,
@@ -183,41 +184,41 @@ function serializeTransactionEIP2930(
     gasPrice,
     storageLimit,
     epochHeight,
-  } = transaction;
+  } = transaction
 
-  assertTransactionEIP2930(transaction);
-  const toHexAddress = to ? base32AddressToHex({ address: to }) : undefined;
-  const serializedAccessList = serializeAccessList(accessList);
+  assertTransactionEIP2930(transaction)
+  const toHexAddress = to ? base32AddressToHex({ address: to }) : undefined
+  const serializedAccessList = serializeAccessList(accessList)
 
   const serializedTransaction = [
-    nonce ? toHex(nonce) : "0x",
-    gasPrice ? toHex(gasPrice) : "0x",
-    gas ? toHex(gas) : "0x",
-    toHexAddress ?? "0x",
-    value ? toHex(value) : "0x",
-    storageLimit ? toHex(storageLimit) : "0x",
-    epochHeight ? toHex(epochHeight) : "0x",
+    nonce ? toHex(nonce) : '0x',
+    gasPrice ? toHex(gasPrice) : '0x',
+    gas ? toHex(gas) : '0x',
+    toHexAddress ?? '0x',
+    value ? toHex(value) : '0x',
+    storageLimit ? toHex(storageLimit) : '0x',
+    epochHeight ? toHex(epochHeight) : '0x',
     toHex(chainId),
-    data ?? "0x",
+    data ?? '0x',
     serializedAccessList,
-  ];
+  ]
 
   if (signature) {
     return concatHex([
       rlpTransaction2930Type,
       toRlp([
         serializedTransaction,
-        signature.v ? toHex(signature.v) : "0x",
+        signature.v ? toHex(signature.v) : '0x',
         signature.r,
         signature.s,
       ]),
-    ]) as TransactionSerializedEIP2930;
+    ]) as TransactionSerializedEIP2930
   }
 
   return concatHex([
     rlpTransaction2930Type,
     toRlp(serializedTransaction),
-  ]) as TransactionSerializedEIP2930;
+  ]) as TransactionSerializedEIP2930
 }
 
 type SerializeTransactionLegacyErrorType =
@@ -225,11 +226,11 @@ type SerializeTransactionLegacyErrorType =
   | InvalidLegacyVErrorType
   | ToHexErrorType
   | ToRlpErrorType
-  | ErrorType;
+  | ErrorType
 
 function serializeTransactionLegacy(
   transaction: TransactionSerializableLegacy,
-  signature?: SignatureLegacy | undefined
+  signature?: SignatureLegacy | undefined,
 ): TransactionSerializedLegacy {
   const {
     chainId = 1,
@@ -241,32 +242,32 @@ function serializeTransactionLegacy(
     gasPrice,
     storageLimit,
     epochHeight,
-  } = transaction;
+  } = transaction
 
-  assertTransactionLegacy(transaction);
+  assertTransactionLegacy(transaction)
 
-  let serializedTransaction = [
-    nonce ? toHex(nonce) : "0x",
-    gasPrice ? toHex(gasPrice) : "0x",
-    gas ? toHex(gas) : "0x",
-    to ? base32AddressToHex({ address: to }) : "0x",
-    value ? toHex(value) : "0x",
-    storageLimit ? toHex(storageLimit) : "0x",
-    epochHeight ? toHex(epochHeight) : "0x",
-  ];
+  const serializedTransaction = [
+    nonce ? toHex(nonce) : '0x',
+    gasPrice ? toHex(gasPrice) : '0x',
+    gas ? toHex(gas) : '0x',
+    to ? base32AddressToHex({ address: to }) : '0x',
+    value ? toHex(value) : '0x',
+    storageLimit ? toHex(storageLimit) : '0x',
+    epochHeight ? toHex(epochHeight) : '0x',
+  ]
 
   if (signature) {
     return toRlp([
-      [...serializedTransaction, toHex(chainId), data ?? "0x"],
-      signature.v ? toHex(signature.v) : "0x",
+      [...serializedTransaction, toHex(chainId), data ?? '0x'],
+      signature.v ? toHex(signature.v) : '0x',
       signature.r,
       signature.s,
-    ]) as TransactionSerializedLegacy;
+    ]) as TransactionSerializedLegacy
   } else {
     return toRlp([
       ...serializedTransaction,
       toHex(chainId),
-      data ?? "0x",
-    ]) as TransactionSerializedLegacy;
+      data ?? '0x',
+    ]) as TransactionSerializedLegacy
   }
 }

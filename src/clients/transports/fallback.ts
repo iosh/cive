@@ -1,51 +1,51 @@
 import {
-  Chain,
-  CreateTransportErrorType,
+  type Chain,
+  type CreateTransportErrorType,
   TransactionRejectedRpcError,
-  Transport,
-  TransportConfig,
+  type Transport,
+  type TransportConfig,
   UserRejectedRequestError,
   createTransport,
-} from "viem";
-import { ErrorType } from "../../errors/utils.js";
-import { wait } from "../../utils/wait.js";
+} from 'viem'
+import type { ErrorType } from '../../errors/utils.js'
+import { wait } from '../../utils/wait.js'
 
 // TODO: Narrow `method` & `params` types.
 export type OnResponseFn = (
   args: {
-    method: string;
-    params: unknown[];
-    transport: ReturnType<Transport>;
+    method: string
+    params: unknown[]
+    transport: ReturnType<Transport>
   } & (
     | {
-        error?: never | undefined;
-        response: unknown;
-        status: "success";
+        error?: never | undefined
+        response: unknown
+        status: 'success'
       }
     | {
-        error: Error;
-        response?: never | undefined;
-        status: "error";
+        error: Error
+        response?: never | undefined
+        status: 'error'
       }
-  )
-) => void;
+  ),
+) => void
 
 type RankOptions = {
   /**
    * The polling interval (in ms) at which the ranker should ping the RPC URL.
    * @default client.pollingInterval
    */
-  interval?: number | undefined;
+  interval?: number | undefined
   /**
    * The number of previous samples to perform ranking on.
    * @default 10
    */
-  sampleCount?: number | undefined;
+  sampleCount?: number | undefined
   /**
    * Timeout when sampling transports.
    * @default 1_000
    */
-  timeout?: number | undefined;
+  timeout?: number | undefined
   /**
    * Weights to apply to the scores. Weight values are proportional.
    */
@@ -55,57 +55,57 @@ type RankOptions = {
          * The weight to apply to the latency score.
          * @default 0.3
          */
-        latency?: number | undefined;
+        latency?: number | undefined
         /**
          * The weight to apply to the stability score.
          * @default 0.7
          */
-        stability?: number | undefined;
+        stability?: number | undefined
       }
-    | undefined;
-};
+    | undefined
+}
 
 export type FallbackTransportConfig = {
   /** The key of the Fallback transport. */
-  key?: TransportConfig["key"] | undefined;
+  key?: TransportConfig['key'] | undefined
   /** The name of the Fallback transport. */
-  name?: TransportConfig["name"] | undefined;
+  name?: TransportConfig['name'] | undefined
   /** Toggle to enable ranking, or rank options. */
-  rank?: boolean | RankOptions | undefined;
+  rank?: boolean | RankOptions | undefined
   /** The max number of times to retry. */
-  retryCount?: TransportConfig["retryCount"] | undefined;
+  retryCount?: TransportConfig['retryCount'] | undefined
   /** The base delay (in ms) between retries. */
-  retryDelay?: TransportConfig["retryDelay"] | undefined;
-};
+  retryDelay?: TransportConfig['retryDelay'] | undefined
+}
 
 export type FallbackTransport<transports extends Transport[] = Transport[]> =
   Transport<
-    "fallback",
+    'fallback',
     {
-      onResponse: (fn: OnResponseFn) => void;
+      onResponse: (fn: OnResponseFn) => void
       transports: {
-        [key in keyof transports]: ReturnType<transports[key]>;
-      };
+        [key in keyof transports]: ReturnType<transports[key]>
+      }
     }
-  >;
+  >
 
-export type FallbackTransportErrorType = CreateTransportErrorType | ErrorType;
+export type FallbackTransportErrorType = CreateTransportErrorType | ErrorType
 
 export function fallback<const transports extends Transport[]>(
   transports_: transports,
-  config: FallbackTransportConfig = {}
+  config: FallbackTransportConfig = {},
 ): FallbackTransport<transports> {
   const {
-    key = "fallback",
-    name = "Fallback",
+    key = 'fallback',
+    name = 'Fallback',
     rank = false,
     retryCount,
     retryDelay,
-  } = config;
+  } = config
   return (({ chain, pollingInterval = 4_000, timeout, ...rest }) => {
-    let transports = transports_;
+    let transports = transports_
 
-    let onResponse: OnResponseFn = () => {};
+    let onResponse: OnResponseFn = () => {}
 
     const transport = createTransport(
       {
@@ -118,54 +118,54 @@ export function fallback<const transports extends Transport[]>(
               chain,
               retryCount: 0,
               timeout,
-            });
+            })
             try {
               const response = await transport.request({
                 method,
                 params,
-              } as any);
+              } as any)
 
               onResponse({
                 method,
                 params: params as unknown[],
                 response,
                 transport,
-                status: "success",
-              });
+                status: 'success',
+              })
 
-              return response;
+              return response
             } catch (err) {
               onResponse({
                 error: err as Error,
                 method,
                 params: params as unknown[],
                 transport,
-                status: "error",
-              });
+                status: 'error',
+              })
 
-              if (shouldThrow(err as Error)) throw err;
+              if (shouldThrow(err as Error)) throw err
 
               // If we've reached the end of the fallbacks, throw the error.
-              if (i === transports.length - 1) throw err;
+              if (i === transports.length - 1) throw err
 
               // Otherwise, try the next fallback.
-              return fetch(i + 1);
+              return fetch(i + 1)
             }
-          };
-          return fetch();
+          }
+          return fetch()
         },
         retryCount,
         retryDelay,
-        type: "fallback",
+        type: 'fallback',
       },
       {
         onResponse: (fn: OnResponseFn) => (onResponse = fn),
         transports: transports.map((fn) => fn({ chain, retryCount: 0 })),
-      }
-    );
+      },
+    )
 
     if (rank) {
-      const rankOptions = (typeof rank === "object" ? rank : {}) as RankOptions;
+      const rankOptions = (typeof rank === 'object' ? rank : {}) as RankOptions
       rankTransports({
         chain,
         interval: rankOptions.interval ?? pollingInterval,
@@ -174,22 +174,22 @@ export function fallback<const transports extends Transport[]>(
         timeout: rankOptions.timeout,
         transports,
         weights: rankOptions.weights,
-      });
+      })
     }
-    return transport;
-  }) as FallbackTransport<transports>;
+    return transport
+  }) as FallbackTransport<transports>
 }
 
 function shouldThrow(error: Error) {
-  if ("code" in error && typeof error.code === "number") {
+  if ('code' in error && typeof error.code === 'number') {
     if (
       error.code === TransactionRejectedRpcError.code ||
       error.code === UserRejectedRequestError.code ||
       error.code === 5000 // CAIP UserRejectedRequestError
     )
-      return true;
+      return true
   }
-  return false;
+  return false
 }
 
 export function rankTransports({
@@ -201,83 +201,83 @@ export function rankTransports({
   transports,
   weights = {},
 }: {
-  chain?: Chain | undefined;
-  interval: RankOptions["interval"];
-  onTransports: (transports: Transport[]) => void;
-  sampleCount?: RankOptions["sampleCount"] | undefined;
-  timeout?: RankOptions["timeout"] | undefined;
-  transports: Transport[];
-  weights?: RankOptions["weights"] | undefined;
+  chain?: Chain | undefined
+  interval: RankOptions['interval']
+  onTransports: (transports: Transport[]) => void
+  sampleCount?: RankOptions['sampleCount'] | undefined
+  timeout?: RankOptions['timeout'] | undefined
+  transports: Transport[]
+  weights?: RankOptions['weights'] | undefined
 }) {
   const { stability: stabilityWeight = 0.7, latency: latencyWeight = 0.3 } =
-    weights;
+    weights
 
-  type SampleData = { latency: number; success: number };
-  type Sample = SampleData[];
-  const samples: Sample[] = [];
+  type SampleData = { latency: number; success: number }
+  type Sample = SampleData[]
+  const samples: Sample[] = []
 
   const rankTransports_ = async () => {
     // 1. Take a sample from each Transport.
     const sample: Sample = await Promise.all(
       transports.map(async (transport) => {
-        const transport_ = transport({ chain, retryCount: 0, timeout });
+        const transport_ = transport({ chain, retryCount: 0, timeout })
 
-        const start = Date.now();
-        let end: number;
-        let success: number;
+        const start = Date.now()
+        let end: number
+        let success: number
         try {
-          await transport_.request({ method: "net_listening" });
-          success = 1;
+          await transport_.request({ method: 'net_listening' })
+          success = 1
         } catch {
-          success = 0;
+          success = 0
         } finally {
-          end = Date.now();
+          end = Date.now()
         }
-        const latency = end - start;
-        return { latency, success };
-      })
-    );
+        const latency = end - start
+        return { latency, success }
+      }),
+    )
 
     // 2. Store the sample. If we have more than `sampleCount` samples, remove
     // the oldest sample.
-    samples.push(sample);
-    if (samples.length > sampleCount) samples.shift();
+    samples.push(sample)
+    if (samples.length > sampleCount) samples.shift()
 
     // 3. Calculate the max latency from samples.
     const maxLatency = Math.max(
       ...samples.map((sample) =>
-        Math.max(...sample.map(({ latency }) => latency))
-      )
-    );
+        Math.max(...sample.map(({ latency }) => latency)),
+      ),
+    )
 
     // 4. Calculate the score for each Transport.
     const scores = transports
       .map((_, i) => {
-        const latencies = samples.map((sample) => sample[i].latency);
+        const latencies = samples.map((sample) => sample[i].latency)
         const meanLatency =
           latencies.reduce((acc, latency) => acc + latency, 0) /
-          latencies.length;
-        const latencyScore = 1 - meanLatency / maxLatency;
+          latencies.length
+        const latencyScore = 1 - meanLatency / maxLatency
 
-        const successes = samples.map((sample) => sample[i].success);
+        const successes = samples.map((sample) => sample[i].success)
         const stabilityScore =
           successes.reduce((acc, success) => acc + success, 0) /
-          successes.length;
+          successes.length
 
-        if (stabilityScore === 0) return [0, i];
+        if (stabilityScore === 0) return [0, i]
         return [
           latencyWeight * latencyScore + stabilityWeight * stabilityScore,
           i,
-        ];
+        ]
       })
-      .sort((a, b) => b[0] - a[0]);
+      .sort((a, b) => b[0] - a[0])
 
     // 5. Sort the Transports by score.
-    onTransports(scores.map(([, i]) => transports[i]));
+    onTransports(scores.map(([, i]) => transports[i]))
 
     // 6. Wait, and then rank again.
-    await wait(interval);
-    rankTransports_();
-  };
-  rankTransports_();
+    await wait(interval)
+    rankTransports_()
+  }
+  rankTransports_()
 }

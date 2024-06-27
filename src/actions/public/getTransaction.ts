@@ -1,48 +1,48 @@
 import {
-  TransactionNotFoundError,
   type Hash,
   type NumberToHexErrorType,
+  TransactionNotFoundError,
   type Transport,
-} from "viem";
-import type { Client } from "../../clients/createClient.js";
-import type { Prettify } from "../../types/utils.js";
+} from 'viem'
+import type { RequestErrorType } from 'viem/utils'
+import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { Chain } from '../../types/chain.js'
+import type { Prettify } from '../../types/utils.js'
 import {
-  formatTransaction,
   type FormattedTransaction,
-} from "../../utils/formatters/transaction.js";
-import type { RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils.js";
-import { Chain } from "../../types/chain.js";
+  formatTransaction,
+} from '../../utils/formatters/transaction.js'
 
 export type GetTransactionParameters = {
-  hash: Hash;
-};
+  hash: Hash
+}
 
 export type GetTransactionReturnType<TChain extends Chain | undefined> =
-  Prettify<FormattedTransaction<TChain>>;
+  Prettify<FormattedTransaction<TChain>>
 
 export type GetTransactionErrorType =
   | NumberToHexErrorType
   | RequestErrorType
-  | ErrorType;
+  | ErrorType
 
 export async function getTransaction<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { hash }: GetTransactionParameters
+  { hash }: GetTransactionParameters,
 ): Promise<GetTransactionReturnType<TChain>> {
   const transaction = await client.request({
-    method: "cfx_getTransactionByHash",
+    method: 'cfx_getTransactionByHash',
     params: [hash],
-  });
+  })
 
   if (!transaction) {
     throw new TransactionNotFoundError({
       hash,
-    });
+    })
   }
 
   const format =
-    client.chain?.formatters?.transaction?.format || formatTransaction;
+    client.chain?.formatters?.transaction?.format || formatTransaction
 
-  return format(transaction);
+  return format(transaction)
 }

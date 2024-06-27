@@ -1,6 +1,6 @@
-import type { RpcVote } from "../../types/rpc.js";
-import type { ExactPartial } from "../../types/utils.js";
-import type { Vote } from "../../types/vote.js";
+import type { RpcVote } from '../../types/rpc.js'
+import type { ExactPartial } from '../../types/utils.js'
+import type { Vote } from '../../types/vote.js'
 
 export function formatVote(vote: ExactPartial<RpcVote>): Vote {
   const result = {
@@ -9,7 +9,7 @@ export function formatVote(vote: ExactPartial<RpcVote>): Vote {
     unlockBlockNumber: vote.unlockBlockNumber
       ? Number(vote.unlockBlockNumber)
       : undefined,
-  } as Vote;
+  } as Vote
 
-  return result;
+  return result
 }

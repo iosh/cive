@@ -1,28 +1,28 @@
-import { AbiEvent } from "abitype";
-import { EpochNumber, EpochTag } from "../../types/block.js";
+import type { AbiEvent } from 'abitype'
 import {
-  DecodeEventLogErrorType,
-  EncodeEventTopicsErrorType,
-  EncodeEventTopicsParameters,
-  FormatLogErrorType,
-  Hash,
-  LogTopic,
-  MaybeAbiEventName,
-  MaybeExtractEventArgsFromAbi,
-  NumberToHexErrorType,
-  Transport,
+  type DecodeEventLogErrorType,
+  type EncodeEventTopicsErrorType,
+  type EncodeEventTopicsParameters,
+  type FormatLogErrorType,
+  type Hash,
+  type LogTopic,
+  type MaybeAbiEventName,
+  type MaybeExtractEventArgsFromAbi,
+  type NumberToHexErrorType,
+  type Transport,
   encodeEventTopics,
   numberToHex,
-} from "viem";
-import { Address } from "../../accounts/types.js";
-import { Log } from "../../types/log.js";
-import { RequestErrorType } from "viem/utils";
-import { ErrorType } from "../../errors/utils.js";
-import { Client } from "../../clients/createClient.js";
-import { RpcLog } from "../../types/rpc.js";
-import { formatLog } from "../../utils/formatters/log.js";
-import { parseEventLogs } from "../../utils/abi/parseEventLogs.js";
-import { Chain } from "../../types/chain.js";
+} from 'viem'
+import type { RequestErrorType } from 'viem/utils'
+import type { Address } from '../../accounts/types.js'
+import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { EpochNumber, EpochTag } from '../../types/block.js'
+import type { Chain } from '../../types/chain.js'
+import type { Log } from '../../types/log.js'
+import type { RpcLog } from '../../types/rpc.js'
+import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
+import { formatLog } from '../../utils/formatters/log.js'
 
 export type GetLogsParameters<
   TAbiEvent extends AbiEvent | undefined = undefined,
@@ -33,38 +33,38 @@ export type GetLogsParameters<
   TStrict extends boolean | undefined = undefined,
   TFromEpoch extends EpochNumber | EpochTag | undefined = undefined,
   TToEpoch extends EpochNumber | EpochTag | undefined = undefined,
-  _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>
+  _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>,
 > = {
   /** Address or list of addresses from which logs originated */
-  address?: Address | Address[] | undefined;
-  fromBlock?: bigint | undefined;
-  toBlock?: bigint | undefined;
+  address?: Address | Address[] | undefined
+  fromBlock?: bigint | undefined
+  toBlock?: bigint | undefined
 } & (
   | {
-      event: TAbiEvent;
-      events?: never | undefined;
-      args?: MaybeExtractEventArgsFromAbi<TAbiEvents, _EventName> | undefined;
+      event: TAbiEvent
+      events?: never | undefined
+      args?: MaybeExtractEventArgsFromAbi<TAbiEvents, _EventName> | undefined
       /**
        * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
        * @default false
        */
-      strict?: TStrict | undefined;
+      strict?: TStrict | undefined
     }
   | {
-      event?: never | undefined;
-      events: TAbiEvents;
-      args?: never | undefined;
+      event?: never | undefined
+      events: TAbiEvents
+      args?: never | undefined
       /**
        * Whether or not the logs must match the indexed/non-indexed arguments on `event`.
        * @default false
        */
-      strict?: TStrict | undefined;
+      strict?: TStrict | undefined
     }
   | {
-      event?: never | undefined;
-      events?: never | undefined;
-      args?: never | undefined;
-      strict?: never | undefined;
+      event?: never | undefined
+      events?: never | undefined
+      args?: never | undefined
+      strict?: never | undefined
     }
 ) &
   (
@@ -72,22 +72,22 @@ export type GetLogsParameters<
         /**
          * @default latest_checkpoint
          */
-        fromEpoch?: TFromEpoch | EpochNumber | EpochTag | undefined;
+        fromEpoch?: TFromEpoch | EpochNumber | EpochTag | undefined
         /**
          * @default latest_checkpoint
          */
-        toEpoch?: TToEpoch | EpochNumber | EpochTag | undefined;
+        toEpoch?: TToEpoch | EpochNumber | EpochTag | undefined
 
-        blockHashes?: never | undefined;
+        blockHashes?: never | undefined
       }
     | {
-        fromEpoch?: never | undefined;
+        fromEpoch?: never | undefined
 
-        toEpoch?: never | undefined;
+        toEpoch?: never | undefined
 
-        blockHashes?: Hash[];
+        blockHashes?: Hash[]
       }
-  );
+  )
 
 export type GetLogsReturnType<
   TAbiEvent extends AbiEvent | undefined = undefined,
@@ -96,15 +96,15 @@ export type GetLogsReturnType<
     | readonly unknown[]
     | undefined = TAbiEvent extends AbiEvent ? [TAbiEvent] : undefined,
   TStrict extends boolean | undefined = undefined,
-  _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>
-> = Log<bigint, number, TAbiEvent, TStrict, TAbiEvents, _EventName>[];
+  _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>,
+> = Log<bigint, number, TAbiEvent, TStrict, TAbiEvents, _EventName>[]
 export type GetLogsErrorType =
   | DecodeEventLogErrorType
   | EncodeEventTopicsErrorType
   | FormatLogErrorType
   | NumberToHexErrorType
   | RequestErrorType
-  | ErrorType;
+  | ErrorType
 
 export async function getLogs<
   TChain extends Chain | undefined,
@@ -113,7 +113,7 @@ export async function getLogs<
     | readonly AbiEvent[]
     | readonly unknown[]
     | undefined = TAbiEvent extends AbiEvent ? [TAbiEvent] : undefined,
-  TStrict extends boolean | undefined = undefined
+  TStrict extends boolean | undefined = undefined,
 >(
   client: Client<Transport, TChain>,
   {
@@ -127,13 +127,13 @@ export async function getLogs<
     event,
     events: events_,
     strict: strict_,
-  }: GetLogsParameters<TAbiEvent, TAbiEvents, TStrict> = {}
+  }: GetLogsParameters<TAbiEvent, TAbiEvents, TStrict> = {},
 ): Promise<GetLogsReturnType<TAbiEvent, TAbiEvents, TStrict>> {
-  const strict = strict_ ?? false;
+  const strict = strict_ ?? false
 
-  const events = events_ ?? (event ? [event] : undefined);
+  const events = events_ ?? (event ? [event] : undefined)
 
-  let topics: LogTopic[] = [];
+  let topics: LogTopic[] = []
   if (events) {
     topics = [
       (events as AbiEvent[]).flatMap((event) =>
@@ -141,20 +141,20 @@ export async function getLogs<
           abi: [event],
           eventName: (event as AbiEvent).name,
           args,
-        } as EncodeEventTopicsParameters)
+        } as EncodeEventTopicsParameters),
       ),
-    ];
-    if (event) topics = topics[0] as LogTopic[];
+    ]
+    if (event) topics = topics[0] as LogTopic[]
   }
 
   const fromBlock_ =
-    typeof fromBlock === "bigint" ? numberToHex(fromBlock) : fromBlock;
-  const toBlock_ = typeof toBlock === "bigint" ? numberToHex(toBlock) : toBlock;
-  let logs: RpcLog[];
+    typeof fromBlock === 'bigint' ? numberToHex(fromBlock) : fromBlock
+  const toBlock_ = typeof toBlock === 'bigint' ? numberToHex(toBlock) : toBlock
+  let logs: RpcLog[]
 
   if (blockHashes) {
     logs = await client.request({
-      method: "cfx_getLogs",
+      method: 'cfx_getLogs',
       params: [
         {
           address,
@@ -164,15 +164,15 @@ export async function getLogs<
           toBlock: toBlock_,
         },
       ],
-    });
+    })
   } else {
     const fromEpoch_ =
-      typeof fromEpoch === "bigint" ? numberToHex(fromEpoch) : fromEpoch;
+      typeof fromEpoch === 'bigint' ? numberToHex(fromEpoch) : fromEpoch
     const toEpoch_ =
-      typeof toEpoch === "bigint" ? numberToHex(toEpoch) : toEpoch;
+      typeof toEpoch === 'bigint' ? numberToHex(toEpoch) : toEpoch
 
     logs = await client.request({
-      method: "cfx_getLogs",
+      method: 'cfx_getLogs',
       params: [
         {
           fromEpoch: fromEpoch_,
@@ -182,16 +182,16 @@ export async function getLogs<
           topics,
         },
       ],
-    });
+    })
   }
 
-  const formattedLogs = logs.map((log) => formatLog(log));
+  const formattedLogs = logs.map((log) => formatLog(log))
 
   if (!events)
-    return formattedLogs as GetLogsReturnType<TAbiEvent, TAbiEvents, TStrict>;
+    return formattedLogs as GetLogsReturnType<TAbiEvent, TAbiEvents, TStrict>
   return parseEventLogs({
     abi: events,
     logs: formattedLogs,
     strict,
-  }) as unknown as GetLogsReturnType<TAbiEvent, TAbiEvents, TStrict>;
+  }) as unknown as GetLogsReturnType<TAbiEvent, TAbiEvents, TStrict>
 }

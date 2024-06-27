@@ -2,10 +2,9 @@
 
 import { secp256k1 } from '@noble/curves/secp256k1'
 
+import { type ToHexErrorType, toHex } from 'viem'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Hex, Signature } from '../../types/misc.js'
-import { ToHexErrorType, toHex } from 'viem'
-
 
 export type SignParameters = {
   hash: Hex

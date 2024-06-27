@@ -1,43 +1,43 @@
-import type { EpochNumber, EpochTag } from "../../types/block.js";
-import type { NumberToHexErrorType, RequestErrorType } from "viem/utils";
-import type { ErrorType } from "../../errors/utils.js";
-import type { Client } from "../../clients/createClient.js";
-import { numberToHex, type Transport } from "viem";
-import type { Address } from "../../accounts/types.js";
-import { Chain } from "../../types/chain.js";
+import { type Transport, numberToHex } from 'viem'
+import type { NumberToHexErrorType, RequestErrorType } from 'viem/utils'
+import type { Address } from '../../accounts/types.js'
+import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { EpochNumber, EpochTag } from '../../types/block.js'
+import type { Chain } from '../../types/chain.js'
 export type CheckBalanceAgainstTransactionParameters = {
-  accountAddress: Address;
-  contractAddress: Address;
-  gasLimit: number;
-  gasPrice: number;
-  storageLimit: number;
+  accountAddress: Address
+  contractAddress: Address
+  gasLimit: number
+  gasPrice: number
+  storageLimit: number
 } & (
   | {
       /**
        * @default 'latest_state'
        */
-      epochTag?: EpochTag | undefined;
-      epochNumber?: never | undefined;
+      epochTag?: EpochTag | undefined
+      epochNumber?: never | undefined
     }
   | {
-      epochTag?: never | undefined;
-      epochNumber?: EpochNumber | undefined;
+      epochTag?: never | undefined
+      epochNumber?: EpochNumber | undefined
     }
-);
+)
 
 export type CheckBalanceAgainstTransactionReturnType = {
-  isBalanceEnough: boolean;
-  willPayCollateral: boolean;
-  willPayTxFee: boolean;
-};
+  isBalanceEnough: boolean
+  willPayCollateral: boolean
+  willPayTxFee: boolean
+}
 
 export type CheckBalanceAgainstTransactionErrorType =
   | RequestErrorType
   | NumberToHexErrorType
-  | ErrorType;
+  | ErrorType
 
 export async function checkBalanceAgainstTransaction<
-  TChain extends Chain | undefined
+  TChain extends Chain | undefined,
 >(
   client: Client<Transport, TChain>,
   {
@@ -46,13 +46,13 @@ export async function checkBalanceAgainstTransaction<
     gasLimit,
     gasPrice,
     storageLimit,
-    epochTag = "latest_state",
+    epochTag = 'latest_state',
     epochNumber,
-  }: CheckBalanceAgainstTransactionParameters
+  }: CheckBalanceAgainstTransactionParameters,
 ): Promise<CheckBalanceAgainstTransactionReturnType> {
-  const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined;
+  const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
   const result = await client.request({
-    method: "cfx_checkBalanceAgainstTransaction",
+    method: 'cfx_checkBalanceAgainstTransaction',
     params: [
       accountAddress,
       contractAddress,
@@ -61,7 +61,7 @@ export async function checkBalanceAgainstTransaction<
       numberToHex(storageLimit),
       _epochNumber || epochTag,
     ],
-  });
+  })
 
-  return result;
+  return result
 }

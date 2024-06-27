@@ -1,42 +1,42 @@
-import { Hex, hexToNumber } from "viem";
-import type { Transaction, TransactionType } from "../../types/transaction.js";
-import type { ExactPartial, UnionLooseOmit } from "../../types/utils.js";
-import type { EpochTag } from "../../types/block.js";
-import type { RpcTransaction } from "../../types/rpc.js";
-import {
+import { type Hex, hexToNumber } from 'viem'
+import type { EpochTag } from '../../types/block.js'
+import type {
   Chain,
   ExtractChainFormatterExclude,
   ExtractChainFormatterReturnType,
-} from "../../types/chain.js";
+} from '../../types/chain.js'
+import type { RpcTransaction } from '../../types/rpc.js'
+import type { Transaction, TransactionType } from '../../types/transaction.js'
+import type { ExactPartial, UnionLooseOmit } from '../../types/utils.js'
 
-type TransactionPendingDependencies = "blockHash";
+type TransactionPendingDependencies = 'blockHash'
 
 export const transactionType = {
-  "0x0": "legacy",
-  "0x1": "eip2930",
-  "0x2": "eip1559",
-} as const satisfies Record<Hex, TransactionType>;
+  '0x0': 'legacy',
+  '0x1': 'eip2930',
+  '0x2': 'eip1559',
+} as const satisfies Record<Hex, TransactionType>
 
 export type FormattedTransaction<
   TChain extends Chain | undefined = undefined,
   TEpochNumber extends EpochTag = EpochTag,
   _FormatterReturnType = ExtractChainFormatterReturnType<
     TChain,
-    "transaction",
+    'transaction',
     Transaction
   >,
   _ExcludedPendingDependencies extends string = TransactionPendingDependencies &
-    ExtractChainFormatterExclude<TChain, "transaction">
+    ExtractChainFormatterExclude<TChain, 'transaction'>,
 > = UnionLooseOmit<_FormatterReturnType, TransactionPendingDependencies> & {
-  [_K in _ExcludedPendingDependencies]: never;
+  [_K in _ExcludedPendingDependencies]: never
 } & Pick<
     Transaction<
       bigint,
       number,
-      TEpochNumber extends "latest_state" ? false : true
+      TEpochNumber extends 'latest_state' ? false : true
     >,
     TransactionPendingDependencies
-  >;
+  >
 
 export function formatTransaction(transaction: RpcTransaction) {
   const _transaction = {
@@ -67,18 +67,18 @@ export function formatTransaction(transaction: RpcTransaction) {
     type: transaction.type
       ? (transactionType as any)[transaction.type]
       : undefined,
-  } as Transaction;
+  } as Transaction
 
-  if (_transaction.type === "legacy") {
-    delete _transaction.accessList;
-    delete _transaction.maxFeePerGas;
-    delete _transaction.maxPriorityFeePerGas;
-    delete _transaction.yParity;
+  if (_transaction.type === 'legacy') {
+    delete _transaction.accessList
+    delete _transaction.maxFeePerGas
+    delete _transaction.maxPriorityFeePerGas
+    delete _transaction.yParity
   }
-  if (_transaction.type === "eip2930") {
-    delete _transaction.maxFeePerGas;
-    delete _transaction.maxPriorityFeePerGas;
+  if (_transaction.type === 'eip2930') {
+    delete _transaction.maxFeePerGas
+    delete _transaction.maxPriorityFeePerGas
   }
 
-  return _transaction;
+  return _transaction
 }

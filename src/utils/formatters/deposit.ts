@@ -1,6 +1,6 @@
-import type { Deposit } from "../../types/deposit.js";
-import type { RpcDeposit } from "../../types/rpc.js";
-import type { ExactPartial } from "../../types/utils.js";
+import type { Deposit } from '../../types/deposit.js'
+import type { RpcDeposit } from '../../types/rpc.js'
+import type { ExactPartial } from '../../types/utils.js'
 
 export function formatDeposit(deposit: ExactPartial<RpcDeposit>): Deposit {
   const result = {
@@ -10,7 +10,7 @@ export function formatDeposit(deposit: ExactPartial<RpcDeposit>): Deposit {
       : undefined,
     amount: deposit.amount ? BigInt(deposit.amount) : undefined,
     depositTime: deposit.depositTime ? Number(deposit.depositTime) : undefined,
-  } as Deposit;
+  } as Deposit
 
-  return result;
+  return result
 }

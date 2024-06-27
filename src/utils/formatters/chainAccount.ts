@@ -1,9 +1,9 @@
-import type { ChainAccount } from "../../types/chainAccount.js";
-import type { RpcChainAccount } from "../../types/rpc.js";
-import type { ExactPartial } from "../../types/utils.js";
+import type { ChainAccount } from '../../types/chainAccount.js'
+import type { RpcChainAccount } from '../../types/rpc.js'
+import type { ExactPartial } from '../../types/utils.js'
 
 export function formatChainAccount(
-  chainAccount: ExactPartial<RpcChainAccount>
+  chainAccount: ExactPartial<RpcChainAccount>,
 ) {
   const result = {
     ...chainAccount,
@@ -20,7 +20,7 @@ export function formatChainAccount(
       ? BigInt(chainAccount.accumulatedInterestReturn)
       : undefined,
     admin: chainAccount.admin ? chainAccount.admin : undefined,
-  } as ChainAccount;
+  } as ChainAccount
 
-  return result;
+  return result
 }
