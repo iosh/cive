@@ -672,4 +672,9 @@ export type LocalNodeRpcSchema = [
     Parameters: [numTxs: Quantity, blockSizeLimit: Quantity]
     ReturnType: Hash
   },
+  {
+    Method: "sayhello",
+    Parameters: undefined,
+    ReturnType: string
+  }
 ]
