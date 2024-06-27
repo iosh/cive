@@ -28,10 +28,15 @@ import {
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
 import {
-  createEmptyBlocks,
-  type CreateEmptyBlocksParameters,
-  type CreateEmptyBlocksReturnType,
-} from '../../actions/localNode/createEmptyBlocks.js'
+  generateEmptyLocalNodeBlocks,
+  type GenerateEmptyLocalNodeBlocksParameters,
+  type GenerateEmptyLocalNodeBlocksReturnType,
+} from '../../actions/localNode/generateEmptyLocalNodeBlocks.js'
+import {
+  generateLocalNodeBlocks,
+  type GenerateLocalNodeBlocksParameters,
+  type GenerateLocalNodeBlocksReturnType,
+} from '../../actions/localNode/generateLocalNodeBlocks.js'
 
 export type LocalNodeActions = {
   clearTxpool: () => Promise<void>
@@ -48,9 +53,10 @@ export type LocalNodeActions = {
   generateLocalNodeBlock: (
     args: GenerateLocalNodeBlockParameters,
   ) => Promise<GenerateLocalNodeBlockReturnTYpe>
-  createEmptyBlocks: (
-    args: CreateEmptyBlocksParameters,
-  ) => Promise<CreateEmptyBlocksReturnType>
+  generateEmptyLocalNodeBlocks: (
+    args: GenerateEmptyLocalNodeBlocksParameters,
+  ) => Promise<GenerateEmptyLocalNodeBlocksReturnType>
+  generateLocalNodeBlocks: (args: GenerateLocalNodeBlocksParameters) => Promise<GenerateLocalNodeBlocksReturnType>
 }
 
 export function localNodeActions<
@@ -65,6 +71,7 @@ export function localNodeActions<
     unlockLocalNodeAccount: (args) => unlockLocalNodeAccount(client, args),
     lockLocalNodeAccount: (args) => lockLocalNodeAccount(client, args),
     generateLocalNodeBlock: (args) => generateLocalNodeBlock(client, args),
-    createEmptyBlocks: (args) => createEmptyBlocks(client, args),
+    generateEmptyLocalNodeBlocks: (args) => generateEmptyLocalNodeBlocks(client, args),
+    generateLocalNodeBlocks: (args) => generateLocalNodeBlocks(client, args),
   }
 }

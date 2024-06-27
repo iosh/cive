@@ -673,13 +673,18 @@ export type LocalNodeRpcSchema = [
     ReturnType: Hash
   },
   {
-    Method: "sayhello",
-    Parameters: undefined,
+    Method: 'sayhello'
+    Parameters: undefined
     ReturnType: string
   },
   {
-    Method: "generate_empty_blocks",
-    Parameters: [numBlocks: Quantity],
+    Method: 'generate_empty_blocks'
+    Parameters: [numBlocks: Quantity]
     ReturnType: Hash
-  }
+  },
+  {
+    Method: 'generateoneblock'
+    Parameters: [numTxs: Quantity, blockSizeLimit: Quantity]
+    ReturnType: Hash
+  },
 ]
