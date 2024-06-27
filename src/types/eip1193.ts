@@ -682,9 +682,4 @@ export type LocalNodeRpcSchema = [
     Parameters: [numBlocks: Quantity]
     ReturnType: Hash
   },
-  {
-    Method: 'generateoneblock'
-    Parameters: [numTxs: Quantity, blockSizeLimit: Quantity]
-    ReturnType: Hash
-  },
 ]

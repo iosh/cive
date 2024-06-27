@@ -32,11 +32,6 @@ import {
   type GenerateEmptyLocalNodeBlocksParameters,
   type GenerateEmptyLocalNodeBlocksReturnType,
 } from '../../actions/localNode/generateEmptyLocalNodeBlocks.js'
-import {
-  generateLocalNodeBlocks,
-  type GenerateLocalNodeBlocksParameters,
-  type GenerateLocalNodeBlocksReturnType,
-} from '../../actions/localNode/generateLocalNodeBlocks.js'
 
 export type LocalNodeActions = {
   clearTxpool: () => Promise<void>
@@ -56,7 +51,6 @@ export type LocalNodeActions = {
   generateEmptyLocalNodeBlocks: (
     args: GenerateEmptyLocalNodeBlocksParameters,
   ) => Promise<GenerateEmptyLocalNodeBlocksReturnType>
-  generateLocalNodeBlocks: (args: GenerateLocalNodeBlocksParameters) => Promise<GenerateLocalNodeBlocksReturnType>
 }
 
 export function localNodeActions<
@@ -71,7 +65,8 @@ export function localNodeActions<
     unlockLocalNodeAccount: (args) => unlockLocalNodeAccount(client, args),
     lockLocalNodeAccount: (args) => lockLocalNodeAccount(client, args),
     generateLocalNodeBlock: (args) => generateLocalNodeBlock(client, args),
-    generateEmptyLocalNodeBlocks: (args) => generateEmptyLocalNodeBlocks(client, args),
+    generateEmptyLocalNodeBlocks: (args) =>
+      generateEmptyLocalNodeBlocks(client, args),
     generateLocalNodeBlocks: (args) => generateLocalNodeBlocks(client, args),
   }
 }
