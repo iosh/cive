@@ -17,8 +17,7 @@ test('default', async () => {
   ).toStrictEqual({
     r: message.r,
     s: message.s,
-    v: BigInt(message.v),
-    yParity: message.v,
+    v: message.v,
   })
 
   expect(
@@ -31,8 +30,7 @@ test('default', async () => {
     {
       "r": "0x32e8275f9adae1f82b50798f9945592cc992c0610dc87c0a93f1cec69c93400a",
       "s": "0x1e906b33e9010c219b67db92b77ba0cc6b0e1a5f633132a0d845f62c3733e0df",
-      "v": 0n,
-      "yParity": 0,
+      "v": 0,
     }
   `,
   )
