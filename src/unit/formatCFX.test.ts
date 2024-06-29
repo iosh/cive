@@ -87,9 +87,7 @@ test('converts gDrip to cfx', () => {
   expect(formatCFX(100n, 'gDrip')).toMatchInlineSnapshot('"0.0000001"')
   expect(formatCFX(10n, 'gDrip')).toMatchInlineSnapshot('"0.00000001"')
   expect(formatCFX(1n, 'gDrip')).toMatchInlineSnapshot('"0.000000001"')
-  expect(formatCFX(-82090000000000n, 'gDrip')).toMatchInlineSnapshot(
-    `"-82090"`,
-  )
+  expect(formatCFX(-82090000000000n, 'gDrip')).toMatchInlineSnapshot(`"-82090"`)
   expect(formatCFX(-82090000000000n, 'gDrip')).toMatchInlineSnapshot(`"-82090"`)
   expect(formatCFX(-1000000000n, 'gDrip')).toMatchInlineSnapshot('"-1"')
   expect(formatCFX(-500000000n, 'gDrip')).toMatchInlineSnapshot('"-0.5"')

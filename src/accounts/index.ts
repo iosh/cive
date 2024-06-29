@@ -29,7 +29,7 @@ export {
 } from './hdKeyToAccount.js'
 
 export {
-  MnemonicToAccountErrorType,
+  type MnemonicToAccountErrorType,
   mnemonicToAccount,
 } from './mnemonicToAccount.js'
 

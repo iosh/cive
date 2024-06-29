@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { parseCFX } from './parseCFX.js'
 import { Drip } from 'js-conflux-sdk'
+import { parseCFX } from './parseCFX.js'
 
 test('converts cfx to drip', () => {
   expect(parseCFX('6942069420.12345678912345')).toBe(

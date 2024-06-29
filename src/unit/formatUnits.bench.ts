@@ -1,7 +1,7 @@
 import { bench, describe } from 'vitest'
 
-import { formatUnits } from './formatUnits.js'
 import { Drip } from 'js-conflux-sdk'
+import { formatUnits } from './formatUnits.js'
 
 describe('Format Unit', () => {
   bench('viem: `formatUnits`', () => {

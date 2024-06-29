@@ -1,16 +1,16 @@
 import type { Transport } from 'viem'
 import type { Account } from '../../accounts/types.js'
-import {
-  type UnlockLocalNodeAccountParameters,
-  type UnlockLocalNodeAccountReturnType,
-  unlockLocalNodeAccount,
-} from '../../actions/localNode/unlockLocalNodeAccount.js'
 import { clearTxpool } from '../../actions/localNode/clearTxpool.js'
 import {
   type CreateLocalNodeAccountParameters,
   type CreateLocalNodeAccountReturnType,
   createLocalNodeAccount,
 } from '../../actions/localNode/createLocalNodeAccount.js'
+import {
+  type GenerateEmptyLocalNodeBlocksParameters,
+  type GenerateEmptyLocalNodeBlocksReturnType,
+  generateEmptyLocalNodeBlocks,
+} from '../../actions/localNode/generateEmptyLocalNodeBlocks.js'
 import {
   type GenerateLocalNodeBlockParameters,
   type GenerateLocalNodeBlockReturnTYpe,
@@ -25,13 +25,13 @@ import {
   type LockLocalNodeAccountReturnType,
   lockLocalNodeAccount,
 } from '../../actions/localNode/lockLocalNodeAccount.js'
+import {
+  type UnlockLocalNodeAccountParameters,
+  type UnlockLocalNodeAccountReturnType,
+  unlockLocalNodeAccount,
+} from '../../actions/localNode/unlockLocalNodeAccount.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
-import {
-  generateEmptyLocalNodeBlocks,
-  type GenerateEmptyLocalNodeBlocksParameters,
-  type GenerateEmptyLocalNodeBlocksReturnType,
-} from '../../actions/localNode/generateEmptyLocalNodeBlocks.js'
 
 export type LocalNodeActions = {
   clearTxpool: () => Promise<void>
