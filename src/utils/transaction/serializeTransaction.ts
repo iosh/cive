@@ -3,7 +3,6 @@ import {
   type ConcatHexErrorType,
   type GetTransationTypeErrorType as GetTransactionTypeErrorType,
   type InvalidLegacyVErrorType,
-  type Signature,
   type ToHexErrorType,
   type ToRlpErrorType,
   concatHex,
@@ -15,7 +14,7 @@ import {
   rlpTransaction2930Type,
 } from '../../constants/transaction.js'
 import type { ErrorType } from '../../errors/utils.js'
-import type { SignatureLegacy } from '../../types/misc.js'
+import type { Signature, SignatureLegacy } from '../../types/misc.js'
 import type {
   TransactionSerializable,
   TransactionSerializableEIP1559,
@@ -263,11 +262,10 @@ function serializeTransactionLegacy(
       signature.r,
       signature.s,
     ]) as TransactionSerializedLegacy
-  } else {
-    return toRlp([
-      ...serializedTransaction,
-      toHex(chainId),
-      data ?? '0x',
-    ]) as TransactionSerializedLegacy
   }
+  return toRlp([
+    ...serializedTransaction,
+    toHex(chainId),
+    data ?? '0x',
+  ]) as TransactionSerializedLegacy
 }
