@@ -13,25 +13,9 @@ export type SignableMessage =
 export type SignatureLegacy = {
   r: Hex
   s: Hex
-  v: bigint
+  v: number
 }
-export type Signature = OneOf<
-  | SignatureLegacy
-  | {
-      r: Hex
-      s: Hex
-      /** @deprecated use `yParity`. */
-      v: bigint
-      yParity?: number | undefined
-    }
-  | {
-      r: Hex
-      s: Hex
-      /** @deprecated use `yParity`. */
-      v?: bigint | undefined
-      yParity: number
-    }
->
+export type Signature = OneOf<SignatureLegacy>
 export type CompactSignature = {
   r: Hex
   yParityAndS: Hex
