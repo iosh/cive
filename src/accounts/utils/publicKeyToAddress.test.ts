@@ -1,6 +1,6 @@
-import { expect, test } from 'vitest'
-import { sign, format } from 'js-conflux-sdk'
 import { Buffer } from 'node:buffer'
+import { format, sign } from 'js-conflux-sdk'
+import { expect, test } from 'vitest'
 
 import { publicKeyToAddress } from './publicKeyToAddress.js'
 

@@ -1,7 +1,7 @@
-import { expect, test } from 'vitest'
 import { PrivateKeyAccount } from 'js-conflux-sdk'
-import { privateKeyToAddress } from './privateKeyToAddress.js'
+import { expect, test } from 'vitest'
 import { accounts } from '~test/src/conflux/accounts.js'
+import { privateKeyToAddress } from './privateKeyToAddress.js'
 
 test('default', () => {
   expect(

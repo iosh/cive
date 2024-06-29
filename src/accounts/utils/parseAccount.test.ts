@@ -2,8 +2,8 @@ import { expect, test } from 'vitest'
 
 import { privateKeyToAccount } from '../privateKeyToAccount.js'
 
-import { parseAccount } from './parseAccount.js'
 import { accounts } from '~test/src/conflux/accounts.js'
+import { parseAccount } from './parseAccount.js'
 
 test('address', () => {
   expect(parseAccount(accounts[0].base32Address)).toMatchInlineSnapshot(`
