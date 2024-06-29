@@ -12,9 +12,9 @@ const base = {
   to: 'cfxtest:aak39z1fdm02v71y33znvaxwthh99skcp2s48zasbp',
   nonce: 785,
   value: parseEther('0'),
-  storageLimit: 100,
+  storageLimit: 100n,
   epochHeight: 100,
-  gas: 21000,
+  gas: 21000n,
 } satisfies TransactionSerializableBase
 
 describe('1559', () => {
@@ -31,6 +31,8 @@ describe('1559', () => {
       value: baseEip1559.value.toString(),
       maxFeePerGas: baseEip1559.maxFeePerGas.toString(),
       maxPriorityFeePerGas: baseEip1559.maxPriorityFeePerGas.toString(),
+      gas: baseEip1559.gas.toString(),
+      storageLimit: baseEip1559.storageLimit.toString(),
       type: 2,
     })
     const encodeData = tx.encode(false)
@@ -50,6 +52,8 @@ describe('1559', () => {
       value: baseEip1559.value.toString(),
       maxFeePerGas: baseEip1559.maxFeePerGas.toString(),
       maxPriorityFeePerGas: baseEip1559.maxPriorityFeePerGas.toString(),
+      gas: baseEip1559.gas.toString(),
+      storageLimit: baseEip1559.storageLimit.toString(),
       type: 2,
     })
     tx.sign(
@@ -83,6 +87,8 @@ describe('2930', () => {
       ...baseEip2930,
       value: baseEip2930.value.toString(),
       gasPrice: baseEip2930.gasPrice.toString(),
+      gas: baseEip2930.gas.toString(),
+      storageLimit: baseEip2930.storageLimit.toString(),
       type: 1,
       accessList: [...baseEip2930.accessList],
     })
@@ -103,6 +109,8 @@ describe('2930', () => {
       ...baseEip2930,
       value: baseEip2930.value.toString(),
       gasPrice: baseEip2930.gasPrice.toString(),
+      gas: baseEip2930.gas.toString(),
+      storageLimit: baseEip2930.storageLimit.toString(),
       type: 1,
       accessList: [...baseEip2930.accessList],
     })
