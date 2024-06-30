@@ -122,7 +122,7 @@ export type CustomSource = {
   >
   signTypedData: <
     const typedData extends TypedData | Record<string, unknown>,
-    primaryType extends keyof typedData | 'EIP712Domain' = keyof typedData,
+    primaryType extends keyof typedData | 'CIP23Domain' = keyof typedData,
   >(
     typedDataDefinition: TypedDataDefinition<typedData, primaryType>,
   ) => Promise<Hash>
