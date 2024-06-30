@@ -156,6 +156,7 @@ export type HDOptions =
       /** The change index to use in the path (`"m/44'/503'/0'/${changeIndex}/0"`). */
       changeIndex?: number | undefined
       path?: never | undefined
+      networkId: number
     }
   | {
       accountIndex?: never | undefined
@@ -163,6 +164,7 @@ export type HDOptions =
       changeIndex?: never | undefined
       /** The HD path. */
       path: `m/44'/503'/${string}`
+      networkId: number
     }
 
 export type PrivateKeyAccount = LocalAccount<'privateKey'>

@@ -20,8 +20,8 @@ export type HDKeyToAccountErrorType =
  */
 export function hdKeyToAccount(
   hdKey_: HDKey,
-  networkId: number,
   {
+    networkId,
     accountIndex = 0,
     addressIndex = 0,
     changeIndex = 0,
@@ -31,7 +31,7 @@ export function hdKeyToAccount(
   }: HDOptions & {
     addressType?: AddressType | undefined
     verbose?: boolean | undefined
-  } = {},
+  },
 ): HDAccount {
   // default Conflux path-503
   const hdKey = hdKey_.derive(
