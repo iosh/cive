@@ -2,10 +2,10 @@ import { expect, test } from 'vitest'
 
 import { accounts, typedData } from '~test/src/constants.js'
 
-import { privateKeyToAccount } from './privateKeyToAccount.js'
 import { PrivateKeyAccount } from 'js-conflux-sdk'
-import { parseGDrip } from '../unit/parseGDrip.js'
 import { parseCFX } from '../unit/parseCFX.js'
+import { parseGDrip } from '../unit/parseGDrip.js'
+import { privateKeyToAccount } from './privateKeyToAccount.js'
 
 const networkId = 1
 test('default', () => {
