@@ -2,7 +2,7 @@ import { Message } from 'js-conflux-sdk'
 
 import { keccak256, toHex } from 'viem'
 import { expect, test } from 'vitest'
-import { accounts } from '~test/src/conflux/accounts.js'
+import { accounts } from '~test/src/constants.js'
 import { sign } from './sign.js'
 
 test('default', async () => {

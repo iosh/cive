@@ -2,7 +2,7 @@ import { expect, test } from 'vitest'
 
 import { privateKeyToAccount } from '../privateKeyToAccount.js'
 
-import { accounts } from '~test/src/conflux/accounts.js'
+import { accounts } from '~test/src/constants.js'
 import { parseAccount } from './parseAccount.js'
 
 test('address', () => {

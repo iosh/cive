@@ -1,8 +1,8 @@
 import { expect, test } from 'vitest'
 
-import { accounts } from '~test/src/conflux/accounts.js'
-import { signMessage } from './signMessage.js'
 import { PersonalMessage } from 'js-conflux-sdk'
+import { accounts } from '~test/src/constants.js'
+import { signMessage } from './signMessage.js'
 
 test('default', async () => {
   expect(
@@ -44,7 +44,9 @@ test('raw', async () => {
       message: { raw: '0x68656c6c6f20776f726c64' },
       privateKey: accounts[0].privateKey,
     }),
-  ).toBe(PersonalMessage.sign(accounts[0].privateKey, '0x68656c6c6f20776f726c64'))
+  ).toBe(
+    PersonalMessage.sign(accounts[0].privateKey, '0x68656c6c6f20776f726c64'),
+  )
 
   expect(
     await signMessage({

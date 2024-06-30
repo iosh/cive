@@ -13,7 +13,7 @@ import {
 import type { ParseAccount } from '~unit/types/account.js'
 import type { Chain } from '~unit/types/chain.js'
 import type { ExactPartial } from '~unit/types/utils.js'
-import { accounts } from './accounts.js'
+import { accounts } from '../constants.js'
 import { createNode, remove } from './docker.js'
 
 type DefineConfluxParameters<chain extends Chain> = {
