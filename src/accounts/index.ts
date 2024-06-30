@@ -1,12 +1,3 @@
-import {
-  generateMnemonic,
-  generatePrivateKey,
-  serializeSignature,
-} from 'viem/accounts'
-import type {
-  GeneratePrivateKeyErrorType,
-  PrivateKeyToAccountErrorType,
-} from 'viem/accounts'
 // biome-ignore lint/performance/noBarrelFile: entrypoint module
 export { HDKey } from '@scure/bip32'
 export { wordlist as czech } from '@scure/bip39/wordlists/czech'
@@ -18,10 +9,15 @@ export { wordlist as korean } from '@scure/bip39/wordlists/korean'
 export { wordlist as simplifiedChinese } from '@scure/bip39/wordlists/simplified-chinese'
 export { wordlist as spanish } from '@scure/bip39/wordlists/spanish'
 export { wordlist as traditionalChinese } from '@scure/bip39/wordlists/traditional-chinese'
+export {
+  generateMnemonic,
+  type GeneratePrivateKeyErrorType,
+} from 'viem/accounts'
 
-export { generateMnemonic, type GeneratePrivateKeyErrorType }
-
-export { generatePrivateKey, type PrivateKeyToAccountErrorType }
+export {
+  generatePrivateKey,
+  type PrivateKeyToAccountErrorType,
+} from 'viem/accounts'
 
 export {
   type HDKeyToAccountErrorType,
@@ -54,14 +50,26 @@ export {
   sign,
 } from './utils/sign.js'
 
-export { serializeSignature }
+export { serializeSignature } from '../utils/signature/serializeSignature.js'
+
+export {
+  type SignMessageErrorType,
+  type SignMessageParameters,
+  type SignMessageReturnType,
+  signMessage,
+} from './utils/signMessage.js'
 
 export {
   type SignTransactionParameters,
   type SignTransactionReturnType,
   signTransaction,
 } from './utils/signTransaction.js'
-
+export {
+  type SignTypedDataErrorType,
+  type SignTypedDataParameters,
+  type SignTypedDataReturnType,
+  signTypedData,
+} from './utils/signTypedData.js'
 export {
   type ParseAccountErrorType,
   parseAccount,
