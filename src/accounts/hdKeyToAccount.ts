@@ -37,8 +37,7 @@ export function hdKeyToAccount(
   const hdKey = hdKey_.derive(
     path || `m/44'/503'/${accountIndex}'/${changeIndex}/${addressIndex}`,
   )
-  const account = privateKeyToAccount({
-    privateKey: toHex(hdKey.privateKey!),
+  const account = privateKeyToAccount(toHex(hdKey.privateKey!), {
     networkId,
     addressType,
     verbose,
