@@ -17,9 +17,8 @@ export type MnemonicToAccountErrorType = HDKeyToAccountErrorType | ErrorType
  */
 export function mnemonicToAccount(
   mnemonic: string,
-  networkId: number,
-  opts: HDOptions = {},
+  opts: HDOptions,
 ): HDAccount {
   const seed = mnemonicToSeedSync(mnemonic)
-  return hdKeyToAccount(HDKey.fromMasterSeed(seed), networkId, opts)
+  return hdKeyToAccount(HDKey.fromMasterSeed(seed), opts)
 }
