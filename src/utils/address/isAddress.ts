@@ -16,7 +16,7 @@ export function isAddress(address: string): address is Address {
     try {
       const addr = base32AddressToHex({ address: address as Address })
       return !!addr
-    } catch (error) {
+    } catch (_error) {
       return false
     }
   })()

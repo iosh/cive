@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import Docker from 'dockerode'
 
 const docker = new Docker({ socketPath: '/var/run/docker.sock' })

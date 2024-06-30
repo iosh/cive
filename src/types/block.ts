@@ -4,9 +4,9 @@ import type { Transaction } from './transaction.js'
 
 export type Block<
   TQuantity = bigint,
-  TIncludeTransactions extends boolean = boolean,
+  _TIncludeTransactions extends boolean = boolean,
   TEpochTag extends EpochTag = EpochTag,
-  TTransaction = Transaction<
+  _TTransaction = Transaction<
     bigint,
     number,
     TEpochTag extends 'latest_mined' ? true : false

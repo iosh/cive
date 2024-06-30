@@ -68,7 +68,7 @@ function defineConflux<const chain extends Chain>(
     forkBlockNumber,
     port,
     wsPort,
-    ...options
+    ..._options
   } = parameters
 
   const rpcUrl = {

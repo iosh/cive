@@ -242,7 +242,7 @@ export async function prepareTransactionRequest<
       )({
         address: account.address,
       })
-    } catch (e) {
+    } catch (_e) {
       request.nonce = await getAction(
         client,
         getNextNonce,

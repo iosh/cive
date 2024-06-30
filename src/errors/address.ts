@@ -24,7 +24,7 @@ export type ConvertBitExcessPaddingErrorType = ConvertBitExcessPaddingError & {
 export class ConvertBitExcessPaddingError extends BaseError {
   override name = 'ConvertBitExcessPaddingError'
   constructor() {
-    super(`Excess padding`)
+    super('Excess padding')
   }
 }
 
@@ -36,7 +36,7 @@ export type ConvertBitNonZeroPaddingErrorType =
 export class ConvertBitNonZeroPaddingError extends BaseError {
   override name = 'ConvertBitNonZeroPaddingError'
   constructor() {
-    super(`Non-zero padding`)
+    super('Non-zero padding')
   }
 }
 

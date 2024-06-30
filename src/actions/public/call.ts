@@ -99,7 +99,7 @@ export async function call<TChain extends Chain | undefined>(
     nonce,
     to,
     value,
-    ...rest
+    ..._rest
   } = args
   const account = account_ ? parseAccount(account_) : undefined
 
@@ -146,7 +146,7 @@ export async function call<TChain extends Chain | undefined>(
     if (response === '0x') return { data: undefined }
     return { data: response }
   } catch (err) {
-    const data = getRevertErrorData(err)
+    const _data = getRevertErrorData(err)
     throw getCallError(err as ErrorType, {
       ...args,
       account,
