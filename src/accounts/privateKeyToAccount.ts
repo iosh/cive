@@ -11,7 +11,6 @@ export type PrivateKeyToAccountParameters<
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined,
 > = {
-  privateKey: Hex
   networkId: TNetworkId
   addressType?: TAddressType | undefined
   verbose?: TVerbose | undefined
@@ -26,16 +25,14 @@ export function privateKeyToAccount<
   TNetworkId extends number = number,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined,
->({
-  privateKey,
-  networkId,
-  addressType = 'user',
-  verbose = false,
-}: PrivateKeyToAccountParameters<
-  TNetworkId,
-  TAddressType,
-  TVerbose
->): PrivateKeyAccount {
+>(
+  privateKey: Hex,
+  {
+    networkId,
+    addressType = 'user',
+    verbose = false,
+  }: PrivateKeyToAccountParameters<TNetworkId, TAddressType, TVerbose>,
+): PrivateKeyAccount {
   const publicKey = toHex(secp256k1.getPublicKey(privateKey.slice(2), false))
   const address = publicKeyToAddress({
     publicKey,
