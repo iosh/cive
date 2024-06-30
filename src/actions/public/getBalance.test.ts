@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
-import { accounts, getTestAccount } from '~test/src/constants.js'
 import { devConflux } from '~test/src/conflux/client.js'
+import { accounts, getTestAccount } from '~test/src/constants.js'
 import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getBalance } from './getBalance.js'

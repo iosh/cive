@@ -2,8 +2,8 @@ import { getMessage } from 'cip-23'
 import { expect, test } from 'vitest'
 import { typedData } from '~test/src/constants.js'
 
-import { hashTypedData } from './hashTypedData.js'
 import { pad, toHex } from 'viem'
+import { hashTypedData } from './hashTypedData.js'
 
 test('default', () => {
   const data = {

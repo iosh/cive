@@ -14,12 +14,12 @@ import {
 } from 'viem'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Hex } from '../../types/misc.js'
+import type { TypedDataDefinition } from '../../types/typedData.js'
 import {
   type GetTypesForCIP23DomainErrorType,
   getTypesForCIP23Domain,
   validateTypedData,
 } from '../typedData.js'
-import type { TypedDataDefinition } from '../../types/typedData.js'
 
 type MessageTypeProperty = {
   name: string

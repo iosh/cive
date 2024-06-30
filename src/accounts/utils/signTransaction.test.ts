@@ -1,17 +1,7 @@
 import { Transaction, format } from 'js-conflux-sdk'
 import { concatHex, toHex, toRlp } from 'viem'
-import {
-  afterAll,
-  assertType,
-  beforeAll,
-  describe,
-  expect,
-  test,
-  vi,
-} from 'vitest'
+import { assertType, describe, expect, test, vi } from 'vitest'
 import { accounts } from '~test/src/constants.js'
-import { devConflux } from '~test/src/conflux/client.js'
-import { sayHelloLocalNode } from '../../actions/localNode/sayHelloLocalNode.js'
 import type {
   TransactionSerializable,
   TransactionSerializableBase,
@@ -25,16 +15,6 @@ import { parseGDrip } from '../../unit/parseGDrip.js'
 import { base32AddressToHex } from '../../utils/address/base32AddressToHex.js'
 import type { SerializeTransactionFn } from '../../utils/transaction/serializeTransaction.js'
 import { signTransaction } from './signTransaction.js'
-
-// const client = devConflux.getClient()
-// beforeAll(async () => {
-//   await devConflux.start()
-//   await sayHelloLocalNode(client)
-// })
-
-// afterAll(async () => {
-//   await devConflux.stop()
-// })
 
 const base = {
   gas: 21000n,
