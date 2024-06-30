@@ -10,11 +10,11 @@ import {
 import type { ErrorType } from '../../errors/utils.js'
 import { type SignErrorType, sign } from './sign.js'
 
+import type { TypedDataDefinition } from '../../types/typedData.js'
 import {
   type HashTypedDataErrorType,
   hashTypedData,
 } from '../../utils/signature/hashTypedData.js'
-import type { TypedDataDefinition } from '../../types/typedData.js'
 
 export type SignTypedDataParameters<
   typedData extends TypedData | Record<string, unknown> = TypedData,

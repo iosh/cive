@@ -3,10 +3,10 @@ import { mnemonicToSeedSync } from '@scure/bip39'
 
 import { describe, expect, test } from 'vitest'
 
-import { hdKeyToAccount } from './hdKeyToAccount.js'
-import { parseGDrip } from '../unit/parseGDrip.js'
 import { accounts, typedData } from '~test/src/constants.js'
 import { parseCFX } from '../unit/parseCFX.js'
+import { parseGDrip } from '../unit/parseGDrip.js'
+import { hdKeyToAccount } from './hdKeyToAccount.js'
 
 const mnemonic =
   'advance income refuse grain method capable upset coast minor situate such library'

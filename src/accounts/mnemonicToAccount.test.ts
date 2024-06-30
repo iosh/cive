@@ -1,10 +1,10 @@
-import { describe, expect, test } from 'vitest'
-import { mnemonicToAccount } from './mnemonicToAccount.js'
 import { HDWallet } from '@conflux-dev/hdwallet'
 import { PrivateKeyAccount } from 'js-conflux-sdk'
-import { parseGDrip } from '../unit/parseGDrip.js'
-import { parseCFX } from '../unit/parseCFX.js'
+import { describe, expect, test } from 'vitest'
 import { accounts, typedData } from '~test/src/constants.js'
+import { parseCFX } from '../unit/parseCFX.js'
+import { parseGDrip } from '../unit/parseGDrip.js'
+import { mnemonicToAccount } from './mnemonicToAccount.js'
 const mnemonic =
   'advance income refuse grain method capable upset coast minor situate such library'
 
