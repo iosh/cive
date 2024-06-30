@@ -91,6 +91,24 @@ export function getTestAccount(account: (typeof accounts)[number]) {
 }
 
 export const typedData = {
+  CIP23Domain: [
+    {
+      name: 'name',
+      type: 'string',
+    },
+    {
+      name: 'version',
+      type: 'string',
+    },
+    {
+      name: 'chainId',
+      type: 'uint256',
+    },
+    {
+      name: 'verifyingContract',
+      type: 'address',
+    },
+  ],
   basic: {
     domain: {
       name: 'CFX Mail',
