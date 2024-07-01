@@ -210,7 +210,7 @@ export type TransactionRequestBase<TQuantity = bigint, TIndex = number> = {
   /**the maximum amount of storage space that can be consumed by the transaction. */
   storageLimit?: TQuantity | undefined
   /** the epoch number of the blockchain, which is used to sets an expiration time for the transaction */
-  epochHeight?: TIndex | undefined
+  epochHeight?: TQuantity | undefined
 }
 
 export type TransactionRequestLegacy<

@@ -9,7 +9,7 @@ export type GetEpochNumberParameters<
   tag?: TEpochTag
 }
 
-export type GetEpochNumberReturnType = number
+export type GetEpochNumberReturnType = bigint
 
 export async function getEpochNumber<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
@@ -20,5 +20,5 @@ export async function getEpochNumber<TChain extends Chain | undefined>(
     params: [tag],
   })
 
-  return Number(epochNumber)
+  return BigInt(epochNumber)
 }
