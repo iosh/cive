@@ -8,7 +8,7 @@ export type NodeOptions = {
   wsPort: number
 }
 
-export const DockerImageName = 'confluxchain/conflux-rust:2.3.5'
+export const DockerImageName = 'confluxchain/conflux-rust:2.4.0'
 
 export let currentNode: Docker.Container | null = null
 

@@ -84,8 +84,7 @@ export const accounts = [
 ] as const
 
 export function getTestAccount(account: (typeof accounts)[number]) {
-  return privateKeyToAccount({
-    privateKey: account.privateKey,
+  return privateKeyToAccount(account.privateKey, {
     networkId: account.netId,
   })
 }
