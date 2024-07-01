@@ -17,9 +17,9 @@ import {
   checkBalanceAgainstTransaction,
 } from '../../actions/public/checkBalanceAgainstTransaction.js'
 import {
-  type ClientVersionReturnType,
-  clientVersion,
-} from '../../actions/public/clientVersion.js'
+  type GetClientVersionReturnType,
+  getClientVersion,
+} from '../../actions/public/getClientVersion.js'
 import {
   type CreateBlockFilterReturnType,
   createBlockFilter,
@@ -532,9 +532,9 @@ export type PublicActions<
   /**
    * Returns the conflux-rust version.
    * - JSON-RPC Method: [`cfx_clientVersion`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_clientversion)
-   * @returns - {@link ClientVersionReturnType}
+   * @returns - {@link GetClientVersionReturnType}
    */
-  clientVersion: () => Promise<ClientVersionReturnType>
+  getClientVersion: () => Promise<GetClientVersionReturnType>
 
   /**
    * Returns the reward info for all executed blocks in the specified epoch.
@@ -854,7 +854,7 @@ export function publicActions<
     getConfirmationRiskByHash: (args) =>
       getConfirmationRiskByHash(client, args),
     getStatus: () => getStatus(client),
-    clientVersion: () => clientVersion(client),
+    getClientVersion: () => getClientVersion(client),
     getBlockRewardInfo: (args) => getBlockRewardInfo(client, args),
     getBlockByHashWithPivotAssumption: (args) =>
       getBlockByHashWithPivotAssumption(client, args),
