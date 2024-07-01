@@ -20,7 +20,7 @@ const base = {
   gas: 21000n,
   nonce: 785,
   storageLimit: 100n,
-  epochHeight: 0,
+  epochHeight: 0n,
 } satisfies TransactionSerializableBase
 
 describe('cip 1559', () => {
@@ -45,6 +45,7 @@ describe('cip 1559', () => {
       storageLimit: baseEip1559.storageLimit.toString(),
       maxPriorityFeePerGas: baseEip1559.maxPriorityFeePerGas.toString(),
       maxFeePerGas: baseEip1559.maxFeePerGas.toString(),
+      epochHeight: baseEip1559.epochHeight.toString(),
     })
     tx.sign(accounts[0].privateKey, 1)
     expect(signature).toEqual(format.hex(tx.encode(true)))
@@ -161,6 +162,7 @@ describe('eip2930', () => {
       gasPrice: baseEip2930.gasPrice.toString(),
       gas: baseEip2930.gas.toString(),
       storageLimit: baseEip2930.storageLimit.toString(),
+      epochHeight: baseEip2930.epochHeight.toString(),
     })
     tx.sign(accounts[0].privateKey, 1)
 
@@ -229,6 +231,7 @@ describe('eip2930', () => {
       gasPrice: baseEip2930.gasPrice.toString(),
       gas: baseEip2930.gas.toString(),
       storageLimit: baseEip2930.storageLimit.toString(),
+      epochHeight: baseEip2930.epochHeight.toString(),
       accessList: [
         {
           address: accounts[0].base32Address,
@@ -372,6 +375,7 @@ describe('legacy', () => {
       gasPrice: baseLegacy.gasPrice.toString(),
       gas: baseLegacy.gas.toString(),
       storageLimit: baseLegacy.storageLimit.toString(),
+      epochHeight: baseLegacy.epochHeight.toString(),
     })
     tx.sign(accounts[0].privateKey, 1)
     expect(signature).toBe(format.hex(tx.encode(true)))
