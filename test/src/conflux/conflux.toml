@@ -561,3 +561,7 @@ evm_chain_id = 201030
 dev_pos_private_key_encryption_password="CFXV50"
 
 genesis_secrets = "./genesis_secrets.txt"
+
+
+# enable cfx_newBlockFilter rpc
+poll_lifetime_in_seconds = 180  
