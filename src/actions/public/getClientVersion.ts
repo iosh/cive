@@ -1,4 +1,4 @@
-import type {  Transport } from 'viem'
+import type { Transport } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
 import type { Client } from '../../clients/createClient.js'
 import type { ErrorType } from '../../errors/utils.js'

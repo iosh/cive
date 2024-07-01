@@ -2,9 +2,9 @@ import type { Transport } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
 import type { Client } from '../../clients/createClient.js'
 import type { ErrorType } from '../../errors/utils.js'
+import type { Chain } from '../../types/chain.js'
 import type { Filter } from '../../types/filter.js'
 import { createFilterRequestScope } from '../../utils/filters/createFilterRequestScope.js'
-import type { Chain } from '../../types/chain.js'
 
 export type CreatePendingTransactionFilterReturnType = Filter<'transaction'>
 

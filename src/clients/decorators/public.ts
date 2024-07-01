@@ -17,10 +17,6 @@ import {
   checkBalanceAgainstTransaction,
 } from '../../actions/public/checkBalanceAgainstTransaction.js'
 import {
-  type GetClientVersionReturnType,
-  getClientVersion,
-} from '../../actions/public/getClientVersion.js'
-import {
   type CreateBlockFilterReturnType,
   createBlockFilter,
 } from '../../actions/public/createBlockFilter.js'
@@ -101,6 +97,10 @@ import {
   type GetBytecodeReturnType,
   getBytecode,
 } from '../../actions/public/getBytecode.js'
+import {
+  type GetClientVersionReturnType,
+  getClientVersion,
+} from '../../actions/public/getClientVersion.js'
 import {
   type GetCollateralInfoParameters,
   type GetCollateralInfoReturnType,
