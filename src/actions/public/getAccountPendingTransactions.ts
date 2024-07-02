@@ -6,7 +6,7 @@ import type { Chain } from '../../types/chain.js'
 import { formatAccountPendingTransaction } from '../../utils/formatters/account.js'
 
 export type GetAccountPendingTransactionsParameters = {
-  account: Address
+  address: Address
   nonce?: number
   limit?: number
 }
@@ -17,7 +17,7 @@ export async function getAccountPendingTransactions<
   TChain extends Chain | undefined,
 >(
   client: Client<Transport, TChain>,
-  { account, nonce, limit }: GetAccountPendingTransactionsParameters,
+  { address: account, nonce, limit }: GetAccountPendingTransactionsParameters,
 ): Promise<GetAccountPendingTransactionsReturnType> {
   const _nonce = nonce ? numberToHex(nonce) : undefined
   const _limit = limit ? numberToHex(limit) : undefined
