@@ -2,12 +2,12 @@ import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
 import { parseCFX } from '../../unit/parseCFX.js'
 import { parseGDrip } from '../../unit/parseGDrip.js'
+import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { estimateGasAndCollateral } from './estimateGasAndCollateral.js'
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
 
 const sourceAccount = getTestAccount(accounts[0])
 const targetAccount = getTestAccount(accounts[1])
