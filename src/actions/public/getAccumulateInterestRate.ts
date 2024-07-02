@@ -31,7 +31,7 @@ export async function getAccumulateInterestRate<
   {
     epochNumber,
     epochTag = 'latest_state',
-  }: GetAccumulateInterestRateParameters,
+  }: GetAccumulateInterestRateParameters = {},
 ): Promise<GetAccumulateInterestRateReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
 
