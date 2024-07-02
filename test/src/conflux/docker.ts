@@ -26,6 +26,18 @@ export async function createNode({ httpPort, wsPort }: NodeOptions) {
           path.resolve(),
           './test/src/conflux/genesis_secrets.txt',
         )}:/root/run/genesis_secrets.txt`,
+        `${path.join(
+          path.resolve(),
+          './test/src/conflux/initial_nodes.json',
+        )}:/root/run/initial_nodes.json`,
+        `${path.join(
+          path.resolve(),
+          './test/src/conflux/pos_config.yaml',
+        )}:/root/run/pos_config/pos_config.yaml`,
+        `${path.join(
+          path.resolve(),
+          './test/src/conflux/genesis_file',
+        )}:/root/run/pos_config/genesis_file`,
       ],
       PortBindings: {
         '12537/tcp': [{ HostPort: `${httpPort}` }],

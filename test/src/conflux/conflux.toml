@@ -565,3 +565,11 @@ genesis_secrets = "./genesis_secrets.txt"
 
 # enable cfx_newBlockFilter rpc
 poll_lifetime_in_seconds = 180  
+
+# enable 1559 transition block height
+next_hardfork_transition_height=1
+next_hardfork_transition_number=1
+
+pos_reference_enable_height=0
+
+pos_initial_nodes_path = "./initial_nodes.json"
