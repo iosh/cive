@@ -45,6 +45,7 @@ export function formatBlock(block: ExactPartial<RpcBlock>) {
 
   const _block = {
     ...block,
+    baseFeePerGas: block.baseFeePerGas ? BigInt(block.baseFeePerGas) : null,
     blame: block.blame ? BigInt(block.blame) : undefined,
     difficulty: block.difficulty ? BigInt(block.difficulty) : undefined,
     epochNumber: block.epochNumber ? BigInt(block.epochNumber) : undefined,
