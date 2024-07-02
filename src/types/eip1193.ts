@@ -392,7 +392,11 @@ export type PublicRpcSchema = [
 
   {
     Method: 'cfx_getAccountPendingTransactions'
-    Parameters: [address: Address, nonce?: Quantity | undefined, limit?: Quantity | undefined]
+    Parameters: [
+      address: Address,
+      nonce?: Quantity | undefined,
+      limit?: Quantity | undefined,
+    ]
     ReturnType: RpcAccountPendingTransaction
   },
   /**

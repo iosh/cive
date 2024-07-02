@@ -1,9 +1,9 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
+import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getAccumulateInterestRate } from './getAccumulateInterestRate.js'
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
 import { getBlock } from './getBlock.js'
 
 const sourceAccount = getTestAccount(accounts[0])

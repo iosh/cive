@@ -1,11 +1,11 @@
+import type { ErrorType } from '../../errors/utils.js'
+import type { Chain } from '../../types/chain.js'
 import {
   ChainMismatchError,
   type ChainMismatchErrorType,
   ChainNotFoundError,
   type ChainNotFoundErrorType,
-} from '../../errors/chain.js'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
+} from '../errors/chain.js'
 
 export type AssertCurrentChainParameters = {
   chain?: Chain | undefined

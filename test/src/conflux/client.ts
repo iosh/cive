@@ -145,7 +145,7 @@ function defineConflux<const chain extends Chain>(
 export const poolId = Number(process.env.VITEST_POOL_ID ?? 1)
 
 export const devConflux = defineConflux({
-  chain: confluxCoreSpaceTest,
+  chain: {...confluxCoreSpaceTest, id: accounts[0].netId},
   port: 12539 + poolId * 10,
   wsPort: 12540 + poolId * 10,
 })

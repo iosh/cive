@@ -1,4 +1,5 @@
-import { BaseError, type Chain } from 'viem'
+import { BaseError } from 'viem'
+import type { Chain } from '../../types/chain.js'
 
 export type ChainDoesNotSupportContractErrorType =
   ChainDoesNotSupportContract & {
