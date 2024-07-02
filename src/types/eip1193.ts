@@ -679,7 +679,7 @@ export type LocalNodeRpcSchema = [
   },
   {
     Method: 'generate_empty_blocks'
-    Parameters: [numBlocks: Quantity]
+    Parameters: [numBlocks: number]
     ReturnType: Hash
   },
 ]

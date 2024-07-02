@@ -15,10 +15,9 @@ export async function generateEmptyLocalNodeBlocks<
   client: LocalNodeClient<Transport, TChain, TAccount, false>,
   { numBlocks }: GenerateEmptyLocalNodeBlocksParameters,
 ): Promise<GenerateEmptyLocalNodeBlocksReturnType> {
-  const _numBlocks = numberToHex(numBlocks)
   const result = await client.request({
     method: 'generate_empty_blocks',
-    params: [_numBlocks],
+    params: [numBlocks],
   })
   return result
 }
