@@ -6,7 +6,6 @@ import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getAccumulateInterestRate } from './getAccumulateInterestRate.js'
 import { getBlock } from './getBlock.js'
 
-const sourceAccount = getTestAccount(accounts[0])
 const client = devConflux.getClient()
 
 beforeAll(async () => {

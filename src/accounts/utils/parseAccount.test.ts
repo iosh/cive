@@ -17,8 +17,7 @@ test('address', () => {
 test('account', () => {
   expect(
     parseAccount(
-      privateKeyToAccount({
-        privateKey: accounts[0].privateKey,
+      privateKeyToAccount(accounts[0].privateKey, {
         networkId: accounts[0].netId,
       }),
     ),
