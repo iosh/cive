@@ -13,7 +13,7 @@ import {
 
 export type GetBlockParameters<
   TIncludeTransactions extends boolean = false,
-  TEpochTag extends EpochTag = 'latest_state',
+  TEpochTag extends EpochTag = EpochTag,
 > = {
   includeTransactions?: TIncludeTransactions | undefined
 } & (
@@ -49,14 +49,14 @@ export type GetBlockParameters<
 export type GetBlockReturnType<
   TChain extends Chain | undefined = undefined,
   TIncludeTransactions extends boolean = false,
-  TBlockTag extends EpochTag = 'latest_state',
+  TBlockTag extends EpochTag = EpochTag,
 > = Prettify<FormattedBlock<TChain, TIncludeTransactions, TBlockTag>>
 
 export async function getBlock<
   TChain extends Chain | undefined,
   TAccount extends Account | undefined,
   TIncludeTransactions extends boolean = false,
-  TEpochTag extends EpochTag = 'latest_state',
+  TEpochTag extends EpochTag = EpochTag,
 >(
   client: Client<Transport, TChain, TAccount>,
   {

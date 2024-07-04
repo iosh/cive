@@ -22,7 +22,10 @@ export type GetBlockRewardInfoErrorType = RequestErrorType | ErrorType
 
 export async function getBlockRewardInfo<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { epochNumber, epochTag = 'latest_checkpoint' }: GetBlockRewardInfoParameters,
+  {
+    epochNumber,
+    epochTag = 'latest_checkpoint',
+  }: GetBlockRewardInfoParameters = {},
 ): Promise<GetBlockRewardInfoReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
 
