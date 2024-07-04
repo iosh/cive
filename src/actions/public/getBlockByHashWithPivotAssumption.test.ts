@@ -29,6 +29,7 @@ test('default', async () => {
     assumedPivotHash: blockHash,
     epochNumber: block.epochNumber,
   })
+  expect(result.hash).toBe(blockHash)
   expect(Object.keys(result)).toMatchInlineSnapshot(`
     [
       "adaptive",
