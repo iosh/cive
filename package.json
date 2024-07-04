@@ -3,7 +3,9 @@
   "scripts": {
     "test": "vitest -c ./test/vitest.config.ts dev",
     "lint": "biome check --fix",
-    "format": "biome format --write"
+    "format": "biome format --write",
+    "docs:dev": "pnpm --filter site dev",
+    "docs:build": "pnpm --filter site build"
   },
   "keywords": [],
   "author": "",
