@@ -1,2 +1,4 @@
 packages:
-  - "./src"
+  - "src"
+  - "test"
+  - "site"
