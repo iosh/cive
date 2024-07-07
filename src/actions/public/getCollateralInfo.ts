@@ -24,7 +24,7 @@ export type GetCollateralInfoReturnType = {
 
 export async function getCollateralInfo<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { epochNumber, epochTag = 'latest_state' }: GetCollateralInfoParameters,
+  { epochNumber, epochTag = 'latest_state' }: GetCollateralInfoParameters = {},
 ): Promise<GetCollateralInfoReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
   const epoch = _epochNumber || epochTag
