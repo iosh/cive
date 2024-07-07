@@ -3,20 +3,33 @@ import type { Client } from '../../clients/createClient.js'
 import type { Chain } from '../../types/chain.js'
 import type { TransactionReceipt } from '../../types/transaction.js'
 import { formatTransactionReceipt } from '../../utils/formatters/transactionReceipt.js'
+import type { EpochNumber, EpochTag } from '../../types/block.js'
 
 export type GetEpochReceiptsParameters = {
-  epochNumber: bigint
-}
+  includeTxReceipts?: boolean
+} & (
+  | {
+      epochTag: EpochTag
+      epochNumber?: never
+    }
+  | {
+      epochTag?: never
+      epochNumber: EpochNumber
+    }
+)
 
 export type GetEpochReceiptsReturnType = TransactionReceipt[]
 
 export async function getEpochReceipts<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { epochNumber }: GetEpochReceiptsParameters,
+  args: GetEpochReceiptsParameters,
 ): Promise<GetEpochReceiptsReturnType> {
+  const epoch =
+    'epochTag' in args ? args.epochTag : numberToHex(args.epochNumber)
+  const { includeTxReceipts = false } = args
   const result = await client.request({
     method: 'cfx_getEpochReceipts',
-    params: [numberToHex(epochNumber)],
+    params: [epoch, includeTxReceipts],
   })
   return result.map(formatTransactionReceipt)
 }
