@@ -597,8 +597,8 @@ export type PublicRpcSchema = [
    */
   {
     Method: 'cfx_getEpochReceipts'
-    Parameters: [epoch: Quantity]
-    ReturnType: RpcTransactionReceipt[]
+    Parameters: [epoch: Quantity | EpochTag, includeTxReceipts?: boolean]
+    ReturnType: RpcTransactionReceipt[][]
   },
   /**
    * @description Get block traces by block hash
