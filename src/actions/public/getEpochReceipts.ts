@@ -1,9 +1,9 @@
 import { type Transport, numberToHex } from 'viem'
 import type { Client } from '../../clients/createClient.js'
+import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { TransactionReceipt } from '../../types/transaction.js'
 import { formatTransactionReceipts } from '../../utils/formatters/transactionReceipt.js'
-import type { EpochNumber, EpochTag } from '../../types/block.js'
 
 export type GetEpochReceiptsParameters = {
   includeTxReceipts?: boolean

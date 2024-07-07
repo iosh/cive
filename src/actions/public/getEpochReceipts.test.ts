@@ -1,14 +1,10 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
-import { getEpochReceipts } from './getEpochReceipts.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
-import { prepareTransactionRequest } from '../wallet/prepareTransactionRequest.js'
-import { signTransaction } from '../../accounts/index.js'
-import { sendRawTransaction } from '../wallet/sendRawTransaction.js'
 import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
-import { getEpochNumber } from './getEpochNumber.js'
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
+import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sendTransaction } from '../wallet/sendTransaction.js'
+import { getEpochReceipts } from './getEpochReceipts.js'
 
 const client = devConflux.getClient()
 beforeAll(async () => {
@@ -26,17 +22,10 @@ test('default', async () => {
   ).toMatchInlineSnapshot('[]')
 
   const sourceAccount = getTestAccount(accounts[0])
-  const tx0 = await prepareTransactionRequest(client, {
+  await sendTransaction(client, {
     value: 0n,
     account: sourceAccount,
-    nonce: 0,
   })
-  const rawTx0 = await signTransaction({
-    privateKey: accounts[0].privateKey,
-    transaction: tx0,
-  })
-
-  await sendRawTransaction(client, { serializedTransaction: rawTx0 })
   await generateLocalNodeBlock(client, { numTxs: 10, blockSizeLimit: 1024 })
   const resultWithoutReceipts = await getEpochReceipts(client, {
     epochNumber: 1n,

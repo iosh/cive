@@ -1,16 +1,13 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
-import { prepareTransactionRequest } from '../wallet/prepareTransactionRequest.js'
 import { getBalance } from './getBalance.js'
 import { getBlock } from './getBlock.js'
 
-import { signTransaction } from '../../accounts/index.js'
 import { parseCFX } from '../../unit/parseCFX.js'
 import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
-import { sendRawTransaction } from '../wallet/sendRawTransaction.js'
+import { sendTransaction } from '../wallet/sendTransaction.js'
 
 const sourceAccount = getTestAccount(accounts[0])
 const targetAccount = getTestAccount(accounts[1])
@@ -52,17 +49,11 @@ test('gets balance at block number', async () => {
 })
 
 test('gets balance when transaction', async () => {
-  const tx = await prepareTransactionRequest(client, {
+  await sendTransaction(client, {
     value: parseCFX('10'),
     to: targetAccount.address,
     account: sourceAccount,
   })
-  const serializedTransaction = await signTransaction({
-    privateKey: accounts[0].privateKey,
-    transaction: tx,
-  })
-
-  await sendRawTransaction(client, { serializedTransaction })
   await generateLocalNodeBlock(client, { numTxs: 1, blockSizeLimit: 1024 })
 
   expect(
