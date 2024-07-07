@@ -31,3 +31,75 @@ test('default', async () => {
     }
   `)
 })
+test('with args epoch tag', async () => {
+  await generateEmptyLocalNodeBlocks(client, { numBlocks: 10 })
+  expect(
+    await getCollateralInfo(client, { epochTag: 'earliest' }),
+  ).toMatchInlineSnapshot(`
+    {
+      "convertedStoragePoints": 0n,
+      "totalStorageTokens": 50062500000000000000n,
+      "usedStoragePoints": 0n,
+    }
+  `)
+
+  expect(
+    await getCollateralInfo(client, { epochTag: 'latest_checkpoint' }),
+  ).toMatchInlineSnapshot(`
+    {
+      "convertedStoragePoints": 0n,
+      "totalStorageTokens": 50062500000000000000n,
+      "usedStoragePoints": 0n,
+    }
+  `)
+  expect(
+    await getCollateralInfo(client, { epochTag: 'latest_finalized' }),
+  ).toMatchInlineSnapshot(`
+    {
+      "convertedStoragePoints": 0n,
+      "totalStorageTokens": 50062500000000000000n,
+      "usedStoragePoints": 0n,
+    }
+  `)
+  expect(
+    await getCollateralInfo(client, { epochTag: 'latest_state' }),
+  ).toMatchInlineSnapshot(`
+    {
+      "convertedStoragePoints": 0n,
+      "totalStorageTokens": 50062500000000000000n,
+      "usedStoragePoints": 0n,
+    }
+  `)
+})
+
+test('with args epoch number', async () => {
+  await generateEmptyLocalNodeBlocks(client, { numBlocks: 10 })
+  expect(
+    await getCollateralInfo(client, { epochNumber: 10n }),
+  ).toMatchInlineSnapshot(`
+    {
+      "convertedStoragePoints": 0n,
+      "totalStorageTokens": 50062500000000000000n,
+      "usedStoragePoints": 0n,
+    }
+  `)
+
+  expect(
+    await getCollateralInfo(client, { epochNumber: 11n }),
+  ).toMatchInlineSnapshot(`
+    {
+      "convertedStoragePoints": 0n,
+      "totalStorageTokens": 50062500000000000000n,
+      "usedStoragePoints": 0n,
+    }
+  `)
+  expect(
+    await getCollateralInfo(client, { epochNumber: 12n }),
+  ).toMatchInlineSnapshot(`
+    {
+      "convertedStoragePoints": 0n,
+      "totalStorageTokens": 50062500000000000000n,
+      "usedStoragePoints": 0n,
+    }
+  `)
+})
