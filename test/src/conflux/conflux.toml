@@ -566,10 +566,26 @@ genesis_secrets = "./genesis_secrets.txt"
 # enable cfx_newBlockFilter rpc
 poll_lifetime_in_seconds = 180  
 
-# enable 1559 transition block height
-next_hardfork_transition_height=1
-next_hardfork_transition_number=1
 
 pos_reference_enable_height=0
 
-pos_initial_nodes_path = "./initial_nodes.json"
+
+dao_vote_transition_number = 1
+dao_vote_transition_height = 1
+cip43_init_end_number = 1
+cip71_patch_transition_number = 1
+cip90_transition_height = 1
+cip90_transition_number = 1
+cip105_transition_number = 1
+
+# v2.3
+cip107_transition_number=1
+cip112_transition_height=1
+cip118_transition_number=1
+cip119_transition_number=1
+
+# v2.4 cips: 1559, 137 and others
+next_hardfork_transition_number=1  # cip131, cip132, cip133b, cip137, cip144, cip145
+next_hardfork_transition_height=1  # cip130, cip133
+cip1559_transition_height=1
+cancun_opcodes_transition_number=1
