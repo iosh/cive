@@ -95,6 +95,8 @@ export type TransactionReceipt<
 
   /** Pre-London, it is equal to the transaction's gasPrice. Post-London, it is equal to the actual gas price paid for inclusion. */
   effectiveGasPrice: TQuantity
+
+  space?: 'native'
 }
 
 export type TransactionBase<

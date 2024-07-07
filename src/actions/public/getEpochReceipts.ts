@@ -2,7 +2,7 @@ import { type Transport, numberToHex } from 'viem'
 import type { Client } from '../../clients/createClient.js'
 import type { Chain } from '../../types/chain.js'
 import type { TransactionReceipt } from '../../types/transaction.js'
-import { formatTransactionReceipt } from '../../utils/formatters/transactionReceipt.js'
+import { formatTransactionReceipts } from '../../utils/formatters/transactionReceipt.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 
 export type GetEpochReceiptsParameters = {
@@ -18,7 +18,7 @@ export type GetEpochReceiptsParameters = {
     }
 )
 
-export type GetEpochReceiptsReturnType = TransactionReceipt[]
+export type GetEpochReceiptsReturnType = TransactionReceipt[][]
 
 export async function getEpochReceipts<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
@@ -31,5 +31,6 @@ export async function getEpochReceipts<TChain extends Chain | undefined>(
     method: 'cfx_getEpochReceipts',
     params: [epoch, includeTxReceipts],
   })
-  return result.map(formatTransactionReceipt)
+  if (!result) return []
+  return formatTransactionReceipts(result)
 }

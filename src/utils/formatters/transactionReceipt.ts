@@ -50,7 +50,9 @@ export function formatTransactionReceipt(
     outcomeStatus: transactionReceipt.outcomeStatus
       ? receiptOutcomeStatuses[transactionReceipt.outcomeStatus]
       : null,
-    log: transactionReceipt.log ? transactionReceipt.log.map(formatLog) : null,
+    log: transactionReceipt.log
+      ? transactionReceipt.log.map((log) => formatLog(log))
+      : null,
     burntGasFee: transactionReceipt.burntGasFee
       ? BigInt(transactionReceipt.burntGasFee)
       : null,
@@ -65,4 +67,10 @@ export function formatTransactionReceipt(
   } as TransactionReceipt
 
   return receipt
+}
+
+export function formatTransactionReceipts(
+  transactionReceipts: ExactPartial<RpcTransactionReceipt>[][],
+) {
+  return transactionReceipts.map((item) => item.map(formatTransactionReceipt))
 }
