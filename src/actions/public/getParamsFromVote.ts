@@ -25,7 +25,7 @@ export type GetParamsFormVoteReturnType = {
 
 export async function getParamsFromVote<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { epochNumber, epochTag = 'latest_state' }: GetParamsFormVoteParameters,
+  { epochNumber, epochTag = 'latest_state' }: GetParamsFormVoteParameters = {},
 ): Promise<GetParamsFormVoteReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
 
