@@ -20,7 +20,7 @@ export type GetInterestRateReturnType = bigint
 
 export async function getInterestRate<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { epochNumber, epochTag = 'latest_state' }: GetInterestRateParameters,
+  { epochNumber, epochTag = 'latest_state' }: GetInterestRateParameters = {},
 ): Promise<GetInterestRateReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
 
