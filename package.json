@@ -11,14 +11,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@biomejs/biome": "1.8.2",
+    "@biomejs/biome": "1.8.3",
     "@conflux-dev/conflux-address-js": "^2.0.1",
     "@conflux-dev/hdwallet": "^0.1.2",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.10",
     "cip-23": "^0.2.0",
-    "js-conflux-sdk": "^2.4.3",
+    "js-conflux-sdk": "^2.4.7",
     "typescript": "^5.5.3",
-    "vitest": "^1.6.0"
-  },
-  "dependencies": {}
+    "vitest": "^2.0.0"
+  }
 }
