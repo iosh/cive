@@ -589,3 +589,4 @@ next_hardfork_transition_number=1  # cip131, cip132, cip133b, cip137, cip144, ci
 next_hardfork_transition_height=1  # cip130, cip133
 cip1559_transition_height=1
 cancun_opcodes_transition_number=1
+cip113_transition_height=1
