@@ -24,7 +24,7 @@ export type GetPoSEconomicsReturnType = {
 
 export async function getPoSEconomics<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { epochNumber, epochTag = 'latest_state' }: GetPoSEconomicsParameters,
+  { epochNumber, epochTag = 'latest_state' }: GetPoSEconomicsParameters = {},
 ): Promise<GetPoSEconomicsReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
   const result = await client.request({
