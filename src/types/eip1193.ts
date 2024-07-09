@@ -1,4 +1,10 @@
-import type { ExactPartial, Hash, Hex, LogTopic } from 'viem'
+import type {
+  ExactPartial,
+  Hash,
+  Hex,
+  Address as HexAddress,
+  LogTopic,
+} from 'viem'
 import type {
   Quantity,
   RpcAccountPending,
@@ -543,7 +549,7 @@ export type PublicRpcSchema = [
    */
   {
     Method: 'pos_getAccount'
-    Parameters: [address: Address]
+    Parameters: [address: HexAddress]
     ReturnType: RpcPoSAccount
   },
   /**

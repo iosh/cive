@@ -169,7 +169,7 @@ import {
   type GetPoSAccountParameters,
   type GetPoSAccountReturnType,
   getPoSAccount,
-} from '../../actions/public/getPoSAccount..js'
+} from '../../actions/public/getPoSAccount.js'
 import {
   type GetPoSBlockParameters,
   type GetPosBlockReturnType,
