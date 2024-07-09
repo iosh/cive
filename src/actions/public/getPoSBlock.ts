@@ -31,7 +31,7 @@ export async function getPoSBlock<TChain extends Chain | undefined>(
     blockHash,
     blockNumber,
     blockTag = 'latest_committed',
-  }: GetPoSBlockParameters,
+  }: GetPoSBlockParameters = {},
 ): Promise<GetPosBlockReturnType> {
   let block: RpcPoSBlock | undefined
 
@@ -43,11 +43,11 @@ export async function getPoSBlock<TChain extends Chain | undefined>(
   } else {
     const _blockNumber = blockNumber ? numberToHex(blockNumber) : undefined
     block = await client.request({
-      method: 'pos_getBlockByHash',
+      method: 'pos_getBlockByNumber',
       params: [_blockNumber ? _blockNumber : blockTag],
     })
   }
-
+  console.log(block)
   if (!block) {
     throw new BlockNotFoundError({ blockHash, blockNumber })
   }

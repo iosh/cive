@@ -575,7 +575,7 @@ export type PublicRpcSchema = [
    * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getblockbynumber
    */
   {
-    Method: 'pos_getBlockByHash'
+    Method: 'pos_getBlockByNumber'
     Parameters: [blockNumber: Quantity | 'latest_committed' | 'latest_voted']
     ReturnType: RpcPoSBlock | null
   },
