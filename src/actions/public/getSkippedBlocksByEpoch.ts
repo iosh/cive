@@ -27,7 +27,10 @@ export type GetSkippedBlocksByEpochErrorType =
 
 export async function getSkippedBlocksByEpoch<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { epochNumber, epochTag = 'latest_state' }: GetSkippedBlocksByEpochParameters,
+  {
+    epochNumber,
+    epochTag = 'latest_state',
+  }: GetSkippedBlocksByEpochParameters = {},
 ): Promise<GetSkippedBlocksByEpochReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
   const blocks = await client.request({
