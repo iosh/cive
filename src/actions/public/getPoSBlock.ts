@@ -47,7 +47,6 @@ export async function getPoSBlock<TChain extends Chain | undefined>(
       params: [_blockNumber ? _blockNumber : blockTag],
     })
   }
-  console.log(block)
   if (!block) {
     throw new BlockNotFoundError({ blockHash, blockNumber })
   }

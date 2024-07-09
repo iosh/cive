@@ -12,7 +12,7 @@ export type GetPosCommitteeReturnType = PoSCommittee
 
 export async function getPosCommittee<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { blockNumber }: GetPosCommitteeParameters,
+  { blockNumber }: GetPosCommitteeParameters = {},
 ): Promise<GetPosCommitteeReturnType> {
   const result = await client.request({
     method: 'pos_getCommittee',
