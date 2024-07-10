@@ -6,7 +6,7 @@ import type { Chain } from '../../types/chain.js'
 export type GenerateEmptyLocalNodeBlocksParameters = {
   numBlocks: number
 }
-export type GenerateEmptyLocalNodeBlocksReturnType = Hash
+export type GenerateEmptyLocalNodeBlocksReturnType = Hash[]
 
 export async function generateEmptyLocalNodeBlocks<
   TChain extends Chain | undefined,
