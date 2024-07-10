@@ -1,5 +1,5 @@
 import type { Account, Address } from '~unit/accounts/types.js'
-import { confluxCoreSpaceTest } from '~unit/chains/index.js'
+import { confluxCoreSpaceTest, localhost } from '~unit/chains/index.js'
 import {
   type Client,
   type ClientConfig,
@@ -145,7 +145,7 @@ function defineConflux<const chain extends Chain>(
 export const poolId = Number(process.env.VITEST_POOL_ID ?? 1)
 
 export const devConflux = defineConflux({
-  chain: { ...confluxCoreSpaceTest, id: accounts[0].netId },
+  chain: localhost,
   port: 12539 + poolId * 10,
   wsPort: 12540 + poolId * 10,
 })

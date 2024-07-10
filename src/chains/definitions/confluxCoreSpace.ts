@@ -1,4 +1,4 @@
-import { defineChain } from 'viem/utils'
+import { defineChain } from '../../utils/chain/defineChain.js'
 
 export const confluxCoreSpace = defineChain({
   id: 1029,
