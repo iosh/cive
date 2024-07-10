@@ -262,10 +262,10 @@ import {
   traceTransaction,
 } from '../../actions/public/traceTransaction.js'
 import {
-  type TxPoolNextNonceParameters,
-  type TxPoolNextNonceReturnType,
-  txPoolNextNonce,
-} from '../../actions/public/txPoolNextNonce.js'
+  type GetTxPoolNextNonceParameters,
+  type GetTxPoolNextNonceReturnType,
+  getTxPoolNextNonce,
+} from '../../actions/public/getTxPoolNextNonce.js'
 import {
   type UninstallFilterParameters,
   type UninstallFilterReturnType,
@@ -727,12 +727,12 @@ export type PublicActions<
    * These RPC methods require node's public_rpc_apis config set to safe or all, or the namespace include txpool
    * Return one address's next usable nonce in transaction pool.
    * - JSON-RPC Method: [`txpool_nextNonce`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/txpool_rpc#txpool_nextnonce)
-   * @param args - {@link TxPoolNextNonceParameters}
-   * @returns - {@link TxPoolNextNonceReturnType}
+   * @param args - {@link GetTxPoolNextNonceParameters}
+   * @returns - {@link GetTxPoolNextNonceReturnType}
    */
-  txPoolNextNonce: (
-    args: TxPoolNextNonceParameters,
-  ) => Promise<TxPoolNextNonceReturnType>
+  getTxPoolNextNonce: (
+    args: GetTxPoolNextNonceParameters,
+  ) => Promise<GetTxPoolNextNonceReturnType>
   /**
    * Returns the current status of the PoS chain
    * - JSON-RPC Method: [`pos_getStatus`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getstatus)
@@ -875,7 +875,7 @@ export function publicActions<
     getFilterLogs: (args) => getFilterLogs(client, args),
     uninstallFilter: (args) => uninstallFilter(client, args),
     getCollateralInfo: (args) => getCollateralInfo(client, args),
-    txPoolNextNonce: (args) => txPoolNextNonce(client, args),
+    getTxPoolNextNonce: (args) => getTxPoolNextNonce(client, args),
     getPoSStatus: () => getPoSStatus(client),
     getPoSAccount: (args) => getPoSAccount(client, args),
     getPosCommittee: (args) => getPosCommittee(client, args),

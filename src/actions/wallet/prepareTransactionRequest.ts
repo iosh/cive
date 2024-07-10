@@ -58,7 +58,7 @@ import type { GetBlocksByEpochErrorType } from '../public/getBlocksByEpoch.js'
 import { getEpochNumber } from '../public/getEpochNumber.js'
 import { getNextNonce } from '../public/getNextNonce.js'
 import { getStatus } from '../public/getStatus.js'
-import { txPoolNextNonce } from '../public/txPoolNextNonce.js'
+import { getTxPoolNextNonce } from '../public/getTxPoolNextNonce.js'
 
 export const defaultParameters = [
   'chainId',
@@ -237,7 +237,7 @@ export async function prepareTransactionRequest<
     try {
       request.nonce = await getAction(
         client,
-        txPoolNextNonce,
+        getTxPoolNextNonce,
         'txPoolNextNonce',
       )({
         address: account.address,

@@ -3,16 +3,16 @@ import type { Address } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
 import type { Chain } from '../../types/chain.js'
 
-export type TxPoolNextNonceParameters = {
+export type GetTxPoolNextNonceParameters = {
   address: Address
 }
 
-export type TxPoolNextNonceReturnType = number
+export type GetTxPoolNextNonceReturnType = number
 
-export async function txPoolNextNonce<TChain extends Chain | undefined>(
+export async function getTxPoolNextNonce<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { address }: TxPoolNextNonceParameters,
-): Promise<TxPoolNextNonceReturnType> {
+  { address }: GetTxPoolNextNonceParameters,
+): Promise<GetTxPoolNextNonceReturnType> {
   const nonce = await client.request({
     method: 'txpool_nextNonce',
     params: [address],
