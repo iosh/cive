@@ -1,5 +1,6 @@
 import type { Abi } from 'abitype'
 import type { Transport } from 'viem'
+import { addChain, type AddChainParameters } from 'viem/actions'
 import type { Account, Address } from '../../accounts/types.js'
 import {
   type DeployContractParameters,
@@ -23,7 +24,10 @@ import {
   getAddresses,
   type GetAddressesReturnType,
 } from '../../actions/wallet/getAddresses.js'
-import { getChainId, type GetChainIdReturnType } from '../../actions/public/getChainId.js'
+import {
+  getChainId,
+  type GetChainIdReturnType,
+} from '../../actions/public/getChainId.js'
 
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,
@@ -63,7 +67,7 @@ export type WalletActions<
   sendRawTransaction: (
     args: SendRawTransactionParameters,
   ) => Promise<SendRawTransactionReturnType>
-
+  addChain: (args: AddChainParameters) => Promise<void>
   getAddresses: () => Promise<GetAddressesReturnType>
   getChainId: () => Promise<GetChainIdReturnType>
 }
@@ -80,6 +84,7 @@ export function walletActions<
     prepareTransactionRequest: (args) =>
       prepareTransactionRequest(client, args) as any,
     sendRawTransaction: (args) => sendRawTransaction(client, args),
+    addChain: (args) => addChain(client, args),
     getAddresses: () => getAddresses(client),
     getChainId: () => getChainId(client),
   }
