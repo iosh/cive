@@ -274,6 +274,10 @@ import {
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
+import {
+  getChainId,
+  type GetChainIdReturnType,
+} from '../../actions/public/getChainId.js'
 
 export type PublicActions<
   _TTransport extends Transport = Transport,
@@ -814,6 +818,12 @@ export type PublicActions<
   traceTransaction: (
     args: TraceTransactionParameters,
   ) => Promise<TraceTransactionReturnType>
+
+  /**
+   * get chain id (call the getStatus method to get the chain id)
+   * @returns - {@link GetChainIdReturnType}
+   */
+  getChainId: () => Promise<GetChainIdReturnType>
 }
 
 export function publicActions<
@@ -886,5 +896,6 @@ export function publicActions<
     getEpochReceipts: (args) => getEpochReceipts(client, args),
     traceBlock: (args) => traceBlock(client, args),
     traceTransaction: (args) => traceTransaction(client, args),
+    getChainId: () => getChainId(client),
   }
 }

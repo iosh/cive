@@ -624,6 +624,11 @@ export type PublicRpcSchema = [
     Parameters: [txHash: Hash]
     ReturnType: RpcTrace
   },
+  {
+    Method: 'cfx_chainId'
+    Parameters?: undefined
+    ReturnType: Quantity
+  },
 ]
 
 export type WalletRpcSchema = [
@@ -636,6 +641,16 @@ export type WalletRpcSchema = [
     Method: 'cfx_sendRawTransaction'
     Parameters: [signedTransaction: Hex]
     ReturnType: Hash
+  },
+  {
+    Method: 'cfx_accounts'
+    Parameters?: undefined
+    ReturnType: Address[]
+  },
+  {
+    Method: 'cfx_chainId'
+    Parameters?: undefined
+    ReturnType: Quantity
   },
 ]
 
