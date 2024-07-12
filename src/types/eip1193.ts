@@ -38,6 +38,20 @@ import type { Block, EpochTag } from './block.js'
 import type { Log } from './log.js'
 import type { RpcEpochNumber, RpcTransaction as Transaction } from './rpc.js'
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
+
+export type WalletPermissionCaveat = {
+  type: string
+  value: any
+}
+
+export type WalletPermission = {
+  caveats: WalletPermissionCaveat[]
+  date: number
+  id: string
+  invoker: `http://${string}` | `https://${string}`
+  parentCapability: 'cfx_accounts' | string
+}
+
 export type PublicRpcSchema = [
   /**
    * @description Returns information about a transaction, identified by its hash.
@@ -656,6 +670,11 @@ export type WalletRpcSchema = [
     Method: 'eth_requestAccounts'
     Parameters?: undefined
     ReturnType: Address[]
+  },
+  {
+    Method: 'wallet_requestPermissions'
+    Parameters: [permissions: { cfx_accounts: Record<string, any> }]
+    ReturnType: WalletPermission[]
   },
 ]
 

@@ -26,6 +26,11 @@ import {
   requestAddresses,
 } from '../../actions/wallet/requestAddresses.js'
 import {
+  type RequestPermissionsParameters,
+  type RequestPermissionsReturnType,
+  requestPermissions,
+} from '../../actions/wallet/requestPermissions.js'
+import {
   type SendRawTransactionParameters,
   type SendRawTransactionReturnType,
   sendRawTransaction,
@@ -76,6 +81,9 @@ export type WalletActions<
   getChainId: () => Promise<GetChainIdReturnType>
   getPermissions: () => Promise<GetPermissionsReturnType>
   requestAddresses: () => Promise<RequestAddressesReturnType>
+  requestPermissions: (
+    args: RequestPermissionsParameters,
+  ) => Promise<RequestPermissionsReturnType>
 }
 
 export function walletActions<
@@ -95,5 +103,6 @@ export function walletActions<
     getChainId: () => getChainId(client),
     getPermissions: () => getPermissions(client),
     requestAddresses: () => requestAddresses(client),
+    requestPermissions: (args) => requestPermissions(client, args),
   }
 }
