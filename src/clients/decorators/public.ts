@@ -98,6 +98,10 @@ import {
   getBytecode,
 } from '../../actions/public/getBytecode.js'
 import {
+  type GetChainIdReturnType,
+  getChainId,
+} from '../../actions/public/getChainId.js'
+import {
   type GetClientVersionReturnType,
   getClientVersion,
 } from '../../actions/public/getClientVersion.js'
@@ -247,6 +251,11 @@ import {
   getTransactionReceipt,
 } from '../../actions/public/getTransactionReceipt.js'
 import {
+  type GetTxPoolNextNonceParameters,
+  type GetTxPoolNextNonceReturnType,
+  getTxPoolNextNonce,
+} from '../../actions/public/getTxPoolNextNonce.js'
+import {
   type GetVoteListParameters,
   type GetVoteListReturnType,
   getVoteList,
@@ -262,11 +271,6 @@ import {
   traceTransaction,
 } from '../../actions/public/traceTransaction.js'
 import {
-  type GetTxPoolNextNonceParameters,
-  type GetTxPoolNextNonceReturnType,
-  getTxPoolNextNonce,
-} from '../../actions/public/getTxPoolNextNonce.js'
-import {
   type UninstallFilterParameters,
   type UninstallFilterReturnType,
   uninstallFilter,
@@ -274,10 +278,6 @@ import {
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
-import {
-  getChainId,
-  type GetChainIdReturnType,
-} from '../../actions/public/getChainId.js'
 
 export type PublicActions<
   _TTransport extends Transport = Transport,

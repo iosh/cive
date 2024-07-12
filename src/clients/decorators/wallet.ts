@@ -1,12 +1,20 @@
 import type { Abi } from 'abitype'
-import type { Transport } from 'viem'
-import { addChain, type AddChainParameters } from 'viem/actions'
+import type { GetPermissionsReturnType, Transport } from 'viem'
+import { type AddChainParameters, addChain, getPermissions } from 'viem/actions'
 import type { Account, Address } from '../../accounts/types.js'
+import {
+  type GetChainIdReturnType,
+  getChainId,
+} from '../../actions/public/getChainId.js'
 import {
   type DeployContractParameters,
   type DeployContractReturnType,
   deployContract,
 } from '../../actions/wallet/deployContract.js'
+import {
+  type GetAddressesReturnType,
+  getAddresses,
+} from '../../actions/wallet/getAddresses.js'
 import {
   type PrepareTransactionRequestParameters,
   type PrepareTransactionRequestRequest,
@@ -14,20 +22,16 @@ import {
   prepareTransactionRequest,
 } from '../../actions/wallet/prepareTransactionRequest.js'
 import {
+  type RequestAddressesReturnType,
+  requestAddresses,
+} from '../../actions/wallet/requestAddresses.js'
+import {
   type SendRawTransactionParameters,
   type SendRawTransactionReturnType,
   sendRawTransaction,
 } from '../../actions/wallet/sendRawTransaction.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
-import {
-  getAddresses,
-  type GetAddressesReturnType,
-} from '../../actions/wallet/getAddresses.js'
-import {
-  getChainId,
-  type GetChainIdReturnType,
-} from '../../actions/public/getChainId.js'
 
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,
@@ -70,6 +74,8 @@ export type WalletActions<
   addChain: (args: AddChainParameters) => Promise<void>
   getAddresses: () => Promise<GetAddressesReturnType>
   getChainId: () => Promise<GetChainIdReturnType>
+  getPermissions: () => Promise<GetPermissionsReturnType>
+  requestAddresses: () => Promise<RequestAddressesReturnType>
 }
 
 export function walletActions<
@@ -87,5 +93,7 @@ export function walletActions<
     addChain: (args) => addChain(client, args),
     getAddresses: () => getAddresses(client),
     getChainId: () => getChainId(client),
+    getPermissions: () => getPermissions(client),
+    requestAddresses: () => requestAddresses(client),
   }
 }

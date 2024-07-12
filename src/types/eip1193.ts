@@ -652,6 +652,11 @@ export type WalletRpcSchema = [
     Parameters?: undefined
     ReturnType: Quantity
   },
+  {
+    Method: 'eth_requestAccounts'
+    Parameters?: undefined
+    ReturnType: Address[]
+  },
 ]
 
 export type LocalNodeRpcSchema = [
