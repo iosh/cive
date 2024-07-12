@@ -1,10 +1,26 @@
-import { expect, test } from 'vitest'
+import { expect, test, vi } from 'vitest'
 import { createClient } from '../../clients/createClient.js'
 import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
 import { accounts } from '~test/src/constants.js'
-import { http } from 'viem'
+
 import { getAddresses } from './getAddresses.js'
 import { localhost } from '../../chains/index.js'
+import { http } from 'viem'
+
+test('mock rpc', async () => {
+  const client = createClient({
+    chain: localhost,
+    transport: http(),
+  })
+  client.request = vi.fn(async () => {
+    return [accounts[1].base32Address] as any
+  })
+  expect(await getAddresses(client)).toMatchInlineSnapshot(`
+    [
+      "net201029:aamx7s8g19hs0zg2793wkv6bfefkmng0bubdy0txaa",
+    ]
+  `)
+})
 
 test('local account', async () => {
   const client = createClient({
@@ -14,6 +30,7 @@ test('local account', async () => {
     chain: localhost,
     transport: http(),
   })
+
   expect(await getAddresses(client)).toMatchInlineSnapshot(`
     [
       "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
