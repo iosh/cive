@@ -1,8 +1,8 @@
 import type { HexToNumberErrorType, Transport } from 'viem'
-import type { Client } from '../../clients/createClient.js'
-import type { Chain } from '../../types/chain.js'
 import type { RequestErrorType } from 'viem/utils'
+import type { Client } from '../../clients/createClient.js'
 import type { ErrorType } from '../../errors/utils.js'
+import type { Chain } from '../../types/chain.js'
 import { getAction } from '../../utils/getAction.js'
 import { getStatus } from './getStatus.js'
 

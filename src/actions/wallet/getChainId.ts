@@ -1,9 +1,9 @@
-import { hexToNumber, type HexToNumberErrorType, type Transport } from 'viem'
+import { type HexToNumberErrorType, type Transport, hexToNumber } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
-import type { ErrorType } from '../../errors/utils.js'
-import type { Chain } from '../../types/chain.js'
 import type { Account } from '../../accounts/index.js'
 import type { Client } from '../../clients/createClient.js'
+import type { ErrorType } from '../../errors/utils.js'
+import type { Chain } from '../../types/chain.js'
 
 export type GetChainIdReturnType = number
 

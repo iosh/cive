@@ -1,9 +1,9 @@
-import { expect, test, vi } from 'vitest'
-import { createClient } from '../../clients/createClient.js'
-import { localhost } from '../../chains/index.js'
 import { http } from 'viem'
-import { getChainId } from './getChainId.js'
+import { expect, test, vi } from 'vitest'
 import { accounts } from '~test/src/constants.js'
+import { localhost } from '../../chains/index.js'
+import { createClient } from '../../clients/createClient.js'
+import { getChainId } from './getChainId.js'
 
 test('mock rpc', async () => {
   const client = createClient({
@@ -13,5 +13,5 @@ test('mock rpc', async () => {
   client.request = vi.fn(async () => {
     return accounts[1].netId as any
   })
-  expect(await getChainId(client)).toMatchInlineSnapshot("201029")
+  expect(await getChainId(client)).toMatchInlineSnapshot('201029')
 })

@@ -1,8 +1,8 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
+import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getSkippedBlocksByEpoch } from './getSkippedBlocksByEpoch.js'
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
 
 const client = devConflux.getClient()
 beforeAll(async () => {

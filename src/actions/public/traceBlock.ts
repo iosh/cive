@@ -1,9 +1,9 @@
 import type { Hash, Transport } from 'viem'
 import type { Client } from '../../clients/createClient.js'
+import { BlockNotFoundError } from '../../errors/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { TraceBlock } from '../../types/tract.js'
 import { formatTraceBlock } from '../../utils/formatters/tract.js'
-import { BlockNotFoundError } from '../../errors/block.js'
 
 export type TraceBlockParameters = {
   blockHash: Hash

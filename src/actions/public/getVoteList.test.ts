@@ -1,9 +1,9 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
-import { getVoteList } from './getVoteList.js'
 import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
+import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { getVoteList } from './getVoteList.js'
 
 const client = devConflux.getClient()
 beforeAll(async () => {

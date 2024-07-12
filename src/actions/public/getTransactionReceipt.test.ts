@@ -1,11 +1,11 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
+import { accounts, getTestAccount } from '~test/src/constants.js'
+import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
+import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
-import { accounts, getTestAccount } from '~test/src/constants.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
 import { getTransactionReceipt } from './getTransactionReceipt.js'
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
 
 const client = devConflux.getClient()
 beforeAll(async () => {

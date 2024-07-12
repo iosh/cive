@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest'
 
-import { getAddress } from './getAddress.js'
 import { accounts } from '~test/src/constants.js'
+import { getAddress } from './getAddress.js'
 
 test('cfx address', () => {
   expect(
@@ -100,7 +100,9 @@ describe('errors', () => {
   test('invalid address', () => {
     expect(() =>
       getAddress('cfx:aajp88pjc5mnxspgrrkxb5zerjpdun3fd2'),
-    ).toThrowError(`Address "cfx:aajp88pjc5mnxspgrrkxb5zerjpdun3fd2" is invalid.`)
+    ).toThrowError(
+      `Address "cfx:aajp88pjc5mnxspgrrkxb5zerjpdun3fd2" is invalid.`,
+    )
     expect(() =>
       getAddress('net201029:aaru84xbk8f3vzfvn51th0zs69rdrmkbhyjuxp'),
     ).toThrowError(`Address "net201029:aaru84xbk8f3vzfvn51th0zs69rdrmkbhyjuxp"`)

@@ -1,9 +1,9 @@
+import type { Transport } from 'viem'
 import type { ChecksumAddressErrorType, RequestErrorType } from 'viem/utils'
 import type { Account, Address } from '../../accounts/types.js'
+import type { Client } from '../../clients/createClient.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Chain } from '../../types/chain.js'
-import type { Transport } from 'viem'
-import type { Client } from '../../clients/createClient.js'
 
 export type GetAddressesReturnType = Address[]
 

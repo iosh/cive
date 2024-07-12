@@ -2,12 +2,12 @@ import { afterAll, beforeAll, expect, test, vi } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 
+import { parseCFX } from '../../unit/parseCFX.js'
+import { parseGDrip } from '../../unit/parseGDrip.js'
 import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
-import { prepareTransactionRequest } from './prepareTransactionRequest.js'
-import { parseCFX } from '../../unit/parseCFX.js'
 import * as getBlock from '../public/getBlock.js'
-import { parseGDrip } from '../../unit/parseGDrip.js'
+import { prepareTransactionRequest } from './prepareTransactionRequest.js'
 
 const sourceAccount = getTestAccount(accounts[0])
 const client = devConflux.getClient({ account: sourceAccount })

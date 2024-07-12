@@ -3,7 +3,6 @@ import { devConflux } from '~test/src/conflux/client.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getPoSBlock } from './getPoSBlock.js'
 
-
 const client = devConflux.getClient()
 beforeAll(async () => {
   await devConflux.start()

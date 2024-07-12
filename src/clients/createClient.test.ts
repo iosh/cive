@@ -1,14 +1,14 @@
 import {
+  http,
+  type EIP1193RequestFn,
   createTransport,
   custom,
-  http,
   webSocket,
-  type EIP1193RequestFn,
 } from 'viem'
 import { assertType, describe, expect, test, vi } from 'vitest'
-import { createClient } from './createClient.js'
-import type { EIP1474Methods } from '../types/eip1193.js'
 import { localhost } from '../chains/index.js'
+import type { EIP1474Methods } from '../types/eip1193.js'
+import { createClient } from './createClient.js'
 import { publicActions } from './decorators/public.js'
 
 test('creates', () => {

@@ -1,11 +1,11 @@
 import { expect, test, vi } from 'vitest'
-import { createClient } from '../../clients/createClient.js'
-import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
 import { accounts } from '~test/src/constants.js'
+import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
+import { createClient } from '../../clients/createClient.js'
 
-import { getAddresses } from './getAddresses.js'
-import { localhost } from '../../chains/index.js'
 import { http } from 'viem'
+import { localhost } from '../../chains/index.js'
+import { getAddresses } from './getAddresses.js'
 
 test('mock rpc', async () => {
   const client = createClient({
