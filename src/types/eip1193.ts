@@ -682,6 +682,16 @@ export type WalletRpcSchema = [
     Parameters: [transaction: TransactionRequest]
     ReturnType: Hash
   },
+  {
+    Method: 'personal_sign'
+    Parameters: [
+      /** Data to sign */
+      data: Hex,
+      /** Address to use for signing */
+      address: Address,
+    ]
+    ReturnType: Hex
+  },
 ]
 
 export type LocalNodeRpcSchema = [

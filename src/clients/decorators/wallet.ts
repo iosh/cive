@@ -35,8 +35,19 @@ import {
   type SendRawTransactionReturnType,
   sendRawTransaction,
 } from '../../actions/wallet/sendRawTransaction.js'
+import {
+  type SendTransactionParameters,
+  type SendTransactionReturnType,
+  sendTransaction,
+} from '../../actions/wallet/sendTransaction.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
+
+import {
+  type SignMessageParameters,
+  type SignMessageReturnType,
+  signMessage,
+} from '../../actions/wallet/signMessage.js'
 
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,
@@ -84,6 +95,12 @@ export type WalletActions<
   requestPermissions: (
     args: RequestPermissionsParameters,
   ) => Promise<RequestPermissionsReturnType>
+  sendTransaction: (
+    args: SendTransactionParameters,
+  ) => Promise<SendTransactionReturnType>
+  signMessage: (
+    args: SignMessageParameters<TAccount>,
+  ) => Promise<SignMessageReturnType>
 }
 
 export function walletActions<
@@ -104,5 +121,7 @@ export function walletActions<
     getPermissions: () => getPermissions(client),
     requestAddresses: () => requestAddresses(client),
     requestPermissions: (args) => requestPermissions(client, args),
+    sendTransaction: (args) => sendTransaction(client, args),
+    signMessage: (args) => signMessage(client, args),
   }
 }
