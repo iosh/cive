@@ -1,4 +1,4 @@
-import type { Abi } from 'abitype'
+import type { Abi, TypedData } from 'abitype'
 import type { GetPermissionsReturnType, Transport } from 'viem'
 import { type AddChainParameters, addChain, getPermissions } from 'viem/actions'
 import type { Account, Address } from '../../accounts/types.js'
@@ -53,6 +53,11 @@ import type {
   SignTransactionParameters,
   SignTransactionReturnType,
 } from '../../actions/wallet/signTransaction.js'
+import {
+  type SignTypedDataParameters,
+  type SignTypedDataReturnType,
+  signTypedData,
+} from '../../actions/wallet/signTypedData.js'
 
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,
@@ -109,6 +114,12 @@ export type WalletActions<
   signTransaction: (
     args: SignTransactionParameters<TChain, TAccount>,
   ) => Promise<SignTransactionReturnType>
+  signTypedData: <
+    const TTypedData extends TypedData | { [key: string]: unknown },
+    TPrimaryType extends string,
+  >(
+    args: SignTypedDataParameters<TTypedData, TPrimaryType, TAccount>,
+  ) => Promise<SignTypedDataReturnType>
 }
 
 export function walletActions<
@@ -131,5 +142,6 @@ export function walletActions<
     requestPermissions: (args) => requestPermissions(client, args),
     sendTransaction: (args) => sendTransaction(client, args),
     signMessage: (args) => signMessage(client, args),
+    signTypedData: (args) => signTypedData(client, args),
   }
 }

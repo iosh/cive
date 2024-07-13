@@ -697,6 +697,16 @@ export type WalletRpcSchema = [
     Parameters: [request: RpcTransactionRequest]
     ReturnType: Hex
   },
+  {
+    Method: 'cfx_signTypedData_v4'
+    Parameters: [
+      /** Address to use for signing */
+      address: Address,
+      /** Message to sign containing type information, a domain separator, and data */
+      message: string,
+    ]
+    ReturnType: Hex
+  },
 ]
 
 export type LocalNodeRpcSchema = [
