@@ -37,6 +37,7 @@ import type { Address } from '../accounts/types.js'
 import type { Block, EpochTag } from './block.js'
 import type { Log } from './log.js'
 import type { RpcEpochNumber, RpcTransaction as Transaction } from './rpc.js'
+import type { TransactionRequest } from './transaction.js'
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
 
 export type WalletPermissionCaveat = {
@@ -675,6 +676,11 @@ export type WalletRpcSchema = [
     Method: 'wallet_requestPermissions'
     Parameters: [permissions: { cfx_accounts: Record<string, any> }]
     ReturnType: WalletPermission[]
+  },
+  {
+    Method: 'cfx_sendTransaction'
+    Parameters: [transaction: TransactionRequest]
+    ReturnType: Hash
   },
 ]
 
