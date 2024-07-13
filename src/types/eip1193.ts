@@ -679,7 +679,7 @@ export type WalletRpcSchema = [
   },
   {
     Method: 'cfx_sendTransaction'
-    Parameters: [transaction: TransactionRequest]
+    Parameters: [transaction: RpcTransactionRequest]
     ReturnType: Hash
   },
   {
@@ -690,6 +690,11 @@ export type WalletRpcSchema = [
       /** Address to use for signing */
       address: Address,
     ]
+    ReturnType: Hex
+  },
+  {
+    Method: 'cfx_signTransaction'
+    Parameters: [request: RpcTransactionRequest]
     ReturnType: Hex
   },
 ]

@@ -49,6 +49,11 @@ import {
   signMessage,
 } from '../../actions/wallet/signMessage.js'
 
+import type {
+  SignTransactionParameters,
+  SignTransactionReturnType,
+} from '../../actions/wallet/signTransaction.js'
+
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,
   TAccount extends Account | undefined = Account | undefined,
@@ -101,6 +106,9 @@ export type WalletActions<
   signMessage: (
     args: SignMessageParameters<TAccount>,
   ) => Promise<SignMessageReturnType>
+  signTransaction: (
+    args: SignTransactionParameters<TChain, TAccount>,
+  ) => Promise<SignTransactionReturnType>
 }
 
 export function walletActions<

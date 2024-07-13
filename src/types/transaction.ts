@@ -199,7 +199,7 @@ export type TransactionRequestBase<TQuantity = bigint, TIndex = number> = {
   /** Transaction recipient */
   to?: Address | null | undefined
   /** Gas provided for transaction execution */
-  gas?: bigint | undefined
+  gas?: TQuantity | undefined
 
   /** Value in wei sent with this transaction */
   value?: TQuantity | undefined
