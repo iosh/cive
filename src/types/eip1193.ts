@@ -707,6 +707,11 @@ export type WalletRpcSchema = [
     ]
     ReturnType: Hex
   },
+  {
+    Method: 'wallet_switchConfluxChain'
+    Parameters: [chain: { chainId: string }]
+    ReturnType: null
+  },
 ]
 
 export type LocalNodeRpcSchema = [

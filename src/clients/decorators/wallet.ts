@@ -58,6 +58,10 @@ import {
   type SignTypedDataReturnType,
   signTypedData,
 } from '../../actions/wallet/signTypedData.js'
+import {
+  type SwitchChainParameters,
+  switchChain,
+} from '../../actions/wallet/switchChain.js'
 
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,
@@ -120,6 +124,7 @@ export type WalletActions<
   >(
     args: SignTypedDataParameters<TTypedData, TPrimaryType, TAccount>,
   ) => Promise<SignTypedDataReturnType>
+  switchChain: (args: SwitchChainParameters) => Promise<void>
 }
 
 export function walletActions<
@@ -143,5 +148,6 @@ export function walletActions<
     sendTransaction: (args) => sendTransaction(client, args),
     signMessage: (args) => signMessage(client, args),
     signTypedData: (args) => signTypedData(client, args),
+    switchChain: (args) => switchChain(client, args),
   }
 }
