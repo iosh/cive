@@ -9,7 +9,6 @@ import type { Log } from './log.js'
 import type { NodeState } from './node.js'
 import {
   type PoSAccount,
-  PoSAccountStatus,
   type PoSBlock,
   type PoSCommittee,
   type PoSRewards,
@@ -25,13 +24,12 @@ import type {
   TransactionEIP2930,
   TransactionLegacy,
   TransactionReceipt,
-  TransactionRequest,
   TransactionRequestEIP1559,
   TransactionRequestEIP2930,
   TransactionRequestLegacy,
   TransactionType,
 } from './transaction.js'
-import { type OneOf, type UnionOmit, UnionPartialBy } from './utils.js'
+import { type OneOf, type UnionOmit } from './utils.js'
 import type { Vote } from './vote.js'
 
 export type { Quantity }

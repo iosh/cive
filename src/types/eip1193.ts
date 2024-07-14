@@ -3,7 +3,6 @@ import type {
   Hash,
   Hex,
   Address as HexAddress,
-  LogTopic,
 } from 'viem'
 import type {
   Quantity,
@@ -12,7 +11,6 @@ import type {
   RpcBlock,
   RpcChainAccount,
   RpcDeposit,
-  RpcFeeValue,
   RpcGasAndCollateral,
   RpcLog,
   RpcLogFilter,
@@ -35,9 +33,7 @@ import type {
 
 import type { Address } from '../accounts/types.js'
 import type { Block, EpochTag } from './block.js'
-import type { Log } from './log.js'
 import type { RpcEpochNumber, RpcTransaction as Transaction } from './rpc.js'
-import type { TransactionRequest } from './transaction.js'
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
 
 export type WalletPermissionCaveat = {

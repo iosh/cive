@@ -1,6 +1,16 @@
 import type { Abi, TypedData } from 'abitype'
-import type { GetPermissionsReturnType, Transport } from 'viem'
-import { type AddChainParameters, addChain, getPermissions } from 'viem/actions'
+import type {
+  GetPermissionsReturnType,
+  Transport,
+  WatchAssetParameters,
+  WatchAssetReturnType,
+} from 'viem'
+import {
+  type AddChainParameters,
+  addChain,
+  getPermissions,
+  watchAsset,
+} from 'viem/actions'
 import type { Account, Address } from '../../accounts/types.js'
 import {
   type GetChainIdReturnType,
@@ -125,6 +135,7 @@ export type WalletActions<
     args: SignTypedDataParameters<TTypedData, TPrimaryType, TAccount>,
   ) => Promise<SignTypedDataReturnType>
   switchChain: (args: SwitchChainParameters) => Promise<void>
+  watchAsset: (args: WatchAssetParameters) => Promise<WatchAssetReturnType>
 }
 
 export function walletActions<
@@ -149,5 +160,6 @@ export function walletActions<
     signMessage: (args) => signMessage(client, args),
     signTypedData: (args) => signTypedData(client, args),
     switchChain: (args) => switchChain(client, args),
+    watchAsset: (args) => watchAsset(client, args),
   }
 }

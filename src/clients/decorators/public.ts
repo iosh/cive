@@ -1,6 +1,5 @@
 import type { AbiEvent } from 'abitype'
 import type {
-  GetProofReturnType,
   MaybeAbiEventName,
   MaybeExtractEventArgsFromAbi,
   Transport,

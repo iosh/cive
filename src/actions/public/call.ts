@@ -12,7 +12,6 @@ import {
   type NumberToHexErrorType,
   RawContractError,
   type RpcStateMapping,
-  StateAssignmentConflictErrorType,
   type StateMapping,
   type Transport,
   decodeFunctionData,
@@ -99,7 +98,6 @@ export async function call<TChain extends Chain | undefined>(
     nonce,
     to,
     value,
-    ..._rest
   } = args
   const account = account_ ? parseAccount(account_) : undefined
 
@@ -146,7 +144,7 @@ export async function call<TChain extends Chain | undefined>(
     if (response === '0x') return { data: undefined }
     return { data: response }
   } catch (err) {
-    const _data = getRevertErrorData(err)
+    getRevertErrorData(err)
     throw getCallError(err as ErrorType, {
       ...args,
       account,

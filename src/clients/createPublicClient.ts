@@ -1,6 +1,4 @@
 import type { CreateClientErrorType, RpcSchema, Transport } from 'viem'
-
-import type { Register } from 'abitype'
 import type { Prettify } from 'viem/chains'
 import type { Account, Address } from '../accounts/types.js'
 import type { ErrorType } from '../errors/utils.js'

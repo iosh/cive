@@ -2,7 +2,6 @@ import { type Hex, hexToBytes, padHex, stringToBytes, toHex } from 'viem'
 import {
   type Address,
   type AddressType,
-  AddressTypeUser,
 } from '../../accounts/types.js'
 import { convertBit } from './convertBit.js'
 import { getNetworkPrefixByNetworkId } from './getNetworkIdPrefixByNetworkId.js'

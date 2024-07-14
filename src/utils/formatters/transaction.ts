@@ -7,7 +7,7 @@ import type {
 } from '../../types/chain.js'
 import type { RpcTransaction } from '../../types/rpc.js'
 import type { Transaction, TransactionType } from '../../types/transaction.js'
-import type { ExactPartial, UnionLooseOmit } from '../../types/utils.js'
+import type { UnionLooseOmit } from '../../types/utils.js'
 
 type TransactionPendingDependencies = 'blockHash'
 

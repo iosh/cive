@@ -11,7 +11,6 @@ import type { ErrorType } from '../../errors/utils.js'
 import type { GetAccountParameter } from '../../types/account.js'
 import type {
   Chain,
-  DeriveChain,
   GetChainParameter,
 } from '../../types/chain.js'
 import type { RpcTransactionRequest } from '../../types/rpc.js'

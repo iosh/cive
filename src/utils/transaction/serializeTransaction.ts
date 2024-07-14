@@ -1,7 +1,9 @@
 import {
   type AssertTransactionLegacyErrorType,
   type ConcatHexErrorType,
-  type GetTransationTypeErrorType as GetTransactionTypeErrorType,
+
+  type GetTransactionTypeErrorType,
+
   type InvalidLegacyVErrorType,
   type ToHexErrorType,
   type ToRlpErrorType,

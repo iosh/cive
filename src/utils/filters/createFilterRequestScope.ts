@@ -1,5 +1,4 @@
 import {
-  EIP1193Parameters,
   type EIP1193RequestFn,
   type Hex,
   type Transport,

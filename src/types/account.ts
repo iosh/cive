@@ -1,4 +1,3 @@
-import type { Hex } from 'viem'
 import type { Prettify } from 'viem/chains'
 import type { Account, Address, JsonRpcAccount } from '../accounts/types.js'
 import type { Transaction } from './transaction.js'
