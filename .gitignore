@@ -176,3 +176,7 @@ dist
 
 # temp dir
 temp/
+
+_cjs
+_esm
+_types
