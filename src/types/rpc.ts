@@ -7,13 +7,13 @@ import type { FeeValues, GasAndCollateral } from './fee.js'
 import type { LogFilter } from './filter.js'
 import type { Log } from './log.js'
 import type { NodeState } from './node.js'
-import {
-  type PoSAccount,
-  type PoSBlock,
-  type PoSCommittee,
-  type PoSRewards,
-  type PoSStatus,
-  type PoSTransaction,
+import type {
+  PoSAccount,
+  PoSBlock,
+  PoSCommittee,
+  PoSRewards,
+  PoSStatus,
+  PoSTransaction,
 } from './pos.js'
 import type { Reward } from './reward.js'
 import type { Sponsor } from './sponsor.js'
@@ -29,7 +29,7 @@ import type {
   TransactionRequestLegacy,
   TransactionType,
 } from './transaction.js'
-import { type OneOf, type UnionOmit } from './utils.js'
+import type { OneOf, UnionOmit } from './utils.js'
 import type { Vote } from './vote.js'
 
 export type { Quantity }

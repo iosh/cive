@@ -1,8 +1,4 @@
-import {
-  type EIP1193RequestFn,
-  type Hex,
-  type Transport,
-} from 'viem'
+import type { EIP1193RequestFn, Hex, Transport } from 'viem'
 import type { Client } from '../../clients/createClient.js'
 import type { OnResponseFn } from '../../clients/transports/fallback.js'
 import type { Chain } from '../../types/chain.js'

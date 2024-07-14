@@ -1,5 +1,5 @@
-import { type Address as HexAddress, bytesToHex, stringToBytes } from 'viem'
-import type { Address, AddressType } from '../../accounts/types.js'
+import { bytesToHex, stringToBytes } from 'viem'
+import type { Address, AddressType, HexAddress } from '../../accounts/types.js'
 import {
   AddressTypeNotMatchError,
   InvalidAddressVersionError,

@@ -9,10 +9,7 @@ import type { Client } from '../../clients/createClient.js'
 import { AccountNotFoundError } from '../../errors/account.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { GetAccountParameter } from '../../types/account.js'
-import type {
-  Chain,
-  GetChainParameter,
-} from '../../types/chain.js'
+import type { Chain, GetChainParameter } from '../../types/chain.js'
 import type { RpcTransactionRequest } from '../../types/rpc.js'
 import type {
   TransactionRequest,

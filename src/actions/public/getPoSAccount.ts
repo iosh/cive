@@ -1,5 +1,5 @@
-import type { Address as HexAddress, Transport } from 'viem'
-
+import type { Transport } from 'viem'
+import type { HexAddress } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
 import type { Chain } from '../../types/chain.js'
 import type { PoSAccount } from '../../types/pos.js'

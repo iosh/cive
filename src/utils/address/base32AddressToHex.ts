@@ -1,5 +1,4 @@
-import type { Address as HexAddress } from 'viem'
-import type { Address, AddressType } from '../../accounts/types.js'
+import type { Address, AddressType, HexAddress } from '../../accounts/types.js'
 import { MixedCaseAddressError } from '../../errors/address.js'
 import { decodeBase32Address } from './decodeBase32Address.js'
 

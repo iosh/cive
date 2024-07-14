@@ -95,6 +95,7 @@ export type Address<
 export type Account<TAddress extends Address = Address> = OneOf<
   JsonRpcAccount<TAddress> | LocalAccount<string, TAddress>
 >
+export type HexAddress = `0x${string}`
 
 export type AccountSource = Address | CustomSource
 

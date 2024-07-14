@@ -1,9 +1,4 @@
-import type {
-  ExactPartial,
-  Hash,
-  Hex,
-  Address as HexAddress,
-} from 'viem'
+import type { ExactPartial, Hash, Hex } from 'viem'
 import type {
   Quantity,
   RpcAccountPending,
@@ -31,7 +26,7 @@ import type {
   RpcVote,
 } from './rpc.js'
 
-import type { Address } from '../accounts/types.js'
+import type { Address, HexAddress } from '../accounts/types.js'
 import type { Block, EpochTag } from './block.js'
 import type { RpcEpochNumber, RpcTransaction as Transaction } from './rpc.js'
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
