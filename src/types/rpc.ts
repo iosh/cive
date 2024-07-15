@@ -91,7 +91,7 @@ export type RpcAccountPending = AccountPending<Quantity>
 
 export type RpcAccountPendingTransaction = AccountPendingTransaction<
   Quantity,
-  Index
+  RpcTransaction
 >
 
 export type RpcLogFilter = LogFilter<Quantity>

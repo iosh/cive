@@ -6,6 +6,7 @@ import type {
   RpcAccountPending,
   RpcAccountPendingTransaction,
 } from '../../types/rpc.js'
+import type { Transaction } from '../../types/transaction.js'
 import type { ExactPartial } from '../../types/utils.js'
 import { formatTransaction } from './transaction.js'
 
@@ -42,7 +43,7 @@ export function formatAccountPendingTransaction(
     pendingTransactions: accountPendingTransaction.pendingTransactions
       ? accountPendingTransaction.pendingTransactions.map(formatTransaction)
       : undefined,
-  } as AccountPendingTransaction
+  } as AccountPendingTransaction<bigint, Transaction>
 
   return result
 }

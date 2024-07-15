@@ -5,7 +5,6 @@ import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNod
 import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
-import { getStatus } from './getStatus.js'
 import { getTransaction } from './getTransaction.js'
 
 const client = devConflux.getClient()

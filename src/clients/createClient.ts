@@ -5,7 +5,6 @@ import type {
   Hex,
   RpcSchema,
   Transport,
-  WalletActions,
 } from 'viem'
 import type { Prettify } from 'viem/chains'
 import type { ParseAccountErrorType } from 'viem/utils'
@@ -16,6 +15,7 @@ import type { Chain } from '../types/chain.js'
 import type { EIP1474Methods } from '../types/eip1193.js'
 import { uid } from '../utils/uid.js'
 import type { PublicActions } from './decorators/public.js'
+import type { WalletActions } from './decorators/wallet.js'
 
 export type ClientConfig<
   transport extends Transport = Transport,
@@ -206,7 +206,7 @@ export function createClient(parameters: ClientConfig): Client {
     ? parseAccount(parameters.account)
     : undefined
   const { config, request, value } = parameters.transport({
-    chain,
+    chain: chain as any,
     pollingInterval,
   })
   const transport = { ...config, ...value }

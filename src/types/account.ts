@@ -1,5 +1,6 @@
 import type { Prettify } from 'viem/chains'
 import type { Account, Address, JsonRpcAccount } from '../accounts/types.js'
+import type { RpcTransaction } from './rpc.js'
 import type { Transaction } from './transaction.js'
 import type { IsUndefined } from './utils.js'
 
@@ -45,12 +46,11 @@ export type AccountPending<TQuantity = bigint> = {
 
 export type AccountPendingTransaction<
   TQuantity = bigint,
-  TIndex = number,
-  TPending extends boolean = boolean,
+  TTransaction = Transaction | RpcTransaction,
 > = {
   firstTxStatus: {
     pending: 'futureNonce' | 'notEnoughCash' | 'ready'
   }
   pendingCount: TQuantity
-  pendingTransactions: Transaction<TQuantity, TIndex, TPending>[]
+  pendingTransactions: TTransaction[]
 }

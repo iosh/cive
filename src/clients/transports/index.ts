@@ -1,3 +1,3 @@
-import { http, Transport, webSocket } from 'viem'
+import { http, type Transport, webSocket } from 'viem'
 
-export { Transport, http, webSocket }
+export { type Transport, http, webSocket }

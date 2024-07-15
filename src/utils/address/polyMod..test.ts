@@ -1,6 +1,6 @@
 import { polyMod as _polyMod } from '@conflux-dev/conflux-address-js/lib/cip37/base32.js'
 import { stringToBytes } from 'viem'
-import { describe, expect, test } from 'vitest'
+import { expect, test } from 'vitest'
 import { polyMod } from './polyMod.js'
 
 test('polyMod', () => {

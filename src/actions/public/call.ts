@@ -7,12 +7,8 @@ import {
   type EncodeFunctionDataErrorType,
   type GetChainContractAddressErrorType,
   type Hex,
-  InvalidBytesBooleanError,
-  type InvalidBytesBooleanErrorType,
   type NumberToHexErrorType,
   RawContractError,
-  type RpcStateMapping,
-  type StateMapping,
   type Transport,
   decodeFunctionData,
   encodeFunctionData,
@@ -273,28 +269,4 @@ export function getRevertErrorData(err: unknown) {
   if (!(err instanceof BaseError)) return undefined
   const error = err.walk() as RawContractError
   return typeof error?.data === 'object' ? error.data?.data : error.data
-}
-
-export type ParseStateMappingErrorType = InvalidBytesBooleanErrorType
-
-export function parseStateMapping(
-  stateMapping: StateMapping | undefined,
-): RpcStateMapping | undefined {
-  if (!stateMapping || stateMapping.length === 0) return undefined
-  return stateMapping.reduce((acc, { slot, value }) => {
-    if (slot.length !== 66)
-      throw new InvalidBytesBooleanError({
-        size: slot.length,
-        targetSize: 66,
-        type: 'hex',
-      })
-    if (value.length !== 66)
-      throw new InvalidBytesBooleanError({
-        size: value.length,
-        targetSize: 66,
-        type: 'hex',
-      })
-    acc[slot] = value
-    return acc
-  }, {} as RpcStateMapping)
 }

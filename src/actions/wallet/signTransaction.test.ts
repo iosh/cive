@@ -1,4 +1,4 @@
-import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest'
+import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts } from '~test/src/constants.js'
 

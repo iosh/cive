@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
 
-import { PersonalMessage, format } from 'js-conflux-sdk'
+import { PersonalMessage } from 'js-conflux-sdk'
 import { stringToHex } from 'viem'
 import { toPrefixedMessage } from './toPrefixedMessage.js'
 

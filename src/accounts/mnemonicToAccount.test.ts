@@ -1,6 +1,6 @@
 import { HDWallet } from '@conflux-dev/hdwallet'
 import { PrivateKeyAccount } from 'js-conflux-sdk'
-import { describe, expect, test } from 'vitest'
+import { expect, test } from 'vitest'
 import { accounts, typedData } from '~test/src/constants.js'
 import { parseCFX } from '../unit/parseCFX.js'
 import { parseGDrip } from '../unit/parseGDrip.js'

@@ -2,7 +2,7 @@ import { expect, test } from 'vitest'
 
 import { accounts, typedData } from '~test/src/constants.js'
 
-import { Message, format, sign } from 'js-conflux-sdk'
+import { Message } from 'js-conflux-sdk'
 import { hashTypedData } from '../../utils/signature/hashTypedData.js'
 import { signTypedData } from './signTypedData.js'
 

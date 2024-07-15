@@ -59,9 +59,10 @@ import {
   signMessage,
 } from '../../actions/wallet/signMessage.js'
 
-import type {
-  SignTransactionParameters,
-  SignTransactionReturnType,
+import {
+  type SignTransactionParameters,
+  type SignTransactionReturnType,
+  signTransaction,
 } from '../../actions/wallet/signTransaction.js'
 import {
   type SignTypedDataParameters,
@@ -120,7 +121,7 @@ export type WalletActions<
     args: RequestPermissionsParameters,
   ) => Promise<RequestPermissionsReturnType>
   sendTransaction: (
-    args: SendTransactionParameters,
+    args: SendTransactionParameters<TChain, TAccount>,
   ) => Promise<SendTransactionReturnType>
   signMessage: (
     args: SignMessageParameters<TAccount>,
@@ -139,27 +140,26 @@ export type WalletActions<
 }
 
 export function walletActions<
-  TTransport extends Transport,
-  TChain extends Chain | undefined = Chain | undefined,
-  TAccount extends Account | undefined = Account | undefined,
->(
-  client: Client<TTransport, TChain, TAccount>,
-): WalletActions<TChain, TAccount> {
+  transport extends Transport,
+  chain extends Chain | undefined = Chain | undefined,
+  account extends Account | undefined = Account | undefined,
+>(client: Client<transport, chain, account>): WalletActions<chain, account> {
   return {
     deployContract: (args) => deployContract(client, args),
     prepareTransactionRequest: (args) =>
       prepareTransactionRequest(client, args) as any,
     sendRawTransaction: (args) => sendRawTransaction(client, args),
-    addChain: (args) => addChain(client, args),
+    addChain: (args) => addChain(client as any, args),
     getAddresses: () => getAddresses(client),
     getChainId: () => getChainId(client),
-    getPermissions: () => getPermissions(client),
+    getPermissions: () => getPermissions(client as any),
     requestAddresses: () => requestAddresses(client),
     requestPermissions: (args) => requestPermissions(client, args),
+    signTransaction: (args) => signTransaction(client, args),
     sendTransaction: (args) => sendTransaction(client, args),
     signMessage: (args) => signMessage(client, args),
     signTypedData: (args) => signTypedData(client, args),
     switchChain: (args) => switchChain(client, args),
-    watchAsset: (args) => watchAsset(client, args),
+    watchAsset: (args) => watchAsset(client as any, args),
   }
 }

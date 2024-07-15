@@ -1,5 +1,5 @@
 import type { Account, Address } from '~unit/accounts/types.js'
-import { confluxCoreSpaceTest, localhost } from '~unit/chains/index.js'
+import { localhost } from '~unit/chains/index.js'
 import {
   type Client,
   type ClientConfig,
@@ -18,8 +18,6 @@ import { createNode, remove } from './docker.js'
 
 type DefineConfluxParameters<chain extends Chain> = {
   chain: chain
-  forkBlockNumber: bigint
-  forkUrl: string
   port: number
   wsPort: number
 }
@@ -27,8 +25,6 @@ type DefineConfluxParameters<chain extends Chain> = {
 type DefineConfluxReturnType<chain extends Chain> = {
   chain: chain
   clientConfig: ClientConfig<Transport, chain, undefined>
-  forkBlockNumber: bigint
-  forkUrl: string
   getClient<
     config extends ExactPartial<
       Omit<ClientConfig, 'account' | 'chain'> & {
@@ -62,14 +58,7 @@ type DefineConfluxReturnType<chain extends Chain> = {
 function defineConflux<const chain extends Chain>(
   parameters: DefineConfluxParameters<chain>,
 ): DefineConfluxReturnType<chain> {
-  const {
-    chain: chain_,
-    forkUrl,
-    forkBlockNumber,
-    port,
-    wsPort,
-    ..._options
-  } = parameters
+  const { chain: chain_, port, wsPort } = parameters
 
   const rpcUrl = {
     http: `http://127.0.0.1:${port}`,
@@ -113,8 +102,6 @@ function defineConflux<const chain extends Chain>(
   return {
     chain,
     clientConfig,
-    forkBlockNumber,
-    forkUrl,
     getClient(config) {
       return (
         createClient({
