@@ -2,7 +2,7 @@ import type {
   TypedData,
   TypedDataDomain,
   TypedDataToPrimitiveTypes,
-} from 'abitype'
+} from '../types/abitype.js'
 
 import type { Prettify } from './utils.js'
 

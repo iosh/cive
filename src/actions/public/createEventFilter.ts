@@ -1,4 +1,4 @@
-import type { AbiEvent } from 'abitype'
+import type { AbiEvent } from '../../types/abitype.js'
 import {
   type EncodeEventTopicsErrorType,
   type EncodeEventTopicsParameters,

@@ -1,4 +1,4 @@
-import type { TypedData } from 'abitype'
+import type { TypedData } from '../../types/abitype.js'
 
 import type { Hex } from '../../types/misc.js'
 

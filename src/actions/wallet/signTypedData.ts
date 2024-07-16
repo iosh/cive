@@ -1,4 +1,4 @@
-import type { TypedData } from 'abitype'
+import type { TypedData } from '../../types/abitype.js'
 import type { Account } from '../../accounts/types.js'
 import {
   type ParseAccountErrorType,

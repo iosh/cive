@@ -1,4 +1,4 @@
-import type { Abi, TypedData } from 'abitype'
+import type { Abi, TypedData } from '../../types/abitype.js'
 import type {
   GetPermissionsReturnType,
   Transport,

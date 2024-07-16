@@ -1,4 +1,4 @@
-import type { Abi, AbiEvent, ExtractAbiEvent } from 'abitype'
+import type { Abi, AbiEvent, ExtractAbiEvent } from '../../types/abitype.js'
 import type {
   DecodeEventLogErrorType,
   FormatLogErrorType,

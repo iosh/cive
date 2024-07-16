@@ -1,4 +1,3 @@
-import type { Address as Base32AddressType } from '../accounts/types.js'
 import {
   type Abi,
   type AbiFunction,
@@ -17,6 +16,16 @@ import {
   type TypedData,
   type TypedDataDomain,
   type TypedDataParameter,
+  type AbiParametersToPrimitiveTypes,
+  type ExtractAbiFunctionNames,
+  type ExtractAbiErrorNames,
+  type ExtractAbiFunction,
+  type ExtractAbiFunctions,
+  type ExtractAbiEventNames,
+  type ExtractAbiError,
+  type ExtractAbiEvent,
+  type AbiError,
+  type TypedDataToPrimitiveTypes,
   CircularReferenceError,
   InvalidAbiParameterError,
   InvalidAbiParametersError,
@@ -35,8 +44,7 @@ import {
   parseAbiItem,
   parseAbiParameter,
   parseAbiParameters,
-} from 'abitype'
-
+} from './abitype/exports/index.js'
 export {
   type Abi,
   type AbiFunction,
@@ -55,6 +63,16 @@ export {
   type TypedData,
   type TypedDataDomain,
   type TypedDataParameter,
+  type AbiParametersToPrimitiveTypes,
+  type ExtractAbiFunctionNames,
+  type ExtractAbiErrorNames,
+  type ExtractAbiFunction,
+  type ExtractAbiFunctions,
+  type ExtractAbiEventNames,
+  type ExtractAbiError,
+  type ExtractAbiEvent,
+  type AbiError,
+  type TypedDataToPrimitiveTypes,
   CircularReferenceError,
   InvalidAbiParameterError,
   InvalidAbiParametersError,
@@ -73,10 +91,4 @@ export {
   parseAbiItem,
   parseAbiParameter,
   parseAbiParameters,
-}
-
-declare module 'abitype' {
-  export interface Register {
-    addressType: Base32AddressType
-  }
 }

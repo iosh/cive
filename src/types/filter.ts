@@ -8,7 +8,7 @@ import type {
 import type { Address } from '../accounts/types.js'
 import type { EpochNumber, EpochTag } from './block.js'
 
-import type { Abi } from 'abitype'
+import type { Abi } from '../types/abitype.js'
 import type { PublicRpcSchema } from './eip1193.js'
 import type { Filter as Filter_ } from './utils.js'
 

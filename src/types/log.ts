@@ -3,7 +3,7 @@ import type {
   AbiEvent,
   ExtractAbiEvent,
   ExtractAbiEventNames,
-} from 'abitype'
+} from '../types/abitype.js'
 import type {
   AbiEventParametersToPrimitiveTypes,
   GetEventArgs,
