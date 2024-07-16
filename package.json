@@ -1,5 +1,6 @@
 {
   "type": "module",
+  "private": true,
   "scripts": {
     "bench": "vitest bench",
     "test": "vitest -c ./test/vitest.config.ts dev",
@@ -13,9 +14,6 @@
     "docs:dev": "pnpm --filter site dev",
     "docs:build": "pnpm --filter site build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@conflux-dev/conflux-address-js": "^2.0.1",
