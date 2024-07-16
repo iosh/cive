@@ -1,4 +1,4 @@
-import type { TypedData, TypedDataDomain, TypedDataParameter } from '../types/abitype.js'
+import type { TypedData, TypedDataDomain, TypedDataParameter } from 'abitype'
 
 import type { Hex } from '../types/misc.js'
 

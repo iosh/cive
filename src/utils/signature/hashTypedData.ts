@@ -1,6 +1,6 @@
 // Implementation forked and adapted from https://github.com/MetaMask/eth-sig-util/blob/main/src/sign-typed-data.ts
 
-import type { AbiParameter, TypedData, TypedDataDomain } from '../../types/abitype.js'
+import type { AbiParameter, TypedData, TypedDataDomain } from 'abitype'
 
 import {
   type EncodeAbiParametersErrorType,
