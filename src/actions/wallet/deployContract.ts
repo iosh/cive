@@ -1,10 +1,4 @@
-import {
-  type Abi,
-  type ContractConstructorArgs,
-  type Hex,
-  type Transport,
-  encodeDeployData,
-} from 'viem'
+import type { Hex, Transport } from 'viem'
 import type { Account } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
 import type { ErrorType } from '../../errors/utils.js'
@@ -16,6 +10,9 @@ import {
   type SendTransactionReturnType,
   sendTransaction,
 } from './sendTransaction.js'
+import type { Abi } from '../../types/abitype.js'
+import type { ContractConstructorArgs } from '../../types/contract.js'
+import { encodeDeployData } from '../../utils/abi/encodeDeployData.js'
 
 export type DeployContractParameters<
   abi extends Abi | readonly unknown[] = Abi,

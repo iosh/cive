@@ -24,9 +24,11 @@ test('default', async () => {
     await deployContract(client, {
       abi: parseAbi(['constructor(address to, uint256 tokenId)']),
       bytecode: '0x',
-      args: [accounts[0].hexAddress, 123n],
+      args: [accounts[0].base32Address, 123n],
     }),
-  ).toBeDefined()
+  ).toMatchInlineSnapshot(
+    `"0x63da4c5b57f2f5d2732b6d98bf0b066c1d097a3cd5b310871750fce4d6ea4dcc"`,
+  )
 })
 
 test('defined inline', async () => {
@@ -49,7 +51,7 @@ test('defined inline', async () => {
         },
       ],
       bytecode: '0x',
-      args: [accounts[0].hexAddress, 123n],
+      args: [accounts[0].base32Address, 123n],
     }),
-  ).toBeDefined()
+  ).toMatchInlineSnapshot(`"0x4a3d05f5b2ba826b6951830afe8abc5b850228b649e3c9feacae515b35e77e27"`)
 })
