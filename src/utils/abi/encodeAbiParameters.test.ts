@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest'
 
+import { accounts } from '../../../test/src/constants.js'
 import {
   encodeAbiParameters,
   getArrayComponents,
 } from './encodeAbiParameters.js'
 import { getAbiItem } from './getAbiItem.js'
-import { accounts } from '../../../test/src/constants.js'
 
 describe('static', () => {
   test('blank', () => {

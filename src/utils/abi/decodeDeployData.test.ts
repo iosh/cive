@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { decodeDeployData } from './decodeDeployData.js'
 import { accounts } from '../../../test/src/constants.js'
+import { decodeDeployData } from './decodeDeployData.js'
 
 test('constructor()', () => {
   expect(

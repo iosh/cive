@@ -1,9 +1,9 @@
 import { expect, test } from 'vitest'
 
 import { erc20Abi } from 'abitype/abis'
+import { accounts } from '../../../test/src/constants.js'
 import { encodeFunctionData } from './encodeFunctionData.js'
 import { prepareEncodeFunctionData } from './prepareEncodeFunctionData.js'
-import { accounts } from '../../../test/src/constants.js'
 test('foo()', () => {
   expect(
     encodeFunctionData({

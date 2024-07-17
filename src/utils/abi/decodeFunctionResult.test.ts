@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 
-import { decodeFunctionResult } from './decodeFunctionResult.js'
 import { accounts } from '../../../test/src/constants.js'
+import { decodeFunctionResult } from './decodeFunctionResult.js'
 
 test('returns ()', () => {
   expect(

@@ -9,17 +9,17 @@ import type { Hex } from '../../types/misc.js'
 import type { IsNarrowable, UnionEvaluate } from '../../types/utils.js'
 
 import {
+  AbiFunctionSignatureNotFoundError,
+  type SliceErrorType,
+  type ToFunctionSelectorErrorType,
+  slice,
+  toFunctionSelector,
+} from 'viem'
+import { type FormatAbiItemErrorType, formatAbiItem } from 'viem/utils'
+import {
   type DecodeAbiParametersErrorType,
   decodeAbiParameters,
 } from './decodeAbiParameters.js'
-import {
-  AbiFunctionSignatureNotFoundError,
-  slice,
-  toFunctionSelector,
-  type SliceErrorType,
-  type ToFunctionSelectorErrorType,
-} from 'viem'
-import { formatAbiItem, type FormatAbiItemErrorType } from 'viem/utils'
 
 export type DecodeFunctionDataParameters<
   abi extends Abi | readonly unknown[] = Abi,

@@ -1,8 +1,8 @@
 import { expect, expectTypeOf, test } from 'vitest'
 
-import { decodeFunctionData } from './decodeFunctionData.js'
 import { accounts } from '../../../test/src/constants.js'
 import type { Address } from '../../types/abitype.js'
+import { decodeFunctionData } from './decodeFunctionData.js'
 
 test('foo()', () => {
   expect(

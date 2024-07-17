@@ -1,10 +1,9 @@
 import { assertType, describe, expect, test } from 'vitest'
-import { decodeAbiParameters } from './decodeAbiParameters.js'
 import { accounts } from '~test/src/constants.js'
-import { parseAbiParameters } from '../../types/abitype.js'
 import type { Address } from '../../accounts/types.js'
+import { parseAbiParameters } from '../../types/abitype.js'
 import type { Hex } from '../../types/misc.js'
-import { getAbiItem } from './getAbiItem.js'
+import { decodeAbiParameters } from './decodeAbiParameters.js'
 
 describe('static', () => {
   test('blank', () => {
@@ -299,7 +298,11 @@ describe('struct: (uint256,bool,address)', () => {
       ]
     >(result)
     expect(result).toEqual([
-      { x: 420n, y: true, z: 'net201029:aam62tadxfg5npg3y11r4egm1m2jcrx2zue8f7yjpu' },
+      {
+        x: 420n,
+        y: true,
+        z: 'net201029:aam62tadxfg5npg3y11r4egm1m2jcrx2zue8f7yjpu',
+      },
     ])
   })
 })
@@ -1215,4 +1218,3 @@ describe('dynamic', () => {
     })
   })
 })
-

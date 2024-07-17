@@ -13,10 +13,19 @@ import {
   createCursor,
 } from '../cursor.js'
 
-import { getArrayComponents } from './encodeAbiParameters.js'
 import {
   AbiDecodingDataSizeTooSmallError,
   AbiDecodingZeroDataError,
+  type BytesToBigIntErrorType,
+  type BytesToBoolErrorType,
+  type BytesToHexErrorType,
+  type BytesToNumberErrorType,
+  type BytesToStringErrorType,
+  type ChecksumAddressErrorType,
+  InvalidAbiDecodingTypeError,
+  type InvalidAbiDecodingTypeErrorType,
+  type SliceBytesErrorType,
+  type TrimErrorType,
   bytesToBigInt,
   bytesToBool,
   bytesToHex,
@@ -24,21 +33,12 @@ import {
   bytesToString,
   checksumAddress,
   hexToBytes,
-  InvalidAbiDecodingTypeError,
   size,
   sliceBytes,
   trim,
-  type BytesToBigIntErrorType,
-  type BytesToBoolErrorType,
-  type BytesToHexErrorType,
-  type BytesToNumberErrorType,
-  type BytesToStringErrorType,
-  type ChecksumAddressErrorType,
-  type InvalidAbiDecodingTypeErrorType,
-  type SliceBytesErrorType,
-  type TrimErrorType,
 } from 'viem'
 import { hexAddressToBase32 } from '../address/hexAddressToBase32.js'
+import { getArrayComponents } from './encodeAbiParameters.js'
 
 export type DecodeAbiParametersReturnType<
   params extends readonly AbiParameter[] = readonly AbiParameter[],
@@ -333,7 +333,7 @@ function decodeTuple(
       cursor.setPosition(start + consumed)
       const [data, consumed_] = decodeParameter(cursor, component, {
         staticPosition: start,
-        networkId
+        networkId,
       })
       consumed += consumed_
       value[hasUnnamedChild ? i : component?.name!] = data
@@ -350,7 +350,7 @@ function decodeTuple(
     const component = param.components[i]
     const [data, consumed_] = decodeParameter(cursor, component, {
       staticPosition,
-      networkId
+      networkId,
     })
     value[hasUnnamedChild ? i : component?.name!] = data
     consumed += consumed_
