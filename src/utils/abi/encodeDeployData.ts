@@ -1,4 +1,4 @@
-import type { Abi } from 'abitype'
+import type { Abi } from '../../types/abitype.js'
 import {
   AbiConstructorNotFoundError,
   AbiConstructorParamsNotFoundError,
@@ -6,7 +6,6 @@ import {
   type AbiConstructorNotFoundErrorType,
   type ConcatHexErrorType,
   type EncodeAbiParametersErrorType,
-  type Abi as EvmAbi,
 } from 'viem'
 
 import type { ErrorType } from '../../errors/utils.js'
