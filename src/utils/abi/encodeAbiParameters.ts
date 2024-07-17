@@ -2,7 +2,7 @@ import type {
   AbiParameter,
   AbiParameterToPrimitiveType,
   AbiParametersToPrimitiveTypes,
-} from 'abitype'
+} from '../../types/abitype.js'
 
 import type { ErrorType } from '../../errors/utils.js'
 import type { Hex } from '../../types/misc.js'
