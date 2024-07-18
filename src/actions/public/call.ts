@@ -10,18 +10,11 @@ import {
   type NumberToHexErrorType,
   RawContractError,
   type Transport,
-  decodeFunctionData,
-  encodeFunctionData,
-  getChainContractAddress,
   multicall3Abi,
   numberToHex,
 } from 'viem'
-import {
-  type GetCallErrorReturnType,
-  type RequestErrorType,
-  getCallError,
-} from 'viem/utils'
-import type { Address } from '../../accounts/types.js'
+import type { GetCallErrorReturnType, RequestErrorType } from 'viem/utils'
+import type { Account, Address } from '../../accounts/types.js'
 import {
   type ParseAccountErrorType,
   parseAccount,
@@ -34,6 +27,10 @@ import type { Chain } from '../../types/chain.js'
 import type { RpcTransactionRequest } from '../../types/rpc.js'
 import type { TransactionRequest } from '../../types/transaction.js'
 import type { ExactPartial, UnionOmit } from '../../types/utils.js'
+import { decodeFunctionResult } from '../../utils/abi/decodeFunctionResult.js'
+import { encodeFunctionData } from '../../utils/abi/encodeFunctionData.js'
+import { getChainContractAddress } from '../../utils/chain/getChainContractAddress.js'
+import { getCallError } from '../../utils/errors/getCallError.js'
 import {
   type FormattedTransactionRequest,
   formatTransactionRequest,
@@ -50,7 +47,7 @@ export type FormattedCall<
 export type CallParameters<
   TChain extends Chain | undefined = Chain | undefined,
 > = UnionOmit<FormattedCall<TChain>, 'from'> & {
-  account?: Address | Address | undefined
+  account?: Account | Address | undefined
   batch?: boolean | undefined
 } & (
     | {
@@ -116,7 +113,6 @@ export async function call<TChain extends Chain | undefined>(
       value,
       storageLimit,
     } as TransactionRequest)
-
     if (batch && shouldPerformMulticall({ request })) {
       try {
         return await scheduleMulticall(client, {
@@ -247,11 +243,12 @@ async function scheduleMulticall<TChain extends Chain | undefined>(
         ],
       })
 
-      return decodeFunctionData({
+      return decodeFunctionResult({
         abi: multicall3Abi,
         args: [calls],
         functionName: 'aggregate3',
         data: data || '0x',
+        networkId: client.chain!.id,
       })
     },
   })
