@@ -1,7 +1,5 @@
-import type { AbiEvent } from '../../types/abitype.js'
 import {
   type EncodeEventTopicsErrorType,
-  type EncodeEventTopicsParameters,
   type Hash,
   type Hex,
   type LogTopic,
@@ -16,10 +14,12 @@ import type { RequestErrorType } from 'viem/utils'
 import type { Address } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
 import type { ErrorType } from '../../errors/utils.js'
+import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { Filter } from '../../types/filter.js'
 import type { Prettify } from '../../types/utils.js'
+import type { EncodeEventTopicsParameters } from '../../utils/abi/encodeEventTopics.js'
 import { createFilterRequestScope } from '../../utils/filters/createFilterRequestScope.js'
 
 export type CreateEventFilterParameters<
@@ -171,16 +171,17 @@ export async function createEventFilter<
   })
 
   let topics: LogTopic[] = []
+
   if (events) {
-    topics = [
-      (events as AbiEvent[]).flatMap((event) =>
-        encodeEventTopics({
-          abi: [event],
-          eventName: (event as AbiEvent).name,
-          args,
-        } as EncodeEventTopicsParameters),
-      ),
-    ]
+    const encoded = (events as AbiEvent[]).flatMap((event) =>
+      encodeEventTopics({
+        abi: [event],
+        eventName: (event as AbiEvent).name,
+        args,
+      } as EncodeEventTopicsParameters),
+    )
+    // TODO: Clean up type casting
+    topics = [encoded as LogTopic]
     if (event) topics = topics[0] as LogTopic[]
   }
 
