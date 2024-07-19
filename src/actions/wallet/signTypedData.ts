@@ -1,4 +1,3 @@
-import type { TypedData } from '../../types/abitype.js'
 import type { Account } from '../../accounts/types.js'
 import {
   type ParseAccountErrorType,
@@ -11,6 +10,7 @@ import {
   type AccountNotFoundErrorType,
 } from '../../errors/account.js'
 import type { ErrorType } from '../../errors/utils.js'
+import type { TypedData } from '../../types/abitype.js'
 import type { GetAccountParameter } from '../../types/account.js'
 import type { Chain } from '../../types/chain.js'
 import type { Hex } from '../../types/misc.js'

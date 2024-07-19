@@ -8,11 +8,11 @@ export type ChainDoesNotSupportContractErrorType =
 export class ChainDoesNotSupportContract extends BaseError {
   override name = 'ChainDoesNotSupportContract'
   constructor({
-    blockNumber,
+    epochNumber,
     chain,
     contract,
   }: {
-    blockNumber?: bigint | undefined
+    epochNumber?: bigint | undefined
     chain: Chain
     contract: { name: string; blockCreated?: number | undefined }
   }) {
@@ -21,11 +21,11 @@ export class ChainDoesNotSupportContract extends BaseError {
       {
         metaMessages: [
           'This could be due to any of the following:',
-          ...(blockNumber &&
+          ...(epochNumber &&
           contract.blockCreated &&
-          contract.blockCreated > blockNumber
+          contract.blockCreated > epochNumber
             ? [
-                `- The contract "${contract.name}" was not deployed until block ${contract.blockCreated} (current block ${blockNumber}).`,
+                `- The contract "${contract.name}" was not deployed until block ${contract.blockCreated} (current block ${epochNumber}).`,
               ]
             : [
                 `- The chain does not have the contract "${contract.name}" configured.`,

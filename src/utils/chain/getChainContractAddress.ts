@@ -1,19 +1,18 @@
+import type { Chain, ChainContract } from '../../types/chain.js'
 import {
-  type Chain,
-  type ChainContract,
   ChainDoesNotSupportContract,
   type ChainDoesNotSupportContractErrorType,
-} from 'viem'
+} from '../errors/chain.js'
 
 export type GetChainContractAddressErrorType =
   ChainDoesNotSupportContractErrorType
 
 export function getChainContractAddress({
-  blockNumber,
+  epochNumber,
   chain,
   contract: name,
 }: {
-  blockNumber?: bigint | undefined
+  epochNumber?: bigint | undefined
   chain: Chain
   contract: string
 }) {
@@ -25,12 +24,12 @@ export function getChainContractAddress({
     })
 
   if (
-    blockNumber &&
+    epochNumber &&
     contract.blockCreated &&
-    contract.blockCreated > blockNumber
+    contract.blockCreated > epochNumber
   )
     throw new ChainDoesNotSupportContract({
-      blockNumber,
+      epochNumber,
       chain,
       contract: {
         name,

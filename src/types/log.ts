@@ -1,16 +1,16 @@
 import type {
-  Abi,
-  AbiEvent,
-  ExtractAbiEvent,
-  ExtractAbiEventNames,
-} from '../types/abitype.js'
-import type {
   AbiEventParametersToPrimitiveTypes,
   GetEventArgs,
   Hash,
   Hex,
 } from 'viem'
 import type { Address } from '../accounts/types.js'
+import type {
+  Abi,
+  AbiEvent,
+  ExtractAbiEvent,
+  ExtractAbiEventNames,
+} from '../types/abitype.js'
 
 export type Log<
   TQuantity = bigint,

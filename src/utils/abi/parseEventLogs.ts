@@ -1,13 +1,13 @@
-import type { Abi } from '../../types/abitype.js'
 import {
   AbiEventSignatureNotFoundError,
-  type ContractEventName,
   type DecodeEventLogErrorType,
   DecodeLogDataMismatch,
   DecodeLogTopicsMismatch,
   decodeEventLog,
 } from 'viem'
 import type { ErrorType } from '../../errors/utils.js'
+import type { Abi } from '../../types/abitype.js'
+import type { ContractEventName } from '../../types/contract.js'
 import type { Log } from '../../types/log.js'
 import type { RpcLog } from '../../types/rpc.js'
 
@@ -49,30 +49,6 @@ export type ParseEventLogsReturnType<
 
 export type ParseEventLogsErrorType = DecodeEventLogErrorType | ErrorType
 
-/**
- * Extracts & decodes logs matching the provided signature(s) (`abi` + optional `eventName`)
- * from a set of opaque logs.
- *
- * @param parameters - {@link ParseEventLogsParameters}
- * @returns The logs. {@link ParseEventLogsReturnType}
- *
- * @example
- * import { createClient, http } from 'viem'
- * import { mainnet } from 'viem/chains'
- * import { parseEventLogs } from 'viem/op-stack'
- *
- * const client = createClient({
- *   chain: mainnet,
- *   transport: http(),
- * })
- *
- * const receipt = await getTransactionReceipt(client, {
- *   hash: '0xec23b2ba4bc59ba61554507c1b1bc91649e6586eb2dd00c728e8ed0db8bb37ea',
- * })
- *
- * const logs = parseEventLogs({ logs: receipt.logs })
- * // [{ args: { ... }, eventName: 'TransactionDeposited', ... }, ...]
- */
 export function parseEventLogs<
   abi extends Abi | readonly unknown[],
   strict extends boolean | undefined = true,

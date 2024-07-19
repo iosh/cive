@@ -1,8 +1,6 @@
-import type { AbiEvent } from '../../types/abitype.js'
 import {
   type DecodeEventLogErrorType,
   type EncodeEventTopicsErrorType,
-  type EncodeEventTopicsParameters,
   type FormatLogErrorType,
   type Hash,
   type LogTopic,
@@ -17,12 +15,14 @@ import type { RequestErrorType } from 'viem/utils'
 import type { Address } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
 import type { ErrorType } from '../../errors/utils.js'
+import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { Log } from '../../types/log.js'
 import type { RpcLog } from '../../types/rpc.js'
 import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
 import { formatLog } from '../../utils/formatters/log.js'
+import type { EncodeEventTopicsParameters } from '../../utils/abi/encodeEventTopics.js'
 
 export type GetLogsParameters<
   TAbiEvent extends AbiEvent | undefined = undefined,
@@ -135,15 +135,14 @@ export async function getLogs<
 
   let topics: LogTopic[] = []
   if (events) {
-    topics = [
-      (events as AbiEvent[]).flatMap((event) =>
-        encodeEventTopics({
-          abi: [event],
-          eventName: (event as AbiEvent).name,
-          args,
-        } as EncodeEventTopicsParameters),
-      ),
-    ]
+    const encoded = (events as AbiEvent[]).flatMap((event) =>
+      encodeEventTopics({
+        abi: [event],
+        eventName: (event as AbiEvent).name,
+        args,
+      } as EncodeEventTopicsParameters),
+    )
+    topics = [encoded as LogTopic]
     if (event) topics = topics[0] as LogTopic[]
   }
 

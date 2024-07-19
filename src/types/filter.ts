@@ -1,14 +1,9 @@
-import type {
-  EIP1193RequestFn,
-  Hash,
-  Hex,
-  LogTopic,
-  MaybeExtractEventArgsFromAbi,
-} from 'viem'
+import type { EIP1193RequestFn, Hash, Hex, LogTopic } from 'viem'
 import type { Address } from '../accounts/types.js'
 import type { EpochNumber, EpochTag } from './block.js'
 
 import type { Abi } from '../types/abitype.js'
+import type { MaybeExtractEventArgsFromAbi } from './contract.js'
 import type { PublicRpcSchema } from './eip1193.js'
 import type { Filter as Filter_ } from './utils.js'
 

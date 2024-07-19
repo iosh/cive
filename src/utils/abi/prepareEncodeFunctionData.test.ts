@@ -1,5 +1,5 @@
-import { erc20Abi } from '../../types/abitype/abis/json.js'
 import { expect, test } from 'vitest'
+import { erc20Abi } from '../../types/abitype/abis/json.js'
 import { prepareEncodeFunctionData } from './prepareEncodeFunctionData.js'
 
 test('default', () => {
