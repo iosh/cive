@@ -1,4 +1,3 @@
-import type { Abi, AbiEvent, ExtractAbiEvent } from '../../types/abitype.js'
 import type {
   DecodeEventLogErrorType,
   FormatLogErrorType,
@@ -8,6 +7,7 @@ import type {
 import type { RequestErrorType } from 'viem/utils'
 import type { Client } from '../../clients/createClient.js'
 import type { ErrorType } from '../../errors/utils.js'
+import type { Abi, AbiEvent, ExtractAbiEvent } from '../../types/abitype.js'
 import type { Chain } from '../../types/chain.js'
 import type { Filter, FilterType } from '../../types/filter.js'
 import type { Log } from '../../types/log.js'
