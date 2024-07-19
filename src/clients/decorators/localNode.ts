@@ -25,6 +25,7 @@ import {
   type LockLocalNodeAccountReturnType,
   lockLocalNodeAccount,
 } from '../../actions/localNode/lockLocalNodeAccount.js'
+import { type MineParameters, mine } from '../../actions/localNode/mine.js'
 import {
   type UnlockLocalNodeAccountParameters,
   type UnlockLocalNodeAccountReturnType,
@@ -51,6 +52,7 @@ export type LocalNodeActions = {
   generateEmptyLocalNodeBlocks: (
     args: GenerateEmptyLocalNodeBlocksParameters,
   ) => Promise<GenerateEmptyLocalNodeBlocksReturnType>
+  mine: (args: MineParameters) => Promise<void>
 }
 
 export function localNodeActions<
@@ -67,5 +69,6 @@ export function localNodeActions<
     generateLocalNodeBlock: (args) => generateLocalNodeBlock(client, args),
     generateEmptyLocalNodeBlocks: (args) =>
       generateEmptyLocalNodeBlocks(client, args),
+    mine: (args) => mine(client, args),
   }
 }
