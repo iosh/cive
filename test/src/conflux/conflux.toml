@@ -43,7 +43,7 @@ mode = "dev"
 # If it's not set, blocks will only be generated after receiving a transaction.
 # Otherwise, blocks are automatically generated every ``dev_block_interval_ms'' ms.
 #
-# dev_block_interval_ms = 250
+dev_block_interval_ms = 1844674407370955161
 
 # ----------------- Mining Configuration -----------------
 

@@ -29,7 +29,7 @@ type DefineConfluxReturnType<chain extends Chain> = {
     config extends ExactPartial<
       Omit<ClientConfig, 'account' | 'chain'> & {
         account?: true | Address | Account | undefined
-        chain?: false | undefined
+        chain?: Chain | undefined
       }
     >,
   >(
@@ -111,7 +111,7 @@ function defineConflux<const chain extends Chain>(
             config?.account === true
               ? accounts[0].base32Address
               : config?.account,
-          chain: config?.chain === false ? undefined : chain,
+          chain: config?.chain || chain,
           transport: clientConfig.transport,
         }) as any
       ).extend(() => ({ mode: 'conflux' })) as never
