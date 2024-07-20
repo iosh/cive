@@ -13,7 +13,8 @@
     "format": "biome format --write",
     "docs:dev": "pnpm --filter site dev",
     "docs:build": "pnpm --filter site build",
-    "postinstall": "bun ./scripts/overLoadAbitype.ts"
+    "postinstall": "bun ./scripts/overLoadAbitype.ts",
+    "prepublishOnly": "bun ./scripts/prepublishOnly.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
