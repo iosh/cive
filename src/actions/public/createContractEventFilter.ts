@@ -10,7 +10,7 @@ import type {
   MaybeExtractEventArgsFromAbi,
 } from '../../types/contract.js'
 import type { Filter } from '../../types/filter.js'
-import type { Hex } from '../../types/misc.js'
+import type { Hash, Hex } from '../../types/misc.js'
 import {
   type EncodeEventTopicsErrorType,
   type EncodeEventTopicsParameters,
@@ -60,59 +60,37 @@ export type CreateContractEventFilterParameters<
          */
         fromEpoch?: EpochNumber | EpochTag
         /**
-         * @default latest_checkpoint
+         * @default latest_state
          */
         toEpoch?: EpochNumber | EpochTag
-        /**
-         * @default null
-         */
+
         toBlock?: never | undefined
-        /**
-         * @default null
-         */
+
         fromBlock?: never | undefined
 
         blockHashes?: never | undefined
       }
     | {
-        /**
-         * @default latest_checkpoint
-         */
         fromEpoch?: never | undefined
-        /**
-         * @default latest_checkpoint
-         */
+
         toEpoch?: never | undefined
-        /**
-         * @default null
-         */
+
         toBlock: EpochNumber
-        /**
-         * @default null
-         */
+
         fromBlock: EpochNumber
 
         blockHashes?: never | undefined
       }
     | {
-        /**
-         * @default latest_checkpoint
-         */
         fromEpoch?: never | undefined
-        /**
-         * @default latest_checkpoint
-         */
+
         toEpoch?: never | undefined
-        /**
-         * @default null
-         */
+
         toBlock?: never | undefined
-        /**
-         * @default null
-         */
+
         fromBlock?: never | undefined
 
-        blockHashes: Hex[]
+        blockHashes: Hash[]
       }
   )
 
@@ -153,7 +131,7 @@ export async function createContractEventFilter<
     toBlock,
     blockHashes,
     fromEpoch = 'latest_checkpoint',
-    toEpoch = 'latest_checkpoint',
+    toEpoch = 'latest_state',
   } = parameters as CreateContractEventFilterParameters
 
   const _fromEpoch = fromBlock ? undefined : fromEpoch
@@ -172,9 +150,6 @@ export async function createContractEventFilter<
 
   const params = blockHashes
     ? {
-        fromBlock:
-          typeof fromBlock === 'bigint' ? numberToHex(fromBlock) : fromBlock,
-        toBlock: typeof toBlock === 'bigint' ? numberToHex(toBlock) : toBlock,
         blockHashes,
         address,
         topics,

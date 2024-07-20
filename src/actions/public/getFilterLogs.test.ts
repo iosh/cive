@@ -1,4 +1,4 @@
-import { formatUnits, parseUnits } from 'viem'
+import { parseUnits } from 'viem'
 import {
   afterAll,
   beforeAll,
@@ -40,90 +40,6 @@ beforeAll(async () => {
   })
   await mine(client)
 })
-
-const event = {
-  default: {
-    inputs: [
-      {
-        indexed: true,
-        name: 'from',
-        type: 'address',
-      },
-      {
-        indexed: true,
-        name: 'to',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        name: 'value',
-        type: 'uint256',
-      },
-    ],
-    name: 'Transfer',
-    type: 'event',
-  },
-  approve: {
-    type: 'event',
-    name: 'Approval',
-    inputs: [
-      {
-        indexed: true,
-        name: 'owner',
-        type: 'address',
-      },
-      {
-        indexed: true,
-        name: 'spender',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        name: 'value',
-        type: 'uint256',
-      },
-    ],
-  },
-  invalid: {
-    inputs: [
-      {
-        indexed: true,
-        name: 'from',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        name: 'to',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        name: 'value',
-        type: 'uint256',
-      },
-    ],
-    name: 'Transfer',
-    type: 'event',
-  },
-  unnamed: {
-    inputs: [
-      {
-        indexed: true,
-        type: 'address',
-      },
-      {
-        indexed: true,
-        type: 'address',
-      },
-      {
-        indexed: false,
-        type: 'uint256',
-      },
-    ],
-    name: 'Transfer',
-    type: 'event',
-  },
-} as const
 
 afterAll(async () => {
   await devConflux.stop()
