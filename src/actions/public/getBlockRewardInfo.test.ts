@@ -1,7 +1,6 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getBlock } from './getBlock.js'
 import { getBlockRewardInfo } from './getBlockRewardInfo.js'
@@ -17,8 +16,7 @@ afterAll(async () => {
 })
 
 test('default', async () => {
-  await generateLocalNodeBlock(client, { numTxs: 10, blockSizeLimit: 1024 })
-  await generateEmptyLocalNodeBlocks(client, { numBlocks: 20 })
+  await generateEmptyLocalNodeBlocks(client, { numBlocks: 30 })
   const block = await getBlock(client, { epochTag: 'latest_mined' })
 
   const result = await getBlockRewardInfo(client, {

@@ -517,6 +517,7 @@ describe('extends', () => {
         "getBlockRewardInfo": [Function],
         "getBlocksByEpoch": [Function],
         "getBytecode": [Function],
+        "getChainId": [Function],
         "getClientVersion": [Function],
         "getCollateralForStorage": [Function],
         "getCollateralInfo": [Function],

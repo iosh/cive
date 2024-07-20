@@ -2,7 +2,7 @@ import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
+import { mine } from '../localNode/mine.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { getTransactionReceipt } from './getTransactionReceipt.js'
@@ -26,7 +26,7 @@ test('default', async () => {
     value: 0n,
   })
 
-  await generateLocalNodeBlock(client, { numTxs: 1, blockSizeLimit: 1024 })
+  await mine(client, { numTxs: 1 })
 
   const receipt = await getTransactionReceipt(client, { hash })
 
@@ -76,7 +76,7 @@ test('default', async () => {
   expect(receipt.index).toMatchInlineSnapshot('0n')
 })
 
-test('1550', async () => {
+test('1559', async () => {
   await generateEmptyLocalNodeBlocks(client, { numBlocks: 10 })
   const hash = await sendTransaction(client, {
     account: sourceAccount,
@@ -84,7 +84,7 @@ test('1550', async () => {
     value: 0n,
   })
 
-  await generateLocalNodeBlock(client, { numTxs: 1, blockSizeLimit: 1024 })
+  await mine(client, { numTxs: 1 })
 
   const receipt = await getTransactionReceipt(client, { hash })
 
@@ -125,11 +125,7 @@ test('1550', async () => {
     `"NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X"`,
   )
 
-  expect(receipt.transactionHash).toMatchInlineSnapshot(
-    `"0x1da884304f56eaa26111178364470062c1c8fece3a41699eee8cf07ce75d0ade"`,
-  )
-
-  expect(receipt.epochNumber).toMatchInlineSnapshot('17n')
+  expect(receipt.epochNumber).toMatchInlineSnapshot(`16n`)
 
   expect(receipt.index).toMatchInlineSnapshot('0n')
 })

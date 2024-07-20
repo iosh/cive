@@ -2,7 +2,7 @@ import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
+import { mine } from '../localNode/mine.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { getTransaction } from './getTransaction.js'
@@ -24,7 +24,7 @@ test('default', async () => {
     to: sourceAccount.address,
   })
 
-  await generateLocalNodeBlock(client, { numTxs: 1, blockSizeLimit: 1024 })
+  await mine(client, { numTxs: 1 })
 
   const tx = await getTransaction(client, { hash })
   expect(Object.keys(tx)).toMatchInlineSnapshot(`
@@ -78,7 +78,7 @@ test('get transaction 1559', async () => {
     to: sourceAccount.address,
   })
 
-  await generateLocalNodeBlock(client, { numTxs: 1, blockSizeLimit: 1024 })
+  await mine(client, { numTxs: 1 })
 
   const tx = await getTransaction(client, { hash })
 
@@ -115,5 +115,5 @@ test('get transaction 1559', async () => {
   expect(tx.maxFeePerGas).toMatchInlineSnapshot('4000001n')
   expect(tx.maxPriorityFeePerGas).toMatchInlineSnapshot('4000000n')
   expect(tx.gasPrice).toMatchInlineSnapshot('4000001n')
-  expect(tx.yParity).toMatchInlineSnapshot(`"0x0"`)
+  expect(tx.yParity).toMatchInlineSnapshot(`"0x1"`)
 })

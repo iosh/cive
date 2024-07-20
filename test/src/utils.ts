@@ -1,4 +1,3 @@
-import { generateLocalNodeBlock } from '~cive/actions/localNode/generateLocalNodeBlock.js'
 import { mine } from '~cive/actions/localNode/mine.js'
 import { getTransactionReceipt } from '~cive/actions/public/getTransactionReceipt.js'
 import {

@@ -6,7 +6,7 @@ import { getBalance } from './getBalance.js'
 import { getBlock } from './getBlock.js'
 
 import { parseCFX } from '../../unit/parseCFX.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
+import { mine } from '../localNode/mine.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 
 const sourceAccount = getTestAccount(accounts[0])
@@ -54,7 +54,7 @@ test('gets balance when transaction', async () => {
     to: targetAccount.address,
     account: sourceAccount,
   })
-  await generateLocalNodeBlock(client, { numTxs: 1, blockSizeLimit: 1024 })
+  await mine(client, { numTxs: 1 })
 
   expect(
     await getBalance(client, { address: sourceAccount.address }),

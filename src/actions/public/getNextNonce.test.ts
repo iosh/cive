@@ -2,7 +2,7 @@ import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
+import { mine } from '../localNode/mine.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { getBlock } from './getBlock.js'
@@ -30,7 +30,7 @@ test('with epoch tag', async () => {
     to: sourceAccount.address,
   })
 
-  await generateLocalNodeBlock(client, { numTxs: 10, blockSizeLimit: 10 })
+  await mine(client, { numTxs: 1 })
   expect(
     await getNextNonce(client, {
       address: sourceAccount.address,
@@ -90,7 +90,7 @@ test('with epoch number', async () => {
     to: sourceAccount.address,
   })
 
-  await generateLocalNodeBlock(client, { numTxs: 1, blockSizeLimit: 10 })
+  await mine(client, { numTxs: 1 })
   expect(
     await getNextNonce(client, {
       address: sourceAccount.address,

@@ -54,6 +54,6 @@ test('defined inline', async () => {
       args: [accounts[0].base32Address, 123n],
     }),
   ).toMatchInlineSnapshot(
-    `"0x4a3d05f5b2ba826b6951830afe8abc5b850228b649e3c9feacae515b35e77e27"`,
+    `"0xce3bacd17d867c58f34b2a671d690fd1b4872616a6fb65e9a08936d22d7bacbb"`,
   )
 })

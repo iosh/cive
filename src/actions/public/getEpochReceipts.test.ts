@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
+import { mine } from '../localNode/mine.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { getEpochReceipts } from './getEpochReceipts.js'
@@ -26,7 +26,7 @@ test('default', async () => {
     value: 0n,
     account: sourceAccount,
   })
-  await generateLocalNodeBlock(client, { numTxs: 10, blockSizeLimit: 1024 })
+  await mine(client, { numTxs: 1 })
   const resultWithoutReceipts = await getEpochReceipts(client, {
     epochNumber: 1n,
   })

@@ -1,8 +1,7 @@
-import { assertType, describe, expect, test } from 'vitest'
-
-import { getAddress } from '../address/getAddress.js'
+import { assertType, expect, test } from 'vitest'
 
 import { accounts } from '../../../test/src/constants.js'
+import { hexAddressToBase32 } from '../address/hexAddressToBase32.js'
 import { decodeEventLog } from './decodeEventLog.js'
 
 test('Transfer()', () => {
@@ -79,8 +78,14 @@ test('named args: Transfer(address,address,uint256)', () => {
   expect(event).toEqual({
     eventName: 'Transfer',
     args: {
-      from: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
-      to: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+      from: hexAddressToBase32({
+        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        networkId: accounts[0].netId,
+      }),
+      to: hexAddressToBase32({
+        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        networkId: accounts[0].netId,
+      }),
       tokenId: 1n,
     },
   })
@@ -124,8 +129,14 @@ test('named args with a missing name: Transfer(address,address,uint256)', () => 
   })
   expect(event).toEqual({
     args: [
-      '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
-      '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+      hexAddressToBase32({
+        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        networkId: accounts[0].netId,
+      }),
+      hexAddressToBase32({
+        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        networkId: accounts[0].netId,
+      }),
       1n,
     ],
     eventName: 'Transfer',
@@ -168,8 +179,14 @@ test('unnamed args: Transfer(address,address,uint256)', () => {
   })
   expect(event).toEqual({
     args: [
-      '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
-      '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+      hexAddressToBase32({
+        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        networkId: accounts[0].netId,
+      }),
+      hexAddressToBase32({
+        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        networkId: accounts[0].netId,
+      }),
       1n,
     ],
     eventName: 'Transfer',
@@ -313,8 +330,14 @@ test('args: data – named (address,address,uint256)', () => {
   expect(event).toEqual({
     eventName: 'Transfer',
     args: {
-      from: getAddress('0xd8da6bf26964af9d7eed9e03e53415d37aa96045'),
-      to: getAddress('0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266'),
+      from: hexAddressToBase32({
+        hexAddress: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
+        networkId: accounts[0].netId,
+      }),
+      to: hexAddressToBase32({
+        hexAddress: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+        networkId: accounts[0].netId,
+      }),
       tokenId: 1n,
     },
   })
@@ -358,8 +381,14 @@ test('args: data – unnamed (address,address,uint256)', () => {
   expect(event).toEqual({
     eventName: 'Transfer',
     args: [
-      getAddress('0xd8da6bf26964af9d7eed9e03e53415d37aa96045'),
-      getAddress('0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266'),
+      hexAddressToBase32({
+        hexAddress: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
+        networkId: accounts[0].netId,
+      }),
+      hexAddressToBase32({
+        hexAddress: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+        networkId: accounts[0].netId,
+      }),
       1n,
     ],
   })

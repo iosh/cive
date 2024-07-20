@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
+import { mine } from '../localNode/mine.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { getNextNonce } from './getNextNonce.js'
@@ -26,6 +27,7 @@ test('default', async () => {
     value: 0n,
   })
 
+  await mine(client, { numTxs: 1 })
   expect(
     await getTxPoolNextNonce(client, { address: sourceAccount.address }),
   ).toMatchInlineSnapshot('1')

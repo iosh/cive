@@ -2,7 +2,7 @@ import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { parseCFX } from '../../unit/parseCFX.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
+import { mine } from '../localNode/mine.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getBalance } from '../public/getBalance.js'
 import { sendTransaction } from './sendTransaction.js'
@@ -36,7 +36,7 @@ test('default local account', async () => {
     }),
   ).toBeDefined()
 
-  await generateLocalNodeBlock(client, { numTxs: 1, blockSizeLimit: 1024 })
+  await mine(client, { numTxs: 1 })
 
   expect(
     await getBalance(client, { address: targetAccount.base32Address }),

@@ -52,9 +52,9 @@ test('with tx', async () => {
     await getAccountPendingInfo(client, { address: accounts[0].base32Address }),
   ).toMatchInlineSnapshot(`
     {
-      "localNonce": 1n,
-      "nextPendingTx": 0n,
-      "pendingCount": 0n,
+      "localNonce": 0n,
+      "nextPendingTx": 45869683219349642423684220173494286329207765601632196501992601067641417510919n,
+      "pendingCount": 1n,
       "pendingNonce": 0n,
     }
   `)
@@ -68,9 +68,9 @@ test('with tx', async () => {
     await getAccountPendingInfo(client, { address: accounts[0].base32Address }),
   ).toMatchInlineSnapshot(`
     {
-      "localNonce": 2n,
-      "nextPendingTx": 0n,
-      "pendingCount": 0n,
+      "localNonce": 0n,
+      "nextPendingTx": 45869683219349642423684220173494286329207765601632196501992601067641417510919n,
+      "pendingCount": 2n,
       "pendingNonce": 0n,
     }
   `)
@@ -85,9 +85,9 @@ test('with tx', async () => {
     await getAccountPendingInfo(client, { address: accounts[0].base32Address }),
   ).toMatchInlineSnapshot(`
     {
-      "localNonce": 3n,
-      "nextPendingTx": 0n,
-      "pendingCount": 0n,
+      "localNonce": 0n,
+      "nextPendingTx": 45869683219349642423684220173494286329207765601632196501992601067641417510919n,
+      "pendingCount": 3n,
       "pendingNonce": 0n,
     }
   `)
