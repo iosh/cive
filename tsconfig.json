@@ -7,7 +7,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~unit/*": ["./src/*"],
+      "~cive/*": ["./src/*"],
       "~test/*": ["./test/*"]
     }
   }

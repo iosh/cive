@@ -1,4 +1,4 @@
-import { privateKeyToAccount } from '~unit/accounts/privateKeyToAccount.js'
+import { privateKeyToAccount } from '~cive/accounts/privateKeyToAccount.js'
 
 export const accounts = [
   {
