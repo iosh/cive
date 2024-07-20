@@ -1,0 +1,40 @@
+# Get started
+
+Get started with Cive.
+
+## Quick start
+
+### 1. Set up your Client & Transport
+
+:tada: :100:
+
+```ts twoslash
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+const client = createPublicClient({
+  // [!code focus]
+  chain: mainnet, // [!code focus]
+  transport: http(), // [!code focus]
+}); // [!code focus]
+```
+
+:::info
+In a production app, it is highly recommended to pass through your authenticated RPC provider URL (see [conflux rpc](https://doc.confluxnetwork.org/docs/core/conflux_rpcs)). If no URL is provided, viem will default to a public RPC provider. [Read more](#TODO).
+:::
+
+
+### 2. Consume Actions
+
+Now that you have a Client set up, you can now interact with Ethereum and consume [Actions](#TODO)!
+
+```ts twoslash
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+const client = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+
+const block = await client.getBlock(); // [!code focus]
+```

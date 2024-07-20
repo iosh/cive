@@ -37,6 +37,9 @@ export {
   parseAbiParameters,
 } from './types/abitype.js'
 
+export { http, webSocket, type Transport } from './clients/transports/index.js'
+export { mainnet, testnet } from './chains/index.js'
+
 export {
   type Client,
   type ClientConfig,

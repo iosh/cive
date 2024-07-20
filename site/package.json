@@ -12,6 +12,7 @@
     "react": "latest",
     "react-dom": "latest",
     "typescript": "latest",
-    "vocs": "latest"
+    "vocs": "latest",
+    "cive": "workspace:*"
   }
 }

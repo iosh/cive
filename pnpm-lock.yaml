@@ -44,6 +44,9 @@ importers:
       '@types/react':
         specifier: latest
         version: 18.3.3
+      cive:
+        specifier: workspace:*
+        version: link:../src
       react:
         specifier: latest
         version: 18.3.1
@@ -55,7 +58,7 @@ importers:
         version: 5.5.3
       vocs:
         specifier: latest
-        version: 1.0.0-alpha.54(@types/node@20.14.10)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.18.0)(typescript@5.5.3)
+        version: 1.0.0-alpha.55(@types/node@20.14.10)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.18.0)(typescript@5.5.3)
 
   src:
     dependencies:
@@ -3281,8 +3284,8 @@ packages:
       jsdom:
         optional: true
 
-  vocs@1.0.0-alpha.54:
-    resolution: {integrity: sha512-N8IUseNg0/FQHHzoGvPzQBTaW2zN1qFZpBUoazIhiBXFdVoWf5sqFDFtaEMS/f2XE1yLR1DktfgObLX/X/3b8g==}
+  vocs@1.0.0-alpha.55:
+    resolution: {integrity: sha512-RT456+7uG4qNz7CwIb7xxhQAt/wJwjUzoi3fNgzfR62v4j/1gTdgn+yqD5vqv7RzJh7j4Iw3R9GF6jriAfiwng==}
     hasBin: true
     peerDependencies:
       react: ^18.2.0
@@ -7046,7 +7049,7 @@ snapshots:
       - supports-color
       - terser
 
-  vocs@1.0.0-alpha.54(@types/node@20.14.10)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.18.0)(typescript@5.5.3):
+  vocs@1.0.0-alpha.55(@types/node@20.14.10)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.18.0)(typescript@5.5.3):
     dependencies:
       '@floating-ui/react': 0.26.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@hono/node-server': 1.12.0

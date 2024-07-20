@@ -1,0 +1,24 @@
+---
+layout: landing
+---
+
+import { HomePage } from "vocs/components";
+
+<HomePage.Root>
+  <HomePage.Logo />
+  <HomePage.Tagline>Cive</HomePage.Tagline>
+  <HomePage.InstallPackage name="cive@canary" type="install" />
+  <HomePage.Description>
+    Cive is an interface for the [Conflux Core
+    Space](https://doc.confluxnetwork.org/docs/core/Overview), built on
+    [Viem](https://viem.sh/).
+  </HomePage.Description>
+  <HomePage.Buttons>
+    <HomePage.Button href="/docs/getting-started" variant="accent">
+      Get started
+    </HomePage.Button>
+    <HomePage.Button href="https://github.com/iosh/cive">
+      GitHub
+    </HomePage.Button>
+  </HomePage.Buttons>
+</HomePage.Root>
