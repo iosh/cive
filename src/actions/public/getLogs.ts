@@ -19,7 +19,6 @@ import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { Log } from '../../types/log.js'
-import type { RpcLog } from '../../types/rpc.js'
 import type { EncodeEventTopicsParameters } from '../../utils/abi/encodeEventTopics.js'
 import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
 import { formatLog } from '../../utils/formatters/log.js'
@@ -31,8 +30,6 @@ export type GetLogsParameters<
     | readonly unknown[]
     | undefined = TAbiEvent extends AbiEvent ? [TAbiEvent] : undefined,
   TStrict extends boolean | undefined = undefined,
-  TFromEpoch extends EpochNumber | EpochTag | undefined = undefined,
-  TToEpoch extends EpochNumber | EpochTag | undefined = undefined,
   _EventName extends string | undefined = MaybeAbiEventName<TAbiEvent>,
 > = {
   /** Address or list of addresses from which logs originated */
@@ -72,11 +69,15 @@ export type GetLogsParameters<
         /**
          * @default latest_checkpoint
          */
-        fromEpoch?: TFromEpoch | EpochNumber | EpochTag | undefined
+        fromEpoch?: EpochNumber | EpochTag
         /**
-         * @default latest_checkpoint
+         * @default latest_state
          */
-        toEpoch?: TToEpoch | EpochNumber | EpochTag | undefined
+        toEpoch?: EpochNumber | EpochTag
+
+        toBlock?: never | undefined
+
+        fromBlock?: never | undefined
 
         blockHashes?: never | undefined
       }
@@ -85,7 +86,22 @@ export type GetLogsParameters<
 
         toEpoch?: never | undefined
 
-        blockHashes?: Hash[]
+        toBlock: EpochNumber
+
+        fromBlock: EpochNumber
+
+        blockHashes?: never | undefined
+      }
+    | {
+        fromEpoch?: never | undefined
+
+        toEpoch?: never | undefined
+
+        toBlock?: never | undefined
+
+        fromBlock?: never | undefined
+
+        blockHashes: Hash[]
       }
   )
 
@@ -117,8 +133,8 @@ export async function getLogs<
 >(
   client: Client<Transport, TChain>,
   {
-    fromEpoch,
-    toEpoch,
+    fromEpoch = 'latest_checkpoint',
+    toEpoch = 'latest_state',
     fromBlock,
     toBlock,
     blockHashes,
@@ -146,43 +162,31 @@ export async function getLogs<
     if (event) topics = topics[0] as LogTopic[]
   }
 
-  const fromBlock_ =
-    typeof fromBlock === 'bigint' ? numberToHex(fromBlock) : fromBlock
-  const toBlock_ = typeof toBlock === 'bigint' ? numberToHex(toBlock) : toBlock
-  let logs: RpcLog[]
+  const _fromEpoch = fromBlock ? undefined : fromEpoch
+  const _toEpoch = toBlock ? undefined : toEpoch
 
-  if (blockHashes) {
-    logs = await client.request({
-      method: 'cfx_getLogs',
-      params: [
-        {
-          address,
-          topics,
-          blockHashes,
-          fromBlock: fromBlock_,
-          toBlock: toBlock_,
-        },
-      ],
-    })
-  } else {
-    const fromEpoch_ =
-      typeof fromEpoch === 'bigint' ? numberToHex(fromEpoch) : fromEpoch
-    const toEpoch_ =
-      typeof toEpoch === 'bigint' ? numberToHex(toEpoch) : toEpoch
+  const params = blockHashes
+    ? {
+        blockHashes,
+        address,
+        topics,
+      }
+    : {
+        fromEpoch:
+          typeof _fromEpoch === 'bigint' ? numberToHex(_fromEpoch) : _fromEpoch,
+        toEpoch:
+          typeof _toEpoch === 'bigint' ? numberToHex(_toEpoch) : _toEpoch,
+        fromBlock:
+          typeof fromBlock === 'bigint' ? numberToHex(fromBlock) : fromBlock,
+        toBlock: typeof toBlock === 'bigint' ? numberToHex(toBlock) : toBlock,
+        address,
+        topics,
+      }
 
-    logs = await client.request({
-      method: 'cfx_getLogs',
-      params: [
-        {
-          fromEpoch: fromEpoch_,
-          toEpoch: toEpoch_,
-          fromBlock: fromBlock_,
-          toBlock: toBlock_,
-          topics,
-        },
-      ],
-    })
-  }
+  const logs = await client.request({
+    method: 'cfx_getLogs',
+    params: [params],
+  })
 
   const formattedLogs = logs.map((log) => formatLog(log))
 
