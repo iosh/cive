@@ -20,9 +20,9 @@ import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { Log } from '../../types/log.js'
 import type { RpcLog } from '../../types/rpc.js'
+import type { EncodeEventTopicsParameters } from '../../utils/abi/encodeEventTopics.js'
 import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
 import { formatLog } from '../../utils/formatters/log.js'
-import type { EncodeEventTopicsParameters } from '../../utils/abi/encodeEventTopics.js'
 
 export type GetLogsParameters<
   TAbiEvent extends AbiEvent | undefined = undefined,

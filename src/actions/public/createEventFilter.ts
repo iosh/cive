@@ -2,9 +2,6 @@ import {
   type EncodeEventTopicsErrorType,
   type Hash,
   type Hex,
-  type LogTopic,
-  type MaybeAbiEventName,
-  type MaybeExtractEventArgsFromAbi,
   type NumberToHexErrorType,
   type Transport,
   encodeEventTopics,
@@ -17,7 +14,12 @@ import type { ErrorType } from '../../errors/utils.js'
 import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
+import type {
+  MaybeAbiEventName,
+  MaybeExtractEventArgsFromAbi,
+} from '../../types/contract.js'
 import type { Filter } from '../../types/filter.js'
+import type { LogTopic } from '../../types/misc.js'
 import type { Prettify } from '../../types/utils.js'
 import type { EncodeEventTopicsParameters } from '../../utils/abi/encodeEventTopics.js'
 import { createFilterRequestScope } from '../../utils/filters/createFilterRequestScope.js'
