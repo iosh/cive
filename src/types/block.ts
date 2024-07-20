@@ -47,12 +47,12 @@ export type Block<
   /**
    * the total gas used in this block. null when the block is pending.
    */
-  gasUsed: TEpochTag extends 'latest_mined' ? null : TQuantity
+  gasUsed: TEpochTag extends 'latest_state' ? null : TQuantity
 
   /**
    *  hash of the block.
    */
-  hash: TEpochTag extends 'latest_mined' ? null : Hash
+  hash: TEpochTag extends 'latest_state' ? null : Hash
 
   /**
    *  the height of the block.
@@ -66,7 +66,7 @@ export type Block<
   /**
    *  hash of the generated proof-of-work.
    */
-  nonce: TEpochTag extends 'latest_mined' ? null : Hex
+  nonce: TEpochTag extends 'latest_state' ? null : Hex
 
   /**
    * hash of the parent block.
@@ -76,7 +76,7 @@ export type Block<
   /**
    * the PoW quality. null when the block is pending.
    */
-  powQuality: TEpochTag extends 'latest_mined' ? null : Hash
+  powQuality: TEpochTag extends 'latest_state' ? null : Hash
   /**
    *  array of referee block hashes.
    */

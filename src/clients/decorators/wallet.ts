@@ -1,4 +1,3 @@
-import type { Abi, TypedData } from '../../types/abitype.js'
 import type {
   GetPermissionsReturnType,
   Transport,
@@ -50,6 +49,7 @@ import {
   type SendTransactionReturnType,
   sendTransaction,
 } from '../../actions/wallet/sendTransaction.js'
+import type { Abi, TypedData } from '../../types/abitype.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
 

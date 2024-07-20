@@ -1,9 +1,4 @@
-import type { AbiEvent } from '../../types/abitype.js'
-import type {
-  MaybeAbiEventName,
-  MaybeExtractEventArgsFromAbi,
-  Transport,
-} from 'viem'
+import type { Transport } from 'viem'
 import type { Account, Address } from '../../accounts/types.js'
 import {
   type CallParameters,
@@ -274,9 +269,11 @@ import {
   type UninstallFilterReturnType,
   uninstallFilter,
 } from '../../actions/public/uninstallFilter.js'
+import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
+import type { MaybeAbiEventName, MaybeExtractEventArgsFromAbi } from '../../types/contract.js'
 
 export type PublicActions<
   _TTransport extends Transport = Transport,
