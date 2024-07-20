@@ -9,12 +9,8 @@ import type {
   Transport,
 } from 'viem'
 import type { SignTransactionErrorType } from 'viem/accounts'
-import {
-  type GetTransactionErrorReturnType,
-  type RequestErrorType,
-  extract,
-  getTransactionError,
-} from 'viem/utils'
+
+import { type RequestErrorType, extract } from 'viem/utils'
 import {
   type ParseAccountErrorType,
   parseAccount,
@@ -32,6 +28,10 @@ import type {
 import type { TransactionRequest } from '../../types/transaction.js'
 import type { UnionOmit } from '../../types/utils.js'
 import { assertCurrentChain } from '../../utils/chain/assertCurrentChain.js'
+import {
+  type GetTransactionErrorReturnType,
+  getTransactionError,
+} from '../../utils/errors/getTransactionError.js'
 import {
   type FormattedTransactionRequest,
   formatTransactionRequest,

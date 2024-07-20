@@ -304,7 +304,12 @@ export type PublicActions<
    */
   getBlock: <
     TIncludeTransactions extends boolean = false,
-    TEpochTag extends EpochTag = 'latest_state',
+    TEpochTag extends
+      | 'latest_mined'
+      | 'latest_state'
+      | 'latest_confirmed'
+      | 'latest_checkpoint'
+      | 'earliest' = 'latest_state',
   >(
     args?: GetBlockParameters<TIncludeTransactions, TEpochTag>,
   ) => Promise<GetBlockReturnType<TChain, TIncludeTransactions, TEpochTag>>

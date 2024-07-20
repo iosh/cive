@@ -125,7 +125,7 @@ test('1559', async () => {
     `"NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X"`,
   )
 
-  expect(receipt.epochNumber).toMatchInlineSnapshot(`16n`)
+  expect(receipt.epochNumber).toMatchInlineSnapshot('16n')
 
   expect(receipt.index).toMatchInlineSnapshot('0n')
 })
