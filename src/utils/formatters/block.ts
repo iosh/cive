@@ -10,7 +10,7 @@ import type { RpcBlock } from '../../types/rpc.js'
 import type { ExactPartial, Prettify } from '../../types/utils.js'
 import { type FormattedTransaction, formatTransaction } from './transaction.js'
 
-type BlockPendingDependencies = 'gasUsed' | 'hash' | 'nonce' | 'powQuality'
+type BlockPendingDependencies = 'gasUsed' | 'posReference' | 'baseFeePerGas'
 export type FormattedBlock<
   TChain extends Chain | undefined = undefined,
   TIncludeTransactions extends boolean = boolean,
@@ -18,7 +18,7 @@ export type FormattedBlock<
   _FormatterReturnType = ExtractChainFormatterReturnType<
     TChain,
     'block',
-    Block<bigint, TIncludeTransactions>
+    Block<bigint, TIncludeTransactions, TEpochTag>
   >,
   _ExcludedPendingDependencies extends string = BlockPendingDependencies &
     ExtractChainFormatterExclude<TChain, 'block'>,

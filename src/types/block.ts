@@ -9,7 +9,7 @@ export type Block<
   _TTransaction = Transaction<
     bigint,
     number,
-    TEpochTag extends 'latest_mined' ? true : false
+    TEpochTag extends 'latest_state' ? true : false
   >,
 > = {
   /**
@@ -47,12 +47,14 @@ export type Block<
   /**
    * the total gas used in this block. null when the block is pending.
    */
-  gasUsed: TEpochTag extends 'latest_state' ? null : TQuantity
+  gasUsed: TEpochTag extends 'earliest' | 'latest_checkpoint' | 'latest_mined'
+    ? null
+    : TQuantity
 
   /**
    *  hash of the block.
    */
-  hash: TEpochTag extends 'latest_state' ? null : Hash
+  hash: Hash
 
   /**
    *  the height of the block.
@@ -66,7 +68,7 @@ export type Block<
   /**
    *  hash of the generated proof-of-work.
    */
-  nonce: TEpochTag extends 'latest_state' ? null : Hex
+  nonce: TEpochTag extends 'latest_checkpoint' | 'latest_mined' ? null : Hex
 
   /**
    * hash of the parent block.
@@ -76,7 +78,9 @@ export type Block<
   /**
    * the PoW quality. null when the block is pending.
    */
-  powQuality: TEpochTag extends 'latest_state' ? null : Hash
+  powQuality: TEpochTag extends 'latest_checkpoint' | 'latest_mined'
+    ? null
+    : Hash
   /**
    *  array of referee block hashes.
    */
@@ -109,10 +113,12 @@ export type Block<
   /**
    * the hash of the PoS newest committed block. Added from Conflux-rust v2.0.0
    */
-  posReference: Hash
+  posReference: TEpochTag extends 'earliest' | 'latest_checkpoint' ? null : Hash
 
   /** Base fee per gas */
-  baseFeePerGas: TQuantity | null
+  baseFeePerGas: TEpochTag extends 'earliest' | 'latest_checkpoint'
+    ? null
+    : TQuantity
 }
 
 export type EpochTag =

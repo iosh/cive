@@ -13,7 +13,7 @@ import {
 
 export type GetBlockParameters<
   TIncludeTransactions extends boolean = false,
-  TEpochTag extends EpochTag = EpochTag,
+  TEpochTag extends EpochTag = 'latest_state',
 > = {
   includeTransactions?: TIncludeTransactions | undefined
 } & (
@@ -43,20 +43,25 @@ export type GetBlockParameters<
        * the epoch tag string
        * @default "latest_state"
        */
-      epochTag?: TEpochTag | undefined
+      epochTag?: TEpochTag | EpochTag | undefined
     }
 )
 export type GetBlockReturnType<
   TChain extends Chain | undefined = undefined,
   TIncludeTransactions extends boolean = false,
-  TBlockTag extends EpochTag = EpochTag,
-> = Prettify<FormattedBlock<TChain, TIncludeTransactions, TBlockTag>>
+  TEpochTag extends EpochTag = 'latest_state',
+> = Prettify<FormattedBlock<TChain, TIncludeTransactions, TEpochTag>>
 
 export async function getBlock<
   TChain extends Chain | undefined,
   TAccount extends Account | undefined,
   TIncludeTransactions extends boolean = false,
-  TEpochTag extends EpochTag = EpochTag,
+  TEpochTag extends
+    | 'latest_mined'
+    | 'latest_state'
+    | 'latest_confirmed'
+    | 'latest_checkpoint'
+    | 'earliest' = 'latest_state',
 >(
   client: Client<Transport, TChain, TAccount>,
   {

@@ -272,8 +272,11 @@ import {
 import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
+import type {
+  MaybeAbiEventName,
+  MaybeExtractEventArgsFromAbi,
+} from '../../types/contract.js'
 import type { Client } from '../createClient.js'
-import type { MaybeAbiEventName, MaybeExtractEventArgsFromAbi } from '../../types/contract.js'
 
 export type PublicActions<
   _TTransport extends Transport = Transport,
