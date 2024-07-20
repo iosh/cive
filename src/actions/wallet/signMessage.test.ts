@@ -2,7 +2,7 @@ import { http } from 'viem'
 import { expect, test, vi } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
-import { localhost } from '../../chains/index.js'
+import { localhostNode } from '../../chains/definitions/localhost.js'
 import { createClient } from '../../clients/createClient.js'
 import { signMessage } from './signMessage.js'
 
@@ -43,7 +43,7 @@ test('default local account', async () => {
 
 test('mock rpc', async () => {
   const client = createClient({
-    chain: localhost,
+    chain: localhostNode,
     transport: http(),
   })
   client.request = vi.fn(async () => {

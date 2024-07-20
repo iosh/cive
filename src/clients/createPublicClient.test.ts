@@ -6,7 +6,7 @@ import {
   webSocket,
 } from 'viem'
 import { assertType, describe, expect, test, vi } from 'vitest'
-import { localhost } from '../chains/index.js'
+import { localhostNode } from '../chains/definitions/localhost.js'
 import type { PublicRpcSchema } from '../types/eip1193.js'
 import { createPublicClient } from './createPublicClient.js'
 
@@ -112,7 +112,7 @@ test('args: batch', () => {
       batch: {
         multicall: true,
       },
-      chain: localhost,
+      chain: localhostNode,
       transport: http(),
     }).batch,
   ).toMatchInlineSnapshot(`
@@ -129,7 +129,7 @@ test('args: batch', () => {
           wait: 32,
         },
       },
-      chain: localhost,
+      chain: localhostNode,
       transport: http(),
     }).batch,
   ).toMatchInlineSnapshot(`
@@ -145,7 +145,7 @@ test('args: batch', () => {
 describe('transports', () => {
   test('http', () => {
     const { uid, ...client } = createPublicClient({
-      chain: localhost,
+      chain: localhostNode,
       transport: http(),
     })
 
@@ -255,8 +255,8 @@ describe('transports', () => {
   })
   test('webSocket', () => {
     const { uid, ...client } = createPublicClient({
-      chain: localhost,
-      transport: webSocket(localhost.rpcUrls.default.webSocket[0]),
+      chain: localhostNode,
+      transport: webSocket(localhostNode.rpcUrls.default.webSocket[0]),
     })
 
     expect(uid).toBeDefined()

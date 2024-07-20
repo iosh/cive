@@ -6,7 +6,7 @@ import {
   webSocket,
 } from 'viem'
 import { assertType, describe, expect, test, vi } from 'vitest'
-import { localhost } from '../chains/index.js'
+import { localhostNode } from '../chains/definitions/localhost.js'
 import type { EIP1474Methods } from '../types/eip1193.js'
 import { createClient } from './createClient.js'
 import { publicActions } from './decorators/public.js'
@@ -55,7 +55,7 @@ test('creates', () => {
 describe('transports', () => {
   test('http', () => {
     const { uid, ...client } = createClient({
-      chain: localhost,
+      chain: localhostNode,
       transport: http(),
     })
 
@@ -111,8 +111,8 @@ describe('transports', () => {
 
   test('webSocket', () => {
     const { uid, ...client } = createClient({
-      chain: localhost,
-      transport: webSocket(localhost.rpcUrls.default.webSocket[0]),
+      chain: localhostNode,
+      transport: webSocket(localhostNode.rpcUrls.default.webSocket[0]),
     })
 
     expect(uid).toBeDefined()
@@ -454,7 +454,7 @@ describe('config', () => {
 describe('extends', () => {
   test('default', async () => {
     const client = createClient({
-      chain: localhost,
+      chain: localhostNode,
       transport: http(),
     }).extend((config) => ({
       getChainId: async () => config.chain.id,
@@ -465,7 +465,7 @@ describe('extends', () => {
 
   test('public actions', () => {
     const { uid: _, ...client } = createClient({
-      chain: localhost,
+      chain: localhostNode,
       transport: http(),
     }).extend(publicActions)
 

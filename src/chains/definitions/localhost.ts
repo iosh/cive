@@ -1,6 +1,6 @@
 import { defineChain } from '../../utils/chain/defineChain.js'
 
-export const localhost = /*#__PURE__*/ defineChain({
+export const localhostNode = /*#__PURE__*/ defineChain({
   id: 201_029,
   name: 'Localhost',
   nativeCurrency: {

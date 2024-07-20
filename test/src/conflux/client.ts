@@ -1,5 +1,5 @@
 import type { Account, Address } from '~cive/accounts/types.js'
-import { localhost } from '~cive/chains/index.js'
+import { localhostNode } from '~cive/chains/definitions/localhost.js'
 import {
   type Client,
   type ClientConfig,
@@ -132,7 +132,7 @@ function defineConflux<const chain extends Chain>(
 export const poolId = Number(process.env.VITEST_POOL_ID ?? 1)
 
 export const devConflux = defineConflux({
-  chain: localhost,
+  chain: localhostNode,
   port: 12539 + poolId * 10,
   wsPort: 12540 + poolId * 10,
 })

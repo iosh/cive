@@ -9,7 +9,7 @@ import { assertType, describe, expect, test, vi } from 'vitest'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import type { PrivateKeyAccount } from '../accounts/index.js'
 import { privateKeyToAccount } from '../accounts/privateKeyToAccount.js'
-import { localhost } from '../chains/index.js'
+import { localhostNode } from '../chains/definitions/localhost.js'
 import type { WalletRpcSchema } from '../types/eip1193.js'
 import { createWalletClient } from './createWalletClient.js'
 import { localNodeActions } from './decorators/localNode.js'
@@ -150,7 +150,7 @@ describe('args: transport', () => {
 
   test('http', () => {
     const { uid, ...client } = createWalletClient({
-      transport: http(localhost.rpcUrls.default.http[0]),
+      transport: http(localhostNode.rpcUrls.default.http[0]),
     })
 
     expect(uid).toBeDefined()
@@ -187,8 +187,8 @@ describe('args: transport', () => {
 
   test('webSocket', () => {
     const { uid, ...client } = createWalletClient({
-      chain: localhost,
-      transport: webSocket(localhost.rpcUrls.default.webSocket[0]),
+      chain: localhostNode,
+      transport: webSocket(localhostNode.rpcUrls.default.webSocket[0]),
     })
 
     expect(uid).toBeDefined()
@@ -248,7 +248,7 @@ describe('args: transport', () => {
   test('extend', () => {
     const { uid: _, ...client } = createWalletClient({
       account: sourceAccount,
-      chain: localhost,
+      chain: localhostNode,
       transport: http(),
     })
       .extend(publicActions)

@@ -4,12 +4,12 @@ import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
 import { createClient } from '../../clients/createClient.js'
 
 import { http } from 'viem'
-import { localhost } from '../../chains/index.js'
+import { localhostNode } from '../../chains/definitions/localhost.js'
 import { getAddresses } from './getAddresses.js'
 
 test('mock rpc', async () => {
   const client = createClient({
-    chain: localhost,
+    chain: localhostNode,
     transport: http(),
   })
   client.request = vi.fn(async () => {
@@ -27,7 +27,7 @@ test('local account', async () => {
     account: privateKeyToAccount(accounts[0].privateKey, {
       networkId: accounts[0].netId,
     }),
-    chain: localhost,
+    chain: localhostNode,
     transport: http(),
   })
 

@@ -3,12 +3,12 @@ import { accounts } from '~test/src/constants.js'
 import { createClient } from '../../clients/createClient.js'
 
 import { http } from 'viem'
-import { localhost } from '../../chains/index.js'
+import { localhostNode } from '../../chains/definitions/localhost.js'
 import { requestPermissions } from './requestPermissions.js'
 
 test('mock rpc', async () => {
   const client = createClient({
-    chain: localhost,
+    chain: localhostNode,
     transport: http(),
   })
   client.request = vi.fn(async () => {

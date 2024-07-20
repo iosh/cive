@@ -1,6 +1,6 @@
 import { defineChain } from '../../utils/chain/defineChain.js'
 
-export const confluxCoreSpace = defineChain({
+export const mainnet = defineChain({
   id: 1029,
   name: 'Conflux core space',
   nativeCurrency: {
