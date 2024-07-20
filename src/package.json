@@ -1,6 +1,6 @@
 {
   "name": "cive",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
   "main": "./_cjs/index.js",
@@ -11,9 +11,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "conflux",
+    "cspace"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
+  "homepage": "https://cive.zyx.ee",
+  "repository": "iosh/cive",
   "dependencies": {
     "@noble/curves": "^1.4.2",
     "@noble/hashes": "^1.4.0",
@@ -32,6 +37,16 @@
       "types": "./_types/accounts/index.d.ts",
       "import": "./_esm/accounts/index.js",
       "default": "./_cjs/accounts/index.js"
+    },
+    "./actions": {
+      "types": "./_types/actions/index.d.ts",
+      "import": "./_esm/actions/index.js",
+      "default": "./_cjs/actions/index.js"
+    },
+    "./chains": {
+      "types": "./_types/chains/index.d.ts",
+      "import": "./_esm/chains/index.js",
+      "default": "./_cjs/chains/index.js"
     }
   }
 }
