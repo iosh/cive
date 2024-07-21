@@ -32,6 +32,13 @@ export default defineConfig({
           },
         ],
       },
+      {
+        text: 'Public Actions',
+        collapsed: true,
+        items: [
+          { text: 'Introduction', link: '/docs/actions/public/introduction' },
+        ],
+      },
     ],
   },
   rootDir: '.',
