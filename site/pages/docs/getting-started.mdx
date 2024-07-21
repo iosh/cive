@@ -1,12 +1,11 @@
-# Get started
+# Get started [Get started with Cive.]
+## Overview
 
-Get started with Cive.
+Cive is a Typescript interface for the [Conflux Core Space](https://doc.confluxnetwork.org/docs/core/Overview). It is built on viem. If you are working with [Conflux eSpace](https://doc.confluxnetwork.org/docs/espace/Overview), we recommended to use [viem](https://viem.sh/).
 
 ## Quick start
 
 ### 1. Set up your Client & Transport
-
-:tada: :100:
 
 ```ts twoslash
 import { createPublicClient, http } from "cive";
@@ -21,7 +20,6 @@ const client = createPublicClient({
 :::info
 In a production app, it is highly recommended to pass through your authenticated RPC provider URL (see [conflux rpc](https://doc.confluxnetwork.org/docs/core/conflux_rpcs)). If no URL is provided, viem will default to a public RPC provider. [Read more](#TODO).
 :::
-
 
 ### 2. Consume Actions
 

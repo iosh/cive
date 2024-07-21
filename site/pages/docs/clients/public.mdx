@@ -1,0 +1,111 @@
+# Public Client
+
+A Public Client is interface to the [Conflux Core Space JSON-RPC](https://doc.confluxnetwork.org/docs/core/build/json-rpc/). See the all supported [Public Actions](#TODO) for more details.
+
+## Import
+
+```ts twoslash
+import { createPublicClient } from "cive";
+```
+
+## Usage
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts:imports]
+const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+## Parameters
+
+### transport
+
+- **Type** [Transport](#TODO)
+
+The [Transport](#TODO) of the Public Client.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts:imports]
+const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(), // [!code focus]
+});
+```
+
+### chain(optional)
+
+- **Type** [Chain](#TODO)
+
+The [Chain](#TODO) of the Public Client.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts:imports]
+const publicClient = createPublicClient({
+  chain: mainnet, // [!code focus]
+  transport: http(),
+});
+```
+
+## cacheTime(optional)
+
+- **Type** `number`
+- **Default** `4000`
+
+Time (in ms) that cached data will remain memory.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts:imports]
+const publicClient = createPublicClient({
+  cacheTime: 10_000, // [!code focus]
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### key(optional)
+
+- **Type** `string`
+- **Default** `public`
+
+The key of the Public Client.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts:imports]
+const publicClient = createPublicClient({
+  key: "public", // [!code focus]
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### name(optional)
+
+- **Type** `string`
+- **Default** `Public Client`
+
+The name of the Public Client.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts:imports]
+const publicClient = createPublicClient({
+  name: "Public Client", // [!code focus]
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### pollingInterval(optional)
+
+- **Type** `number`
+- **Default** `4000`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts:imports]
+const publicClient = createPublicClient({
+  pollingInterval: 4_000, // [!code focus]
+  chain: mainnet,
+  transport: http(),
+});
+```

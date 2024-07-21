@@ -15,6 +15,13 @@ export default defineConfig({
           { text: 'Getting Started', link: '/docs/getting-started' },
         ],
       },
+      {
+        text: 'Clients & Transports',
+        items: [
+          { text: 'Introduction', link: '/docs/clients/installation' },
+          { text: 'Public Client', link: '/docs/clients/public' },
+        ],
+      },
     ],
   },
   rootDir: '.',
