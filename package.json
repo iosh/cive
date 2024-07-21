@@ -8,6 +8,9 @@
     "build:cjs": "tsc --project ./tsconfig.build.json --module commonjs --outDir ./src/_cjs --removeComments --verbatimModuleSyntax false && printf '{\"type\":\"commonjs\"}' > ./src/_cjs/package.json",
     "build:esm": "tsc --project ./tsconfig.build.json --module es2020 --outDir ./src/_esm && printf '{\"type\": \"module\",\"sideEffects\":false}' > ./src/_esm/package.json",
     "build:types": "tsc --project ./tsconfig.build.json --module esnext --declarationDir ./src/_types --emitDeclarationOnly --declaration --declarationMap",
+    "changeset:prepublish": "bun ./scripts/prepublishOnly.ts && pnpm build",
+    "changeset:publish": "pnpm changeset:prepublish && changeset publish",
+    "changeset:version": "changeset version && pnpm install --lockfile-only  && pnpm format",
     "clean": "rm -rf *.tsbuildinfo src/*.tsbuildinfo src/_esm src/_cjs src/_types",
     "lint": "biome check --fix",
     "format": "biome format --write",
@@ -18,6 +21,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
+    "@changesets/cli": "^2.27.7",
     "@conflux-dev/conflux-address-js": "^2.0.1",
     "@conflux-dev/hdwallet": "^0.1.2",
     "@types/bun": "^1.1.6",
