@@ -48,9 +48,26 @@ export {
   createClient,
   rpcSchema,
 } from './clients/createClient.js'
+
+export { publicActions } from './clients/decorators/public.js'
+
 export {
   type PublicClient,
   type PublicClientConfig,
   type CreatePublicClientErrorType,
   createPublicClient,
 } from './clients/createPublicClient.js'
+
+export {
+  type WalletClientConfig,
+  type WalletClient,
+  type CreateWalletClientErrorType,
+  createWalletClient,
+} from './clients/createWalletClient.js'
+
+export { formatCFX } from './utils/unit/formatCFX.js'
+export { formatGDrip } from './utils/unit/formatGDrip.js'
+export { formatUnits } from './utils/unit/formatUnits.js'
+export { parseCFX } from './utils/unit/parseCFX.js'
+export { parseGDrip } from './utils/unit/parseGDrip.js'
+export { parseUnits } from './utils/unit/parseUnits.js'
