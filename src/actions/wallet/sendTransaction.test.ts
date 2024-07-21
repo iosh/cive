@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
-import { parseCFX } from '../../unit/parseCFX.js'
+import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { mine } from '../localNode/mine.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getBalance } from '../public/getBalance.js'

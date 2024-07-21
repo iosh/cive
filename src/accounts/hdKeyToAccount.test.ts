@@ -4,8 +4,8 @@ import { mnemonicToSeedSync } from '@scure/bip39'
 import { describe, expect, test } from 'vitest'
 
 import { accounts, typedData } from '~test/src/constants.js'
-import { parseCFX } from '../unit/parseCFX.js'
-import { parseGDrip } from '../unit/parseGDrip.js'
+import { parseCFX } from '../utils/unit/parseCFX.js'
+import { parseGDrip } from '../utils/unit/parseGDrip.js'
 import { hdKeyToAccount } from './hdKeyToAccount.js'
 
 const mnemonic =

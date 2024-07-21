@@ -6,8 +6,8 @@ import type { EpochTag } from '../types/block.js'
 import type { Chain } from '../types/chain.js'
 import type { Hash, Hex } from '../types/misc.js'
 import type { TransactionType } from '../types/transaction.js'
-import { formatCFX } from '../unit/formatCFX.js'
-import { formatGDrip } from '../unit/formatGDrip.js'
+import { formatCFX } from '../utils/unit/formatCFX.js'
+import { formatGDrip } from '../utils/unit/formatGDrip.js'
 
 export function prettyPrint(
   args: Record<string, bigint | number | string | undefined | false | unknown>,

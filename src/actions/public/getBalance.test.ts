@@ -5,7 +5,7 @@ import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getBalance } from './getBalance.js'
 import { getBlock } from './getBlock.js'
 
-import { parseCFX } from '../../unit/parseCFX.js'
+import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { mine } from '../localNode/mine.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 

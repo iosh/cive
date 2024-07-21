@@ -1,4 +1,4 @@
-import { gDripUnits } from '../constants/unit.js'
+import { gDripUnits } from '../../constants/unit.js'
 import { formatUnits } from './formatUnits.js'
 
 export function formatGDrip(drip: bigint, unit: 'drip' = 'drip') {

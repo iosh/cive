@@ -14,8 +14,8 @@ import { formatAbiItem, formatAbiItemWithArgs } from 'viem/utils'
 import { panicReasons } from '../constants/solidity.js'
 import type { Chain } from '../types/chain.js'
 import type { Hex } from '../types/misc.js'
-import { formatCFX } from '../unit/formatCFX.js'
-import { formatGDrip } from '../unit/formatGDrip.js'
+import { formatCFX } from '../utils/unit/formatCFX.js'
+import { formatGDrip } from '../utils/unit/formatGDrip.js'
 import { prettyPrint } from './transaction.js'
 
 export type CallExecutionErrorType = CallExecutionError & {
