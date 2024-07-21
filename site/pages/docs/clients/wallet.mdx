@@ -1,0 +1,218 @@
+# Wallet Client
+
+## Import
+
+```ts twoslash
+import { http, createWalletClient } from "cive";
+```
+
+### Local Accounts (Private Key, Mnemonic, etc)
+
+A local account signs transactions and messages with a private key before executing a method via JSON-RPC.
+
+There are three types of Local Accounts in cive:
+
+- [Private Key Account](#TODO)
+- [Mnemonic Account](#TODO)
+- [Hierarchical Deterministic (HD) Account](#TODO)
+
+The following steps outline how to integrate a `Private Key Account`, and the same steps can be applied to `Mnemonic` and `HD Accounts` as well.
+
+#### 1. Initialize a Wallet Client
+
+First we create the Wallet Client with the `http` Transport.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts:imports]
+
+const client = createWalletClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+#### 2. Create a Private Key Account
+
+Next, we create a Private Key Account using privateKeyToAccount. To create an account, you need to provide the private key and the [Network ID](https://doc.confluxnetwork.org/docs/core/core-space-basics/addresses#network-prefix) (1029 for mainnet, 1 for testnet).
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts:imports]
+import { privateKeyToAccount } from "cive/accounts";
+const client = createWalletClient({
+  chain: mainnet,
+  transport: http(),
+});
+const account = privateKeyToAccount("0x...", {
+  // [!code focus]
+  networkId: mainnet.id, // [!code focus]
+}); // [!code focus]
+```
+
+#### 3. Consume Wallet Actions
+
+New you can use the Account whtin [Wallet Actions](#TODO).
+
+```ts twoslash
+import { http, createWalletClient, parseCFX } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+const client = createWalletClient({
+  chain: mainnet,
+  transport: http(),
+});
+const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+const hash = await client.sendTransaction({
+  // [!code focus:5]
+  account,
+  to: "cfxtest:...",
+  value: parseCFX("0.001"),
+});
+```
+
+#### Optional: Hoist the Account
+
+If you do not wish to pass the account for every action, you can also elevate the account to the wallet client.
+
+```ts twoslash
+import { http, createWalletClient, parseCFX } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+const client = createWalletClient({
+  // [!code focus:10]
+  account, // [!code ++]
+  chain: mainnet,
+  transport: http(),
+});
+
+const hash = await client.sendTransaction({
+  account, // [!code --]
+  to: "cfxtest:....",
+  value: parseCFX("0.001"),
+});
+```
+
+#### Optional: Extend with Public Actions
+
+When you using a local account, you may find yourself using a publick client instantiated with the same parameters as you wallet client.
+
+In this case ,you can extend your wallet client with [Public Actions](#TODO) to avoid having to handle multiple clients.
+
+```ts twoslash
+import { http, createWalletClient, parseCFX, publicActions } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+const client = createWalletClient({
+  account,
+  chain: mainnet,
+  transport: http(),
+}).extend(publicActions); // [!code ++] // [!code focus:10]
+
+const block = await client.getBlock();
+```
+
+## Parameters
+
+### account (optional)
+
+- **Type:** `Account`
+
+The Account to use for the Wallet Client. This will be used for Actions that require an `account` as an argument.
+
+Accepts a [Local Account (Private Key, etc)](#local-accounts-private-key-mnemonic-etc).
+
+```ts twoslash
+import { http, createWalletClient, parseCFX } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+const account = privateKeyToAccount("0x...", {
+  // [!code focus]
+  networkId: mainnet.id, // [!code focus]
+}); // [!code focus]
+const client = createWalletClient({
+  account, // [!code ++] // [!code focus]
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### chain (optional)
+
+- **Type:** `Chain`
+
+The [Chain](#TODO) of the Wallet Client.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts:imports]
+const client = createWalletClient({
+  chain: mainnet, // [!code focus]
+  transport: http(),
+});
+```
+
+### cacheTime (optional)
+
+- **Type:** `number`
+- **Default:** `4000`
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts:imports]
+const client = createWalletClient({
+  cacheTime: 4000, // [!code focus]
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### key(optional)
+
+- **Type** `string`
+- **Default** `public`
+
+The key of the Public Client.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts:imports]
+const publicClient = createWalletClient({
+  key: "wallet", // [!code focus]
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### name(optional)
+
+- **Type** `string`
+- **Default** `Public Client`
+
+The name of the Public Client.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts:imports]
+const publicClient = createWalletClient({
+  name: "wallet Client", // [!code focus]
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### pollingInterval(optional)
+
+- **Type** `number`
+- **Default** `4000`
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts:imports]
+const publicClient = createWalletClient({
+  pollingInterval: 4000, // [!code focus]
+  chain: mainnet,
+  transport: http(),
+});
+```

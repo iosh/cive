@@ -20,6 +20,7 @@ export default defineConfig({
         items: [
           { text: 'Introduction', link: '/docs/clients/installation' },
           { text: 'Public Client', link: '/docs/clients/public' },
+          { text: 'Wallet Client', link: '/docs/clients/wallet' },
         ],
       },
     ],
