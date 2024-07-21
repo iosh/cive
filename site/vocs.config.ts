@@ -21,6 +21,15 @@ export default defineConfig({
           { text: 'Introduction', link: '/docs/clients/installation' },
           { text: 'Public Client', link: '/docs/clients/public' },
           { text: 'Wallet Client', link: '/docs/clients/wallet' },
+          {
+            text: 'Transports',
+            items: [
+              {
+                text: 'HTTP',
+                link: '/docs/clients/transports/http',
+              },
+            ],
+          },
         ],
       },
     ],

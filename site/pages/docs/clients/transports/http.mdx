@@ -1,0 +1,60 @@
+# HTTP Transport
+
+The `http` Transport connects to a JSON-RPC API via HTTP.
+
+## Import
+
+```ts twoslash
+import { http } from "cive";
+```
+
+## Usage
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts:imports]
+
+const client = createPublicClient({
+  chain: mainnet,
+  transport: http("https://main.confluxrpc.com/..."),
+});
+```
+
+:::warning[Warning]
+If no `URL` is provided, the transport will default to a public RPC URL on the chain. It is recommended to provide an authenticated RPC URL to prevent rate-limiting. You can find more information about [Conflux RPC](https://doc.confluxnetwork.org/docs/core/conflux_rpcs)
+:::
+
+## Batch JSON-RPC
+
+The `http` Transport supports Batch JSON-RPC. This means that multiple JSON-RPC requests can be sent in a single HTTP request.
+
+The Transport will batch up Actions over a given period and execute them in a single Batch JSON-RPC HTTP request. By default, this period is a [zero delay](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop#zero_delays) meaning that the batch request will be executed at the end of the current [JavaScript message queue](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop#queue). Consumers can specify a custom time period `wait` (in ms).
+
+You can enable Batch JSON-RPC by setting the `batch` flag to `true`:
+
+```ts twoslash
+import { http } from "cive";
+const transport = http("https://main.confluxrpc.com/...", {
+  batch: true, // [!code focus]
+});
+```
+
+Now when you invoke Actions, the `http` Transport will batch and send over those requests at the end of the message queue (or custom time period) in a single Batch JSON-RPC HTTP request:
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts:imports]
+const client = createPublicClient({
+  chain: mainnet,
+  transport: http("https://main.confluxrpc.com/..."),
+});
+// ---cut---
+// The below will send a single Batch JSON-RPC HTTP request to the RPC Provider.
+const [blcok, balance, status] = await Promise.all([
+  client.getBlock(),
+  client.getBalance({ address: "cfx:..." }),
+  client.getStatus(),
+]);
+```
+
+## Parameters
+
+The `http` is a re-export of the viem, So you can refer to [Viem](https://viem.sh/docs/clients/transports/http) for information on the parameters.
