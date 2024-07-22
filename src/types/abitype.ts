@@ -45,7 +45,7 @@ import {
   parseAbiItem,
   parseAbiParameter,
   parseAbiParameters,
-} from './abitype/exports/index.js'
+} from 'abitype'
 export {
   type Abi,
   type AbiFunction,
