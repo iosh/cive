@@ -19,7 +19,7 @@ export type GetTransactionParameters = {
 }
 
 export type GetTransactionReturnType<TChain extends Chain | undefined> =
-  Prettify<FormattedTransaction<TChain>>
+  Prettify<FormattedTransaction<TChain, 'latest_state'>>
 
 export type GetTransactionErrorType =
   | NumberToHexErrorType

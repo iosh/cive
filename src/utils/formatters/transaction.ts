@@ -19,7 +19,7 @@ export const transactionType = {
 
 export type FormattedTransaction<
   TChain extends Chain | undefined = undefined,
-  TEpochNumber extends EpochTag = EpochTag,
+  TEpochTag extends EpochTag = EpochTag,
   _FormatterReturnType = ExtractChainFormatterReturnType<
     TChain,
     'transaction',
@@ -33,7 +33,7 @@ export type FormattedTransaction<
     Transaction<
       bigint,
       number,
-      TEpochNumber extends 'latest_state' ? false : true
+      TEpochTag extends 'latest_state' ? false : true
     >,
     TransactionPendingDependencies
   >
