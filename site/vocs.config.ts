@@ -37,6 +37,42 @@ export default defineConfig({
         collapsed: true,
         items: [
           { text: 'Introduction', link: '/docs/actions/public/introduction' },
+          {
+            text: 'Block',
+            items: [
+              { text: 'getBlock', link: '/docs/actions/public/getBlock' },
+              {
+                text: 'getBastBlockHash',
+                link: '/docs/actions/public/getBastBlockHash',
+              },
+              {
+                text: 'getEpochNumber',
+                link: '/docs/actions/public/getEpochNumber',
+              },
+            ],
+          },
+          {
+            text: 'Fee',
+            items: [
+              {
+                text: 'getGasPrice',
+                link: '/docs/actions/public/getGasPrice',
+              },
+              {
+                text: 'estimateMaxPriorityFeePerGas',
+                link: '/docs/actions/public/estimateMaxPriorityFeePerGas',
+              }
+            ],
+          },
+          {
+            text: 'Transaction',
+            items: [
+              {
+                text: 'getTransaction',
+                link: '/docs/actions/public/getTransaction',
+              },
+            ],
+          },
         ],
       },
     ],
