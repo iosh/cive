@@ -1,0 +1,42 @@
+# getEpochNumber
+
+Get the epoch number by epoch tag.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const epochNumber = await publicClient.getEpochNumber();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+`bigint`
+
+## Parameters
+
+### epochTag (optional)
+
+- **epochTag** `latest_mined`| `latest_state` | `latest_confirmed` | `latest_checkpoint` | `earliest`
+- **Defaut** `latest_state`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const epochNumber = await publicClient.getEpochNumber({
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_epochNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_epochnumber)
