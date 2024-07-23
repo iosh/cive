@@ -1,0 +1,27 @@
+# estimateMaxPriorityFeePerGas
+
+Get the current priority fee per gas (in drip). (Note: Currently, this method directly calls the cfx_maxPriorityFeePerGas RPC.)
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const maxPriorityFeePerGas = await publicClient.estimateMaxPriorityFeePerGas();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+`bigint`
+
+## JSON-RPC Method
+
+[`cfx_maxPriorityFeePerGas`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_maxPriorityFeePerGas)
