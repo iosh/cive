@@ -1,0 +1,118 @@
+---
+description: Returns information about a block at a block/e hash or tag.
+---
+
+# getBlock
+
+Returns information about a block at an epoch tag/number, block number, or hash.
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const block = await publicClient.getBlock();
+
+// @log: Output: {
+// @log:  hash: "0xd2f1997676690a5d7eb2067846c1c28e6fe47064239b327a2dfcdd8321274b8f",
+// @log:  parentHash: "0x15cbfa0e66693302ddb28015dd3fbac6593a4695c8d6572d2db5964c1ccd4ff2",
+// @log:  height: 100866417n,
+// @log:  deferredStateRoot: "0xae5c788dbe5d4f30fc0f797cb94d9b7635c41e8074082b95735e2b68c77442c7",
+// @log:  ...
+// @log: }
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`Block`](#TODO)
+
+The block information.
+
+## Parameters
+
+### blockHash (optional)
+
+- **Type:** `Hash`
+
+Get information about a block by hash.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const block = await publicClient.getBlock({
+  blockHash:
+    "0xf6cec5af1ee95f56038fc30589bcfeb4b960075c3c76b8a0eaa6d36e8e623b50", // [!code focus]
+});
+```
+
+### epochTag (optional) defaut
+
+- **Type:** `latest_mined` |`latest_state` | `latest_confirmed` | `latest_checkpoint` | `earliest`
+- **Defaut** `latest_state`
+
+Get information about a block by epoch tag.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const block = await publicClient.getBlock({
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+Get information about a block by epoch number.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const block = await publicClient.getBlock({
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+### blockNumber (optional)
+
+- **Type:** `bigint`
+
+Get information about a block by block number.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const block = await publicClient.getBlock({
+  blockNumber: 1n, // [!code focus]
+});
+```
+
+### includeTransactions (optional)
+
+- **Type:** `boolean`
+
+Whether to include transactions (as a structured array of Transaction objects).
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const block = await publicClient.getBlock({
+  blockNumber: 1n,
+  includeTransactions: true,
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getblockbyhash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyhash)
+
+[`cfx_getBlockByEpochNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyepochnumber)
+
+[`cfx_getBlockByBlockNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyblocknumber)
