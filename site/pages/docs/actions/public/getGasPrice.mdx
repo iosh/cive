@@ -1,0 +1,29 @@
+# getGasPrice
+
+Returns the current price of gas (in drip).
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const gasPrice = await publicClient.getGasPrice();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+`bigint`
+
+The gas price (in drip).
+
+## JSON-RPC Method
+
+[`cfx_gasprice`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gasprice)
