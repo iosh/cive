@@ -1,0 +1,64 @@
+---
+description: get transaction by hash
+---
+
+# getTransaction
+
+Returns information about a transaction by hash.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const transaction = await publicClient.getTransaction({
+  hash: "0x4ca7ee652d57678f26e887c149ab0735f41de37bcad58c9f6d3ed5824f15b74d",
+});
+// @log: {
+// @log:  hash: "0xe54a939d7ecbc39610fc7c9b29f67943a04219e7a5235d412260d81721ca7d68",
+// @log:  nonce: 0,
+// @log:  blockHash: "0xf6cec5af1ee95f56038fc30589bcfeb4b960075c3c76b8a0eaa6d36e8e623b50",
+// @log:  transactionIndex: 0,
+// @log:  from: "cfx:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0sfbnjm2",
+// @log:  to: "cfx:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0sfbnjm2",
+// @log:  ...
+// @log: }
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`Transaction`](#TODO)
+
+The transaction information.
+
+## Parameters
+
+### hash (required)
+
+Get information about a transaction by hash.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const transaction = await publicClient.getTransaction({
+  hash: "0x4ca7ee652d57678f26e887c149ab0735f41de37bcad58c9f6d3ed5824f15b74d", // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getTransactionByHash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionbyhash)
