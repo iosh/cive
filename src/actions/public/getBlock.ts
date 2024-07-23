@@ -25,7 +25,7 @@ export type GetBlockParameters<
     }
   | {
       blockHash?: never | undefined
-      blockNumber?: number
+      blockNumber?: bigint
       epochNumber?: never | undefined
       epochTag?: never | undefined
     }

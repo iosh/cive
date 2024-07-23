@@ -96,7 +96,7 @@ export type Block<
   /**
    * array of transaction objects, or 32-byte transaction hashes, depending on the second parameter.
    */
-  transactions: Hash[]
+  transactions: _TIncludeTransactions extends true ? _TTransaction[] : Hash[]
   /**
    *  the Merkle root of the transactions in this block
    */
