@@ -4,7 +4,7 @@ import type { EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 
 export type GetEpochNumberParameters<TEpochTag extends EpochTag = EpochTag> = {
-  epochTag?: TEpochTag
+  epochTag?: Exclude<TEpochTag, 'latest_confirmed'>
 }
 
 export type GetEpochNumberReturnType = bigint

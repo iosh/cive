@@ -13,7 +13,7 @@ import {
 
 export type GetBlockParameters<
   TIncludeTransactions extends boolean = false,
-  TEpochTag extends EpochTag = 'latest_state',
+  TEpochTag extends Exclude<EpochTag, 'latest_finalized'> = 'latest_state',
 > = {
   includeTransactions?: TIncludeTransactions | undefined
 } & (
@@ -43,7 +43,7 @@ export type GetBlockParameters<
        * the epoch tag string
        * @default "latest_state"
        */
-      epochTag?: TEpochTag | EpochTag | undefined
+      epochTag?: TEpochTag | Exclude<EpochTag, 'latest_finalized'> | undefined
     }
 )
 export type GetBlockReturnType<
@@ -56,12 +56,7 @@ export async function getBlock<
   TChain extends Chain | undefined,
   TAccount extends Account | undefined,
   TIncludeTransactions extends boolean = false,
-  TEpochTag extends
-    | 'latest_mined'
-    | 'latest_state'
-    | 'latest_confirmed'
-    | 'latest_checkpoint'
-    | 'earliest' = 'latest_state',
+  TEpochTag extends Exclude<EpochTag, 'latest_finalized'> = 'latest_state',
 >(
   client: Client<Transport, TChain, TAccount>,
   {
