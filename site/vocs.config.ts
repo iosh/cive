@@ -38,6 +38,15 @@ export default defineConfig({
         items: [
           { text: 'Introduction', link: '/docs/actions/public/introduction' },
           {
+            text: 'Account',
+            items: [
+              {
+                text: 'getBalance',
+                link: '/docs/actions/public/getBalance',
+              },
+            ],
+          },
+          {
             text: 'Block',
             items: [
               { text: 'getBlock', link: '/docs/actions/public/getBlock' },
