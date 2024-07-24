@@ -130,6 +130,11 @@ import {
   getEpochReceipts,
 } from '../../actions/public/getEpochReceipts.js'
 import {
+  type GetFeeHistoryParameters,
+  type GetFeeHistoryReturnType,
+  getFeeHistory,
+} from '../../actions/public/getFeeHistory.js'
+import {
   type GetFilterChangesParameters,
   type GetFilterChangesReturnType,
   getFilterChanges,
@@ -277,11 +282,6 @@ import type {
   MaybeExtractEventArgsFromAbi,
 } from '../../types/contract.js'
 import type { Client } from '../createClient.js'
-import {
-  getFeeHistory,
-  type GetFeeHistoryParameters,
-  type GetFeeHistoryReturnType,
-} from '../../actions/public/getFeeHistory.js'
 
 export type PublicActions<
   _TTransport extends Transport = Transport,
@@ -362,7 +362,7 @@ export type PublicActions<
    * @returns - {@link GetBlocksByEpochReturnType}
    */
   getBlocksByEpoch: (
-    args: GetBlocksByEpochParameters,
+    args?: GetBlocksByEpochParameters | undefined,
   ) => Promise<GetBlocksByEpochReturnType>
 
   /**

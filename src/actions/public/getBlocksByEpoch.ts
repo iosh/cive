@@ -12,7 +12,7 @@ export type GetBlocksByEpochParameters = {} & (
     }
   | {
       epochNumber?: never | undefined
-      epochTag?: EpochTag
+      epochTag?: Exclude<EpochTag, 'latest_finalized'>
     }
 )
 
@@ -25,7 +25,7 @@ export type GetBlocksByEpochErrorType =
 
 export async function getBlocksByEpoch<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { epochNumber, epochTag = 'latest_state' }: GetBlocksByEpochParameters,
+  { epochNumber, epochTag = 'latest_state' }: GetBlocksByEpochParameters = {},
 ): Promise<GetBlocksByEpochReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
 

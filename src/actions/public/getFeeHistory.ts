@@ -1,7 +1,7 @@
-import { numberToHex, type Transport } from 'viem'
+import { type Transport, numberToHex } from 'viem'
 import type { Client } from '../../clients/createClient.js'
-import type { Chain } from '../../types/chain.js'
 import type { EpochTag } from '../../types/block.js'
+import type { Chain } from '../../types/chain.js'
 import type { FeeHistory } from '../../types/fee.js'
 import { formatFeeHistory } from '../../utils/formatters/feeHistory.js'
 
