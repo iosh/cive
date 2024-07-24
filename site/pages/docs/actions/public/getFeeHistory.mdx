@@ -1,0 +1,93 @@
+# getFeeHistory
+
+Returns a collection of historical gas information.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const feeHistory = await publicClient.getFeeHistory({
+  epochCount: 4,
+  rewardPercentiles: [25, 75],
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`FeeHistory`](#TODO)
+
+## Parameters
+
+### epochCount (optional)
+
+- **Type:** `number`
+
+the number of epochs to query.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const feeHistory = await publicClient.getFeeHistory({
+  epochCount: 4, // [!code focus]
+  rewardPercentiles: [25, 75],
+});
+```
+
+### rewardPercentiles (optional)
+
+- **Type:** `number[]`
+
+A monotonically increasing float list of percentile values. For each block in the requested range, the transactions will be sorted in ascending order by effective tip per gas and the coresponding effective tip for the percentile will be determined, accounting for gas consumed.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const feeHistory = await publicClient.getFeeHistory({
+  epochCount: 4,
+  rewardPercentiles: [25, 75], // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `number`
+  The epoch number
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const feeHistory = await publicClient.getFeeHistory({
+  epochCount: 4,
+  epochNumber: 1n, // [!code focus]
+  rewardPercentiles: [25, 75],
+});
+```
+
+### epochTag (optional)
+
+- **type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` |`earliest `
+- **Defaut:** `latest_state`
+  The epoch tag
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const feeHistory = await publicClient.getFeeHistory({
+  epochCount: 4,
+  epochTag: "latest_state", // [!code focus]
+  rewardPercentiles: [25, 75],
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_feeHistory`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_feehistory)

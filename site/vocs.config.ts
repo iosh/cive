@@ -61,7 +61,11 @@ export default defineConfig({
               {
                 text: 'estimateMaxPriorityFeePerGas',
                 link: '/docs/actions/public/estimateMaxPriorityFeePerGas',
-              }
+              },
+              {
+                text: 'getFeeHistory',
+                link: '/docs/actions/public/getFeeHistory',
+              },
             ],
           },
           {
