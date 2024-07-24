@@ -107,6 +107,7 @@ export default defineConfig({
             text: 'Actions',
             items: [
               { text: 'getAdmin', link: '/docs/contract/getAdmin' },
+              { text: 'getCode', link: '/docs/contract/getCode' },
             ],
           },
         ],
