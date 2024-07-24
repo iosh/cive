@@ -43,7 +43,10 @@ export default defineConfig({
               {
                 text: 'getBalance',
                 link: '/docs/actions/public/getBalance',
-              },
+              },{
+                text: 'getStakingBalance',
+                link: '/docs/actions/public/getStakingBalance'
+              }
             ],
           },
           {

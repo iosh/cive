@@ -1,6 +1,6 @@
-# getBalance
+# getStakingBalance
 
-Get the balance of the given account, identified by its address.
+Get the stacking balance of the accout, identified by its address.
 
 ## Usage
 
@@ -9,7 +9,7 @@ Get the balance of the given account, identified by its address.
 ```ts twoslash [example.ts]
 import { publicClient } from "./client";
 // [!code focus:99]
-const balance = await publicClient.getBalance({
+const balance = await publicClient.getStakingBalance({
   address: "cfx:...",
 });
 ```
@@ -24,20 +24,18 @@ const balance = await publicClient.getBalance({
 
 `bigint`
 
-The balance of the address in drip.
+The staking balance in drip.
 
 ## Parameters
 
 ### address
 
-- **Type** `Address`
-
-The address to check for balance
+- **address:** `Address`
 
 ```ts twoslash
 // [!include ~/snippets/publicClient.ts]
 // ---cut---
-const balance = await publicClient.getBalance({
+const balance = await publicClient.getStakingBalance({
   address: "cfx:...", // [!code focus]
 });
 ```
@@ -50,7 +48,7 @@ const balance = await publicClient.getBalance({
 ```ts twoslash
 // [!include ~/snippets/publicClient.ts]
 // ---cut---
-const balance = await publicClient.getBalance({
+const balance = await publicClient.getStakingBalance({
   address: "cfx:...",
   epochTag: "latest_state", // [!code focus]
 });
@@ -63,27 +61,12 @@ const balance = await publicClient.getBalance({
 ```ts twoslash
 // [!include ~/snippets/publicClient.ts]
 // ---cut---
-const balance = await publicClient.getBalance({
+const balance = await publicClient.getStakingBalance({
   address: "cfx:...",
   epochNumber: 1n, // [!code focus]
 });
 ```
 
-## Tips
-
-You can convert the balance to ether units with `formatCFX`.
-
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
-import { formatCFX } from "cive";
-const balance = await publicClient.getBalance({
-  address: "cfx:...",
-});
-const balanceAsCFX = formatCFX(balance); // [!code focus:2]
-     // "99"
-```
-
 ## JSON-RPC Method
 
-[`cfx_getbalance`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getbalance)
+[`cfx_getStakingBalance`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getstakingbalance)
