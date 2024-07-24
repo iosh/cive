@@ -11,14 +11,16 @@ import type { ErrorType } from '../../errors/utils.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 
-export type GetBytecodeParameters = {
+export type GetCodeParameters = {
   address: Address
 } & (
   | {
       /**
        * @default 'latest_state'
        */
-      epochTag?: EpochTag | undefined
+      epochTag?:
+        | Exclude<EpochTag, 'latest_finalized' | 'latest_mined'>
+        | undefined
       epochNumber?: never | undefined
     }
   | {
@@ -27,17 +29,17 @@ export type GetBytecodeParameters = {
     }
 )
 
-export type GetBytecodeReturnType = Hex | undefined
+export type GetCodeReturnType = Hex | undefined
 
 export type GetBytecodeErrorType =
   | NumberToHexErrorType
   | RequestErrorType
   | ErrorType
 
-export async function getBytecode<TChain extends Chain | undefined>(
+export async function getCode<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { address, epochNumber, epochTag = 'latest_state' }: GetBytecodeParameters,
-): Promise<GetBytecodeReturnType> {
+  { address, epochNumber, epochTag = 'latest_state' }: GetCodeParameters,
+): Promise<GetCodeReturnType> {
   const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
 
   const hex = await client.request({

@@ -87,11 +87,6 @@ import {
   getBlocksByEpoch,
 } from '../../actions/public/getBlocksByEpoch.js'
 import {
-  type GetBytecodeParameters,
-  type GetBytecodeReturnType,
-  getBytecode,
-} from '../../actions/public/getBytecode.js'
-import {
   type GetChainIdReturnType,
   getChainId,
 } from '../../actions/public/getChainId.js'
@@ -99,6 +94,11 @@ import {
   type GetClientVersionReturnType,
   getClientVersion,
 } from '../../actions/public/getClientVersion.js'
+import {
+  type GetCodeParameters,
+  type GetCodeReturnType,
+  getCode,
+} from '../../actions/public/getCode.js'
 import {
   type GetCollateralInfoParameters,
   type GetCollateralInfoReturnType,
@@ -405,10 +405,10 @@ export type PublicActions<
   /**
    * Returns the code of the specified contract. If contract not exist will return 0x
    * - JSON-RPC Methods: [`cfx_getCode`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getcode)
-   * @param args - {@link GetBytecodeParameters}
-   * @returns byte code of the contract, or 0x if the account has no code. {@link GetBytecodeReturnType}
+   * @param args - {@link GetCodeParameters}
+   * @returns byte code of the contract, or 0x if the account has no code. {@link GetCodeReturnType}
    */
-  getBytecode: (args: GetBytecodeParameters) => Promise<GetBytecodeReturnType>
+  getCode: (args: GetCodeParameters) => Promise<GetCodeReturnType>
 
   /**
    * Returns storage entries from a given contract.
@@ -863,7 +863,7 @@ export function publicActions<
     getStakingBalance: (args) => getStakingBalance(client, args),
     getCollateralForStorage: (args) => getCollateralForStorage(client, args),
     getAdmin: (args) => getAdmin(client, args),
-    getBytecode: (args) => getBytecode(client, args),
+    getCode: (args) => getCode(client, args),
     getStorageAt: (args) => GetStorageAt(client, args),
     getStorageRoot: (args) => GetStorageRoot(client, args),
     getSponsorInfo: (args) => GetSponsorInfo(client, args),
