@@ -82,6 +82,10 @@ export default defineConfig({
                 text: 'getFeeHistory',
                 link: '/docs/actions/public/getFeeHistory',
               },
+              {
+                text: 'getCollateralForStorage',
+                link: '/docs/actions/public/getCollateralForStorage',
+              }
             ],
           },
           {
