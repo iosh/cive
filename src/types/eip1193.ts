@@ -6,6 +6,7 @@ import type {
   RpcBlock,
   RpcChainAccount,
   RpcDeposit,
+  RpcFeeHistory,
   RpcGasAndCollateral,
   RpcLog,
   RpcLogFilter,
@@ -111,6 +112,21 @@ export type PublicRpcSchema = [
     Method: 'cfx_maxPriorityFeePerGas'
     Parameters: undefined
     ReturnType: Quantity
+  },
+  /**
+   * @description Returns transaction base fee per gas and effective priority fee per gas for the requested/supported epoch range.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_feehistory
+   */
+  {
+    Method: 'cfx_feeHistory'
+    Parameters: [
+      epochCount: Quantity,
+      newestBlock:
+        | RpcEpochNumber
+        | Exclude<EpochTag, 'latest_finalized' | 'latest_mined'>,
+      rewardPercentile: number[] | undefined,
+    ]
+    ReturnType: RpcFeeHistory
   },
   /**
    * @description Returns the block hashes in the specified epoch.

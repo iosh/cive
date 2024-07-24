@@ -277,6 +277,11 @@ import type {
   MaybeExtractEventArgsFromAbi,
 } from '../../types/contract.js'
 import type { Client } from '../createClient.js'
+import {
+  getFeeHistory,
+  type GetFeeHistoryParameters,
+  type GetFeeHistoryReturnType,
+} from '../../actions/public/getFeeHistory.js'
 
 export type PublicActions<
   _TTransport extends Transport = Transport,
@@ -341,7 +346,15 @@ export type PublicActions<
    * - JSON-RPC Method: [`cfx_maxPriorityFeePerGas`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_maxPriorityFeePerGas)
    */
   estimateMaxPriorityFeePerGas: () => Promise<EstimateMaxPriorityFeePerGasReturnType>
-
+  /**
+   * Returns transaction base fee per gas and effective priority fee per gas for the requested/supported epoch range.
+   * - JSON-RPC Method: [`cfx_feeHistory`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_feehistory)
+   * @param args
+   * @returns
+   */
+  getFeeHistory: (
+    args: GetFeeHistoryParameters,
+  ) => Promise<GetFeeHistoryReturnType>
   /**
    * Returns the block hashes in the specified epoch.
    * - JSON-RPC Methods: [`cfx_getBlocksByEpoch`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblocksbyepoch)
@@ -844,6 +857,7 @@ export function publicActions<
     getEpochNumber: (args) => getEpochNumber(client, args),
     getGasPrice: () => getGasPrice(client),
     estimateMaxPriorityFeePerGas: () => estimateMaxPriorityFeePerGas(client),
+    getFeeHistory: (args) => getFeeHistory(client, args),
     getBlocksByEpoch: (args) => getBlocksByEpoch(client, args),
     getBalance: (args) => getBalance(client, args),
     getStakingBalance: (args) => getStakingBalance(client, args),

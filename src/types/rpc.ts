@@ -3,7 +3,7 @@ import type { AccountPending, AccountPendingTransaction } from './account.js'
 import type { Block, EpochNumber, EpochTag } from './block.js'
 import type { ChainAccount } from './chainAccount.js'
 import type { Deposit } from './deposit.js'
-import type { FeeValues, GasAndCollateral } from './fee.js'
+import type { FeeHistory, FeeValues, GasAndCollateral } from './fee.js'
 import type { LogFilter } from './filter.js'
 import type { Log } from './log.js'
 import type { NodeState } from './node.js'
@@ -65,6 +65,7 @@ export type RpcTransactionRequest = OneOf<
 
 export type RpcFeeValue = FeeValues<Quantity>
 export type RpcGasAndCollateral = GasAndCollateral<Quantity>
+export type RpcFeeHistory = FeeHistory<Quantity>
 
 export type RpcLog = Log<Quantity, Index>
 
