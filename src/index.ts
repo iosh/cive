@@ -71,3 +71,5 @@ export { formatUnits } from './utils/unit/formatUnits.js'
 export { parseCFX } from './utils/unit/parseCFX.js'
 export { parseGDrip } from './utils/unit/parseGDrip.js'
 export { parseUnits } from './utils/unit/parseUnits.js'
+
+export { toHex } from 'viem/utils'

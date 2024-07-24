@@ -1,0 +1,97 @@
+# getStorageAt
+
+Get the value from a storage slot at a given address.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { toHex } from "cive";
+import { publicClient } from "./client";
+
+// [!code focus:99]
+const hex = await publicClient.getStorageAt({
+  address: "cfx:aakvz2e5nt82c9nvbbg84hzbrjy53nsdf26azny4p7",
+  slot: toHex(2),
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Return
+
+`Hex`
+The value of the storage slot.
+
+## Parameters
+
+### address
+
+- **Type:** `Address`
+
+The contract address.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { toHex } from "cive";
+const data = await publicClient.getStorageAt({
+  address: "cfx:...", // [!code focus]
+  slot: toHex(0),
+});
+```
+
+### slot
+
+- **Type:** `Hex`
+  The storage position (as a hex encoded value).
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { toHex } from "cive";
+const data = await publicClient.getStorageAt({
+  address: "cfx:...",
+  slot: toHex(0), // [!code focus]
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { toHex } from "cive";
+const data = await publicClient.getStorageAt({
+  address: "cfx:...",
+  slot: toHex(0),
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { toHex } from "cive";
+const data = await publicClient.getStorageAt({
+  address: "cfx:...",
+  slot: toHex(0),
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getStorageAt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getstorageat)

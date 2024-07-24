@@ -108,6 +108,7 @@ export default defineConfig({
             items: [
               { text: 'getAdmin', link: '/docs/contract/getAdmin' },
               { text: 'getCode', link: '/docs/contract/getCode' },
+              { text: 'getStorageAt', link: '/docs/contract/getStorageAt' },
             ],
           },
         ],
