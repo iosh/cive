@@ -1,0 +1,54 @@
+# getBlocksByEpoch
+
+Get the block hashes in the specified epoch.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const hashes = await publicClient.getBlocksByEpoch();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`Hash[]`](#TODO)
+
+## Parameters
+
+### epochTag (optional)
+
+- **Type** `latest_mined`|`latest_state`|`latest_confirmed`|`latest_checkpoint` | `earliest`
+- **Defaut** `latest_state`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const hashes = await publicClient.getBlocksByEpoch({
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type** `bigint`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const hashes = await publicClient.getBlocksByEpoch({
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getBlocksByEpoch`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblocksbyepoch)

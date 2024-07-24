@@ -49,6 +49,10 @@ export default defineConfig({
                 text: 'getEpochNumber',
                 link: '/docs/actions/public/getEpochNumber',
               },
+              {
+                text: 'getBlocksByEpoch',
+                link: '/docs/actions/public/getBlocksByEpoch',
+              },
             ],
           },
           {
