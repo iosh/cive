@@ -43,10 +43,11 @@ export default defineConfig({
               {
                 text: 'getBalance',
                 link: '/docs/actions/public/getBalance',
-              },{
+              },
+              {
                 text: 'getStakingBalance',
-                link: '/docs/actions/public/getStakingBalance'
-              }
+                link: '/docs/actions/public/getStakingBalance',
+              },
             ],
           },
           {
@@ -85,7 +86,7 @@ export default defineConfig({
               {
                 text: 'getCollateralForStorage',
                 link: '/docs/actions/public/getCollateralForStorage',
-              }
+              },
             ],
           },
           {
@@ -95,6 +96,17 @@ export default defineConfig({
                 text: 'getTransaction',
                 link: '/docs/actions/public/getTransaction',
               },
+            ],
+          },
+        ],
+      },
+      {
+        text: 'Contract',
+        items: [
+          {
+            text: 'Actions',
+            items: [
+              { text: 'getAdmin', link: '/docs/contract/getAdmin' },
             ],
           },
         ],

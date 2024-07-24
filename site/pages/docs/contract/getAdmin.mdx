@@ -1,0 +1,74 @@
+# getAdmin
+
+Get the admin of the specified contract
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const contractAddress = await publicClient.getAdmin({
+  address: "cfx:...",
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+`Address` | `null`
+
+Return the admin of the specified contract address or `null` if the contract does not exist.
+
+## Parameters
+
+### address
+
+- **Type:** `Address`
+
+The address to check for collateral storage
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const contractAddress = await publicClient.getAdmin({
+  address: "cfx:...", // [!code focus]
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const contractAddress = await publicClient.getAdmin({
+  address: "cfx:...",
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const contractAddress = await publicClient.getAdmin({
+  address: "cfx:...",
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getAdmin`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getadmin)
