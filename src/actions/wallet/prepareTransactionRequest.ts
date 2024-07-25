@@ -58,7 +58,6 @@ import type { GetBlocksByEpochErrorType } from '../public/getBlocksByEpoch.js'
 import { getEpochNumber } from '../public/getEpochNumber.js'
 import { getNextNonce } from '../public/getNextNonce.js'
 import { getStatus } from '../public/getStatus.js'
-import { getTxPoolNextNonce } from '../public/getTxPoolNextNonce.js'
 
 export const defaultParameters = [
   'chainId',

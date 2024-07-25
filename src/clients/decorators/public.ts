@@ -274,6 +274,11 @@ import {
   type UninstallFilterReturnType,
   uninstallFilter,
 } from '../../actions/public/uninstallFilter.js'
+import {
+  type SendRawTransactionParameters,
+  type SendRawTransactionReturnType,
+  sendRawTransaction,
+} from '../../actions/wallet/sendRawTransaction.js'
 import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
@@ -841,6 +846,15 @@ export type PublicActions<
    * @returns - {@link GetChainIdReturnType}
    */
   getChainId: () => Promise<GetChainIdReturnType>
+  /**
+   * Sends a signed transaction into the network for processing.
+   * - JSON-RPC Method: [`cfx_sendRawTransaction`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_sendrawtransaction)
+   * @param args - {@link SendRawTransactionParameters}
+   * @returns -  {@link SendRawTransactionReturnType}
+   */
+  sendRawTransaction: (
+    args: SendRawTransactionParameters,
+  ) => Promise<SendRawTransactionReturnType>
 }
 
 export function publicActions<
@@ -915,5 +929,6 @@ export function publicActions<
     traceBlock: (args) => traceBlock(client, args),
     traceTransaction: (args) => traceTransaction(client, args),
     getChainId: () => getChainId(client),
+    sendRawTransaction: (args) => sendRawTransaction(client, args),
   }
 }

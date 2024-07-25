@@ -47,6 +47,11 @@
       "types": "./_types/chains/index.d.ts",
       "import": "./_esm/chains/index.js",
       "default": "./_cjs/chains/index.js"
+    },
+    "./window": {
+      "types": "./_types/window/index.d.ts",
+      "import": "./_esm/window/index.js",
+      "default": "./_cjs/window/index.js"
     }
   }
 }

@@ -1,4 +1,10 @@
-import type { ExactPartial, Hash, Hex } from 'viem'
+import type {
+  EIP1193Events,
+  EIP1193RequestFn,
+  ExactPartial,
+  Hash,
+  Hex,
+} from 'viem'
 import type {
   Quantity,
   RpcAccountPending,
@@ -30,7 +36,15 @@ import type {
 import type { Address, HexAddress } from '../accounts/types.js'
 import type { Block, EpochTag } from './block.js'
 import type { RpcEpochNumber, RpcTransaction as Transaction } from './rpc.js'
+import type { Prettify } from './utils.js'
+
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
+
+export type EIP1193Provider = Prettify<
+  EIP1193Events & {
+    request: EIP1193RequestFn<EIP1474Methods>
+  }
+>
 
 export type WalletPermissionCaveat = {
   type: string
