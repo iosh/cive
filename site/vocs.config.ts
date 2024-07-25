@@ -48,6 +48,10 @@ export default defineConfig({
                 text: 'getStakingBalance',
                 link: '/docs/actions/public/getStakingBalance',
               },
+              {
+                text: 'getNextNonce',
+                link: '/docs/actions/public/getNextNonce',
+              },
             ],
           },
           {

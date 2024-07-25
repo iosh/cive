@@ -1,0 +1,84 @@
+# getNextNonce
+
+Get the next nonce to be used in the next transaction.
+
+## Usage
+
+:::code-group
+
+```ts [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const nonce = await publicClient.getNextNonce({
+  address: "cfx:...",
+});
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+`number`
+
+The next nonce that should be used by the given address.
+
+## Parameters
+
+### address
+
+- **Type:** `Address`
+
+```ts
+const nonce = await publicClient.getNextNonce({
+  address: "cfx:...", // [!code focus]
+});
+```
+
+### tryTxPool (optional)
+
+- **Type:** `boolean`
+- **Defaut:** `true`
+
+Conflux transactions execution will be delayed for several seconds. During this period, the nonce retrieved using `cfx_getNextNonce` may still reflect an outdated value, while `txpool_nextNonce` will provide the correct nonce. However, it's important to note that not all RPC nodes support the `txpool_nextNonce` method.
+
+If you dont want to use the `txpool_nextNonce`, you can set `tryTxPool` to `false`.
+
+```ts
+const nonce = await publicClient.getNextNonce({
+  address: "cfx:...",
+  tryTxPool: true, // [!code focus]
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+const nonce = await publicClient.getNextNonce({
+  address: "cfx:...",
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const nonce = await publicClient.getNextNonce({
+  address: "cfx:...",
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getNextNonce`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getnextnonce)
+
+[`txpool_nextNonce`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/txpool_rpc#txpool_nextnonce)
