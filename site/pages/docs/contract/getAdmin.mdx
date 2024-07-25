@@ -6,7 +6,7 @@ Get the admin of the specified contract
 
 :::code-group
 
-```ts twoslash [example.ts]
+```ts  [example.ts]
 import { publicClient } from "./client";
 // [!code focus:99]
 const contractAddress = await publicClient.getAdmin({
@@ -14,7 +14,7 @@ const contractAddress = await publicClient.getAdmin({
 });
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
+```ts  [client.ts] filename="client.ts"
 // [!include ~/snippets/publicClient.ts]
 ```
 
@@ -34,9 +34,7 @@ Return the admin of the specified contract address or `null` if the contract doe
 
 The address to check for collateral storage
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts 
 const contractAddress = await publicClient.getAdmin({
   address: "cfx:...", // [!code focus]
 });
@@ -47,9 +45,7 @@ const contractAddress = await publicClient.getAdmin({
 - **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
 - **Defaut:** `latest_state`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts 
 const contractAddress = await publicClient.getAdmin({
   address: "cfx:...",
   epochTag: "latest_state", // [!code focus]
@@ -60,9 +56,7 @@ const contractAddress = await publicClient.getAdmin({
 
 - **Type:** `bigint`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts 
 const contractAddress = await publicClient.getAdmin({
   address: "cfx:...",
   epochNumber: 1n, // [!code focus]

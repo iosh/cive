@@ -27,14 +27,8 @@ const transaction = await publicClient.getTransaction({
 // @log: }
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
-import { createPublicClient, http } from "cive";
-import { mainnet } from "cive/chains";
-
-export const publicClient = createPublicClient({
-  chain: mainnet,
-  transport: http(),
-});
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
 ```
 
 :::
@@ -51,9 +45,7 @@ The transaction information.
 
 Get information about a transaction by hash.
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const transaction = await publicClient.getTransaction({
   hash: "0x4ca7ee652d57678f26e887c149ab0735f41de37bcad58c9f6d3ed5824f15b74d", // [!code focus]
 });

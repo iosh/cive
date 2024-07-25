@@ -6,13 +6,13 @@ Get the epoch number by epoch tag.
 
 :::code-group
 
-```ts twoslash [example.ts]
+```ts [example.ts]
 import { publicClient } from "./client";
 // [!code focus:99]
 const epochNumber = await publicClient.getEpochNumber();
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
+```ts [client.ts] filename="client.ts"
 // [!include ~/snippets/publicClient.ts]
 ```
 
@@ -29,7 +29,7 @@ const epochNumber = await publicClient.getEpochNumber();
 - **Type** `latest_mined`| `latest_state` | `latest_confirmed` | `latest_checkpoint` | `earliest`
 - **Defaut** `latest_state`
 
-```ts twoslash
+```ts
 // [!include ~/snippets/publicClient.ts]
 // ---cut---
 const epochNumber = await publicClient.getEpochNumber({

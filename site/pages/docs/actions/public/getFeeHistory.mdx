@@ -6,7 +6,7 @@ Returns a collection of historical gas information.
 
 :::code-group
 
-```ts twoslash [example.ts]
+```ts [example.ts]
 import { publicClient } from "./client";
 // [!code focus:99]
 const feeHistory = await publicClient.getFeeHistory({
@@ -15,7 +15,7 @@ const feeHistory = await publicClient.getFeeHistory({
 });
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
+```ts [client.ts] filename="client.ts"
 // [!include ~/snippets/publicClient.ts]
 ```
 
@@ -33,9 +33,7 @@ const feeHistory = await publicClient.getFeeHistory({
 
 the number of epochs to query.
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const feeHistory = await publicClient.getFeeHistory({
   epochCount: 4, // [!code focus]
   rewardPercentiles: [25, 75],
@@ -48,9 +46,7 @@ const feeHistory = await publicClient.getFeeHistory({
 
 A monotonically increasing float list of percentile values. For each block in the requested range, the transactions will be sorted in ascending order by effective tip per gas and the coresponding effective tip for the percentile will be determined, accounting for gas consumed.
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const feeHistory = await publicClient.getFeeHistory({
   epochCount: 4,
   rewardPercentiles: [25, 75], // [!code focus]
@@ -62,9 +58,7 @@ const feeHistory = await publicClient.getFeeHistory({
 - **Type:** `number`
   The epoch number
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const feeHistory = await publicClient.getFeeHistory({
   epochCount: 4,
   epochNumber: 1n, // [!code focus]
@@ -78,9 +72,7 @@ const feeHistory = await publicClient.getFeeHistory({
 - **Defaut:** `latest_state`
   The epoch tag
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const feeHistory = await publicClient.getFeeHistory({
   epochCount: 4,
   epochTag: "latest_state", // [!code focus]

@@ -6,13 +6,13 @@ Get the current priority fee per gas (in drip). (Note: Currently, this method di
 
 :::code-group
 
-```ts twoslash [example.ts]
+```ts [example.ts]
 import { publicClient } from "./client";
 // [!code focus:99]
 const maxPriorityFeePerGas = await publicClient.estimateMaxPriorityFeePerGas();
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
+```ts [client.ts] filename="client.ts"
 // [!include ~/snippets/publicClient.ts]
 ```
 

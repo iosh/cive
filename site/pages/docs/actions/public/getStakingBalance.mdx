@@ -6,7 +6,7 @@ Get the stacking balance of the accout, identified by its address.
 
 :::code-group
 
-```ts twoslash [example.ts]
+```ts [example.ts]
 import { publicClient } from "./client";
 // [!code focus:99]
 const balance = await publicClient.getStakingBalance({
@@ -14,7 +14,7 @@ const balance = await publicClient.getStakingBalance({
 });
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
+```ts [client.ts] filename="client.ts"
 // [!include ~/snippets/publicClient.ts]
 ```
 
@@ -32,9 +32,7 @@ The staking balance in drip.
 
 - **address:** `Address`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const balance = await publicClient.getStakingBalance({
   address: "cfx:...", // [!code focus]
 });
@@ -45,9 +43,7 @@ const balance = await publicClient.getStakingBalance({
 - **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
 - **Defaut:** `latest_state`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const balance = await publicClient.getStakingBalance({
   address: "cfx:...",
   epochTag: "latest_state", // [!code focus]
@@ -58,9 +54,7 @@ const balance = await publicClient.getStakingBalance({
 
 - **Type:** `bigint`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const balance = await publicClient.getStakingBalance({
   address: "cfx:...",
   epochNumber: 1n, // [!code focus]

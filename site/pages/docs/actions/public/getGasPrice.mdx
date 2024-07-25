@@ -6,13 +6,13 @@ Returns the current price of gas (in drip).
 
 :::code-group
 
-```ts twoslash [example.ts]
+```ts [example.ts]
 import { publicClient } from "./client";
 // [!code focus:99]
 const gasPrice = await publicClient.getGasPrice();
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
+```ts [client.ts] filename="client.ts"
 // [!include ~/snippets/publicClient.ts]
 ```
 

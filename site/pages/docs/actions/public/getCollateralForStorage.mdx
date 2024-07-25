@@ -4,7 +4,7 @@ Get the size of the collateral storage of a given address, in bytes.
 
 :::code-group
 
-```ts twoslash [example.ts]
+```ts [example.ts]
 import { publicClient } from "./client";
 // [!code focus:99]
 const balance = await publicClient.getCollateralForStorage({
@@ -12,7 +12,7 @@ const balance = await publicClient.getCollateralForStorage({
 });
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
+```ts [client.ts] filename="client.ts"
 // [!include ~/snippets/publicClient.ts]
 ```
 
@@ -32,9 +32,7 @@ The size of the collateral storage in bytes.
 
 The address to check for collateral storage
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const balance = await publicClient.getCollateralForStorage({
   address: "cfx:...", // [!code focus]
 });
@@ -45,9 +43,7 @@ const balance = await publicClient.getCollateralForStorage({
 - **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
 - **Defaut:** `latest_state`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const balance = await publicClient.getCollateralForStorage({
   address: "cfx:...",
   epochTag: "latest_state", // [!code focus]
@@ -58,9 +54,7 @@ const balance = await publicClient.getCollateralForStorage({
 
 - **Type:** `bigint`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const balance = await publicClient.getCollateralForStorage({
   address: "cfx:...",
   epochNumber: 1n, // [!code focus]

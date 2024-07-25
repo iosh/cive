@@ -6,7 +6,7 @@ Get the code of the specified contract. If contract not exist will return `undef
 
 :::code-group
 
-```ts twoslash [example.ts]
+```ts  [example.ts]
 import { publicClient } from "./client";
 // [!code focus:99]
 const bytecode = await publicClient.getCode({
@@ -14,7 +14,7 @@ const bytecode = await publicClient.getCode({
 });
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
+```ts  [client.ts] filename="client.ts"
 // [!include ~/snippets/publicClient.ts]
 ```
 
@@ -32,9 +32,7 @@ Return `Hex` if the address has code; otherwise, return `undefined`.
 
 The address to check for collateral storage
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts 
 const contractAddress = await publicClient.getCode({
   address: "cfx:...", // [!code focus]
 });
@@ -45,9 +43,7 @@ const contractAddress = await publicClient.getCode({
 - **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
 - **Defaut:** `latest_state`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts 
 const contractAddress = await publicClient.getCode({
   address: "cfx:...",
   epochTag: "latest_state", // [!code focus]
@@ -58,9 +54,7 @@ const contractAddress = await publicClient.getCode({
 
 - **Type:** `bigint`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts 
 const contractAddress = await publicClient.getCode({
   address: "cfx:...",
   epochNumber: 1n, // [!code focus]

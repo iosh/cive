@@ -149,8 +149,7 @@ const client = createWalletClient({
 
 The [Chain](#TODO) of the Wallet Client.
 
-```ts twoslash
-// [!include ~/snippets/walletClient.ts:imports]
+```ts
 const client = createWalletClient({
   chain: mainnet, // [!code focus]
   transport: http(),
@@ -162,8 +161,7 @@ const client = createWalletClient({
 - **Type:** `number`
 - **Default:** `4000`
 
-```ts twoslash
-// [!include ~/snippets/walletClient.ts:imports]
+```ts
 const client = createWalletClient({
   cacheTime: 4000, // [!code focus]
   chain: mainnet,
@@ -178,8 +176,7 @@ const client = createWalletClient({
 
 The key of the Public Client.
 
-```ts twoslash
-// [!include ~/snippets/walletClient.ts:imports]
+```ts
 const publicClient = createWalletClient({
   key: "wallet", // [!code focus]
   chain: mainnet,
@@ -194,8 +191,7 @@ const publicClient = createWalletClient({
 
 The name of the Public Client.
 
-```ts twoslash
-// [!include ~/snippets/walletClient.ts:imports]
+```ts
 const publicClient = createWalletClient({
   name: "wallet Client", // [!code focus]
   chain: mainnet,
@@ -208,8 +204,7 @@ const publicClient = createWalletClient({
 - **Type** `number`
 - **Default** `4000`
 
-```ts twoslash
-// [!include ~/snippets/walletClient.ts:imports]
+```ts
 const publicClient = createWalletClient({
   pollingInterval: 4000, // [!code focus]
   chain: mainnet,

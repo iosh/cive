@@ -19,7 +19,7 @@ const storage = await publicClient.getStorageRoot({
 // @log: }
 ```
 
-```ts twoslash [client.ts] filename="client.ts"
+```ts [client.ts] filename="client.ts"
 // [!include ~/snippets/publicClient.ts]
 ```
 
@@ -37,9 +37,7 @@ const storage = await publicClient.getStorageRoot({
 
 The address to check for collateral storage
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const storage = await publicClient.getStorageRoot({
   address: "cfx:...", // [!code focus]
 });
@@ -50,9 +48,7 @@ const storage = await publicClient.getStorageRoot({
 - **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
 - **Defaut:** `latest_state`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const storage = await publicClient.getStorageRoot({
   address: "cfx:...",
   epochTag: "latest_state", // [!code focus]
@@ -63,9 +59,7 @@ const storage = await publicClient.getStorageRoot({
 
 - **Type:** `bigint`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts]
-// ---cut---
+```ts
 const storage = await publicClient.getStorageRoot({
   address: "cfx:...",
   epochNumber: 1n, // [!code focus]

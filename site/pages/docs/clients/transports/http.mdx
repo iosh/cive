@@ -4,13 +4,13 @@ The `http` Transport connects to a JSON-RPC API via HTTP.
 
 ## Import
 
-```ts twoslash
+```ts
 import { http } from "cive";
 ```
 
 ## Usage
 
-```ts twoslash
+```ts
 // [!include ~/snippets/publicClient.ts:imports]
 
 const client = createPublicClient({
@@ -31,7 +31,7 @@ The Transport will batch up Actions over a given period and execute them in a si
 
 You can enable Batch JSON-RPC by setting the `batch` flag to `true`:
 
-```ts twoslash
+```ts
 import { http } from "cive";
 const transport = http("https://main.confluxrpc.com/...", {
   batch: true, // [!code focus]
@@ -40,7 +40,7 @@ const transport = http("https://main.confluxrpc.com/...", {
 
 Now when you invoke Actions, the `http` Transport will batch and send over those requests at the end of the message queue (or custom time period) in a single Batch JSON-RPC HTTP request:
 
-```ts twoslash
+```ts
 // [!include ~/snippets/publicClient.ts:imports]
 const client = createPublicClient({
   chain: mainnet,

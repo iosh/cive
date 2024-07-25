@@ -26,8 +26,7 @@ const publicClient = createPublicClient({
 
 The [Transport](/docs/clients/transports/http) of the Public Client.
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts:imports]
+```ts
 const publicClient = createPublicClient({
   chain: mainnet,
   transport: http(), // [!code focus]
@@ -40,8 +39,7 @@ const publicClient = createPublicClient({
 
 The [Chain](#TODO) of the Public Client.
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts:imports]
+```ts
 const publicClient = createPublicClient({
   chain: mainnet, // [!code focus]
   transport: http(),
@@ -55,8 +53,7 @@ const publicClient = createPublicClient({
 
 Time (in ms) that cached data will remain memory.
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts:imports]
+```ts
 const publicClient = createPublicClient({
   cacheTime: 10_000, // [!code focus]
   chain: mainnet,
@@ -71,8 +68,7 @@ const publicClient = createPublicClient({
 
 The key of the Public Client.
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts:imports]
+```ts
 const publicClient = createPublicClient({
   key: "public", // [!code focus]
   chain: mainnet,
@@ -87,8 +83,7 @@ const publicClient = createPublicClient({
 
 The name of the Public Client.
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts:imports]
+```ts
 const publicClient = createPublicClient({
   name: "Public Client", // [!code focus]
   chain: mainnet,
@@ -101,8 +96,7 @@ const publicClient = createPublicClient({
 - **Type** `number`
 - **Default** `4000`
 
-```ts twoslash
-// [!include ~/snippets/publicClient.ts:imports]
+```ts
 const publicClient = createPublicClient({
   pollingInterval: 4_000, // [!code focus]
   chain: mainnet,
