@@ -105,6 +105,16 @@ export default defineConfig({
         ],
       },
       {
+        text: 'Wallet Actions',
+        items: [
+          { text: 'Introduction', link: '/docs/actions/wallet/introduction' },
+          {
+            text: 'sendRawTransaction',
+            link: '/docs/actions/wallet/sendRawTransaction',
+          },
+        ],
+      },
+      {
         text: 'Contract',
         items: [
           {
