@@ -1,0 +1,77 @@
+# getStorageRoot
+
+Get the storage root of the contract address.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const storage = await publicClient.getStorageRoot({
+  address: "cfx:...",
+});
+// @log: Output: {
+// @log:  delta: "0x0240a5a3486ac1cee71db22b8e12f1bb6ac9f207ecd81b06031c407663c20a94",
+// @log:  intermediate: "0x314a41f277b678a1dc811a1fc0393b6d30c35e900cb27762ec9e9042bfdbdd49",
+// @log:  snapshot: 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,
+// @log: }
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`StorageRoot`](#TODO)
+
+## Parameters
+
+### address
+
+- **Type:** `Address`
+
+The address to check for collateral storage
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const storage = await publicClient.getStorageRoot({
+  address: "cfx:...", // [!code focus]
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const storage = await publicClient.getStorageRoot({
+  address: "cfx:...",
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const storage = await publicClient.getStorageRoot({
+  address: "cfx:...",
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getStorageRoot`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getstorageroot)
