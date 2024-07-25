@@ -41,6 +41,7 @@ test('with epoch tag', async () => {
   expect(
     await getNextNonce(client, {
       address: sourceAccount.address,
+      tryTxPool: false,
       epochTag: 'earliest',
     }),
   ).toBe(0)
@@ -48,6 +49,7 @@ test('with epoch tag', async () => {
   expect(
     await getNextNonce(client, {
       address: sourceAccount.address,
+      tryTxPool: false,
       epochTag: 'latest_checkpoint',
     }),
   ).toBe(0)
@@ -55,6 +57,7 @@ test('with epoch tag', async () => {
   expect(
     await getNextNonce(client, {
       address: sourceAccount.address,
+      tryTxPool: false,
       epochTag: 'latest_confirmed',
     }),
   ).toBe(0)
@@ -64,6 +67,7 @@ test('with epoch tag', async () => {
   expect(
     await getNextNonce(client, {
       address: sourceAccount.address,
+      tryTxPool: false,
       epochTag: 'latest_confirmed',
     }),
   ).toBe(1)
@@ -71,22 +75,17 @@ test('with epoch tag', async () => {
   expect(
     await getNextNonce(client, {
       address: sourceAccount.address,
+      tryTxPool: false,
       epochTag: 'latest_state',
     }),
   ).toBe(1)
-
-  expect(
-    await getNextNonce(client, {
-      address: sourceAccount.address,
-      epochTag: 'latest_finalized',
-    }),
-  ).toBe(0)
 })
 
 test('with epoch number', async () => {
   await sendTransaction(client, {
     account: sourceAccount,
     value: 0n,
+
     to: sourceAccount.address,
   })
 
@@ -94,6 +93,7 @@ test('with epoch number', async () => {
   expect(
     await getNextNonce(client, {
       address: sourceAccount.address,
+      tryTxPool: false,
       epochNumber: 1n,
     }),
   ).toBe(1)
@@ -103,7 +103,41 @@ test('with epoch number', async () => {
   expect(
     await getNextNonce(client, {
       address: sourceAccount.address,
+      tryTxPool: false,
       epochNumber: block.blockNumber,
     }),
   ).toBe(2)
+})
+
+test('with tryTxPool', async () => {
+  await sendTransaction(client, {
+    account: sourceAccount,
+    value: 0n,
+
+    to: sourceAccount.address,
+  })
+  await sendTransaction(client, {
+    account: sourceAccount,
+    value: 0n,
+
+    to: sourceAccount.address,
+  })
+  await sendTransaction(client, {
+    account: sourceAccount,
+    value: 0n,
+
+    to: sourceAccount.address,
+  })
+  await sendTransaction(client, {
+    account: sourceAccount,
+    value: 0n,
+
+    to: sourceAccount.address,
+  })
+  // there is 4 tx in tx pool and 2 is executed
+  expect(
+    await getNextNonce(client, {
+      address: sourceAccount.address,
+    }),
+  ).toBe(6)
 })

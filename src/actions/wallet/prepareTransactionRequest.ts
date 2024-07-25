@@ -234,23 +234,14 @@ export async function prepareTransactionRequest<
      * while txPoolNextNonce will provide the correct nonce.
      * but not all RPC nodes support txPoolNextNonce.
      */
-    try {
-      request.nonce = await getAction(
-        client,
-        getTxPoolNextNonce,
-        'txPoolNextNonce',
-      )({
-        address: account.address,
-      })
-    } catch (_e) {
-      request.nonce = await getAction(
-        client,
-        getNextNonce,
-        'getNextNonce',
-      )({
-        address: account.address,
-      })
-    }
+
+    request.nonce = await getAction(
+      client,
+      getNextNonce,
+      'getNextNonce',
+    )({
+      address: account.address,
+    })
   }
 
   if (parameters.includes('chainId')) {

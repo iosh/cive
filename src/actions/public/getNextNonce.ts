@@ -8,12 +8,18 @@ import type { Chain } from '../../types/chain.js'
 
 export type GetNextNonceParameters = {
   address: Address
+  /**
+   * @default true
+   */
+  tryTxPool?: boolean
 } & (
   | {
       /**
        * @default 'latest_state'
        */
-      epochTag?: EpochTag | undefined
+      epochTag?:
+        | Exclude<EpochTag, 'latest_finalized' | 'latest_mined'>
+        | undefined
       epochNumber?: never | undefined
     }
   | {
@@ -31,12 +37,32 @@ export type GetNextNonceErrorType =
 
 export async function getNextNonce<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { address, epochNumber, epochTag = 'latest_state' }: GetNextNonceParameters,
+  {
+    address,
+    epochNumber,
+    tryTxPool = true,
+    epochTag = 'latest_state',
+  }: GetNextNonceParameters,
 ): Promise<GetNextNonceReturnType> {
-  const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
-  const nonce = await client.request({
-    method: 'cfx_getNextNonce',
-    params: [address, _epochNumber || epochTag],
-  })
-  return Number(nonce)
+  const defaultFn = async () => {
+    const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
+    const nonce = await client.request({
+      method: 'cfx_getNextNonce',
+      params: [address, _epochNumber || epochTag],
+    })
+    return Number(nonce)
+  }
+
+  try {
+    if (tryTxPool) {
+      const nonce = await client.request({
+        method: 'txpool_nextNonce',
+        params: [address],
+      })
+      return Number(nonce)
+    }
+    return defaultFn()
+  } catch {
+    return defaultFn()
+  }
 }
