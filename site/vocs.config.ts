@@ -110,6 +110,7 @@ export default defineConfig({
               { text: 'getCode', link: '/docs/contract/getCode' },
               { text: 'getStorageAt', link: '/docs/contract/getStorageAt' },
               { text: 'getStorageRoot', link: '/docs/contract/getStorageRoot' },
+              { text: 'getSponsorInfo', link: '/docs/contract/getSponsorInfo' },
             ],
           },
         ],

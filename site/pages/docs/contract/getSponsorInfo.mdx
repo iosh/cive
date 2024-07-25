@@ -1,0 +1,70 @@
+# getSponsorInfo
+
+Get the contract sponsor info by address
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const sponsorInfo = await publicClient.getSponsorInfo({
+  address: "cfx:...",
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`Sponsor`](#TODO)
+
+The sponsor info
+
+## Parameters
+
+### Address
+
+- **Type:** `Address`
+
+```ts
+const sponsorInfo = await publicClient.getSponsorInfo({
+  address: "cfx:...",
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const sponsorInfo = await publicClient.getSponsorInfo({
+  address: "cfx:...",
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const sponsorInfo = await publicClient.getSponsorInfo({
+  address: "cfx:...",
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getSponsorInfo`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getsponsorinfo)
