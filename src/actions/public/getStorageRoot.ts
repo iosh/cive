@@ -11,7 +11,9 @@ export type GetStorageRootParameters = {
       /**
        * @default 'latest_state'
        */
-      epochTag?: EpochTag | undefined
+      epochTag?:
+        | Exclude<EpochTag, 'latest_finalized' | 'latest_mined'>
+        | undefined
       epochNumber?: never | undefined
     }
   | {
