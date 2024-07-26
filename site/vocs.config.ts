@@ -52,6 +52,10 @@ export default defineConfig({
                 text: 'getNextNonce',
                 link: '/docs/actions/public/getNextNonce',
               },
+              {
+                text: 'getAccount',
+                link: '/docs/actions/public/getAccount',
+              },
             ],
           },
           {

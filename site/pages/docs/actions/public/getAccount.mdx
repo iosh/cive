@@ -1,0 +1,66 @@
+# getAccount
+
+Get an account, identified by its address.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const account = await publicClient.getAccount({
+  address: "cfx:...",
+});
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`Account`](#TODO)
+
+The state of the given account.
+
+## Parameters
+
+### address
+
+- **Type** `Address`
+
+```ts
+const account = await publicClient.getAccount({
+  address: "cfx:...",
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+const account = await publicClient.getAccount({
+  address: "cfx:...",
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const account = await publicClient.getAccount({
+  address: "cfx:...",
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getAccount`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccount)
