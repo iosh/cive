@@ -59,6 +59,19 @@ export default defineConfig({
             ],
           },
           {
+            text: 'Epoch',
+            items: [
+              {
+                text: 'getInterestRate',
+                link: '/docs/actions/public/getInterestRate',
+              },
+              {
+                text: 'getAccumulateInterestRate',
+                link: '/docs/actions/public/getAccumulateInterestRate',
+              },
+            ],
+          },
+          {
             text: 'Block',
             items: [
               { text: 'getBlock', link: '/docs/actions/public/getBlock' },

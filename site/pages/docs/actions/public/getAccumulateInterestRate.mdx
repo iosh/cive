@@ -1,0 +1,52 @@
+# getAccumulateInterestRate
+
+Get the accumulate interest rate at the given epoch.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const accumulateInterestRate = await publicClient.getAccumulateInterestRate({
+  epochTag: "latest_state",
+});
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+`bigint`
+
+## Parameters
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+const accumulateInterestRate = await publicClient.getAccumulateInterestRate({
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const accumulateInterestRate = await publicClient.getAccumulateInterestRate({
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getAccumulateInterestRate`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccumulateinterestrate)
