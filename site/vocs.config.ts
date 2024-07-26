@@ -100,6 +100,10 @@ export default defineConfig({
                 text: 'getCollateralForStorage',
                 link: '/docs/actions/public/getCollateralForStorage',
               },
+              {
+                text: 'estimateGasAndCollateral',
+                link: '/docs/actions/public/estimateGasAndCollateral',
+              },
             ],
           },
           {
