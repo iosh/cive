@@ -1,0 +1,52 @@
+# getTransactionReceipt
+
+Returns the Transaction Receipt given a Transaction hash.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const transaction = await publicClient.getTransactionReceipt({
+  // [!code focus:99]
+  hash: "0x...",
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`TransactionReceipt`](#TODO)
+
+The transaction receipt.
+
+## Parameters
+
+### hash
+
+- **Type:** `'0x${string}'`
+
+A transaction hash.
+
+```ts
+const transaction = await publicClient.getTransactionReceipt({
+  hash: "0x...", // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getTransactionReceipt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionreceipt)

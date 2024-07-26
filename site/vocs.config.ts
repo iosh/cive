@@ -122,6 +122,10 @@ export default defineConfig({
                 text: 'getTransaction',
                 link: '/docs/actions/public/getTransaction',
               },
+              {
+                text: 'getTransactionReceipt',
+                link: '/docs/actions/public/getTransactionReceipt',
+              },
             ],
           },
         ],
