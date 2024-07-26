@@ -1,0 +1,211 @@
+# call
+
+Executes a new message call immediately without submitting a transaction to the network.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { account, publicClient } from "./config";
+
+const data = await publicClient.call({
+  // [!code focus:7]
+  account,
+  data: "0x",
+  to: "cfx:...",
+});
+```
+
+```ts twoslash [config.ts] filename="config.ts"
+import { createPublicClient, http } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+
+// @log: ↓ Local Account
+export const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`Hex`](#TODO)
+
+The call data.
+
+## Parameters
+
+### account
+
+- **Type:** `Account | Address`
+
+The Account to call from.
+
+Accepts [Local Account (Private Key, etc)](/docs/clients/wallet#local-accounts-private-key-mnemonic-etc).
+
+```ts
+export const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+const data = await publicClient.call({
+  account: account, // [!code focus]
+  data: "0x",
+  to: "cfx:...",
+});
+```
+
+```ts
+const data = await publicClient.call({
+  account: "cfx:...", // [!code focus]
+  data: "0x",
+  to: "cfx:...",
+});
+```
+
+### to
+
+- **Type:** `Address`
+
+The contract address or recipient.
+
+```ts
+const data = await publicClient.call({
+  account: "cfx:...",
+  data: "0x",
+  to: "cfx:...", // [!code focus]
+});
+```
+
+### gasPrice (optional)
+
+- **Type:** `bigint`
+
+The price (in drip) to pay per gas. Only applies to [Legacy Transactions](#TODO).
+
+```ts
+import { parseGDrip } from "cive";
+const data = await publicClient.call({
+  account: "cfx:...",
+  data: "0x",
+  to: "cfx:...",
+  gasPrice: parseGDrip("20"), // [!code focus]
+});
+```
+
+### gas (optional)
+
+- **Type:** `bigint`
+
+The gas provided for transaction execution.
+
+```ts
+const data = await publicClient.call({
+  account: "cfx:...",
+  data: "0x",
+  to: "cfx:...",
+  gas: 1_000_000n, // [!code focus]
+});
+```
+
+### value (optional)
+
+- **Type:** `bigint`
+
+Value (in drip) sent with this transaction.
+
+```ts
+import { parseCFX } from "cive";
+const data = await publicClient.call({
+  account: "cfx:...",
+  data: "0x",
+  to: "cfx:...",
+  value: parseCFX("1"), // [!code focus]
+});
+```
+
+### factoryData (optional)
+
+- **Type:**
+
+Calldata to execute on the factory to deploy the contract.
+
+```ts
+const data = await publicClient.call({
+  account: "cfx:...",
+  data: "0x", // [!code focus]
+  to: "cfx:...",
+});
+```
+
+### nonce (optional)
+
+- **Type:** `bigint`
+
+Unique number identifying this transaction.
+
+```ts
+const data = await publicClient.call({
+  account: "cfx:...",
+  nonce: 1, // [!code focus]
+  to: "cfx:...",
+});
+```
+
+### accessList (optional)
+
+- **Type:** [`AccessList`](#TODO)
+
+The access list.
+
+```ts
+const data = await publicClient.call({
+  account: "cfx:...",
+  to: "cfx:...",
+  accessList: [
+    // [!code focus:6]
+    {
+      address: "cfx:...",
+      storageKeys: ["0x1"],
+    },
+  ],
+});
+```
+
+### maxFeePerGas (optional)
+
+- **Type:** `bigint`
+
+Total fee per gas (in drip), inclusive of `maxPriorityFeePerGas`.
+
+```ts
+import { parseGDrip } from "cive";
+const data = await publicClient.call({
+  account: "cfx:...",
+  to: "cfx:...",
+  maxFeePerGas: parseGDrip("20"), // [!code focus]
+});
+```
+
+### maxPriorityFeePerGas (optional)
+
+- **Type:** `bigint`
+
+Max priority fee per gas (in drip).
+
+```ts
+import { parseGDrip } from "cive";
+const data = await publicClient.call({
+  account: "cfx:...",
+  to: "cfx:...",
+  maxFeePerGas: parseGDrip("20"),
+  maxPriorityFeePerGas: parseGDrip("2"), // [!code focus]
+});
+```
+
+## JSON-RPC Methods
+
+[`cfx_call`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_call)

@@ -24,7 +24,7 @@ First we create the Wallet Client with the `http` Transport.
 
 ```ts twoslash
 // [!include ~/snippets/walletClient.ts:imports]
-
+import { http } from "cive";
 const client = createWalletClient({
   chain: mainnet,
   transport: http(),
@@ -37,6 +37,7 @@ Next, we create a Private Key Account using privateKeyToAccount. To create an ac
 
 ```ts twoslash
 // [!include ~/snippets/walletClient.ts:imports]
+import { http } from "cive";
 import { privateKeyToAccount } from "cive/accounts";
 const client = createWalletClient({
   chain: mainnet,

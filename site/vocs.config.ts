@@ -73,6 +73,15 @@ export default defineConfig({
             ],
           },
           {
+            text: 'Call',
+            items: [
+              {
+                text: 'call',
+                link: '/docs/actions/public/call',
+              },
+            ],
+          },
+          {
             text: 'Fee',
             items: [
               {
