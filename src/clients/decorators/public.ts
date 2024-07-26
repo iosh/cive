@@ -479,7 +479,16 @@ export type PublicActions<
    * @param args - {@link GetLogsParameters}
    * @returns - {@link GetLogsReturnType}
    */
-  getLogs: (args: GetLogsParameters) => Promise<GetLogsReturnType>
+  getLogs: <
+    const abiEvent extends AbiEvent | undefined = undefined,
+    const abiEvents extends
+      | readonly AbiEvent[]
+      | readonly unknown[]
+      | undefined = abiEvent extends AbiEvent ? [abiEvent] : undefined,
+    strict extends boolean | undefined = undefined,
+  >(
+    args?: GetLogsParameters<abiEvent, abiEvents, strict> | undefined,
+  ) => Promise<GetLogsReturnType<abiEvent, abiEvents, strict>>
   /**
    * Returns a transaction receipt, identified by the corresponding transaction hash.
    * - JSON-RPC Method: [`cfx_getTransactionReceipt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionreceipt)
@@ -884,7 +893,7 @@ export function publicActions<
     getNextNonce: (args) => getNextNonce(client, args),
     call: (args) => call(client, args),
     estimateGasAndCollateral: (args) => estimateGasAndCollateral(client, args),
-    getLogs: (args) => getLogs(client, args),
+    getLogs: (args) => getLogs(client, args as any),
     getTransactionReceipt: (args) => getTransactionReceipt(client, args),
     getAccount: (args) => getAccount(client, args),
     getInterestRate: (args) => getInterestRate(client, args),

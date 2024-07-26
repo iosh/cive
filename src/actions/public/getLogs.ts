@@ -3,12 +3,8 @@ import {
   type EncodeEventTopicsErrorType,
   type FormatLogErrorType,
   type Hash,
-  type LogTopic,
-  type MaybeAbiEventName,
-  type MaybeExtractEventArgsFromAbi,
   type NumberToHexErrorType,
   type Transport,
-  encodeEventTopics,
   numberToHex,
 } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
@@ -18,8 +14,16 @@ import type { ErrorType } from '../../errors/utils.js'
 import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
+import type {
+  MaybeAbiEventName,
+  MaybeExtractEventArgsFromAbi,
+} from '../../types/contract.js'
 import type { Log } from '../../types/log.js'
-import type { EncodeEventTopicsParameters } from '../../utils/abi/encodeEventTopics.js'
+import type { LogTopic } from '../../types/misc.js'
+import {
+  type EncodeEventTopicsParameters,
+  encodeEventTopics,
+} from '../../utils/abi/encodeEventTopics.js'
 import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
 import { formatLog } from '../../utils/formatters/log.js'
 
@@ -69,11 +73,15 @@ export type GetLogsParameters<
         /**
          * @default latest_checkpoint
          */
-        fromEpoch?: EpochNumber | EpochTag
+        fromEpoch?:
+          | EpochNumber
+          | Exclude<EpochTag, 'latest_finalized' | 'latest_mined'>
         /**
          * @default latest_state
          */
-        toEpoch?: EpochNumber | EpochTag
+        toEpoch?:
+          | EpochNumber
+          | Exclude<EpochTag, 'latest_finalized' | 'latest_mined'>
 
         toBlock?: never | undefined
 
