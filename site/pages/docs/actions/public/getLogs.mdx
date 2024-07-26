@@ -1,0 +1,312 @@
+# getLogs
+
+Returns a list of **event** logs matching the provided parameters.
+
+## Usage
+
+By default, `getLogs` returns all events. In practice, you must use scoping to filter for specific events.
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const logs = await publicClient.getLogs(); // [!code focus:99]
+// @log: Output: [{ ... }, { ... }, { ... }]
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Scoping
+
+You can also scope to a set of given attributes.
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { parseAbiItem } from "cive";
+import { publicClient } from "./client";
+
+const logs = await publicClient.getLogs({
+  // [!code focus:99]
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed, address indexed, uint256)"
+  ),
+  fromEpoch: 16330000n,
+  toEpoch: 16330000n,
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+By default, `event` accepts the [`AbiEvent`](#TODO) type:
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: {
+    // [!code focus:8]
+    type: "event",
+    name: "Transfer",
+    inputs: [
+      { type: "address", indexed: true, name: "from" },
+      { type: "address", indexed: true, name: "to" },
+      { type: "uint256", indexed: false, name: "value" },
+    ],
+  },
+  args: {
+    from: "cfx:...",
+    to: "cfx:...",
+  },
+  fromEpoch: 16330000n,
+  toEpoch: 16330000n,
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+### Address (Optional)
+
+Logs can be scoped to an **address**:
+
+```ts
+const logs = await publicClient.getLogs({
+  address: "cfx:...", // [!code focus]
+});
+```
+
+### Event (Optional)
+
+Logs can be scoped to an **event**.
+
+The `event` argument takes in an event in ABI format – we have a [`parseAbiItem` utility](#TODO) that you can use to convert from a human-readable event signature → ABI.
+
+```ts
+import { parseAbiItem } from "cive"; // [!code focus]
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed from, address indexed to, uint256 value)"
+  ), // [!code focus]
+});
+```
+
+### Arguments (Optional)
+
+Logs can be scoped to given **_indexed_ arguments**:
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { parseAbiItem } from "cive";
+
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed from, address indexed to, uint256 value)"
+  ),
+  args: {
+    // [!code focus:4]
+    from: "cfx:...",
+    to: "cfx:...",
+  },
+});
+```
+
+Only indexed arguments in `event` are candidates for `args`.
+
+An argument can also be an array to indicate that other values can exist in the position:
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { parseAbiItem } from "cive";
+
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed from, address indexed to, uint256 value)"
+  ),
+  args: {
+    // [!code focus:8]
+    from: ["cfx:...", "cfx:...", "cfx:..."],
+  },
+});
+```
+
+### Epoch Range (Optional)
+
+Logs can be scoped to a **epoch range**:
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { parseAbiItem } from "cive";
+
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed from, address indexed to, uint256 value)"
+  ),
+  fromEpoch: 16330000n, // [!code focus]
+  toEpoch: 16330050n, // [!code focus]
+});
+```
+
+Or Epoch tag
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { parseAbiItem } from "cive";
+
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed from, address indexed to, uint256 value)"
+  ),
+  fromEpoch: "earliest", // [!code focus]
+  toEpoch: "latest_state", // [!code focus]
+});
+```
+
+### Block Range (Optional)
+
+Logs can be scoped to a **block range**:
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { parseAbiItem } from "cive";
+
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed from, address indexed to, uint256 value)"
+  ),
+  fromBlock: 16330000n, // [!code focus]
+  toBlock: 16330050n, // [!code focus]
+});
+```
+
+### blockHashes (Optional)
+
+Array of up to 128 block hashes that the search will be applied to. This will override from/to epoch fields if it's not null.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { parseAbiItem } from "cive";
+
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed from, address indexed to, uint256 value)"
+  ),
+  blockHashes: ["0x...", "0x..."],
+});
+```
+
+### Multiple Events
+
+Logs can be scoped to **multiple events**:
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { parseAbi } from "cive";
+
+const logs = await publicClient.getLogs({
+  events: parseAbi([
+    // [!code focus:4]
+    "event Approval(address indexed owner, address indexed sender, uint256 value)",
+    "event Transfer(address indexed from, address indexed to, uint256 value)",
+  ]),
+});
+```
+
+Note: Logs scoped to multiple events cannot be also scoped with [indexed arguments](#arguments) (`args`).
+
+### Strict Mode
+
+By default, `getLogs` will include logs that [do not conform](#TODO) to the indexed & non-indexed arguments on the `event`.
+viem will not return a value for arguments that do not conform to the ABI, thus, some arguments on `args` may be undefined.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { parseAbiItem } from "cive";
+
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed from, address indexed to, uint256 value)"
+  ),
+});
+
+logs[0].args;
+//      ^?
+```
+
+You can turn on `strict` mode to only return logs that conform to the indexed & non-indexed arguments on the `event`, meaning that `args` will always be defined. The trade-off is that non-conforming logs will be filtered out.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+import { parseAbiItem } from "cive";
+
+const logs = await publicClient.getLogs({
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed from, address indexed to, uint256 value)"
+  ),
+  strict: true,
+});
+
+logs[0].args;
+//      ^?
+```
+
+## Returns
+
+[`Log[]`](#TODO)
+
+A list of event logs.
+
+## JSON-RPC Method
+
+[`cfx_getLogs`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getlogs)

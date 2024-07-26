@@ -82,6 +82,15 @@ export default defineConfig({
             ],
           },
           {
+            text: 'Filters & Logs',
+            items: [
+              {
+                text: 'getLogs',
+                link: '/docs/actions/public/getLogs',
+              },
+            ],
+          },
+          {
             text: 'Fee',
             items: [
               {
