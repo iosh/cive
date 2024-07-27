@@ -153,6 +153,10 @@ export default defineConfig({
                 text: 'createPendingTransactionFilter',
                 link: '/docs/actions/public/createPendingTransactionFilter',
               },
+              {
+                text: 'getFilterChanges',
+                link: '/docs/actions/public/getFilterChanges',
+              },
             ],
           },
           {
