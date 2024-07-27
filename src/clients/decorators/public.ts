@@ -642,7 +642,7 @@ export type PublicActions<
    * @returns - {@link GetPoSEconomicsReturnType}
    */
   getPoSEconomics: (
-    args: GetPoSEconomicsParameters,
+    args?: GetPoSEconomicsParameters,
   ) => Promise<GetPoSEconomicsReturnType>
 
   /**

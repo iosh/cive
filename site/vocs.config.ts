@@ -191,6 +191,15 @@ export default defineConfig({
               },
             ],
           },
+          {
+            text: 'PoS',
+            items: [
+              {
+                text: 'getPoSEconomics',
+                link: '/docs/actions/public/getPoSEconomics',
+              },
+            ],
+          },
         ],
       },
       {
