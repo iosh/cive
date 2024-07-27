@@ -56,6 +56,10 @@ export default defineConfig({
                 text: 'getAccount',
                 link: '/docs/actions/public/getAccount',
               },
+              {
+                text: 'checkBalanceAgainstTransaction',
+                link: '/docs/actions/public/checkBalanceAgainstTransaction',
+              },
             ],
           },
           {

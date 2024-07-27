@@ -1,0 +1,141 @@
+# checkBalanceAgainstTransaction
+
+Check if a user's balance is enough to send a transaction with the specified gas and storage limits to the specified contract. The balance is enough if the user can cover the up-front payment of both execution and storage, or if these costs are sponsored by the contract.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const data = await publicClient.checkBalanceAgainstTransaction({
+  accountAddress: "cfx:...",
+  contractAddress: "cfx:...",
+  gasLimit: 21000,
+  gasPrice: 10000000000,
+  storageLimit: 0,
+});
+// @log: Output: {
+// @log:  isBalanceEnough: true,
+// @log:  willPayCollateral: true,
+// @log:  willPayTxFee: true
+// @log: }
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+- **isBalanceEnough**: `boolean` indicate balance is enough for gas fee and collateral storage
+- **willPayCollateral**: `boolean` false if the transaction is eligible for storage collateral sponsorship, true otherwise.
+- **willPayTxFee**: `boolean` false if the transaction is eligible for gas sponsorship, true otherwise.
+
+## Parameters
+
+### accountAddress
+
+- **Type:** `Address`
+
+```ts
+const data = await publicClient.checkBalanceAgainstTransaction({
+  accountAddress: "cfx:...", // [!code focus]
+  contractAddress: "cfx:...",
+  gasLimit: 21000,
+  gasPrice: 10000000000,
+  storageLimit: 0,
+});
+```
+
+### contractAddress
+
+- **Type:** `Address`
+
+```ts
+const data = await publicClient.checkBalanceAgainstTransaction({
+  accountAddress: "cfx:...",
+  contractAddress: "cfx:...", // [!code focus]
+  gasLimit: 21000,
+  gasPrice: 10000000000,
+  storageLimit: 0,
+});
+```
+
+### gasLimit
+
+- **Type:** `number`
+
+```ts
+const data = await publicClient.checkBalanceAgainstTransaction({
+  accountAddress: "cfx:...",
+  contractAddress: "cfx:...",
+  gasLimit: 21000, // [!code focus]
+  gasPrice: 10000000000,
+  storageLimit: 0,
+});
+```
+
+### gasPrice
+
+- **Type:** `number`
+
+```ts
+const data = await publicClient.checkBalanceAgainstTransaction({
+  accountAddress: "cfx:...",
+  contractAddress: "cfx:...",
+  gasLimit: 21000,
+  gasPrice: 10000000000, // [!code focus]
+  storageLimit: 0,
+});
+```
+
+### storageLimit
+
+```ts
+const data = await publicClient.checkBalanceAgainstTransaction({
+  accountAddress: "cfx:...",
+  contractAddress: "cfx:...",
+  gasLimit: 21000,
+  gasPrice: 10000000000,
+  storageLimit: 0, // [!code focus]
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+const data = await publicClient.checkBalanceAgainstTransaction({
+  accountAddress: "cfx:...",
+  contractAddress: "cfx:...",
+  gasLimit: 21000,
+  gasPrice: 10000000000,
+  storageLimit: 0,
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const data = await publicClient.checkBalanceAgainstTransaction({
+  accountAddress: "cfx:...",
+  contractAddress: "cfx:...",
+  gasLimit: 21000,
+  gasPrice: 10000000000,
+  storageLimit: 0,
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_checkBalanceAgainstTransaction`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_checkbalanceagainsttransaction)
