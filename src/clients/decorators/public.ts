@@ -280,7 +280,7 @@ import {
   type SendRawTransactionReturnType,
   sendRawTransaction,
 } from '../../actions/wallet/sendRawTransaction.js'
-import type { AbiEvent } from '../../types/abitype.js'
+import type { Abi, AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type {
@@ -737,9 +737,13 @@ export type PublicActions<
    * @param args - {@link GetFilterLogsParameters}
    * @returns - {@link GetFilterLogsReturnType}
    */
-  getFilterLogs: (
-    args: GetFilterLogsParameters,
-  ) => Promise<GetFilterLogsReturnType>
+  getFilterLogs: <
+    const abi extends Abi | readonly unknown[] | undefined,
+    eventName extends string | undefined,
+    strict extends boolean | undefined = undefined,
+  >(
+    args: GetFilterLogsParameters<abi, eventName, strict>,
+  ) => Promise<GetFilterLogsReturnType<abi, eventName, strict>>
   /**
    * Uninstall the specified filter. Returns a bool whether the uninstallation succeeds.
    * - JSON-RPC Method: [`cfx_uninstallFilter`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_uninstallfilter)

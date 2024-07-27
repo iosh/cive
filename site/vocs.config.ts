@@ -137,6 +137,10 @@ export default defineConfig({
                 text: 'getLogs',
                 link: '/docs/actions/public/getLogs',
               },
+              {
+                text: 'createEventFilter',
+                link: '/docs/actions/public/createEventFilter',
+              },
             ],
           },
           {
