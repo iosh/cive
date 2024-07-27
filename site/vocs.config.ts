@@ -141,6 +141,10 @@ export default defineConfig({
                 text: 'createEventFilter',
                 link: '/docs/actions/public/createEventFilter',
               },
+              {
+                text: 'createBlockFilter',
+                link: '/docs/actions/public/createBlockFilter',
+              },
             ],
           },
           {
