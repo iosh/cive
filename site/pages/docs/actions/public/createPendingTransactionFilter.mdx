@@ -1,0 +1,34 @@
+# createPendingTransactionFilter
+
+Creates a Filter to listen for new pending transaction hashes that can be used with [`getFilterChanges`](#TODO).
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const filter = await publicClient.createPendingTransactionFilter(); // [!code focus:99]
+// @log: Output: { id: "0x...", type: 'transaction' }
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`Filter`](#TODO)
+
+## JSON-RPC Methods
+
+[`cfx_newPendingTransactionFilter`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_newpendingtransactionfilter)

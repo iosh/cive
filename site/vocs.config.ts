@@ -149,6 +149,10 @@ export default defineConfig({
                 text: 'getFilterLogs',
                 link: '/docs/actions/public/getFilterLogs',
               },
+              {
+                text: 'createPendingTransactionFilter',
+                link: '/docs/actions/public/createPendingTransactionFilter',
+              },
             ],
           },
           {
