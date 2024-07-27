@@ -157,6 +157,12 @@ export default defineConfig({
               },
             ],
           },
+          {
+            text: 'Node',
+            items: [
+              { text: 'cfx_getStatus', link: '/docs/actions/public/getStatus' },
+            ],
+          },
         ],
       },
       {

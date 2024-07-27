@@ -1,0 +1,29 @@
+# getStatus
+
+Get the status of the node.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const nodeStatus = await publicClient.getStatus();
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`NodeStatus`](#TODO)
+
+The NodeStatus object.
+
+## JSON-RPC Method
+
+[`cfx_getStatus`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getstatus)
