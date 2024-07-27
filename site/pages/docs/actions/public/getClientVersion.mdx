@@ -1,0 +1,29 @@
+# getClientVersion
+
+Get the Conflux-rust version
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const version = await publicClient.getClientVersion();
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+`string`
+
+The Conflux-rust version.
+
+### JSON-RPC Method
+
+[`cfx_clientVersion`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_clientversion)

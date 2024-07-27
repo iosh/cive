@@ -160,7 +160,11 @@ export default defineConfig({
           {
             text: 'Node',
             items: [
-              { text: 'cfx_getStatus', link: '/docs/actions/public/getStatus' },
+              { text: 'getStatus', link: '/docs/actions/public/getStatus' },
+              {
+                text: 'getClientVersion',
+                link: '/docs/actions/public/getClientVersion',
+              },
             ],
           },
         ],
