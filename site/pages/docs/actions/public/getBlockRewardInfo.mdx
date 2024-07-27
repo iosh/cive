@@ -1,0 +1,52 @@
+# getBlockRewardInfo
+
+Get the reward info for all executed blocks in the specified epoch.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const rewardInfo = await publicClient.getBlockRewardInfo();
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`BlockRewardInfo`][](#TODO)
+
+The reward info object array.
+
+## Parameters
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+const rewardInfo = await publicClient.getBlockRewardInfo({
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const rewardInfo = await publicClient.getBlockRewardInfo({
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getBlockRewardInfo`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockrewardinfo)

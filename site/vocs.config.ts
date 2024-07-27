@@ -77,6 +77,10 @@ export default defineConfig({
                 text: 'getSkippedBlocksByEpoch',
                 link: '/docs/actions/public/getSkippedBlocksByEpoch',
               },
+              {
+                text: 'getBlockRewardInfo',
+                link: '/docs/actions/public/getBlockRewardInfo',
+              },
             ],
           },
           {

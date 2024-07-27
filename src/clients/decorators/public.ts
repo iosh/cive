@@ -578,7 +578,7 @@ export type PublicActions<
    * @returns  array of reward info objects {@link GetBlockRewardInfoReturnType}
    */
   getBlockRewardInfo: (
-    args: GetBlockRewardInfoParameters,
+    args?: GetBlockRewardInfoParameters,
   ) => Promise<GetBlockRewardInfoReturnType>
   /**
    *Returns the requested block if the provided pivot hash is correct, returns an error otherwise.
