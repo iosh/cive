@@ -1,0 +1,64 @@
+# getDepositList
+
+Get the deposit list of the given account, identified by its address.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const depositList = await publicClient.getDepositList({
+  address: "cfx:...",
+});
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`DepositInfo`](#TODO) []
+
+## Parameters
+
+### address
+
+- **Type:** `Address`
+
+```ts
+const depositList = await publicClient.getDepositList({
+  address: "cfx:...", // [!code focus]
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+const depositList = await publicClient.getDepositList({
+  address: "cfx:...",
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const depositList = await publicClient.getDepositList({
+  address: "cfx:...",
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getDepositList`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getdepositlist)

@@ -60,6 +60,10 @@ export default defineConfig({
                 text: 'checkBalanceAgainstTransaction',
                 link: '/docs/actions/public/checkBalanceAgainstTransaction',
               },
+              {
+                text: 'getDepositList',
+                link: '/docs/actions/public/getDepositList',
+              },
             ],
           },
           {
