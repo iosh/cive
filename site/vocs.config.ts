@@ -73,6 +73,10 @@ export default defineConfig({
                 text: 'getAccumulateInterestRate',
                 link: '/docs/actions/public/getAccumulateInterestRate',
               },
+              {
+                text: 'getSkippedBlocksByEpoch',
+                link: '/docs/actions/public/getSkippedBlocksByEpoch',
+              },
             ],
           },
           {

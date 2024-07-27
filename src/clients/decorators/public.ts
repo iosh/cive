@@ -544,7 +544,7 @@ export type PublicActions<
    * @returns Array of block hashes {@link GetSkippedBlocksByEpochReturnType}
    */
   getSkippedBlocksByEpoch: (
-    args: GetSkippedBlocksByEpochParameters,
+    args?: GetSkippedBlocksByEpochParameters,
   ) => Promise<GetSkippedBlocksByEpochReturnType>
 
   /**
