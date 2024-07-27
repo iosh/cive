@@ -1,0 +1,43 @@
+# getConfirmationRiskByHash
+
+Get the confirmation risk of a given block, identified by its hash.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const confirmationRisk = await publicClient.getConfirmationRiskByHash({
+  blockHash: "0x...",
+});
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+`bigint` or `undefined`
+
+The integer confirmation risk, or undefined if the block does not exist.
+
+## Parameters
+
+### blockHash
+
+- **Type:** `Hash`
+
+```ts
+const confirmationRisk = await publicClient.getConfirmationRiskByHash({
+  blockHash: "0x...",
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getConfirmationRiskByHash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getconfirmationriskbyhash)

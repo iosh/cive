@@ -95,6 +95,10 @@ export default defineConfig({
                 text: 'getBlocksByEpoch',
                 link: '/docs/actions/public/getBlocksByEpoch',
               },
+              {
+                text: 'getConfirmationRiskByHash',
+                link: '/docs/actions/public/getConfirmationRiskByHash',
+              },
             ],
           },
           {
