@@ -198,6 +198,10 @@ export default defineConfig({
                 text: 'getPoSEconomics',
                 link: '/docs/actions/public/getPoSEconomics',
               },
+              {
+                text: 'getPoSRewardByEpoch',
+                link: '/docs/actions/public/getPoSRewardByEpoch',
+              },
             ],
           },
         ],

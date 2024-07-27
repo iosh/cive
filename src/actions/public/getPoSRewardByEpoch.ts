@@ -8,14 +8,16 @@ export type GetPoSRewardByEpochParameters = {
   epochNumber: EpochNumber
 }
 
-export type GetPoSRewardByEpochReturnType = {
-  accountRewards: {
-    posAddress: Address
-    powAddress: Address
-    reward: BigInt
-  }[]
-  powEpochHash: Hash
-} | null
+export type GetPoSRewardByEpochReturnType =
+  | {
+      accountRewards: {
+        posAddress: Address
+        powAddress: Address
+        reward: BigInt
+      }[]
+      powEpochHash: Hash
+    }
+  | undefined
 
 export async function getPoSRewardByEpoch<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
@@ -26,7 +28,7 @@ export async function getPoSRewardByEpoch<TChain extends Chain | undefined>(
     params: [numberToHex(epochNumber)],
   })
 
-  if (result === null) return null
+  if (result === null) return undefined
 
   return {
     ...result,

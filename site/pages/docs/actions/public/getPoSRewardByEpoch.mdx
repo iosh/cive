@@ -1,0 +1,41 @@
+# getPoSRewardByEpoch
+
+Get rewards information of a PoS epoch by it's correspond PoW epoch number. Only PoW epoch happen's at PoS epoch end will have rewards information. Others will return undefined.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const PoSReward = await publicClient.getPoSRewardByEpoch({
+  epochNumber: 1n,
+});
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`PoSReward`](#TODO) | `undefined`
+
+## Parameters
+
+### epochNumber
+
+- **Type:** `bigint`
+
+```ts
+const PoSReward = await publicClient.getPoSRewardByEpoch({
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getPoSRewardByEpoch`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getposrewardbyepoch)
