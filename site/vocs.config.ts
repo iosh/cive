@@ -157,6 +157,10 @@ export default defineConfig({
                 text: 'getFilterChanges',
                 link: '/docs/actions/public/getFilterChanges',
               },
+              {
+                text: 'uninstallFilter',
+                link: '/docs/actions/public/uninstallFilter',
+              },
             ],
           },
           {
