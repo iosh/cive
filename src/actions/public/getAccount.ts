@@ -15,7 +15,9 @@ export type GetChainAccountParameters = {
       /**
        * @default 'latest_state'
        */
-      epochTag?: Exclude<EpochTag, 'latest_finalized' | 'latest_mined'> | undefined
+      epochTag?:
+        | Exclude<EpochTag, 'latest_finalized' | 'latest_mined'>
+        | undefined
       epochNumber?: never | undefined
     }
   | {
