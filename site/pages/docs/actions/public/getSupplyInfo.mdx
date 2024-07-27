@@ -1,0 +1,25 @@
+# getSupplyInfo
+
+Get summary supply info of the entire chain.
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const supplySummary = await publicClient.getSupplyInfo();
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`SupplyInfo`](#TODO)
+
+## JSON-RPC Method
+
+[`cfx_getSupplyInfo`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getsupplyinfo)

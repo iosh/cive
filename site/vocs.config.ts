@@ -177,6 +177,10 @@ export default defineConfig({
                 text: 'getClientVersion',
                 link: '/docs/actions/public/getClientVersion',
               },
+              {
+                text: 'getSupplyInfo',
+                link: '/docs/actions/public/getSupplyInfo',
+              },
             ],
           },
         ],
