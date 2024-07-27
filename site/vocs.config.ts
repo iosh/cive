@@ -67,7 +67,11 @@ export default defineConfig({
               {
                 text: 'getAccountPendingInfo',
                 link: '/docs/actions/public/getAccountPendingInfo',
-              }
+              },
+              {
+                text: 'getAccountPendingTransactions',
+                link: '/docs/actions/public/getAccountPendingTransactions',
+              },
             ],
           },
           {

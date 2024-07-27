@@ -1,0 +1,61 @@
+# getAccountPendingTransactions
+
+Get ht pending transactions in pool by address.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const pendingTx = await publicClient.getAccountPendingTransactions({
+  address: "cfx:...",
+});
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`AccountPendingTransactions`](#TODO)
+
+## Parameters
+
+### address
+
+- **Type:** `Address`
+
+```ts
+const pendingTx = await publicClient.getAccountPendingTransactions({
+  address: "cfx:...", // [!code focus]
+});
+```
+
+### nonce (optional)
+
+- **Type:** `number`
+
+```ts
+const pendingTx = await publicClient.getAccountPendingTransactions({
+  address: "cfx:...",
+  nonce: 0, // [!code focus]
+});
+```
+
+### limit (optional)
+
+```ts
+const pendingTx = await publicClient.getAccountPendingTransactions({
+  address: "cfx:...",
+  limit: 10, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getAccountPendingTransactions`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccountpendingtransactions)
