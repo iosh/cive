@@ -103,6 +103,10 @@ export default defineConfig({
                 text: 'getConfirmationRiskByHash',
                 link: '/docs/actions/public/getConfirmationRiskByHash',
               },
+              {
+                text: 'getBlockByHashWithPivotAssumption',
+                link: '/docs/actions/public/getBlockByHashWithPivotAssumption',
+              },
             ],
           },
           {

@@ -1,0 +1,69 @@
+# getBlockByHashWithPivotAssumption
+
+Get the requested block if the provided pivot hash is correct, returns an error otherwise.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const block = await publicClient.getBlockByHashWithPivotAssumption({
+  blockHash: "0x...",
+  assumedPivotHash: "0x...",
+  epochNumber: 1n,
+});
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+`Block`
+
+## Parameters
+
+### blockHash
+
+- **Type:** `Hash`
+
+```ts
+const block = await publicClient.getBlockByHashWithPivotAssumption({
+  blockHash: "0x...", // [!code focus]
+  assumedPivotHash: "0x...",
+  epochNumber: 1n,
+});
+```
+
+### assumedPivotHash
+
+- **Type:** `Hash`
+
+```ts
+const block = await publicClient.getBlockByHashWithPivotAssumption({
+  blockHash: "0x...",
+  assumedPivotHash: "0x...", // [!code focus]
+  epochNumber: 1n,
+});
+```
+
+### epochNumber
+
+- **Type:** `bigint`
+
+```ts
+const block = await publicClient.getBlockByHashWithPivotAssumption({
+  blockHash: "0x...",
+  assumedPivotHash: "0x...",
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getBlockByHashWithPivotAssumption`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyhashwithpivotassumption)
