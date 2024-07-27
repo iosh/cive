@@ -204,6 +204,15 @@ export default defineConfig({
               },
             ],
           },
+          {
+            text: 'DAO',
+            items: [
+              {
+                text: 'getParamsFromVote',
+                link: '/docs/actions/public/getParamsFromVote',
+              },
+            ],
+          },
         ],
       },
       {

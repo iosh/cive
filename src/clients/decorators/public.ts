@@ -195,6 +195,7 @@ import {
 } from '../../actions/public/getPoSRewardByEpoch.js'
 import {
   type GetPoSRewardsParameters,
+  type GetPoSRewardsReturnType,
   getPoSRewards,
 } from '../../actions/public/getPoSRewards.js'
 import {
@@ -662,7 +663,7 @@ export type PublicActions<
    * @returns - {@link GetParamsFormVoteReturnType}
    */
   getParamsFromVote: (
-    args: GetParamsFormVoteParameters,
+    args?: GetParamsFormVoteParameters,
   ) => Promise<GetParamsFormVoteReturnType>
 
   /**
@@ -810,7 +811,7 @@ export type PublicActions<
    */
   getPoSRewards: (
     args: GetPoSRewardsParameters,
-  ) => Promise<GetPoSRewardByEpochReturnType>
+  ) => Promise<GetPoSRewardsReturnType>
 
   /**
    * Get the transaction information by transaction number
