@@ -1,0 +1,41 @@
+# getAccountPendingInfo
+
+Get the transaction pool pending info by address.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+// [!code focus:99]
+const pendingInfo = await publicClient.getAccountPendingInfo({
+  address: "cfx:...",
+});
+```
+
+```ts [client.ts] filename="client.ts"
+// [!include ~/snippets/publicClient.ts]
+```
+
+:::
+
+## Returns
+
+[`AccountPendingInfo`](#TODO)
+
+## Parameters
+
+### address
+
+- **Type:** `Address`
+
+```ts
+const pendingInfo = await publicClient.getAccountPendingInfo({
+  address: "cfx:...",
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getAccountPendingInfo`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getaccountpendinginfo)

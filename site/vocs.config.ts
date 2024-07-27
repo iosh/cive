@@ -64,6 +64,10 @@ export default defineConfig({
                 text: 'getDepositList',
                 link: '/docs/actions/public/getDepositList',
               },
+              {
+                text: 'getAccountPendingInfo',
+                link: '/docs/actions/public/getAccountPendingInfo',
+              }
             ],
           },
           {
