@@ -145,6 +145,10 @@ export default defineConfig({
                 text: 'createBlockFilter',
                 link: '/docs/actions/public/createBlockFilter',
               },
+              {
+                text: 'getFilterLogs',
+                link: '/docs/actions/public/getFilterLogs',
+              },
             ],
           },
           {

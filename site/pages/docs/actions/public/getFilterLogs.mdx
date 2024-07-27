@@ -1,0 +1,63 @@
+# getFilterLogs
+
+Returns a list of **event** logs since the filter was created.
+
+Note: `getFilterLogs` is only compatible with **event filters**.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { parseAbiItem } from "cive";
+import { publicClient } from "./client";
+
+const filter = await publicClient.createEventFilter({
+  // [!code focus:99]
+  address: "cfx:...",
+  event: parseAbiItem(
+    "event Transfer(address indexed, address indexed, uint256)"
+  ),
+});
+const logs = await publicClient.getFilterLogs({ filter });
+// @log: [{ ... }, { ... }, { ... }]
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`Log[]`](#TODO)
+
+A list of event logs.
+
+## Parameters
+
+### filter
+
+- **Type:** [`Filter`](#TODO)
+
+An **event** filter.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const filter = await publicClient.createEventFilter();
+const logs = await publicClient.getFilterChanges({
+  filter, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getFilterLogs`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getfilterlogs)
