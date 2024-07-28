@@ -585,7 +585,7 @@ export type PublicRpcSchema = [
    */
   {
     Method: 'pos_getAccount'
-    Parameters: [address: HexAddress]
+    Parameters: [address: HexAddress, blockNumber?: Quantity | undefined]
     ReturnType: RpcPoSAccount
   },
   /**

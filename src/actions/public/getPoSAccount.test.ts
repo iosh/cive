@@ -35,3 +35,27 @@ test('default', async () => {
     }
   `)
 })
+
+test('with args block number', async () => {
+  expect(
+    await getPoSAccount(client, {
+      address:
+        '0x046ca462890f25ed9394ca9f92c979ff48e1738a81822ecab96d83813c1a433c',
+      blockNumber: 1n,
+    }),
+  ).toMatchInlineSnapshot(`
+    {
+      "address": "0x046ca462890f25ed9394ca9f92c979ff48e1738a81822ecab96d83813c1a433c",
+      "blockNumber": 1n,
+      "status": {
+        "availableVotes": 0n,
+        "forceRetired": undefined,
+        "forfeited": 0n,
+        "inQueue": [],
+        "locked": 0n,
+        "outQueue": [],
+        "unlocked": 0n,
+      },
+    }
+  `)
+})

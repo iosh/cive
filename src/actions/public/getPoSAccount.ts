@@ -1,4 +1,4 @@
-import type { Transport } from 'viem'
+import { type Transport, numberToHex } from 'viem'
 import type { HexAddress } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
 import type { Chain } from '../../types/chain.js'
@@ -7,17 +7,19 @@ import { formatPoSAccount } from '../../utils/formatters/pos.js'
 
 export type GetPoSAccountParameters = {
   address: HexAddress
+  blockNumber?: bigint
 }
 
 export type GetPoSAccountReturnType = PoSAccount
 
 export async function getPoSAccount<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  { address }: GetPoSAccountParameters,
+  { address, blockNumber }: GetPoSAccountParameters,
 ): Promise<GetPoSAccountReturnType> {
+  const _blockNumber = blockNumber ? numberToHex(blockNumber) : undefined
   const result = await client.request({
     method: 'pos_getAccount',
-    params: [address],
+    params: [address, _blockNumber],
   })
   return formatPoSAccount(result)
 }
