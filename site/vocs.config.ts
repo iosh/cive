@@ -217,6 +217,10 @@ export default defineConfig({
                 text: 'getSupplyInfo',
                 link: '/docs/actions/public/getSupplyInfo',
               },
+              {
+                text: 'getCollateralInfo',
+                link: '/docs/actions/public/getCollateralInfo',
+              },
             ],
           },
           {

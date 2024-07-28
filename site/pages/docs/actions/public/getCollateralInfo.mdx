@@ -1,0 +1,54 @@
+# getCollateralInfo
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const storageCollateral = await publicClient.getCollateralInfo();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`storage collateral`](#TODO)
+
+## Parameters
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+const storageCollateral = await publicClient.getCollateralInfo({
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const storageCollateral = await publicClient.getCollateralInfo({
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getCollateralInfo`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getcollateralinfo)
