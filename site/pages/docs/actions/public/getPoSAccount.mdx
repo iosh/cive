@@ -1,0 +1,62 @@
+# getPoSAccount
+
+Get the PoS account information
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const PoSAccount = await publicClient.getPoSAccount({
+  address: "0x...",
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`PoSAccount`](#TODO)
+
+The PoS account information object.
+
+## Parameters
+
+### address
+
+- **Type:** `HexAddress`
+
+:::warning
+The address is not base32 address, it is hex address.
+:::
+
+```ts
+const PoSAccount = await publicClient.getPoSAccount({
+  address: "0x...", // [!code focus]
+});
+```
+
+### blockNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const PoSAccount = await publicClient.getPoSAccount({
+  address: "0x...", // [!code focus]
+  blockNumber: 1n,
+});
+```
+
+## JSON-RPC Method
+
+[`pos_getAccount`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getaccount)

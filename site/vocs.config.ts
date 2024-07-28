@@ -242,6 +242,10 @@ export default defineConfig({
                 text: 'getPoSStatus',
                 link: '/docs/actions/public/getPoSStatus',
               },
+              {
+                text: 'getPoSAccount',
+                link: '/docs/actions/public/getPoSAccount',
+              },
             ],
           },
           {
