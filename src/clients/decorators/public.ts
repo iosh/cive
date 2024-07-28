@@ -809,7 +809,7 @@ export type PublicActions<
    * @param args - {@link GetPosBlockParameters}
    * @returns - {@link GetPosBlockReturnType}
    */
-  getPoSBlock: (args: GetPoSBlockParameters) => Promise<GetPosBlockReturnType>
+  getPoSBlock: (args?: GetPoSBlockParameters) => Promise<GetPosBlockReturnType>
 
   /**
    * returns the rewards information of a PoS epoch

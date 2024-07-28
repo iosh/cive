@@ -1,0 +1,70 @@
+# getPoSBlock
+
+Get the PoS block information by block number or block hash.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const PoSBlock = await publicClient.getPoSBlock();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`PoSBlock`](#TODO)
+
+## Parameters
+
+### blockNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const PoSBlock = await publicClient.getPoSBlock({
+  blockNumber: 1n, // [!code focus]
+});
+```
+
+### blockTag (optional)
+
+- **Type:** `latest_committed`| `latest_voted`
+- **Defaut:** `latest_voted`
+
+```ts
+const PoSBlock = await publicClient.getPoSBlock({
+  blockTag: "latest_voted",
+});
+```
+
+### blockHash (optional)
+
+- **Type:** `Hash`
+
+```ts
+const PoSBlock = await publicClient.getPoSBlock({
+  blockHash: "0x...",
+});
+```
+
+## JSON-RPC Method
+
+[`pos_getBlockByHash`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getblockbyhash)
+
+[`pos_getBlockByNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getblockbynumber)
+
+

@@ -119,6 +119,10 @@ export default defineConfig({
                 text: 'getBlockByHashWithPivotAssumption',
                 link: '/docs/actions/public/getBlockByHashWithPivotAssumption',
               },
+              {
+                text: 'getPoSBlock',
+                link: '/docs/actions/public/getPoSBlock',
+              },
             ],
           },
           {
@@ -245,6 +249,10 @@ export default defineConfig({
               {
                 text: 'getPoSAccount',
                 link: '/docs/actions/public/getPoSAccount',
+              },
+              {
+                text: 'getPosCommittee',
+                link: '/docs/actions/public/getPosCommittee',
               },
             ],
           },

@@ -30,7 +30,7 @@ export async function getPoSBlock<TChain extends Chain | undefined>(
   {
     blockHash,
     blockNumber,
-    blockTag = 'latest_committed',
+    blockTag = 'latest_voted',
   }: GetPoSBlockParameters = {},
 ): Promise<GetPosBlockReturnType> {
   let block: RpcPoSBlock | undefined
