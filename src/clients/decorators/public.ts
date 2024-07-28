@@ -835,7 +835,7 @@ export type PublicActions<
    * @returns - {@link GetEpochReceiptsReturnType}
    */
   getEpochReceipts: (
-    args: GetEpochReceiptsParameters,
+    args?: GetEpochReceiptsParameters,
   ) => Promise<GetEpochReceiptsReturnType>
   /**
    * Get block traces by block hash

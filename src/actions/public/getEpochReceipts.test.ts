@@ -17,6 +17,8 @@ afterAll(async () => {
 })
 
 test('default', async () => {
+  expect(await getEpochReceipts(client)).toMatchInlineSnapshot('[]')
+
   expect(
     await getEpochReceipts(client, { epochNumber: 0n }),
   ).toMatchInlineSnapshot('[]')

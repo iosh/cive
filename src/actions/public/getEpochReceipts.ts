@@ -9,27 +9,33 @@ export type GetEpochReceiptsParameters = {
   includeTxReceipts?: boolean
 } & (
   | {
-      epochTag: EpochTag
-      epochNumber?: never
+      /**
+       * @default 'latest_state'
+       */
+      epochTag?:
+        | Exclude<EpochTag, 'latest_finalized' | 'latest_mined'>
+        | undefined
+      epochNumber?: never | undefined
     }
   | {
-      epochTag?: never
-      epochNumber: EpochNumber
+      epochTag?: never | undefined
+      epochNumber?: EpochNumber | undefined
     }
 )
-
 export type GetEpochReceiptsReturnType = TransactionReceipt[][]
 
 export async function getEpochReceipts<TChain extends Chain | undefined>(
   client: Client<Transport, TChain>,
-  args: GetEpochReceiptsParameters,
+  {
+    epochNumber,
+    includeTxReceipts = false,
+    epochTag = 'latest_state',
+  }: GetEpochReceiptsParameters = {},
 ): Promise<GetEpochReceiptsReturnType> {
-  const epoch =
-    'epochTag' in args ? args.epochTag : numberToHex(args.epochNumber)
-  const { includeTxReceipts = false } = args
+  const _epochNumber = epochNumber ? numberToHex(epochNumber) : undefined
   const result = await client.request({
     method: 'cfx_getEpochReceipts',
-    params: [epoch, includeTxReceipts],
+    params: [_epochNumber || epochTag, includeTxReceipts],
   })
   if (!result) return []
   return formatTransactionReceipts(result)
