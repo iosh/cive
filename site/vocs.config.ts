@@ -215,6 +215,10 @@ export default defineConfig({
                 text: 'getEpochReceipts',
                 link: '/docs/actions/public/getEpochReceipts',
               },
+              {
+                text: 'getPoSTransactionByNumber',
+                link: '/docs/actions/public/getPoSTransactionByNumber',
+              },
             ],
           },
           {

@@ -1,0 +1,47 @@
+# getPoSTransactionByNumber
+
+Get the PoS transaction information by transaction number.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const transaction = await publicClient.getPoSTransactionByNumber({
+  transactionNumber: 1n,
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`PoSTransaction`](#TODO)
+
+## Parameters
+
+### transactionNumber
+
+- **Type:** `bigint`
+
+```ts
+const transaction = await publicClient.getPoSTransactionByNumber({
+  transactionNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`pos_getTransactionByNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_gettransactionbynumber)
