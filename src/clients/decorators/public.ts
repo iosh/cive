@@ -874,6 +874,11 @@ export type PublicActions<
     args: SendRawTransactionParameters,
   ) => Promise<SendRawTransactionReturnType>
 
+  /**
+   * Get the total burnt tx gas fee by 1559. Added in Conflux-Rust v2.4.0.
+   * - JSON-RPC Method: [`cfx_getFeeBurnt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getfeeburnt)
+   * @returns - {@link GetFeeBurntReturnType}
+   */
   getFeeBurnt: () => Promise<GetFeeBurntReturnType>
 }
 

@@ -186,6 +186,10 @@ export default defineConfig({
                 text: 'estimateGasAndCollateral',
                 link: '/docs/actions/public/estimateGasAndCollateral',
               },
+              {
+                text: 'getFeeBurnt',
+                link: '/docs/actions/public/getFeeBurnt',
+              },
             ],
           },
           {

@@ -1,0 +1,35 @@
+# getFeeBurnt
+
+Get the total burnt transaction fee by 1559.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const totalBurntFee = await publicClient.getFeeBurnt();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+`bigint`
+
+The total burnt transaction fee (in drip).
+
+## JSON-RPC Method
+
+[`cfx_getFeeBurnt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getfeeburnt)
