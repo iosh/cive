@@ -665,6 +665,15 @@ export type PublicRpcSchema = [
     Parameters?: undefined
     ReturnType: Quantity
   },
+  /**
+   * @description  Get the total burnt tx gas fee by 1559. Added in Conflux-Rust v2.4.0.
+   * @link https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getfeeburnt
+   */
+  {
+    Method: 'cfx_getFeeBurnt'
+    Parameters?: undefined
+    ReturnType: Quantity
+  },
 ]
 
 export type WalletRpcSchema = [

@@ -130,6 +130,10 @@ import {
   getEpochReceipts,
 } from '../../actions/public/getEpochReceipts.js'
 import {
+  type GetFeeBurntReturnType,
+  getFeeBurnt,
+} from '../../actions/public/getFeeBurnt.js'
+import {
   type GetFeeHistoryParameters,
   type GetFeeHistoryReturnType,
   getFeeHistory,
@@ -869,6 +873,8 @@ export type PublicActions<
   sendRawTransaction: (
     args: SendRawTransactionParameters,
   ) => Promise<SendRawTransactionReturnType>
+
+  getFeeBurnt: () => Promise<GetFeeBurntReturnType>
 }
 
 export function publicActions<
@@ -944,5 +950,6 @@ export function publicActions<
     traceTransaction: (args) => traceTransaction(client, args),
     getChainId: () => getChainId(client),
     sendRawTransaction: (args) => sendRawTransaction(client, args),
+    getFeeBurnt: () => getFeeBurnt(client),
   }
 }
