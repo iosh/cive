@@ -199,6 +199,10 @@ export default defineConfig({
                 text: 'getTransactionReceipt',
                 link: '/docs/actions/public/getTransactionReceipt',
               },
+              {
+                text: 'getEpochReceipts',
+                link: '/docs/actions/public/getEpochReceipts',
+              },
             ],
           },
           {

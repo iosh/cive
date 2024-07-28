@@ -1,0 +1,67 @@
+# getEpochReceipts
+
+Get all transaction receipts within the specific epoch.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const receipts = await publicClient.getEpochReceipts();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`TransactionReceipt`](#TODO)[]
+
+## Parameters
+
+### includeTxReceipts (optional)
+
+- **Type:** `boolean`
+- **Defaut:** `false`
+
+```ts
+const receipts = await publicClient.getEpochReceipts({
+  includeTxReceipts: false, // [!code focus]
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+const receipts = await publicClient.getEpochReceipts({
+  epochTag: "latest_state", // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+```ts
+const receipts = await publicClient.getEpochReceipts({
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`cfx_getEpochReceipts`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getepochreceipts)
