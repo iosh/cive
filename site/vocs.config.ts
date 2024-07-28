@@ -238,6 +238,10 @@ export default defineConfig({
                 text: 'getPoSRewardByEpoch',
                 link: '/docs/actions/public/getPoSRewardByEpoch',
               },
+              {
+                text: 'getPoSStatus',
+                link: '/docs/actions/public/getPoSStatus',
+              },
             ],
           },
           {

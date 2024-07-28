@@ -1,0 +1,33 @@
+# getPoSStatus
+
+Get the current status of the PoS chain.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const PoSStatus = await publicClient.getPoSStatus();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`PoSStatus`](#TODO)
+
+## JSON-RPC Method
+
+[`pos_getStatus`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getstatus)
