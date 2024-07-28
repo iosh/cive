@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
-import { getPosCommittee } from './getPoSCommittee.js'
+import { getPoSCommittee } from './getPoSCommittee.js'
 
 const client = devConflux.getClient()
 beforeAll(async () => {
@@ -14,7 +14,7 @@ afterAll(async () => {
 })
 
 test('default', async () => {
-  expect(await getPosCommittee(client)).toBeDefined()
+  expect(await getPoSCommittee(client)).toBeDefined()
 
-  expect(await getPosCommittee(client, { blockNumber: 1n })).toBeDefined()
+  expect(await getPoSCommittee(client, { blockNumber: 1n })).toBeDefined()
 })

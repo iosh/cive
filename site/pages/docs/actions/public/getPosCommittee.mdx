@@ -1,0 +1,42 @@
+# getPosCommittee
+
+Get the current PoS committee information in default. It is also able to get the committee information for a block in history by specifying the blockNumber.
+
+## Usage
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const PoSCommittee = await publicClient.getPoSCommittee();
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`PoSCommittee`](#TODO)
+
+## Parameters
+
+### blockNumber (optional)
+
+```ts
+const PoSCommittee = await publicClient.getPoSCommittee({
+  blockNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`pos_getCommittee`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getcommittee)

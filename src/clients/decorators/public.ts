@@ -183,9 +183,9 @@ import {
   getPoSBlock,
 } from '../../actions/public/getPoSBlock.js'
 import {
-  type GetPosCommitteeParameters,
-  type GetPosCommitteeReturnType,
-  getPosCommittee,
+  type GetPoSCommitteeParameters,
+  type GetPoSCommitteeReturnType,
+  getPoSCommittee,
 } from '../../actions/public/getPoSCommittee.js'
 import {
   type GetPoSEconomicsParameters,
@@ -795,12 +795,12 @@ export type PublicActions<
   /**
    * Get the current PoS committee information in default. It is also able to get the committee information for a block in history by specifying the blockNumber.Parameters
    * - JSON-RPC Method: [`pos_getCommittee`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getcommittee)
-   * @param args - {@link GetPosCommitteeParameters}
-   * @returns - {@link GetPosCommitteeReturnType}
+   * @param args - {@link GetPoSCommitteeParameters}
+   * @returns - {@link GetPoSCommitteeReturnType}
    */
-  getPosCommittee: (
-    args: GetPosCommitteeParameters,
-  ) => Promise<GetPosCommitteeReturnType>
+  getPoSCommittee: (
+    args?: GetPoSCommitteeParameters,
+  ) => Promise<GetPoSCommitteeReturnType>
 
   /**
    * Get block information by its hash value
@@ -945,7 +945,7 @@ export function publicActions<
     getTxPoolNextNonce: (args) => getTxPoolNextNonce(client, args),
     getPoSStatus: () => getPoSStatus(client),
     getPoSAccount: (args) => getPoSAccount(client, args),
-    getPosCommittee: (args) => getPosCommittee(client, args),
+    getPoSCommittee: (args) => getPoSCommittee(client, args),
     getPoSBlock: (args) => getPoSBlock(client, args),
     getPoSRewards: (args) => getPoSRewards(client, args),
     getPoSTransactionByNumber: (args) =>
