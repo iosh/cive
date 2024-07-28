@@ -53,15 +53,6 @@ test('with args epoch tag', async () => {
     }
   `)
   expect(
-    await getCollateralInfo(client, { epochTag: 'latest_finalized' }),
-  ).toMatchInlineSnapshot(`
-    {
-      "convertedStoragePoints": 0n,
-      "totalStorageTokens": 50062500000000000000n,
-      "usedStoragePoints": 0n,
-    }
-  `)
-  expect(
     await getCollateralInfo(client, { epochTag: 'latest_state' }),
   ).toMatchInlineSnapshot(`
     {

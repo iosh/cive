@@ -761,7 +761,7 @@ export type PublicActions<
    * @returns - {@link GetCollateralForStorageReturnType}
    */
   getCollateralInfo: (
-    args: GetCollateralInfoParameters,
+    args?: GetCollateralInfoParameters,
   ) => Promise<GetCollateralInfoReturnType>
   /**
    * These RPC methods require node's public_rpc_apis config set to safe or all, or the namespace include txpool
