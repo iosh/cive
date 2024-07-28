@@ -93,6 +93,10 @@ export default defineConfig({
                 text: 'getBlockRewardInfo',
                 link: '/docs/actions/public/getBlockRewardInfo',
               },
+              {
+                text: 'getPoSRewards',
+                link: '/docs/actions/public/getPoSRewards',
+              },
             ],
           },
           {

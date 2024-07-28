@@ -1,0 +1,44 @@
+# getPoSRewards
+
+Get the rewards information of a PoS epoch.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+const PoSReward = await publicClient.getPoSRewardByEpoch({
+  epochNumber: 1n,
+});
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`PoSReward`](#TODO)
+
+## Parameters
+
+### epochNumber
+
+```ts
+const PoSReward = await publicClient.getPoSRewardByEpoch({
+  epochNumber: 1n, // [!code focus]
+});
+```
+
+## JSON-RPC Method
+
+[`pos_getRewardsByEpoch`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/pos_rpc#pos_getrewardsbyepoch)
