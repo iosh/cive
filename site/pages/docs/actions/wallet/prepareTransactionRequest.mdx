@@ -1,0 +1,253 @@
+# prepareTransactionRequest
+
+Prepares a transaction request for signing by populating a nonce, gas limit, fee values, and a transaction type.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { parseCFX } from "cive";
+import { account, walletClient } from "./config";
+
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  to: "cfx:...",
+  value: parseCFX("1"),
+});
+```
+
+```ts twoslash [config.ts] filename="config.ts"
+import { privateKeyToAccount } from "cive/accounts";
+// [!include ~/snippets/walletClient.ts]
+
+export const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+```
+
+:::
+
+## Returns
+
+[`TransactionRequest`](#TODO)
+
+The transaction request
+
+## Parameters
+
+### account
+
+- **Type:** `Account | Address`
+
+The Account to send the transaction from.
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+const request = await walletClient.prepareTransactionRequest({
+  account: account, // or "cfx:...", // [!code focus]
+  to: "cfx:...",
+  value: 1000000000000000000n,
+});
+```
+
+### to
+
+- **Type:** `Address`
+
+The transaction recipient or contract address.
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  to: "cfx:...", // [!code focus]
+  value: 1000000000000000000n,
+  nonce: 1,
+});
+```
+
+### accessList (optional)
+
+- **Type:** [`AccessList`](#TODO)
+
+The access list.
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+const request = await walletClient.prepareTransactionRequest({
+  accessList: [
+    // [!code focus:6]
+    {
+      address: "cfx:...",
+      storageKeys: ["0x1"],
+    },
+  ],
+  account,
+  to: "cfx:...",
+});
+```
+
+### data (optional)
+
+- **Type:** `0x${string}`
+
+A contract hashed method call with encoded args.
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+const request = await walletClient.prepareTransactionRequest({
+  data: "0x...", // [!code focus]
+  account,
+  to: "cfx:...",
+  value: 1000000000000000000n,
+});
+```
+
+### gasPrice (optional)
+
+- **Type:** `bigint`
+
+The price (in drip) to pay per gas. Only applies to [Legacy Transactions](#TODO).
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+import { parseCFX, parseDrip } from "cive";
+
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  gasPrice: parseDrip("20"), // [!code focus]
+  to: "cfx:...",
+  value: parseCFX("1"),
+});
+```
+
+### maxFeePerGas (optional)
+
+- **Type:** `bigint`
+
+Total fee per gas (in drip), inclusive of `maxPriorityFeePerGas`. Only applies to [EIP-1559 Transactions](#TODO)
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+import { parseCFX, parseDrip } from "cive";
+
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  maxFeePerGas: parseDrip("20"), // [!code focus]
+  to: "cfx:...",
+  value: parseCFX("1"),
+});
+```
+
+### maxPriorityFeePerGas (optional)
+
+- **Type:** `bigint`
+
+Max priority fee per gas (in wei). Only applies to [EIP-1559 Transactions](#TODO)
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+import { parseCFX, parseDrip } from "cive";
+
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  maxFeePerGas: parseDrip("20"),
+  maxPriorityFeePerGas: parseDrip("2"), // [!code focus]
+  to: "cfx:...",
+  value: parseCFX("1"),
+});
+```
+
+### nonce (optional)
+
+- **Type:** `number`
+
+Unique number identifying this transaction.
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  to: "cfx:...",
+  value: 1000000000000000000n,
+  nonce: 6, // [!code focus]
+});
+```
+
+### parameters (optional)
+
+- **Type:** `("fees" | "gas" | "nonce" | "type" | "epochHeight" |"storageLimit")[]`
+- **Default:** `["fees", "gas", "nonce", "type", "epochHeight", "storageLimit"]`
+
+Parameters to prepare.
+
+For instance, if `["gas", "nonce"]` is provided, then only the `gas` and `nonce` parameters will be prepared.
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  to: "cfx:...",
+  value: 1000000000000000000n,
+  nonce: 1, // [!code focus]
+});
+```
+
+### value (optional)
+
+- **Type:** `bigint`
+
+Value in wei sent with this transaction.
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+import { parseCFX } from "cive";
+
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  to: "cfx:...",
+  value: parseCFX("1"), // [!code focus]
+  nonce: 69,
+});
+```
+
+### epochHeight (optional)
+
+- **Type:** `bigint`
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+import { parseCFX } from "cive";
+
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  to: "cfx:...",
+  epochHeight: 11n, // [!code focus]
+});
+```
+
+### storageLimit (optional)
+
+- **Type:** `bigint`
+
+```ts twoslash
+// [!include config.ts]
+// ---cut---
+import { parseCFX } from "cive";
+
+const request = await walletClient.prepareTransactionRequest({
+  account,
+  to: "cfx:...",
+  storageLimit: 11n, // [!code focus]
+});
+```

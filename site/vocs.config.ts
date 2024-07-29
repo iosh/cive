@@ -283,6 +283,10 @@ export default defineConfig({
             text: 'sendRawTransaction',
             link: '/docs/actions/wallet/sendRawTransaction',
           },
+          {
+            text: 'prepareTransactionRequest',
+            link: '/docs/actions/wallet/prepareTransactionRequest',
+          },
         ],
       },
       {
