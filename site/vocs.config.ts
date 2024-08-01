@@ -290,6 +290,20 @@ export default defineConfig({
         ],
       },
       {
+        text: 'Accounts',
+        items: [
+          {
+            text: 'Local Accounts',
+            items: [
+              {
+                text: 'Private Key',
+                link: '/docs/accounts/privateKeyToAccount',
+              },
+            ],
+          },
+        ],
+      },
+      {
         text: 'Contract',
         items: [
           {

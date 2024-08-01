@@ -1,0 +1,94 @@
+# privateKeyToAccount
+
+A Private Key Account is an interface that has the ability to sign transactions and messages with a given private key.
+
+:::info
+cive internally uses [`@noble/curves`](https://github.com/paulmillr/noble-curves), an **audited** implementation of [secp256k1](https://www.secg.org/sec2-v2.pdf), for our private key & signing implementation.
+:::
+
+## Import
+
+```ts twoslash
+import { privateKeyToAccount } from "cive/accounts";
+```
+
+## Usage
+
+To initialize a Private Key Account, you will need to pass a private key to `privateKeyToAccount`:
+
+:::info
+Conflux core space address is need the network id.
+:::
+
+```ts twoslash
+import { createWalletClient, http } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+
+const account = privateKeyToAccount(
+  "0x...", // [!code focus]
+  { networkId: mainnet.id } // [!code focus]
+);
+
+const client = createWalletClient({
+  account,
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### Generating Private Keys
+
+You can generate a random private key using the `generatePrivateKey` function:
+
+```ts twoslash
+import { generatePrivateKey } from "cive/accounts";
+
+const privateKey = generatePrivateKey();
+```
+
+## Parameters
+
+### privateKey
+
+- **Type:** `Hex`
+
+The private key to use for the Account.
+
+
+### address
+
+The address of the Account.
+
+```ts twoslash
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+// ---cut---
+const account = privateKeyToAccount(
+  "0xb8f3864b49115f1eec4868dbb19d3a406d152f6e18292d8aa300989f681442a3", // [!code focus]
+  { networkId: mainnet.id } // [!code focus]
+);
+
+account.address;
+// 'cfx:aakcrjzwbmguzj92tm11yegsr26ja93hj2h10sa7r4'
+```
+
+### options.networkId
+
+The network id of the Account.
+
+```ts twoslash
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+// ---cut---
+const account = privateKeyToAccount(
+  "0xb8f3864b49115f1eec4868dbb19d3a406d152f6e18292d8aa300989f681442a3",
+  {
+    networkId: mainnet.id, // [!code focus]
+  }
+);
+
+account.address;
+// 'cfx:aakcrjzwbmguzj92tm11yegsr26ja93hj2h10sa7r4'
+```
+
