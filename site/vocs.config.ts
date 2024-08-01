@@ -303,6 +303,10 @@ export default defineConfig({
                 text: 'Mnemonic',
                 link: '/docs/accounts/mnemonicToAccount',
               },
+              {
+                text: 'Hierarchical Deterministic (HD)',
+                link: '/docs/accounts/hdKeyToAccount',
+              }
             ],
           },
         ],
