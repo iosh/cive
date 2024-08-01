@@ -299,6 +299,10 @@ export default defineConfig({
                 text: 'Private Key',
                 link: '/docs/accounts/privateKeyToAccount',
               },
+              {
+                text: 'Mnemonic',
+                link: '/docs/accounts/mnemonicToAccount',
+              },
             ],
           },
         ],

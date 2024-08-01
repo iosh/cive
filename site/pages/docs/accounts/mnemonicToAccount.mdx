@@ -1,0 +1,200 @@
+# Mnemonic Account
+
+A Mnemonic Account is a [Hierarchical Deterministic (HD) Account](/docs/accounts/hd) that is derived from a [BIP-39 mnemonic phrase](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki) and an optional HD path.
+
+It has the ability to sign transactions and messages with the private key derived from the HD Node.
+
+:::info
+cive internally uses [`@scure/bip32`](https://github.com/paulmillr/scure-bip32), an **audited** implementation of [BIP-32 HD wallets](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki#abstract), for hierarchical deterministic (HD) wallet derivation.
+:::
+
+## Import
+
+```ts twoslash
+import { mnemonicToAccount } from "cive/accounts";
+```
+
+## Usage
+
+To initialize a Mnemonic Account, you will need to pass a mnemonic phrase to `mnemonicToAccount`:
+
+:::info
+Conflux core space address is need the network id.
+:::
+
+```ts twoslash
+import { createWalletClient, http } from "cive";
+import { mnemonicToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+
+const account = mnemonicToAccount(
+  "surge stable sick canyon you absent rigid define rack banana author retire", // [!code focus]
+  { networkId: mainnet.id } // [!code focus]
+);
+
+const client = createWalletClient({
+  account,
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### Generating Mnemonics
+
+You can generate a random BIP-39 mnemonic using the `generateMnemonic` function with a wordlist:
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { english, generateMnemonic, mnemonicToAccount } from "cive/accounts";
+
+const mnemonic = generateMnemonic(english); // [!code focus]
+const account = mnemonicToAccount(mnemonic, { networkId: mainnet.id });
+```
+
+:::tip
+You can customize the strength of the generated mnemonic by passing a value between 128 and 256 as the second argument to the `generateMnemonic` function. This value must be a multiple of 32.
+:::
+
+Available wordlists:
+
+- `czech`
+- `english`
+- `french`
+- `italian`
+- `japanese`
+- `korean`
+- `simplifiedChinese`
+- `spanish`
+- `traditionalChinese`
+
+```ts twoslash
+import {
+  english,
+  czech,
+  french,
+  italian,
+  japanese,
+  korean,
+  simplifiedChinese,
+  spanish,
+  traditionalChinese,
+} from "cive/accounts";
+```
+
+## Parameters
+
+### mnemonic
+
+- **Type:** `string`
+
+The BIP-39 mnemonic phrase.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { mnemonicToAccount } from "cive/accounts";
+// ---cut---
+const account = mnemonicToAccount(
+  "surge stable sick canyon you absent rigid define rack banana author retire", // [!code focus],
+  { networkId: mainnet.id } // [!code focus]
+);
+account.address;
+// 'cfx:aan3gfd3b9nnwba7928ckpt7zfkbkncngpc0gp5xjm'
+```
+
+### options.networkId
+
+- **Type:** `number`
+
+The network id of the Account.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { mnemonicToAccount } from "cive/accounts";
+// ---cut---
+const account = mnemonicToAccount(
+  "surge stable sick canyon you absent rigid define rack banana author retire", // [!code focus],
+  { networkId: mainnet.id } // [!code focus]
+);
+```
+
+### options.accountIndex
+
+- **Type:** `number`
+- **Default:** `0`
+
+The account index to use in the path **(`"m/44'/503'/${accountIndex}'/0/0"`)** to derive a private key.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { mnemonicToAccount } from "cive/accounts";
+// ---cut---
+const account = mnemonicToAccount(
+  "surge stable sick canyon you absent rigid define rack banana author retire",
+  {
+    networkId: mainnet.id,
+    accountIndex: 1, // [!code focus]
+  }
+);
+```
+
+### options.addressIndex
+
+- **Type:** `number`
+- **Default:** `0`
+
+The address index to use in the path **(`"m/44'/503'/0'/0/${addressIndex}"`)** to derive a private key.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { mnemonicToAccount } from "cive/accounts";
+// ---cut---
+const account = mnemonicToAccount(
+  "surge stable sick canyon you absent rigid define rack banana author retire",
+  {
+    networkId: mainnet.id,
+    accountIndex: 1,
+    addressIndex: 6, // [!code focus]
+  }
+);
+```
+
+### options.changeIndex
+
+- **Type:** `number`
+- **Default:** `0`
+
+The change index to use in the path **(`"m/44'/503'/0'/0/${addressIndex}"`)** to derive a private key.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { mnemonicToAccount } from "cive/accounts";
+// ---cut---
+const account = mnemonicToAccount(
+  "surge stable sick canyon you absent rigid define rack banana author retire",
+  {
+    networkId: mainnet.id,
+    accountIndex: 1,
+    addressIndex: 6,
+    changeIndex: 2, // [!code focus]
+  }
+);
+```
+
+### options.path
+
+- **Type:** `"m/44'/503'/${string}"`
+
+The HD path to use to derive a private key.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { mnemonicToAccount } from "cive/accounts";
+// ---cut---
+const account = mnemonicToAccount(
+  "surge stable sick canyon you absent rigid define rack banana author retire",
+  {
+    networkId: mainnet.id,
+    path: "m/44'/503'/5'/0/2", // [!code focus]
+  }
+);
+```
