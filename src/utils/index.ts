@@ -147,8 +147,6 @@ export {
   hexAddressToBase32,
 } from './address/hexAddressToBase32.js'
 
-
-
 export { formatCFX } from './unit/formatCFX.js'
 export { formatGDrip } from './unit/formatGDrip.js'
 export { formatUnits } from './unit/formatUnits.js'
