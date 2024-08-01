@@ -1,0 +1,115 @@
+# Local Accounts
+
+A Local Account performs signing of transactions & messages with a private key **before** executing a method over JSON-RPC.
+
+There are three types of Local Accounts in cive:
+
+- [Private Key Account](/docs/accounts/privateKeyToAccount)
+- [Mnemonic Account](/docs/accounts/mnemonicToAccount)
+- [Hierarchical Deterministic (HD) Account](/docs/accounts/hdKeyToAccount)
+
+Below are the steps to integrate a **Private Key Account**, but the same steps can be applied to **Mnemonic & HD Accounts**.
+
+### 1: Initialize a Wallet Client
+
+Before we set up our Account and start consuming Wallet Actions, we will need to set up our Wallet Client with the [`http` Transport](/docs/clients/transports/http):
+
+```ts twoslash
+import { createWalletClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+const client = createWalletClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+### 2: Set up your Local Account
+
+Next, we will instantiate a Private Key Account using `privateKeyToAccount`:
+
+```ts twoslash
+import { createWalletClient, http } from "cive";
+import { privateKeyToAccount } from "cive/accounts"; // [!code focus]
+import { mainnet } from "cive/chains";
+
+const client = createWalletClient({
+  chain: mainnet,
+  transport: http(),
+});
+
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id }); // [!code focus:1]
+```
+
+### 3: Consume [Wallet Actions](/docs/actions/wallet/introduction)
+
+Now you can use that Account within Wallet Actions that need a signature from the user:
+
+```ts twoslash
+import { createWalletClient, http, parseCFX } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+
+const client = createWalletClient({
+  chain: mainnet,
+  transport: http(),
+});
+
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+
+const hash = await client.sendTransaction({
+  // [!code focus:5]
+  account,
+  to: "cfx:...",
+  value: parseCFX("0.001"),
+});
+```
+
+### Optional: Hoist the Account
+
+If you do not wish to pass an account around to every Action that requires an `account`, you can also hoist the account into the Wallet Client.
+
+```ts twoslash
+import { createWalletClient, http, parseCFX } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+
+const client = createWalletClient({
+  // [!code focus:99]
+  account, // [!code ++]
+  chain: mainnet,
+  transport: http(),
+});
+
+const hash = await client.sendTransaction({
+  account, // [!code --]
+  to: "cfx:...",
+  value: parseCFX("0.001"),
+});
+```
+
+### Optional: Extend with Public Actions
+
+When using a Local Account, you may be finding yourself using a [Public Client](/docs/clients/public) instantiated with the same parameters (`transport`, `chain`, etc) as your Wallet Client.
+
+In this case, you can extend your Wallet Client with [Public Actions](/docs/actions/public/introduction) to avoid having to handle multiple Clients.
+
+```ts twoslash {12}
+import { createWalletClient, http, publicActions } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+
+const client = createWalletClient({
+  account,
+  chain: mainnet,
+  transport: http(),
+}).extend(publicActions); // [!code ++]
+
+const balance = await client.getBalance({ address: "cfx:..." }); // Public Action
+const hash = await client.sendTransaction({ to: "cfx:..." }); // Wallet Action
+
+```

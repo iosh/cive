@@ -294,6 +294,7 @@ export default defineConfig({
         items: [
           {
             text: 'Local Accounts',
+            link: '/docs/accounts/localAccounts',
             items: [
               {
                 text: 'Private Key',
@@ -306,7 +307,7 @@ export default defineConfig({
               {
                 text: 'Hierarchical Deterministic (HD)',
                 link: '/docs/accounts/hdKeyToAccount',
-              }
+              },
             ],
           },
         ],
