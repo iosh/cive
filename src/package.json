@@ -52,6 +52,11 @@
       "types": "./_types/window/index.d.ts",
       "import": "./_esm/window/index.js",
       "default": "./_cjs/window/index.js"
+    },
+    "./utils": {
+      "types": "./_types/utils/index.d.ts",
+      "import": "./_esm/utils/index.js",
+      "default": "./_cjs/utils/index.js"
     }
   }
 }
