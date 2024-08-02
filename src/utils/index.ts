@@ -138,6 +138,19 @@ export {
 } from './signature/hashMessage.js'
 
 export {
+  type RecoverMessageAddressParameters,
+  type RecoverMessageAddressReturnType,
+  type RecoverMessageAddressErrorType,
+  recoverMessageAddress,
+} from './signature/recoverMessageAddress.js'
+
+export {
+  type VerifyMessageParameters,
+  type VerifyMessageReturnType,
+  verifyMessage,
+} from './signature/verifyMessage.js'
+
+export {
   type Base32AddressToHexParameters,
   base32AddressToHex,
 } from './address/base32AddressToHex.js'
