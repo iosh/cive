@@ -64,6 +64,6 @@ test('sign typed data', async () => {
   expect(
     await account.signTypedData({ ...typedData.basic, primaryType: 'Mail' }),
   ).toMatchInlineSnapshot(
-    `"0x48154bb5d9403ccaf991ada81e1d61142ba85b85702f390d3945bcca57cfad9025d826045e1a9c8dca343f69a8f24d94e7f20143ddd115e3d2acee25d2d590811c"`,
+    `"0xeb376dca45860063b24144736ec5bd39120d38e280712acb958acdcce3c93c305b0942d29e23474c70132baaff12a47d39c6bceab1255232136d51a9d9f1bd2b01"`,
   )
 })

@@ -7,14 +7,13 @@ import {
   type NumberToHexErrorType,
   type SizeErrorType,
   type TypedDataDefinition,
-  isAddress,
   numberToHex,
   size,
   stringify,
 } from 'viem'
 import { bytesRegex, integerRegex } from 'viem/utils'
 import type { ErrorType } from '../errors/utils.js'
-import type { IsAddressErrorType } from './address/isAddress.js'
+import { isAddress, type IsAddressErrorType } from './address/isAddress.js'
 import { InvalidAddressError } from './errors/address.js'
 import {
   type HashDomainErrorType,

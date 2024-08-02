@@ -31,6 +31,6 @@ export async function sign({
   return {
     r: toHex(r),
     s: toHex(s),
-    v: recovery,
+    v: BigInt(recovery),
   }
 }

@@ -113,7 +113,7 @@ export const typedData = {
       name: 'CFX Mail',
       version: '1',
       chainId: 1,
-      verifyingContract: '0x0000000000000000000000000000000000000000',
+      verifyingContract: accounts[0].base32Address,
     },
     types: {
       Person: [
@@ -129,11 +129,11 @@ export const typedData = {
     message: {
       from: {
         name: 'Cow',
-        wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+        wallet: accounts[0].base32Address,
       },
       to: {
         name: 'Bob',
-        wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+        wallet: accounts[0].base32Address,
       },
       contents: 'Hello, Bob!',
     },
@@ -143,7 +143,7 @@ export const typedData = {
       name: 'Ether Mail 🥵',
       version: '1.1.1',
       chainId: 1,
-      verifyingContract: '0x0000000000000000000000000000000000000000',
+      verifyingContract: accounts[0].base32Address,
     },
     types: {
       Name: [
@@ -175,7 +175,7 @@ export const typedData = {
           first: 'Cow',
           last: 'Burns',
         },
-        wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+        wallet: accounts[0].base32Address,
         age: 69,
         foo: 123123123123123123n,
         favoriteColors: ['red', 'green', 'blue'],
@@ -183,7 +183,7 @@ export const typedData = {
       },
       to: {
         name: { first: 'Bob', last: 'Builder' },
-        wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+        wallet: accounts[0].base32Address,
         age: 70,
         foo: 123123123123123123n,
         favoriteColors: ['orange', 'yellow', 'green'],

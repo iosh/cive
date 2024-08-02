@@ -15,7 +15,7 @@ test('default local account', async () => {
       message: 'hello',
     }),
   ).toMatchInlineSnapshot(
-    `"0xb484223a77031fe37fd61f78676b6a6bec17e333dde0af8a8352678e1bdc7cd00a14f7a6ac96d76d2ebf979f986bf33f1aafe6e0bdd62b47bd616da3b5a4e0331b"`,
+    `"0xedd550d9cfc669218f125b7ae5f57ab565eda1463a384ce566764b58d95fa0fc212732cdbeed4148059b51d5eaab4223fba734ad29495aa1e31a5eea45a7397600"`,
   )
 
   expect(
@@ -24,7 +24,7 @@ test('default local account', async () => {
       message: { raw: '0x68656c6c6f20776f726c64' },
     }),
   ).toMatchInlineSnapshot(
-    `"0x32e8275f9adae1f82b50798f9945592cc992c0610dc87c0a93f1cec69c93400a1e906b33e9010c219b67db92b77ba0cc6b0e1a5f633132a0d845f62c3733e0df1b"`,
+    `"0x7faf17ad6b7e74e4ec5fc47a9845d9cfe260c14b293308f6942ea202588073df4801eb7a2877ccb895bf42d57644c3818eded847bc03edd63fb36574df90699801"`,
   )
 
   expect(
@@ -37,7 +37,7 @@ test('default local account', async () => {
       },
     }),
   ).toMatchInlineSnapshot(
-    `"0x32e8275f9adae1f82b50798f9945592cc992c0610dc87c0a93f1cec69c93400a1e906b33e9010c219b67db92b77ba0cc6b0e1a5f633132a0d845f62c3733e0df1b"`,
+    `"0x7faf17ad6b7e74e4ec5fc47a9845d9cfe260c14b293308f6942ea202588073df4801eb7a2877ccb895bf42d57644c3818eded847bc03edd63fb36574df90699801"`,
   )
 })
 

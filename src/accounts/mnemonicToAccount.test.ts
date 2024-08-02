@@ -193,7 +193,7 @@ test('sign message', async () => {
   expect(
     await account.signMessage({ message: 'hello world' }),
   ).toMatchInlineSnapshot(
-    `"0x06526845f4507614d6ae149da128149e4c17f95ac36a90b3fafcb120c2e430e271d96c685d406f1fb58478f1e5786aebf2187c1cf10fc81a50f0aea54dfa2acd1b"`,
+    `"0xd7ee1b0d888686614525eeba909cfcdc55d78539de5b5752c082f9cfad5785c944942f57ef6e80bf9fd15e909ca6cfd64d3ea92fe0e40be4158efff626f1e69101"`,
   )
 })
 
@@ -217,6 +217,6 @@ test('sign typed data', async () => {
   expect(
     await account.signTypedData({ ...typedData.basic, primaryType: 'Mail' }),
   ).toMatchInlineSnapshot(
-    `"0x62467c20d6cd1ea4c1c2b0156d7118b926bf089787775951f02c9c5909a1936826cedb8fb9c00e11f332cc7fd965e74becd50f5e58fed10d851ed9721a403ffc1c"`,
+    `"0xe68a36148212947a94033e0814186d605ffab0f527f0c8ff8962ebaefe878d8740d9f9384af97f5d66d5caa8cf2c32b57ef10b58ec52e2ead4968c45a0d460b500"`,
   )
 })

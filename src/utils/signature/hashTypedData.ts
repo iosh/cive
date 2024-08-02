@@ -8,7 +8,6 @@ import {
   type ToHexErrorType,
   type ValidateTypedDataErrorType,
   concat,
-  encodeAbiParameters,
   keccak256,
   toHex,
 } from 'viem'
@@ -20,6 +19,7 @@ import {
   getTypesForCIP23Domain,
   validateTypedData,
 } from '../typedData.js'
+import { encodeAbiParameters } from '../abi/encodeAbiParameters.js'
 
 type MessageTypeProperty = {
   name: string

@@ -1,10 +1,11 @@
 import { secp256k1 } from '@noble/curves/secp256k1'
 import { type Hex, toHex } from 'viem'
-import { signMessage, signTypedData } from 'viem/accounts'
 import { toAccount } from './toAccount.js'
 import type { AddressType, PrivateKeyAccount } from './types.js'
 import { publicKeyToAddress } from './utils/publicKeyToAddress.js'
 import { signTransaction } from './utils/signTransaction.js'
+import { signMessage } from './utils/signMessage.js'
+import { signTypedData } from './utils/signTypedData.js'
 
 export type PrivateKeyToAccountParameters<
   TNetworkId extends number = number,

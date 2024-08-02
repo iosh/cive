@@ -1,6 +1,6 @@
 import { getMessage } from 'cip-23'
 import { expect, test } from 'vitest'
-import { typedData } from '~test/src/constants.js'
+import { accounts, typedData } from '~test/src/constants.js'
 
 import { pad, toHex } from 'viem'
 import { hashTypedData } from './hashTypedData.js'
@@ -19,10 +19,12 @@ test('default', () => {
     primaryType: 'Mail',
   })
 
-  expect(hash).toBe(`0x${getMessage(data, true).toString('hex')}`)
+  expect(hash).toBe(
+    `0x${getMessage({ ...data, domain: { ...data.domain, verifyingContract: accounts[0].hexAddress }, message: { ...data.message, from: { ...data.message.from, wallet: accounts[0].hexAddress }, to: { ...data.message.to, wallet: accounts[0].hexAddress } } }, true).toString('hex')}`,
+  )
 
   expect(hash).toMatchInlineSnapshot(
-    `"0x3c95ec9de8acccb87b0ea58261d330d594b29f60c2cabf93469e736cfb87f372"`,
+    `"0xf055cded65f6001fad77807e8b0584f54a5a5a1f0811513260091801dfef0fac"`,
   )
 })
 
@@ -39,10 +41,12 @@ test('complex', () => {
     ...typedData.complex,
     primaryType: 'Mail',
   })
-  expect(hash).toBe(`0x${getMessage(data, true).toString('hex')}`)
+  expect(hash).toBe(
+    `0x${getMessage({ ...data, domain: { ...data.domain, verifyingContract: accounts[0].hexAddress }, message: { ...data.message, from: { ...data.message.from, wallet: accounts[0].hexAddress }, to: { ...data.message.to, wallet: accounts[0].hexAddress } } }, true).toString('hex')}`,
+  )
 
   expect(hash).toMatchInlineSnapshot(
-    `"0x8c216f9c0c18284db3261091cb00d740907c7a3f2591bde36440f1f3d528a145"`,
+    `"0x18248b023f30c4c88bedb290d7f6bbd7ae957300a8e680021f3ae942cbd43a8a"`,
   )
 })
 
@@ -60,10 +64,12 @@ test('no domain', () => {
     domain: undefined,
     primaryType: 'Mail',
   })
-  expect(hash).toBe(`0x${getMessage(data, true).toString('hex')}`)
+  expect(hash).toBe(
+    `0x${getMessage({ ...data, domain: { ...data.domain, verifyingContract: accounts[0].hexAddress }, message: { ...data.message, from: { ...data.message.from, wallet: accounts[0].hexAddress }, to: { ...data.message.to, wallet: accounts[0].hexAddress } } }, true).toString('hex')}`,
+  )
 
   expect(hash).toMatchInlineSnapshot(
-    `"0xaab224e47a7b69f7c41ae4265647be286e4e76af202feb5d27ba71e89518b899"`,
+    `"0xde2d71e298abc720fca9129529436e1b90fa6d3320eba5ce1bd8f34a75ce82b9"`,
   )
   expect(
     hashTypedData({
@@ -72,7 +78,7 @@ test('no domain', () => {
       primaryType: 'Mail',
     }),
   ).toMatchInlineSnapshot(
-    `"0xaab224e47a7b69f7c41ae4265647be286e4e76af202feb5d27ba71e89518b899"`,
+    `"0xde2d71e298abc720fca9129529436e1b90fa6d3320eba5ce1bd8f34a75ce82b9"`,
   )
 })
 
@@ -97,10 +103,12 @@ test('domain: empty name', () => {
     domain: { name: '' },
     primaryType: 'Mail',
   })
-  expect(hash).toBe(`0x${getMessage(data, true).toString('hex')}`)
+  expect(hash).toBe(
+    `0x${getMessage({ ...data, domain: { ...data.domain, verifyingContract: accounts[0].hexAddress }, message: { ...data.message, from: { ...data.message.from, wallet: accounts[0].hexAddress }, to: { ...data.message.to, wallet: accounts[0].hexAddress } } }, true).toString('hex')}`,
+  )
 
   expect(hash).toMatchInlineSnapshot(
-    `"0xa89f85e69e526ec7e3c77d227d97a85df83c00e0ebea84b819a4ce0e383cecad"`,
+    `"0xcb940477d5ab0deb2c93a45f88a09364e1fe2e80d5f7d4e98738f5b1feadd235"`,
   )
 })
 
@@ -150,13 +158,13 @@ test('typed message with a domain separator that uses all fields.', () => {
       name: 'example.metamask.io',
       version: '1',
       chainId: 1,
-      verifyingContract: '0x0000000000000000000000000000000000000000',
+      verifyingContract: accounts[0].base32Address,
       salt: pad(toHex(new Uint8Array([1, 2, 3])), { dir: 'right' }),
     },
   })
 
   expect(hash).toMatchInlineSnapshot(
-    `"0xa55e95dd54cec04a32fbfd14d98588a131b23677d131806f52e5d268b8189eed"`,
+    `"0x52b51a03dd27562e72e27e8ce57ab34bfc18d1c6798dc92158240ace4634296e"`,
   )
 })
 
@@ -195,14 +203,14 @@ test('typed message with only custom domain seperator fields', () => {
       customName: 'example.metamask.io',
       customVersion: '1',
       customChainId: 1n,
-      customVerifyingContract: '0x0000000000000000000000000000000000000000',
+      customVerifyingContract: accounts[0].base32Address,
       customSalt: pad(toHex(new Uint8Array([1, 2, 3])), { dir: 'right' }),
       extraField: 'stuff',
     },
   })
 
   expect(hash).toMatchInlineSnapshot(
-    `"0x1fc09f7d41b48ea86ea9ed16694c5446dac049e805939d639b8b2354d69c422f"`,
+    `"0x94984e53d4b3f7cfd5c076142f66d0db158bf77216a37e7796d29dab1fc40c93"`,
   )
 })
 
@@ -238,7 +246,7 @@ test('typed message with data', () => {
       name: 'example.metamask.io',
       version: '1',
       chainId: 1,
-      verifyingContract: '0x0000000000000000000000000000000000000000',
+      verifyingContract: accounts[0].base32Address,
       salt: pad(toHex(new Uint8Array([1, 2, 3])), { dir: 'right' }),
     },
     message: {
@@ -247,6 +255,6 @@ test('typed message with data', () => {
   })
 
   expect(hash).toMatchInlineSnapshot(
-    `"0xa3fc11f2ac42f9ee18f0fc4bebc9fa032a2f97c97e9a3bbab79a226395bcc9b0"`,
+    `"0x570aabe3e46bbe195b224875b58d5e406b089c8e85e05729e9f94275849ee337"`,
   )
 })
