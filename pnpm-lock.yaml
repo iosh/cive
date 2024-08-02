@@ -6,7 +6,7 @@ settings:
 
 patchedDependencies:
   abitype@0.0.0-canary-20240628164201:
-    hash: xihf2tqjue7nb6jhrk3i2nkjoq
+    hash: 2tlcrkwlgkms7wyz4szikx3e4q
     path: patches/abitype@0.0.0-canary-20240628164201.patch
 
 importers:
@@ -84,7 +84,7 @@ importers:
         version: 1.3.0
       abitype:
         specifier: 0.0.0-canary-20240628164201
-        version: 0.0.0-canary-20240628164201(patch_hash=xihf2tqjue7nb6jhrk3i2nkjoq)(typescript@5.5.3)(zod@3.23.8)
+        version: 0.0.0-canary-20240628164201(patch_hash=2tlcrkwlgkms7wyz4szikx3e4q)(typescript@5.5.3)(zod@3.23.8)
       viem:
         specifier: ^2.17.3
         version: 2.17.3(bufferutil@4.0.8)(typescript@5.5.3)(utf-8-validate@6.0.4)(zod@3.23.8)
@@ -4957,7 +4957,7 @@ snapshots:
     dependencies:
       '@ethersproject/logger': 5.7.0
 
-  abitype@0.0.0-canary-20240628164201(patch_hash=xihf2tqjue7nb6jhrk3i2nkjoq)(typescript@5.5.3)(zod@3.23.8):
+  abitype@0.0.0-canary-20240628164201(patch_hash=2tlcrkwlgkms7wyz4szikx3e4q)(typescript@5.5.3)(zod@3.23.8):
     optionalDependencies:
       typescript: 5.5.3
       zod: 3.23.8
