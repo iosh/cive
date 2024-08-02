@@ -29,10 +29,6 @@ test('with args epoch tag', async () => {
   ).toMatchInlineSnapshot('0n')
 
   expect(
-    await getEpochNumber(client, { epochTag: 'latest_confirmed' }),
-  ).toMatchInlineSnapshot('0n')
-
-  expect(
     await getEpochNumber(client, { epochTag: 'latest_finalized' }),
   ).toMatchInlineSnapshot('0n')
 

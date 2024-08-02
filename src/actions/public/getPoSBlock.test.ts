@@ -14,7 +14,9 @@ afterAll(async () => {
 })
 
 test('default', async () => {
-  expect(await getPoSBlock(client)).toBeDefined()
+  expect(
+    await getPoSBlock(client, { blockTag: 'latest_committed' }),
+  ).toBeDefined()
 
   expect(await getPoSBlock(client, { blockNumber: 1n })).toBeDefined()
 

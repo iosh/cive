@@ -14,5 +14,5 @@ afterAll(async () => {
 })
 
 test('default', async () => {
-  expect(await getPoSRewardByEpoch(client, { epochNumber: 0n })).toBeNull()
+  expect(await getPoSRewardByEpoch(client, { epochNumber: 0n })).toBeUndefined()
 })

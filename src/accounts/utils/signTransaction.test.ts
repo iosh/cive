@@ -11,10 +11,10 @@ import type {
   TransactionSerializableLegacy,
   TransactionSerializedLegacy,
 } from '../../types/transaction.js'
-import { parseGDrip } from '../../unit/parseGDrip.js'
 import { base32AddressToHex } from '../../utils/address/base32AddressToHex.js'
 import type { SerializeTransactionFn } from '../../utils/transaction/serializeTransaction.js'
 import { signTransaction } from './signTransaction.js'
+import { parseGDrip } from '../../utils/index.js'
 
 const base = {
   gas: 21000n,

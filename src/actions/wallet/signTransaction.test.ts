@@ -9,9 +9,9 @@ import type {
   TransactionRequestEIP2930,
   TransactionRequestLegacy,
 } from '../../types/transaction.js'
-import { parseGDrip } from '../../unit/parseGDrip.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { signTransaction } from './signTransaction.js'
+import { parseGDrip } from '../../utils/index.js'
 
 const client = devConflux.getClient()
 beforeAll(async () => {
