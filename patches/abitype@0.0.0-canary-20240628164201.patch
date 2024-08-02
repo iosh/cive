@@ -86,7 +86,7 @@ index 4f29120e7150c9d3d519c233ddf000af26021af1..f693175e4f36445aa3149c62479db634
 +++ b/src/register.ts
 @@ -1,4 +1,5 @@
  // biome-ignore lint/suspicious/noEmptyInterface: <explanation>
-+import {Address} from './address'
++import type {Address} from './address.js'
  export interface Register {}
  
  // TODO: Remove deprecated properties next major version
