@@ -73,7 +73,7 @@ export async function signTypedData<
   const account = parseAccount(account_)
 
   const types = {
-    EIP712Domain: getTypesForCIP23Domain({ domain }),
+    CIP23Domain: getTypesForCIP23Domain({ domain }),
     ...parameters.types,
   }
 

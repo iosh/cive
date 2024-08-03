@@ -1,4 +1,8 @@
-import type { TypedData, TypedDataDomain, TypedDataParameter } from 'abitype'
+import type {
+  TypedData,
+  TypedDataDomain,
+  TypedDataParameter,
+} from '../types/abitype.js'
 
 import type { Hex } from '../types/misc.js'
 
@@ -6,7 +10,6 @@ import {
   BytesSizeMismatchError,
   type NumberToHexErrorType,
   type SizeErrorType,
-  type TypedDataDefinition,
   numberToHex,
   size,
   stringify,
@@ -19,6 +22,7 @@ import {
   type HashDomainErrorType,
   hashDomain,
 } from './signature/hashTypedData.js'
+import type { TypedDataDefinition } from '../types/typedData.js'
 
 export type SerializeTypedDataErrorType =
   | HashDomainErrorType
