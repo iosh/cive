@@ -308,6 +308,12 @@ export default defineConfig({
                 text: 'Hierarchical Deterministic (HD)',
                 link: '/docs/accounts/hdKeyToAccount',
               },
+              {
+                text: 'Utilities',
+                items: [
+                  { text: 'signMessage', link: '/docs/accounts/signMessage' },
+                ],
+              },
             ],
           },
         ],
