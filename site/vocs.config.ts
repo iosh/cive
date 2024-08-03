@@ -316,6 +316,10 @@ export default defineConfig({
                     text: 'signTransaction',
                     link: '/docs/accounts/signTransaction',
                   },
+                  {
+                    text: 'signTypedData',
+                    link: '/docs/accounts/signTypedData',
+                  },
                 ],
               },
             ],
