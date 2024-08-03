@@ -312,6 +312,10 @@ export default defineConfig({
                 text: 'Utilities',
                 items: [
                   { text: 'signMessage', link: '/docs/accounts/signMessage' },
+                  {
+                    text: 'signTransaction',
+                    link: '/docs/accounts/signTransaction',
+                  },
                 ],
               },
             ],

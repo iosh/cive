@@ -1,0 +1,265 @@
+# signTransaction (Local Account)
+
+Signs a transaction with the Account's private key.
+
+## Usage
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { parseCFX } from "cive/utils";
+import { privateKeyToAccount } from "cive/accounts";
+
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+
+const signature = await account.signTransaction({
+  chainId: 1,
+  maxFeePerGas: parseCFX("20"),
+  maxPriorityFeePerGas: parseCFX("3"),
+  gas: 21000n,
+  nonce: 69,
+  to: account.address,
+});
+// @log: Output: "0x63667802f876f2458829a2241af62c00008901158e460913d000008252089417f88e30cb8f60dda1c7e3b345f18052b5daa1188080800180c080a0fcbb7b169667d14e3c550a1368bcf567cbe3d111d5da564c015dcc5adaa42220a06d9faad51cd836032c8b43b0faccccca7564fcea8aa8110fb0103953300f0757"
+```
+
+## Returns
+
+[`Hex`](#TODO)
+
+The signed transaction.
+
+## Parameters
+
+### accessList (optional)
+
+- **Type:** [`AccessList`](#TODO)
+
+The access list.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  accessList: [
+    // [!code focus:6]
+    {
+      address: "cfx:...",
+      storageKeys: ["0x1"],
+    },
+  ],
+  type: "eip1559",
+});
+```
+
+### chainId (optional)
+
+- **Type:** `number`
+
+The chain ID.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id, // [!code focus]
+});
+```
+
+### data (optional)
+
+- **Type:** `0x${string}`
+
+Transaction data.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  data: "0x", // [!code focus]
+});
+```
+
+### gas (optional)
+
+- **Type:** `bigint`
+
+The gas limit for the transaction.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  gas: 21000n, // [!code focus]
+});
+```
+
+### gasPrice (optional)
+
+- **Type:** `bigint`
+
+### gasPrice (optional)
+
+- **Type:** `bigint`
+
+The price (in gdrip) to pay per gas. Only applies to [Legacy Transactions](#TODO).
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { parseGDrip } from "cive/utils";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  gasPrice: parseGDrip("20"), // [!code focus]
+});
+```
+
+### maxFeePerGas (optional)
+
+- **Type:** `bigint`
+
+Total fee per gas (in Drip), inclusive of `maxPriorityFeePerGas`. Only applies to [CIP-1559 Transactions](#TODO)
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { parseGDrip } from "cive/utils";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  maxFeePerGas: parseGDrip("20"), // [!code focus]
+});
+```
+
+### maxPriorityFeePerGas (optional)
+
+- **Type:** `bigint`
+
+Max priority fee per gas (in Drip). Only applies to [CIP-1559 Transactions](#TODO)
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { parseGDrip } from "cive/utils";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  maxPriorityFeePerGas: parseGDrip("20"), // [!code focus]
+});
+```
+
+### nonce (optional)
+
+- **Type:** `number`
+
+Unique number identifying this transaction.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  nonce: 1, // [!code focus]
+});
+```
+
+### to (optional)
+
+- **Type:** `Address`
+
+The transaction recipient.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  to: "cfx:...", // [!code focus]
+});
+```
+
+### type (optional)
+
+- **Type:** `"legacy" | "eip2930" | "eip1559"`
+
+The transaction type.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  type: "eip1559", // [!code focus]
+});
+```
+
+### value (optional)
+
+- **Type:** `bigint`
+
+Value in Drip sent with this transaction.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+import { parseCFX } from "cive/utils";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  value: parseCFX("2"), // [!code focus]
+});
+```
+
+### storageLimit (optional)
+
+- **Type:** `bigint`
+
+The storage staking limit.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+import { parseCFX } from "cive/utils";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  storageLimit: 100n, // [!code focus]
+});
+```
+
+### epochHeight (optional)
+
+The height that the transaction execution targets.
+
+```ts twoslash
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+import { parseCFX } from "cive/utils";
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+// ---cut---
+const signature = await account.signTransaction({
+  chainId: mainnet.id,
+  storageLimit: 100n, // [!code focus]
+});
