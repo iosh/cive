@@ -1,13 +1,13 @@
-import { recoverAddress, type RecoverAddressErrorType } from 'viem'
+import { type RecoverAddressErrorType, recoverAddress } from 'viem'
 import type { HexAddress } from '../../accounts/types.js'
+import type { ErrorType } from '../../errors/utils.js'
 import type {
   ByteArray,
   Hex,
   SignableMessage,
   Signature,
 } from '../../types/misc.js'
-import { hashMessage, type HashMessageErrorType } from './hashMessage.js'
-import type { ErrorType } from '../../errors/utils.js'
+import { type HashMessageErrorType, hashMessage } from './hashMessage.js'
 
 export type RecoverMessageAddressParameters = {
   message: SignableMessage

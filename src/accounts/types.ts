@@ -9,16 +9,16 @@ import type {
   otherNetworkNameType,
   testNetworkNameType,
 } from '../constants/networkName.js'
+import type { TypedData } from '../types/abitype.js'
+import type { SignableMessage } from '../types/misc.js'
 import type {
   TransactionSerializable,
   TransactionSerialized,
 } from '../types/transaction.js'
+import type { TypedDataDefinition } from '../types/typedData.js'
 import type { IsNarrowable } from '../types/utils.js'
 import type { GetTransactionType } from '../utils/transaction/getTransactionType.js'
 import type { SerializeTransactionFn } from '../utils/transaction/serializeTransaction.js'
-import type { TypedData } from '../types/abitype.js'
-import type { TypedDataDefinition } from '../types/typedData.js'
-import type { SignableMessage } from '../types/misc.js'
 
 export type NetworkNameType =
   | mainNetworkNameType

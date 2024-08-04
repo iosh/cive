@@ -3,8 +3,8 @@ import { type Hex, toHex } from 'viem'
 import { toAccount } from './toAccount.js'
 import type { AddressType, PrivateKeyAccount } from './types.js'
 import { publicKeyToAddress } from './utils/publicKeyToAddress.js'
-import { signTransaction } from './utils/signTransaction.js'
 import { signMessage } from './utils/signMessage.js'
+import { signTransaction } from './utils/signTransaction.js'
 import { signTypedData } from './utils/signTypedData.js'
 
 export type PrivateKeyToAccountParameters<

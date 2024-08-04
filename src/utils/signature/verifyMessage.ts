@@ -6,8 +6,8 @@ import type {
   SignableMessage,
   Signature,
 } from '../../types/misc.js'
-import { recoverMessageAddress } from './recoverMessageAddress.js'
 import { base32AddressToHex } from '../address/base32AddressToHex.js'
+import { recoverMessageAddress } from './recoverMessageAddress.js'
 
 export type VerifyMessageParameters = {
   /** The address that signed the original message. */

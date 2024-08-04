@@ -16,13 +16,13 @@ import {
 } from 'viem'
 import { bytesRegex, integerRegex } from 'viem/utils'
 import type { ErrorType } from '../errors/utils.js'
-import { isAddress, type IsAddressErrorType } from './address/isAddress.js'
+import type { TypedDataDefinition } from '../types/typedData.js'
+import { type IsAddressErrorType, isAddress } from './address/isAddress.js'
 import { InvalidAddressError } from './errors/address.js'
 import {
   type HashDomainErrorType,
   hashDomain,
 } from './signature/hashTypedData.js'
-import type { TypedDataDefinition } from '../types/typedData.js'
 
 export type SerializeTypedDataErrorType =
   | HashDomainErrorType

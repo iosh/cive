@@ -1,11 +1,11 @@
+import { getAddress } from 'viem'
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { sayHelloLocalNode } from '../../actions/localNode/sayHelloLocalNode.js'
 import { signMessage } from '../../actions/wallet/signMessage.js'
-import { verifyMessage } from './verifyMessage.js'
 import { recoverMessageAddress } from './recoverMessageAddress.js'
-import { getAddress } from 'viem'
+import { verifyMessage } from './verifyMessage.js'
 
 const client = devConflux.getClient({ account: getTestAccount(accounts[0]) })
 beforeAll(async () => {

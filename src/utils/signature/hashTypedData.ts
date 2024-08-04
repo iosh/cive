@@ -1,6 +1,10 @@
 // Implementation forked and adapted from https://github.com/MetaMask/eth-sig-util/blob/main/src/sign-typed-data.ts
 
-import type { AbiParameter, TypedData, TypedDataDomain } from '../../types/abitype.js'
+import type {
+  AbiParameter,
+  TypedData,
+  TypedDataDomain,
+} from '../../types/abitype.js'
 
 import {
   type EncodeAbiParametersErrorType,
@@ -14,12 +18,12 @@ import {
 import type { ErrorType } from '../../errors/utils.js'
 import type { Hex } from '../../types/misc.js'
 import type { TypedDataDefinition } from '../../types/typedData.js'
+import { encodeAbiParameters } from '../abi/encodeAbiParameters.js'
 import {
   type GetTypesForCIP23DomainErrorType,
   getTypesForCIP23Domain,
   validateTypedData,
 } from '../typedData.js'
-import { encodeAbiParameters } from '../abi/encodeAbiParameters.js'
 
 type MessageTypeProperty = {
   name: string
