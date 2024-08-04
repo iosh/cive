@@ -346,6 +346,10 @@ export default defineConfig({
                 text: 'readContract',
                 link: '/docs/contract/readContract',
               },
+              {
+                text: 'simulateContract',
+                link: '/docs/contract/simulateContract',
+              },
             ],
           },
         ],
