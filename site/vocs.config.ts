@@ -350,6 +350,10 @@ export default defineConfig({
                 text: 'simulateContract',
                 link: '/docs/contract/simulateContract',
               },
+              {
+                text: 'writeContract',
+                link: '/docs/contract/writeContract',
+              },
             ],
           },
         ],
