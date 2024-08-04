@@ -21,6 +21,7 @@ import {
 } from '../../accounts/utils/parseAccount.js'
 import type { Client } from '../../clients/createClient.js'
 import { aggregate3Signature } from '../../constants/contract.js'
+import { ChainIdNotFoundError } from '../../errors/chain.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
@@ -244,13 +245,16 @@ async function scheduleMulticall<TChain extends Chain | undefined>(
           block,
         ],
       })
-
+      // TODO: update this
+      if (typeof client.chain === 'undefined' || !('id' in client.chain)) {
+        throw new ChainIdNotFoundError()
+      }
       return decodeFunctionResult({
         abi: multicall3Abi,
         args: [calls],
         functionName: 'aggregate3',
         data: data || '0x',
-        networkId: client.chain!.id,
+        networkId: client.chain.id,
       })
     },
   })
