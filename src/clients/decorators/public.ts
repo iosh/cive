@@ -270,6 +270,11 @@ import {
   getVoteList,
 } from '../../actions/public/getVoteList.js'
 import {
+  type ReadContractParameters,
+  type ReadContractReturnType,
+  readContract,
+} from '../../actions/public/readContract.js'
+import {
   type TraceBlockParameters,
   type TraceBlockReturnType,
   traceBlock,
@@ -294,6 +299,8 @@ import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type {
   ContractEventName,
+  ContractFunctionArgs,
+  ContractFunctionName,
   MaybeAbiEventName,
   MaybeExtractEventArgsFromAbi,
 } from '../../types/contract.js'
@@ -886,7 +893,11 @@ export type PublicActions<
    * @returns - {@link GetFeeBurntReturnType}
    */
   getFeeBurnt: () => Promise<GetFeeBurntReturnType>
-
+  /**
+   *
+   * @param args - {@link CreateContractEventFilterParameters}
+   * @returns - {@link CreateContractEventFilterReturnType}
+   */
   createContractEventFilter: <
     const abi extends Abi | readonly unknown[],
     eventName extends ContractEventName<abi> | undefined,
@@ -897,6 +908,19 @@ export type PublicActions<
   ) => Promise<
     CreateContractEventFilterReturnType<abi, eventName, args, strict>
   >
+
+  /**
+   *
+   * @param args - {@link ReadContractParameters}
+   * @returns The response from the contract. Type is inferred. {@link ReadContractReturnType}
+   */
+  readContract: <
+    const abi extends Abi | readonly unknown[],
+    functionName extends ContractFunctionName<abi, 'pure' | 'view'>,
+    args extends ContractFunctionArgs<abi, 'pure' | 'view', functionName>,
+  >(
+    args: ReadContractParameters<abi, functionName, args>,
+  ) => Promise<ReadContractReturnType<abi, functionName, args>>
 }
 
 export function publicActions<
@@ -975,5 +999,6 @@ export function publicActions<
     getFeeBurnt: () => getFeeBurnt(client),
     createContractEventFilter: (args) =>
       createContractEventFilter(client, args),
+    readContract: (args) => readContract(client, args),
   }
 }
