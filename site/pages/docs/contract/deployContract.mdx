@@ -1,0 +1,176 @@
+# deployContract
+
+Deploys a contract to the network, given bytecode & constructor arguments.
+
+:::code-group
+
+```ts [example.ts]
+import { Abi } from "./abi";
+import { account, walletClient } from "./config";
+
+const hash = await walletClient.deployContract({
+  abi: Abi,
+  account,
+  bytecode: "0x608060405260405161083e38038061083e833981016040819052610...",
+});
+```
+
+```ts [abi.ts]
+export const Abi = [
+    ...
+  {
+    inputs: [],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  ...
+] as const;
+```
+
+```ts [client.ts]
+import { createWalletClient, http } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+
+// Local Account
+export const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+
+export const walletClient = createWalletClient({
+  account,
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+### Deploying with Constructor Args
+
+:::code-group
+
+```ts [example.ts] {8}
+import { deployContract } from "cive";
+import { Abi } from "./abi";
+import { account, walletClient } from "./config";
+
+const hash = await walletClient.deployContract({
+  abi: Abi,
+  account,
+  args: [69420],
+  bytecode: "0x608060405260405161083e38038061083e833981016040819052610...",
+});
+```
+
+```ts [abi.ts] {4}
+export const Abi = [
+  ...
+  {
+    inputs: [{ name: "x", type: "uint32" }],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  ...
+] as const;
+```
+
+```ts [client.ts]
+import { createWalletClient, custom } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+
+export const walletClient = createWalletClient({
+  account,
+  chain: mainnet,
+  transport: http(),
+});
+
+// Local Account
+export const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+```
+
+:::
+
+## Returns
+
+[`Hash`](#TODO)
+
+The [Transaction](#TODO) hash.
+
+### abi
+
+- **Type:** [`Abi`](/docs/glossary/types#abi)
+
+The contract's ABI.
+
+```ts
+import { privateKeyToAccount } from "cive/accounts";
+export const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+const hash = await walletClient.deployContract({
+  abi: Abi, // [!code focus]
+  account: account,
+  bytecode: "0x608060405260405161083e38038061083e833981016040819052610...",
+});
+```
+
+### account
+
+- **Type:** `Account`
+
+The Account to deploy the contract from.
+
+Accepts [Local Account (Private Key, etc)](/docs/accounts/hdKeyToAccount).
+
+```ts
+import { privateKeyToAccount } from "cive/accounts";
+export const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+const hash = await walletClient.deployContract({
+  abi: Abi,
+  account: account, // [!code focus]
+  bytecode: "0x608060405260405161083e38038061083e833981016040819052610...",
+});
+```
+
+### bytecode
+
+- **Type:** [`Hex`](#TODO)
+
+The contract's bytecode.
+
+```ts
+import { privateKeyToAccount } from "cive/accounts";
+export const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+const hash = await walletClient.deployContract({
+  abi: Abi,
+  account: account,
+  bytecode: "0x608060405260405161083e38038061083e833981016040819052610...", // [!code focus]
+});
+```
+
+### args
+
+- **Type:** Inferred from ABI.
+
+Constructor arguments to call upon deployment.
+
+```ts
+import { privateKeyToAccount } from "cive/accounts";
+export const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+const hash = await walletClient.deployContract({
+  abi: Abi,
+  account: account,
+  bytecode: "0x608060405260405161083e38038061083e833981016040819052610...",
+  args: [69], // [!code focus]
+});
+```
