@@ -1,0 +1,340 @@
+# createContractEventFilter
+
+Creates a Filter to retrieve event logs that can be used with [`getFilterChanges`](/docs/actions/public/getFilterChanges) or [`getFilterLogs`](/docs/actions/public/getFilterLogs).
+
+## Usage
+
+By default, an Event Filter with an ABI (`abi`) will retrieve events defined on the ABI.
+
+:::code-group
+
+```ts [example.ts]
+import { publicClient } from "./client";
+import { Abi } from "./abi";
+
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+});
+/**
+ *  {
+ *    abi: [...],
+ *    id: '0x345a6572337856574a76364e457a4366',
+ *    type: 'event'
+ *  }
+ */
+```
+
+```ts [abi.ts]
+export const Abi = [
+  ...
+  {
+    inputs: [
+      {
+        indexed: true,
+        name: "from",
+        type: "address",
+      },
+      { indexed: true, name: "to", type: "address" },
+      {
+        indexed: true,
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "Transfer",
+    type: "event",
+  },
+  ...
+] as const;
+```
+
+```ts [client.ts]
+import { createPublicClient, http } from "viem";
+import { mainnet } from "viem/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Scoping
+
+You can also scope a Filter to a set of given attributes (listed below).
+
+### Address
+
+- **Type:** `Address`
+
+A Filter can be scoped to an **address**:
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  address: "cfx:..", // [!code focus]
+});
+```
+
+### Event
+
+- **Type:** `Event`
+
+A Filter can be scoped to an **event**:
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  address: "cfx:..",
+  eventName: "Transfer", // [!code focus]
+});
+```
+
+### Arguments
+
+A Filter can be scoped to given **_indexed_ arguments**:
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  address: "cfx:..",
+  eventName: "Transfer",
+  args: {
+    from: "cfx:..",
+    to: "cfx:..",
+  },
+});
+```
+
+Only indexed arguments in `event` are candidates for `args`.
+
+A Filter Argument can also be an array to indicate that other values can exist in the position:
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  address: "cfx:...",
+  eventName: "Transfer",
+  args: {
+    // [!code focus:8]
+    from: ["cfx:...", "cfx:...", "cfx:..."],
+  },
+});
+```
+
+### Block Range
+
+A Filter can be scoped to a **block range**:
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  address: "cfx:...",
+  eventName: "Transfer",
+  fromBlock: 16330000n, // [!code focus]
+  toBlock: 16330050n, // [!code focus]
+});
+```
+
+### Epoch tag
+
+A Filter can be scoped to a **epoch tag range**:
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  address: "cfx:...",
+  eventName: "Transfer",
+  fromEpoch: "earliest", // [!code focus]
+  toEpoch: "latest_state", // [!code focus]
+});
+```
+
+### Epoch number
+
+A Filter can be scoped to a **epoch number range**:
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  address: "cfx:...",
+  eventName: "Transfer",
+  fromEpoch: 111n, // [!code focus]
+  toEpoch: 222n, // [!code focus]
+});
+```
+
+### Strict Mode
+
+By default, `createContractEventFilter` will include logs that [do not conform](#TODO) to the indexed & non-indexed arguments on the `event`.
+viem will not return a value for arguments that do not conform to the ABI, thus, some arguments on `args` may be undefined.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  eventName: "Transfer",
+});
+const logs = await publicClient.getFilterLogs({ filter });
+
+logs[0].args; // [!code focus]
+//      ^? { address?: Address, to?: Address, value?: bigint } // [!code focus]
+```
+
+You can turn on `strict` mode to only return logs that conform to the indexed & non-indexed arguments on the `event`, meaning that `args` will always be defined. The trade-off is that non-conforming logs will be filtered out.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  eventName: "Transfer",
+  strict: true,
+});
+const logs = await publicClient.getFilterLogs({ filter });
+
+logs[0].args; // [!code focus]
+//      ^? { address: Address, to: Address, value: bigint } // [!code focus]
+```
+
+## Returns
+
+[`Filter`](#TODO)
+
+## Parameters
+
+### abi
+
+- **Type:** [`Abi`](#TODO)
+
+The contract's ABI.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi, // [!code focus]
+});
+```
+
+### address (optional)
+
+- **Type:** `Address | Address[]`
+
+The contract address or a list of addresses from which Logs should originate. If no addresses are provided, then it will query all events matching the event signatures on the ABI.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  address: "cfx:...", // [!code focus]
+});
+```
+
+### eventName (optional)
+
+- **Type:** `string`
+
+The event name.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  eventName: "Transfer", // [!code focus]
+});
+```
+
+### args (optional)
+
+- **Type:** Inferred.
+
+A list of _indexed_ event arguments.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  eventName: "Transfer",
+  args: {
+    // [!code focus:4]
+    from: "cfx:...",
+    to: "cfx:...",
+  },
+});
+```
+
+### fromBlock (optional)
+
+- **Type:** `bigint`
+
+Block to start querying/listening from.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  fromBlock: 69420n, // [!code focus]
+  toBlock: 70120n,
+});
+```
+
+### toBlock (optional)
+
+- **Type:** `bigint`
+
+Block to query/listen until.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  fromBlock: 69420n,
+  toBlock: 70120n, // [!code focus]
+});
+```
+
+### fromEpoch tag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_checkpoint`
+
+Epoch to query/listen until.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  fromEpoch: "earliest", // [!code focus]
+});
+```
+
+### fromEpoch tag (optional)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+Epoch to query/listen until.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  fromEpoch: "earliest", // [!code focus]
+});
+```
+
+### fromEpoch number (optional)
+
+- **Type:** `bigint`
+
+Block to start querying/listening from.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  fromEpoch: 111n, // [!code focus]
+});
+```
+
+### toEpoch number (optional)
+
+- **Type:** `bigint`
+
+Block to start querying/listening from.
+
+```ts
+const filter = await publicClient.createContractEventFilter({
+  abi: Abi,
+  toEpoch: 111n, // [!code focus]
+});
+```
