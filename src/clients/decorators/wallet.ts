@@ -73,6 +73,15 @@ import {
   type SwitchChainParameters,
   switchChain,
 } from '../../actions/wallet/switchChain.js'
+import type {
+  ContractFunctionArgs,
+  ContractFunctionName,
+} from '../../types/contract.js'
+import {
+  writeContract,
+  type WriteContractParameters,
+  type WriteContractReturnType,
+} from '../../actions/wallet/writeContract.js'
 
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,
@@ -137,6 +146,25 @@ export type WalletActions<
   ) => Promise<SignTypedDataReturnType>
   switchChain: (args: SwitchChainParameters) => Promise<void>
   watchAsset: (args: WatchAssetParameters) => Promise<WatchAssetReturnType>
+  writeContract: <
+    const abi extends Abi | readonly unknown[],
+    functionName extends ContractFunctionName<abi, 'payable' | 'nonpayable'>,
+    args extends ContractFunctionArgs<
+      abi,
+      'payable' | 'nonpayable',
+      functionName
+    >,
+    chainOverride extends Chain | undefined = undefined,
+  >(
+    args: WriteContractParameters<
+      abi,
+      functionName,
+      args,
+      TChain,
+      TAccount,
+      chainOverride
+    >,
+  ) => Promise<WriteContractReturnType>
 }
 
 export function walletActions<
@@ -161,5 +189,6 @@ export function walletActions<
     signTypedData: (args) => signTypedData(client, args),
     switchChain: (args) => switchChain(client, args),
     watchAsset: (args) => watchAsset(client as any, args),
+    writeContract: (args) => writeContract(client, args),
   }
 }

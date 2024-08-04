@@ -926,7 +926,11 @@ export type PublicActions<
   >(
     args: ReadContractParameters<abi, functionName, args>,
   ) => Promise<ReadContractReturnType<abi, functionName, args>>
-
+  /**
+   *
+   * @param args - {@link SimulateContractParameters}
+   * @returns - {@link SimulateContractReturnType}
+   */
   simulateContract: <
     const abi extends Abi | readonly unknown[],
     functionName extends ContractFunctionName<abi, 'nonpayable' | 'payable'>,
