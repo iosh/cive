@@ -305,6 +305,11 @@ import type {
   MaybeExtractEventArgsFromAbi,
 } from '../../types/contract.js'
 import type { Client } from '../createClient.js'
+import {
+  simulateContract,
+  type SimulateContractParameters,
+  type SimulateContractReturnType,
+} from '../../actions/public/simulateContract.js'
 
 export type PublicActions<
   _TTransport extends Transport = Transport,
@@ -921,6 +926,37 @@ export type PublicActions<
   >(
     args: ReadContractParameters<abi, functionName, args>,
   ) => Promise<ReadContractReturnType<abi, functionName, args>>
+
+  simulateContract: <
+    const abi extends Abi | readonly unknown[],
+    functionName extends ContractFunctionName<abi, 'nonpayable' | 'payable'>,
+    args extends ContractFunctionArgs<
+      abi,
+      'nonpayable' | 'payable',
+      functionName
+    >,
+    chainOverride extends Chain | undefined,
+    accountOverride extends Account | Address | undefined = undefined,
+  >(
+    args: SimulateContractParameters<
+      abi,
+      functionName,
+      args,
+      TChain,
+      chainOverride,
+      accountOverride
+    >,
+  ) => Promise<
+    SimulateContractReturnType<
+      abi,
+      functionName,
+      args,
+      TChain,
+      _TAccount,
+      chainOverride,
+      accountOverride
+    >
+  >
 }
 
 export function publicActions<
@@ -1000,5 +1036,6 @@ export function publicActions<
     createContractEventFilter: (args) =>
       createContractEventFilter(client, args),
     readContract: (args) => readContract(client, args),
+    simulateContract: (args) => simulateContract(client, args),
   }
 }
