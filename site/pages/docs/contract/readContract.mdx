@@ -1,0 +1,211 @@
+# readContract
+
+Calls a read-only function on a contract, and returns the response.
+
+A "read-only" function (constant function) on a Solidity contract is denoted by a `view` or `pure` keyword. They can only read the state of the contract, and cannot make any changes to it. Since read-only methods do not change the state of the contract, they do not require any gas to be executed, and can be called by any user without the need to pay for gas.
+
+Internally, `readContract` uses a [Public Client](/docs/clients/public) to call the [`call`](/docs/actions/public/call)action with [ABI-encoded `data`](#TODO).
+
+## Usage
+
+Below is a very basic example of how to call a read-only function on a contract (with no arguments).
+
+:::code-group
+
+```ts [example.ts]
+import { publicClient } from "./client";
+import { Abi } from "./abi";
+
+const data = await publicClient.readContract({
+  address: "cfx:...",
+  abi: Abi,
+  functionName: "totalSupply",
+});
+```
+
+```ts [abi.ts]
+export const Abi = [
+  {
+    inputs: [],
+    name: "totalSupply",
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+] as const;
+```
+
+```ts [client.ts]
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+### Passing Arguments
+
+If your function requires argument(s), you can pass them through with the `args` attribute.
+
+TypeScript types for `args` will be inferred from the function name & ABI, to guard you from inserting the wrong values.
+
+For example, the `balanceOf` function name below requires an **address** argument, and it is typed as `Address`.
+
+:::code-group
+
+```ts [example.ts] {8}
+import { publicClient } from "./client";
+import { Abi } from "./abi";
+
+const data = await publicClient.readContract({
+  address: "cfx:...",
+  abi: Abi,
+  functionName: "balanceOf",
+  args: ["cfx:..."],
+});
+```
+
+```ts [abi.ts]
+export const Abi = [
+  ...
+  {
+    inputs: [{ name: "owner", type: "address" }],
+    name: "balanceOf",
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  ...
+] as const;
+```
+
+```ts [client.ts]
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Return Value
+
+The response from the contract. Type is inferred.
+
+## Parameters
+
+### address
+
+- **Type:** [`Address`](#TODO)
+
+The contract address.
+
+```ts
+const data = await publicClient.readContract({
+  address: "cfx:...", // [!code focus]
+  abi: Abi,
+  functionName: "totalSupply",
+});
+```
+
+### abi
+
+- **Type:** [`Abi`](#TODO)
+
+The contract's ABI.
+
+```ts
+const data = await publicClient.readContract({
+  address: "cfx:...",
+  abi: Abi, // [!code focus]
+  functionName: "totalSupply",
+});
+```
+
+### functionName
+
+- **Type:** `string`
+
+A function to extract from the ABI.
+
+```ts
+const data = await publicClient.readContract({
+  address: "cfx:...",
+  abi: Abi,
+  functionName: "totalSupply", // [!code focus]
+});
+```
+
+### args (optional)
+
+- **Type:** Inferred from ABI.
+
+Arguments to pass to function call.
+
+```ts
+const data = await publicClient.readContract({
+  address: "cfx:...",
+  abi: Abi,
+  functionName: "balanceOf",
+  args: ["cfx:..."], // [!code focus]
+});
+```
+
+### account (optional)
+
+- **Type:** `Account | Address`
+
+Optional Account sender override.
+
+Accepts a [Local Account (Private Key, etc)](/docs/clients/hdKeyToAccount).
+
+```ts
+import { privateKeyToAccount } from "cive/accounts";
+export const account = privateKeyToAccount("0x...", {
+  networkId: mainnet.id,
+});
+const data = await publicClient.readContract({
+  address: "cfx:...",
+  abi: Abi,
+  functionName: "totalSupply",
+  account: account, // [!code focus]
+});
+```
+
+### epochNumber (optional)
+
+- **Type:** `bigint`
+
+The block number to perform the read against.
+
+```ts
+const data = await publicClient.readContract({
+  address: "cfx:...",
+  abi: Abi,
+  functionName: "totalSupply",
+  epochNumber: 15121123n, // [!code focus]
+});
+```
+
+### epochTag (optional)
+
+- **Type:** `latest_state` | `latest_confirmed` | `latest_checkpoint` | `earliest`
+- **Default:** `latest_state`
+
+  The block number to perform the read against.
+
+```ts
+const data = await publicClient.readContract({
+  address: "cfx:...",
+  abi: Abi,
+  functionName: "totalSupply",
+  epochTag: "latest_state", // [!code focus]
+});
+```

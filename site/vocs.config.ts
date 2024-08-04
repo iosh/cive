@@ -342,6 +342,10 @@ export default defineConfig({
                 text: 'createContractEventFilter',
                 link: '/docs/contract/createContractEventFilter',
               },
+              {
+                text: 'readContract',
+                link: '/docs/contract/readContract',
+              },
             ],
           },
         ],
