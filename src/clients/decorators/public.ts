@@ -15,6 +15,11 @@ import {
   createBlockFilter,
 } from '../../actions/public/createBlockFilter.js'
 import {
+  type CreateContractEventFilterParameters,
+  type CreateContractEventFilterReturnType,
+  createContractEventFilter,
+} from '../../actions/public/createContractEventFilter.js'
+import {
   type CreateEventFilterParameters,
   type CreateEventFilterReturnType,
   createEventFilter,
@@ -288,6 +293,7 @@ import type { Abi, AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type {
+  ContractEventName,
   MaybeAbiEventName,
   MaybeExtractEventArgsFromAbi,
 } from '../../types/contract.js'
@@ -472,8 +478,8 @@ export type PublicActions<
   /**
    * Virtually executes a transaction, returns an estimate for the size of storage collateralized and the gas used by the transaction. The transaction will not be added to the blockchain.
    * - JSON-RPC Method: [`cfx_estimateGasAndCollateral`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_estimategasandcollateral)
-   * @param args - {@link EstimateContractGasParameters}
-   * @returns  an estimate result object {@link EstimateContractGasReturnType}
+   * @param args - {@link EstimateGasAndCollateralParameters}
+   * @returns  an estimate result object {@link EstimateGasAndCollateralReturnType}
    */
   estimateGasAndCollateral: (
     args: EstimateGasAndCollateralParameters,
@@ -880,6 +886,17 @@ export type PublicActions<
    * @returns - {@link GetFeeBurntReturnType}
    */
   getFeeBurnt: () => Promise<GetFeeBurntReturnType>
+
+  createContractEventFilter: <
+    const abi extends Abi | readonly unknown[],
+    eventName extends ContractEventName<abi> | undefined,
+    args extends MaybeExtractEventArgsFromAbi<abi, eventName> | undefined,
+    strict extends boolean | undefined = undefined,
+  >(
+    args: CreateContractEventFilterParameters<abi, eventName, args, strict>,
+  ) => Promise<
+    CreateContractEventFilterReturnType<abi, eventName, args, strict>
+  >
 }
 
 export function publicActions<
@@ -956,5 +973,7 @@ export function publicActions<
     getChainId: () => getChainId(client),
     sendRawTransaction: (args) => sendRawTransaction(client, args),
     getFeeBurnt: () => getFeeBurnt(client),
+    createContractEventFilter: (args) =>
+      createContractEventFilter(client, args),
   }
 }
