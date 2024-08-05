@@ -81,3 +81,10 @@ export {
   type DecodeDeployDataReturnType,
   decodeDeployData,
 } from './utils/abi/decodeDeployData.js'
+
+export {
+  type DecodeEventLogErrorType,
+  type DecodeEventLogParameters,
+  type DecodeEventLogReturnType,
+  decodeEventLog,
+} from './utils/abi/decodeEventLog.js'
