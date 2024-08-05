@@ -356,6 +356,15 @@ export default defineConfig({
               },
             ],
           },
+          {
+            text: 'Utilities',
+            items: [
+              {
+                text: 'decodeDeployData',
+                link: '/docs/contract/decodeDeployData',
+              },
+            ],
+          },
         ],
       },
     ],

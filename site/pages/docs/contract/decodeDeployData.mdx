@@ -1,0 +1,120 @@
+# decodeDeployData
+
+Decodes ABI encoded deploy data (bytecode & arguments).
+
+The opposite of [`encodeDeployData`](#TODO).
+
+## Install
+
+```ts
+import { decodeDeployData } from "viem";
+```
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { decodeDeployData } from "cive";
+import { mainnet } from "cive/chains";
+import { Abi } from "./abi.ts";
+const { args } = decodeDeployData({
+  networkId: mainnet.id,
+  abi: Abi,
+  bytecode:
+    "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220116554d4ba29ee08da9e97dc54ff9a2a65d67a648140d616fc225a25ff08c86364736f6c63430008070033",
+  data: "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220116554d4ba29ee08da9e97dc54ff9a2a65d67a648140d616fc225a25ff08c86364736f6c634300080700330000000000000000000000000000000000000000000000000000000000010f2c",
+});
+// { args: [69420n], bytecode: '0x6080604...' }
+```
+
+```ts [abi.ts] filename="abi.ts"
+export const Abi = [
+  {
+    inputs: [
+      {
+        name: "abc",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+] as const;
+```
+
+:::
+
+## Return Value
+
+```ts
+{
+  args: unknown[] | undefined;
+  bytecode: Hex;
+}
+```
+
+Decoded deploy data.
+
+### abi
+
+- **Type:** [`Abi`](/docs/glossary/types#abi)
+
+The contract's ABI.
+
+```ts
+const { args } = decodeDeployData({
+  networkId: mainnet.id,
+
+  bytecode:
+    "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220116554d4ba29ee08da9e97dc54ff9a2a65d67a648140d616fc225a25ff08c86364736f6c63430008070033",
+  data: "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220116554d4ba29ee08da9e97dc54ff9a2a65d67a648140d616fc225a25ff08c86364736f6c634300080700330000000000000000000000000000000000000000000000000000000000010f2c",
+  // [!code focus:13]
+  abi: [
+    {
+      inputs: [
+        {
+          name: "abc",
+          type: "uint256",
+        },
+      ],
+      stateMutability: "nonpayable",
+      type: "constructor",
+    },
+  ],
+});
+```
+
+### bytecode
+
+- **Type:** [`Hex`](#TODO)
+
+Contract bytecode.
+
+```ts
+const { args } = decodeDeployData({
+  networkId: mainnet.id,
+  // [!code focus:3]
+  bytecode:
+    "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220116554d4ba29ee08da9e97dc54ff9a2a65d67a648140d616fc225a25ff08c86364736f6c63430008070033",
+  data: "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220116554d4ba29ee08da9e97dc54ff9a2a65d67a648140d616fc225a25ff08c86364736f6c634300080700330000000000000000000000000000000000000000000000000000000000010f2c",
+
+  abi: Abi,
+});
+```
+
+### data
+
+- **Type:** [`Hex`](#TODO)
+
+```ts
+const { args } = decodeDeployData({
+  networkId: mainnet.id,
+  bytecode:
+    "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220116554d4ba29ee08da9e97dc54ff9a2a65d67a648140d616fc225a25ff08c86364736f6c63430008070033",
+  // [!code focus:4]
+  data: "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220116554d4ba29ee08da9e97dc54ff9a2a65d67a648140d616fc225a25ff08c86364736f6c634300080700330000000000000000000000000000000000000000000000000000000000010f2c",
+
+  abi: Abi,
+});
+```
