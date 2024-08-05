@@ -70,7 +70,7 @@ The `event` argument takes in an event in ABI format – we have a [`parseAbiIte
 :::code-group
 
 ```ts twoslash [example.ts]
-import { parseAbiItem } from "viem"; // [!code focus]
+import { parseAbiItem } from "cive"; // [!code focus]
 import { publicClient } from "./client";
 
 const filter = await publicClient.createEventFilter({
@@ -248,7 +248,7 @@ Note: A Filter scoped to multiple events cannot be also scoped with [indexed arg
 ### Strict Mode
 
 By default, `createEventFilter` will include logs that [do not conform](#TODO) to the indexed & non-indexed arguments on the `event`.
-viem will not return a value for arguments that do not conform to the ABI, thus, some arguments on `args` may be undefined.
+cive will not return a value for arguments that do not conform to the ABI, thus, some arguments on `args` may be undefined.
 
 ```ts twoslash
 // [!include ~/snippets/publicClient.ts]
