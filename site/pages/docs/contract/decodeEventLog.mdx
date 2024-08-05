@@ -1,0 +1,218 @@
+# decodeEventLog
+
+Decodes ABI encoded event topics & data (from an [Event Log](#TODO)) into an event name and structured arguments (both indexed & non-indexed).
+
+## Install
+
+```ts
+import { decodeEventLog } from "cive";
+```
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { decodeEventLog } from "cive";
+import { mainnet } from "cive/chains";
+import { Abi } from "./abi.ts";
+const event = decodeEventLog({
+  abi: Abi,
+  topics: [
+    "0x406dade31f7ae4b5dbc276258c28dde5ae6d5c2773c5745802c493a2360e55e0",
+  ],
+  networkId: mainnet.id,
+});
+/**
+ *   {
+ *       eventName: "Transfer",
+ *       args: undefined,
+ *   }
+ */
+```
+
+```ts [abi.ts] filename="abi.ts"
+export const Abi = [
+  {
+    inputs: [],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    inputs: [],
+    name: "Transfer",
+    type: "event",
+  },
+  {
+    inputs: [],
+    name: "Approve",
+    type: "event",
+  },
+] as const;
+```
+
+:::
+
+### Partial Decode
+
+By default, if the `topics` and `data` does not conform to the ABI (a mismatch between the number of indexed/non-indexed arguments), `decodeEventLog` will throw an error.
+
+For example, the following will throw an error as there is a mismatch in non-`indexed` arguments & `data` length.
+
+```ts
+decodeEventLog({
+  abi: parseAbi(["event Transfer(address indexed, address, uint256)"]), // [!code focus]
+  // `data` should be 64 bytes, but is only 32 bytes. // [!code focus]
+  data: "0x0000000000000000000000000000000000000000000000000000000000000001", // [!code focus]
+  topics: [
+    "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+    "0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+  ],
+  networkId: mainnet.id,
+});
+// [DecodeLogDataMismatch]: Data size of 32 bytes is too small for non-indexed event parameters.
+```
+
+It is possible for `decodeEventLog` to try and partially decode the Log, this can be done by setting the `strict` argument to `false`:
+
+```ts
+decodeEventLog({
+  // [!code focus]
+  abi: parseAbi(["event Transfer(address indexed, address, uint256)"]), // [!code focus]
+  data: "0x0000000000000000000000000000000000000000000000000000000000000001", // [!code focus]
+  topics: [
+    "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+    "0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+  ],
+  networkId: mainnet.id,
+  strict: false, // [!code ++] // [!code focus]
+});
+/**
+ * {
+ *   eventName: 'Transfer',
+ *   args: ['cfx:aak39z1fdm02v71y33znvaxwthh99skcp2evrfgefg']
+ * }
+ */
+```
+
+## Return Value
+
+```ts
+{
+  eventName: string;
+  args: Inferred;
+}
+```
+
+Decoded ABI event topics.
+
+## Parameters
+
+### networkId
+
+- **Type:** `Number`
+
+The network ID will be used for decoding the base32 address.
+
+```ts
+const topics = decodeEventLog({
+  abi: Abi,
+  networkId: mainnet.id, // [!code focus:3]
+  data: "0x0000000000000000000000000000000000000000000000000000000000000001",
+  topics: [
+    "0x406dade31f7ae4b5dbc276258c28dde5ae6d5c2773c5745802c493a2360e55e0",
+  ],
+});
+```
+
+### abi
+
+- **Type:** [`Abi`](#TODO)
+
+The contract's ABI.
+
+```ts
+const topics = decodeEventLog({
+  abi: Abi, // [!code focus]
+  networkId: mainnet.id,
+  data: "0x0000000000000000000000000000000000000000000000000000000000000001",
+  topics: [
+    "0x406dade31f7ae4b5dbc276258c28dde5ae6d5c2773c5745802c493a2360e55e0",
+  ],
+});
+```
+
+### topics
+
+- **Type:** `[Hex, ...(Hex | Hex[] | null)[]]`
+
+A set of topics (encoded indexed args) from the [Event Log](#TODO).
+
+```ts
+const topics = decodeEventLog({
+  abi: Abi,
+  networkId: mainnet.id,
+  data: "0x0000000000000000000000000000000000000000000000000000000000000001",
+  // [!code focus:3]
+  topics: [
+    "0x406dade31f7ae4b5dbc276258c28dde5ae6d5c2773c5745802c493a2360e55e0",
+  ],
+});
+```
+
+### data (optional)
+
+- **Type:** `string`
+
+The data (encoded non-indexed args) from the [Event Log](#TODO).
+
+```ts
+const topics = decodeEventLog({
+  abi: Abi,
+  networkId: mainnet.id,
+  data: "0x0000000000000000000000000000000000000000000000000000000000000001", // [!code focus]
+  topics: [
+    "0x406dade31f7ae4b5dbc276258c28dde5ae6d5c2773c5745802c493a2360e55e0",
+  ],
+});
+```
+
+### eventName (optional)
+
+- **Type:** `string`
+
+An event name from the ABI. Provide an `eventName` to infer the return type of `decodeEventLog`.
+
+```ts
+const topics = decodeEventLog({
+  abi: Abi,
+  networkId: mainnet.id,
+  eventName: "Transfer", // [!code focus]
+  data: "0x0000000000000000000000000000000000000000000000000000000000000001",
+  topics: [
+    "0x406dade31f7ae4b5dbc276258c28dde5ae6d5c2773c5745802c493a2360e55e0",
+  ],
+});
+```
+
+### strict (optional)
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+If `true`, `decodeEventLog` will throw an error if the `data` & `topics` lengths to not conform to the event on the ABI.
+If `false`, `decodeEventLog` will try and [partially decode](#partial-decode).
+
+```ts
+decodeEventLog({
+  // [!code focus]
+  abi: parseAbi(["event Transfer(address indexed, address, uint256)"]), // [!code focus]
+  data: "0x0000000000000000000000000000000000000000000000000000000000000001", // [!code focus]
+  topics: [
+    "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+    "0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266",
+  ],
+  networkId: mainnet.id,
+  strict: false, // [!code ++]
+});
+```

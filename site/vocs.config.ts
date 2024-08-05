@@ -363,6 +363,10 @@ export default defineConfig({
                 text: 'decodeDeployData',
                 link: '/docs/contract/decodeDeployData',
               },
+              {
+                text: 'decodeEventLog',
+                link: '/docs/contract/decodeEventLog',
+              }
             ],
           },
         ],
