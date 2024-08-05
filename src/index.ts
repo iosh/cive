@@ -74,3 +74,10 @@ export { parseGDrip } from './utils/unit/parseGDrip.js'
 export { parseUnits } from './utils/unit/parseUnits.js'
 
 export { toHex } from 'viem/utils'
+
+export {
+  type DecodeDeployDataErrorType,
+  type DecodeDeployDataParameters,
+  type DecodeDeployDataReturnType,
+  decodeDeployData,
+} from './utils/abi/decodeDeployData.js'

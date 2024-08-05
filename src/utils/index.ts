@@ -166,6 +166,14 @@ export { formatUnits } from './unit/formatUnits.js'
 export { parseCFX } from './unit/parseCFX.js'
 export { parseGDrip } from './unit/parseGDrip.js'
 export { parseUnits } from './unit/parseUnits.js'
+
+export {
+  decodeDeployData,
+  type DecodeDeployDataParameters,
+  type DecodeDeployDataReturnType,
+  type DecodeDeployDataErrorType,
+} from './abi/decodeDeployData.js'
+
 export {
   type EncodePackedErrorType,
   encodePacked,
