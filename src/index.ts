@@ -94,3 +94,9 @@ export {
   type DecodeFunctionDataReturnType,
   decodeFunctionData,
 } from './utils/abi/decodeFunctionData.js'
+export {
+  type DecodeFunctionResultErrorType,
+  type DecodeFunctionResultParameters,
+  type DecodeFunctionResultReturnType,
+  decodeFunctionResult,
+} from './utils/abi/decodeFunctionResult.js'
