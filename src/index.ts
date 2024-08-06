@@ -88,3 +88,9 @@ export {
   type DecodeEventLogReturnType,
   decodeEventLog,
 } from './utils/abi/decodeEventLog.js'
+export {
+  type DecodeFunctionDataErrorType,
+  type DecodeFunctionDataParameters,
+  type DecodeFunctionDataReturnType,
+  decodeFunctionData,
+} from './utils/abi/decodeFunctionData.js'
