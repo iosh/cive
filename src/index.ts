@@ -100,3 +100,29 @@ export {
   type DecodeFunctionResultReturnType,
   decodeFunctionResult,
 } from './utils/abi/decodeFunctionResult.js'
+
+export {
+  type EncodeDeployDataErrorType,
+  type EncodeDeployDataParameters,
+  type EncodeDeployDataReturnType,
+  encodeDeployData,
+} from './utils/abi/encodeDeployData.js'
+
+export {
+  type EncodeEventTopicsErrorType,
+  type EncodeEventTopicsParameters,
+  type EncodeEventTopicsReturnType,
+  encodeEventTopics,
+} from './utils/abi/encodeEventTopics.js'
+export {
+  type EncodeFunctionDataErrorType,
+  type EncodeFunctionDataParameters,
+  type EncodeFunctionDataReturnType,
+  encodeFunctionData,
+} from './utils/abi/encodeFunctionData.js'
+export {
+  type ParseEventLogsErrorType,
+  type ParseEventLogsParameters,
+  type ParseEventLogsReturnType,
+  parseEventLogs,
+} from './utils/abi/parseEventLogs.js'
