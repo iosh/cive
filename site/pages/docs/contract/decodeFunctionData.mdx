@@ -1,0 +1,150 @@
+# decodeFunctionData
+
+Decodes ABI encoded data (4 byte selector & arguments) into a function name and arguments.
+
+The opposite of [`encodeFunctionData`](#TODO).
+
+## Install
+
+```ts
+import { decodeFunctionData } from "cive";
+```
+
+## Usage
+
+Below is a very basic example of how to decode a function to calldata.
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { decodeFunctionData } from "cive";
+import { mainnet } from "cive/chains";
+import { Abi } from "./abi.ts";
+
+const { functionName } = decodeFunctionData({
+  networkId: mainnet.id,
+  abi: Abi,
+  data: "0x18160ddd",
+});
+```
+
+```ts [abi.ts] filename="abi.ts"
+export const Abi = [
+  {
+    inputs: [],
+    name: "totalSupply",
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+] as const;
+```
+
+:::
+
+### Extracting Arguments
+
+If your calldata includes argument(s) after the 4byte function signature, you can extract them with the `args` return value.
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { decodeFunctionData } from "cive";
+import { mainnet } from "cive/chains";
+import { Abi } from "./abi";
+
+// [!code word:args:1]
+const { functionName, args } = decodeFunctionData({
+  networkId: mainnet.id,
+  abi: Abi,
+  data: "0x70a082310000000000000000000000001c2e0c63246a30e121042d7121ee79a6a7012218",
+});
+// { functionName: 'balanceOf', args: ["cfx:aar4hekpybg7j0gjjtvs6ce0t9ae8rn32j67hhjxva"] }
+```
+
+```ts [abi.ts] filename="abi.ts"
+export const Abi = [
+  {
+    inputs: [{ name: "owner", type: "address" }],
+    name: "balanceOf",
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+] as const;
+```
+
+:::
+
+## Return Value
+
+```ts
+{
+  functionName: string;
+  args: unknown[] | undefined;
+}
+```
+
+Decoded ABI function data.
+
+### functionName
+
+- **Type**: `string`
+
+The decoded function name.
+
+### args
+
+- **Type**: `unknown[] | undefined`
+
+The decoded function arguments.
+
+## Parameters
+
+### networkId
+
+- **Type:** number
+
+The network ID will be used for decoding the base32 address.
+
+```ts
+import { mainnet } from "cive/chains";
+
+const { functionName } = decodeFunctionData({
+  networkId: mainnet.id, // [!code focus]
+  abi: Abi,
+  data: "0x18160ddd",
+});
+```
+
+### abi
+
+- **Type:** [`Abi`](#TODO)
+
+The contract's ABI.
+
+```ts
+import { mainnet } from "cive/chains";
+
+const { functionName } = decodeFunctionData({
+  networkId: mainnet.id,
+  abi: Abi, // [!code focus]
+  data: "0x18160ddd",
+});
+```
+
+### data
+
+- **Type:** [`Hex`](#TODO)
+
+The encoded calldata.
+
+```ts
+import { mainnet } from "cive/chains";
+
+const { functionName } = decodeFunctionData({
+  networkId: mainnet.id,
+  abi: Abi,
+  data: "0x18160ddd", // [!code focus]
+});
+```

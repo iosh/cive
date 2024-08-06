@@ -366,7 +366,11 @@ export default defineConfig({
               {
                 text: 'decodeEventLog',
                 link: '/docs/contract/decodeEventLog',
-              }
+              },
+              {
+                text: 'decodeFunctionData',
+                link: '/docs/contract/decodeFunctionData',
+              },
             ],
           },
         ],
