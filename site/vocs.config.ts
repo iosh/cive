@@ -373,7 +373,7 @@ export default defineConfig({
               },
               {
                 text: 'decodeFunctionResult',
-                link: '/docs/contract/decodeFunctionResult'
+                link: '/docs/contract/decodeFunctionResult',
               },
               {
                 text: 'decodeDeployData',
@@ -382,7 +382,7 @@ export default defineConfig({
               {
                 text: 'encodeDeployData',
                 link: '/docs/contract/encodeDeployData',
-              }
+              },
             ],
           },
         ],
