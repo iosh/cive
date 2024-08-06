@@ -1,0 +1,207 @@
+# decodeFunctionResult
+
+Decodes the result of a function call on a contract.
+
+## Install
+
+```ts
+import { decodeFunctionResult } from "cive";
+```
+
+## Usage
+
+Given an ABI (`abi`) and a function (`functionName`), pass through the encoded calldata (`data`) to retrieve the decoded value:
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { decodeFunctionResult } from "cive";
+import { mainnet } from "cive/chains";
+import { Abi } from "./abi.ts";
+
+const value = decodeFunctionResult({
+  networkId: mainnet.id,
+  abi: Abi,
+  functionName: "ownerOf",
+  data: "0x0000000000000000000000001c2e0c63246a30e121042d7121ee79a6a7012218",
+});
+// 'cfx:aasc6dddevzdb2kbau01cjtstgxmsakcdawt2p3a14'
+```
+
+```ts [abi.ts] filename="abi.ts"
+export const Abi = [
+  {
+    inputs: [{ name: "tokenId", type: "uint256" }],
+    name: "ownerOf",
+    outputs: [{ name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+] as const;
+```
+
+:::
+
+### Without `functionName`
+
+If your `abi` contains only one ABI item, you can omit the `functionName` (it becomes optional):
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { decodeFunctionResult } from "cive";
+import { mainnet } from "cive/chains";
+import { abiItem } from "./abi.ts";
+
+const value = decodeFunctionResult({
+  networkId: mainnet.id,
+  abi: [Abi],
+  functionName: "ownerOf", // [!code --]
+  data: "0x0000000000000000000000001c2e0c63246a30e121042d7121ee79a6a7012218",
+});
+// 'cfx:aasc6dddevzdb2kbau01cjtstgxmsakcdawt2p3a14'
+```
+
+```ts [abi.ts] filename="abi.ts"
+const abiItem = {
+  inputs: [{ name: "tokenId", type: "uint256" }],
+  name: "ownerOf",
+  outputs: [{ name: "", type: "address" }],
+  stateMutability: "view",
+  type: "function",
+};
+```
+
+:::
+
+### A more complex example
+
+:::code-group
+
+```ts [example.ts]
+import { decodeFunctionResult } from "cive";
+import { mainnet } from "cive/chains";
+import { Abi } from "./abi.ts";
+
+const value = decodeFunctionResult({
+  networkId: mainnet.id,
+  abi: Abi,
+  functionName: "getInfo",
+  data: "0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac0000000000000000000000000000000000000000000000000000000000010f2c0000000000000000000000000000000000000000000000000000000000000001000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac0000000000000000000000000000000000000000000000000000000000000045",
+});
+/**
+ * {
+ *  foo: {
+ *    sender: 'cfx:aam62tadxfg5npg3y11r4egm1m2jcrx2zuvcn3jhes',
+ *    x: 69420n,
+ *    y: true
+ *  },
+ *  sender: 'cfx:aam62tadxfg5npg3y11r4egm1m2jcrx2zuvcn3jhes',
+ *  z: 69
+ * }
+ */
+```
+
+```ts [abi.ts]
+export const Abi = [
+  ...
+  {
+    inputs: [],
+    name: 'getInfo',
+    outputs: [
+      {
+        components: [
+          {
+            components: [
+              {
+                name: 'sender',
+                type: 'address',
+              },
+              {
+                name: 'x',
+                type: 'uint256',
+              },
+              {
+                name: 'y',
+                type: 'bool',
+              },
+            ],
+            name: 'foo',
+            type: 'tuple',
+          },
+          {
+            name: 'sender',
+            type: 'address',
+          },
+          {
+            name: 'z',
+            type: 'uint32',
+          },
+        ],
+        name: 'res',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'pure',
+    type: 'function',
+  },
+  ...
+] as const;
+```
+
+:::
+
+## Return Value
+
+The decoded data. Type is inferred from the ABI.
+
+### networkId
+
+- **Type:** number
+
+The network ID will be used for decoding the base32 address.
+
+```ts
+import { mainnet } from "cive/chains";
+
+const value = decodeFunctionResult({
+  network: mainnet.id, // [!code focus]
+  abi: Abi,
+  functionName: "ownerOf",
+  data: "0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac",
+});
+```
+
+### functionName
+
+- **Type:** `string`
+
+The function to encode from the ABI.
+
+```ts
+import { mainnet } from "cive/chains";
+
+const value = decodeFunctionResult({
+  network: mainnet.id,
+  abi: Abi,
+  functionName: "ownerOf", // [!code focus]
+  data: "0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac",
+});
+```
+
+### data
+
+- **Type:** [`Hex`](#TODO)
+
+The calldata.
+
+```ts
+import { mainnet } from "cive/chains";
+
+const value = decodeFunctionResult({
+  network: mainnet.id,
+  abi: Abi,
+  functionName: "ownerOf",
+  data: "0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac", // [!code focus]
+});
+```

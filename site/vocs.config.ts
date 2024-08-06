@@ -371,6 +371,14 @@ export default defineConfig({
                 text: 'decodeFunctionData',
                 link: '/docs/contract/decodeFunctionData',
               },
+              {
+                text: 'decodeFunctionResult',
+                link: '/docs/contract/decodeFunctionResult'
+              },
+              {
+                text: 'decodeDeployData',
+                link: '/docs/contract/decodeDeployData',
+              }
             ],
           },
         ],
