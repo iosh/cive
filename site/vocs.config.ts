@@ -378,6 +378,10 @@ export default defineConfig({
               {
                 text: 'decodeDeployData',
                 link: '/docs/contract/decodeDeployData',
+              },
+              {
+                text: 'encodeDeployData',
+                link: '/docs/contract/encodeDeployData',
               }
             ],
           },
