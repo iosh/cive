@@ -41,6 +41,22 @@ export { http, webSocket, type Transport } from './clients/transports/index.js'
 export { custom } from 'viem'
 export { mainnet, testnet } from './chains/index.js'
 
+export type {
+  Chain,
+  ChainContract,
+  ChainFees,
+  ChainFeesFnParameters,
+  ChainFormatter,
+  ChainEstimateFeesPerGasFnParameters,
+  DeriveChain,
+  GetChainParameter,
+  ChainFormatters,
+  ChainSerializers,
+  ExtractChainFormatterExclude,
+  ExtractChainFormatterParameters,
+  ExtractChainFormatterReturnType,
+} from './types/chain.js'
+
 export {
   type Client,
   type ClientConfig,
