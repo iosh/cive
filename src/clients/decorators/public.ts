@@ -29,6 +29,11 @@ import {
   createPendingTransactionFilter,
 } from '../../actions/public/createPendingTransactionFilter.js'
 import {
+  type EstimateContractGasAndCollateralParameters,
+  type EstimateContractGasAndCollateralReturnType,
+  estimateContractGasAndCollateral,
+} from '../../actions/public/estimateContractGasAndCollateral.js'
+import {
   type EstimateGasAndCollateralParameters,
   type EstimateGasAndCollateralReturnType,
   estimateGasAndCollateral,
@@ -119,6 +124,11 @@ import {
   type GetConfirmationRiskByHashReturnType,
   getConfirmationRiskByHash,
 } from '../../actions/public/getConfirmationRiskByHash.js'
+import {
+  type GetContractEventsParameters,
+  type GetContractEventsReturnType,
+  getContractEvents,
+} from '../../actions/public/getContractEvents.js'
 import {
   type GetDepositListParameters,
   type GetDepositListReturnType,
@@ -275,6 +285,11 @@ import {
   readContract,
 } from '../../actions/public/readContract.js'
 import {
+  type SimulateContractParameters,
+  type SimulateContractReturnType,
+  simulateContract,
+} from '../../actions/public/simulateContract.js'
+import {
   type TraceBlockParameters,
   type TraceBlockReturnType,
   traceBlock,
@@ -305,11 +320,6 @@ import type {
   MaybeExtractEventArgsFromAbi,
 } from '../../types/contract.js'
 import type { Client } from '../createClient.js'
-import {
-  simulateContract,
-  type SimulateContractParameters,
-  type SimulateContractReturnType,
-} from '../../actions/public/simulateContract.js'
 
 export type PublicActions<
   _TTransport extends Transport = Transport,
@@ -961,6 +971,41 @@ export type PublicActions<
       accountOverride
     >
   >
+  /**
+   *
+   * @param args - {@link GetContractEventsParameters}
+   * @returns - {@link GetContractEventsReturnType}
+   */
+  getContractEvents: <
+    const abi extends Abi | readonly unknown[],
+    eventName extends ContractEventName<abi> | undefined = undefined,
+    strict extends boolean | undefined = undefined,
+  >(
+    args: GetContractEventsParameters<abi, eventName, strict>,
+  ) => Promise<GetContractEventsReturnType<abi, eventName, strict>>
+
+  /**
+   *
+   * @param args - {@link EstimateContractGasAndCollateralParameters}
+   * @returns - {@link EstimateContractGasAndCollateralReturnType}
+   */
+  estimateContractGasAndCollateral: <
+    chain extends TChain | undefined,
+    const abi extends Abi | readonly unknown[],
+    functionName extends ContractFunctionName<abi, 'nonpayable' | 'payable'>,
+    args extends ContractFunctionArgs<
+      abi,
+      'nonpayable' | 'payable',
+      functionName
+    >,
+  >(
+    args: EstimateContractGasAndCollateralParameters<
+      abi,
+      functionName,
+      args,
+      chain
+    >,
+  ) => Promise<EstimateContractGasAndCollateralReturnType>
 }
 
 export function publicActions<
@@ -1041,5 +1086,8 @@ export function publicActions<
       createContractEventFilter(client, args),
     readContract: (args) => readContract(client, args),
     simulateContract: (args) => simulateContract(client, args),
+    getContractEvents: (args) => getContractEvents(client, args),
+    estimateContractGasAndCollateral: (args) =>
+      estimateContractGasAndCollateral(client, args as any),
   }
 }

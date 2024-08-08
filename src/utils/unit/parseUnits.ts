@@ -1,3 +1,3 @@
-import { parseUnits } from 'viem'
+import { parseUnits } from 'viem/utils'
 
 export { parseUnits }

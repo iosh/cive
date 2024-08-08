@@ -1,3 +1,3 @@
-import { formatUnits } from 'viem'
+import { formatUnits } from 'viem/utils'
 
 export { formatUnits }
