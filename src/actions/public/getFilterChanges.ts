@@ -14,6 +14,7 @@ import type { Log } from '../../types/log.js'
 import type { RpcLog } from '../../types/rpc.js'
 import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
 import { formatLog } from '../../utils/formatters/log.js'
+import { ChainIdNotFoundError } from '../../errors/chain.js'
 
 export type GetFilterChangesParameters<
   TFilterType extends FilterType = FilterType,
@@ -51,13 +52,16 @@ export async function getFilterChanges<
   TEventName extends string | undefined,
   TStrict extends boolean | undefined = undefined,
 >(
-  _: Client<Transport, TChain>,
+  client: Client<Transport, TChain>,
   {
     filter,
   }: GetFilterChangesParameters<TFilterType, TAbi, TEventName, TStrict>,
 ): Promise<GetFilterChangesReturnType<TFilterType, TAbi, TEventName, TStrict>> {
   const strict = 'strict' in filter && filter.strict
-
+  // TODO: update this
+  if (typeof client.chain === 'undefined' || !('id' in client.chain)) {
+    throw new ChainIdNotFoundError()
+  }
   const logs = await filter.request({
     method: 'cfx_getFilterChanges',
     params: [filter.id],
@@ -83,6 +87,7 @@ export async function getFilterChanges<
     abi: filter.abi,
     logs: formattedLogs,
     strict,
+    networkId: client.chain.id,
   }) as unknown as GetFilterChangesReturnType<
     TFilterType,
     TAbi,

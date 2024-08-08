@@ -1,15 +1,17 @@
 import {
   AbiEventSignatureNotFoundError,
-  type DecodeEventLogErrorType,
   DecodeLogDataMismatch,
   DecodeLogTopicsMismatch,
-  decodeEventLog,
 } from 'viem'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Abi } from '../../types/abitype.js'
 import type { ContractEventName } from '../../types/contract.js'
 import type { Log } from '../../types/log.js'
 import type { RpcLog } from '../../types/rpc.js'
+import {
+  type DecodeEventLogErrorType,
+  decodeEventLog,
+} from './decodeEventLog.js'
 
 export type ParseEventLogsParameters<
   abi extends Abi | readonly unknown[] = Abi,
@@ -30,6 +32,7 @@ export type ParseEventLogsParameters<
   /** List of logs. */
   logs: (Log | RpcLog)[]
   strict?: strict | boolean | undefined
+  networkId: number
 }
 
 export type ParseEventLogsReturnType<
@@ -61,6 +64,7 @@ export function parseEventLogs<
   eventName,
   logs,
   strict = true,
+  networkId,
 }: ParseEventLogsParameters<abi, eventName, strict>): ParseEventLogsReturnType<
   abi,
   eventName,
@@ -73,6 +77,7 @@ export function parseEventLogs<
           ...log,
           abi,
           strict,
+          networkId,
         })
         if (eventName && !eventName.includes(event.eventName!)) return null
         return { ...event, ...log }

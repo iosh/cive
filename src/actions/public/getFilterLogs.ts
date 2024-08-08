@@ -13,6 +13,7 @@ import { formatLog } from '../../utils/formatters/log.js'
 
 import type { Chain } from '../../types/chain.js'
 import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
+import { ChainIdNotFoundError } from '../../errors/chain.js'
 export type GetFilterLogsParameters<
   TAbi extends Abi | readonly unknown[] | undefined = undefined,
   TEventName extends string | undefined = undefined,
@@ -43,11 +44,14 @@ export async function getFilterLogs<
   TEventName extends string | undefined,
   TStrict extends boolean | undefined = undefined,
 >(
-  _client: Client<Transport, TChain>,
+  client: Client<Transport, TChain>,
   { filter }: GetFilterLogsParameters<TAbi, TEventName, TStrict>,
 ): Promise<GetFilterLogsReturnType<TAbi, TEventName, TStrict>> {
   const strict = filter.strict ?? false
-
+  // TODO: update this
+  if (typeof client.chain === 'undefined' || !('id' in client.chain)) {
+    throw new ChainIdNotFoundError()
+  }
   const logs = await filter.request({
     method: 'cfx_getFilterLogs',
     params: [filter.id],
@@ -60,5 +64,6 @@ export async function getFilterLogs<
     abi: filter.abi,
     logs: formattedLogs,
     strict,
+    networkId: client.chain.id,
   }) as unknown as GetFilterLogsReturnType<TAbi, TEventName, TStrict>
 }

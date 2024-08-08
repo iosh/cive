@@ -1,13 +1,14 @@
 import type { BaseError, Transport } from 'viem'
 import {
-  parseAccount,
   type ParseAccountErrorType,
+  parseAccount,
 } from '../../accounts/index.js'
 import type { Account } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import { ChainIdNotFoundError } from '../../errors/chain.js'
 import {
-  getContractError,
   type GetContractErrorReturnType,
+  getContractError,
 } from '../../errors/getContractError.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Abi, Address } from '../../types/abitype.js'
@@ -23,16 +24,15 @@ import type {
 } from '../../types/contract.js'
 import type { Hex } from '../../types/misc.js'
 import type { Prettify, UnionEvaluate, UnionOmit } from '../../types/utils.js'
+import { getAction } from '../../utils/getAction.js'
 import {
-  decodeFunctionResult,
-  encodeFunctionData,
   type DecodeFunctionResultErrorType,
   type EncodeFunctionDataErrorType,
+  decodeFunctionResult,
+  encodeFunctionData,
 } from '../../utils/index.js'
 import type { WriteContractParameters } from '../wallet/writeContract.js'
-import { call, type CallErrorType, type CallParameters } from './call.js'
-import { getAction } from '../../utils/getAction.js'
-import { ChainIdNotFoundError } from '../../errors/chain.js'
+import { type CallErrorType, type CallParameters, call } from './call.js'
 
 export type SimulateContractParameters<
   abi extends Abi | readonly unknown[] = Abi,

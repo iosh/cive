@@ -73,15 +73,15 @@ import {
   type SwitchChainParameters,
   switchChain,
 } from '../../actions/wallet/switchChain.js'
+import {
+  type WriteContractParameters,
+  type WriteContractReturnType,
+  writeContract,
+} from '../../actions/wallet/writeContract.js'
 import type {
   ContractFunctionArgs,
   ContractFunctionName,
 } from '../../types/contract.js'
-import {
-  writeContract,
-  type WriteContractParameters,
-  type WriteContractReturnType,
-} from '../../actions/wallet/writeContract.js'
 
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,

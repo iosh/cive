@@ -10,6 +10,7 @@ import {
 import type { RequestErrorType } from 'viem/utils'
 import type { Address } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import { ChainIdNotFoundError } from '../../errors/chain.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
@@ -156,14 +157,17 @@ export async function getLogs<
   const strict = strict_ ?? false
 
   const events = events_ ?? (event ? [event] : undefined)
-
+  // TODO: update this
+  if (typeof client.chain === 'undefined' || !('id' in client.chain)) {
+    throw new ChainIdNotFoundError()
+  }
   let topics: LogTopic[] = []
   if (events) {
     const encoded = (events as AbiEvent[]).flatMap((event) =>
       encodeEventTopics({
         abi: [event],
         eventName: (event as AbiEvent).name,
-        args,
+        args: events_ ? undefined : args,
       } as EncodeEventTopicsParameters),
     )
     topics = [encoded as LogTopic]
@@ -204,5 +208,6 @@ export async function getLogs<
     abi: events,
     logs: formattedLogs,
     strict,
+    networkId: client.chain.id,
   }) as unknown as GetLogsReturnType<TAbiEvent, TAbiEvents, TStrict>
 }
