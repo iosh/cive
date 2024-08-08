@@ -1,0 +1,5 @@
+---
+"cive": minor
+---
+
+Added estimateContractGasAndCollateral
