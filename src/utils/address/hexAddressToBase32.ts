@@ -31,9 +31,10 @@ export function hexAddressToBase32<
   TAddressType,
   TVerbose
 > {
-  const addressType = getAddressTypeByHexAddress(hexToBytes(hexAddress))
-
   const hexBuffer = hexToBytes(hexAddress)
+  
+  const addressType = getAddressTypeByHexAddress(hexBuffer)
+
   const netName = getNetworkPrefixByNetworkId(networkId).toUpperCase()
 
   const netName5Bits = stringToBytes(netName).map((_byte) => _byte & 31)
