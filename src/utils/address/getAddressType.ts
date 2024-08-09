@@ -2,7 +2,7 @@ import type { AddressType } from '../../accounts/types.js'
 
 export function getAddressTypeByHexAddress(
   hexAddressUit8Array: Uint8Array,
-): AddressType {
+): AddressType | 'unknown' {
   switch (hexAddressUit8Array[0] & 0xf0) {
     case 0x10:
       return 'user'
@@ -14,6 +14,6 @@ export function getAddressTypeByHexAddress(
       }
       return 'null'
     default:
-      throw new Error('Invalid address type')
+      return 'unknown'
   }
 }

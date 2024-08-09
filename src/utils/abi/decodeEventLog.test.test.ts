@@ -62,8 +62,8 @@ test('named args: Transfer(address,address,uint256)', () => {
     data: '0x0000000000000000000000000000000000000000000000000000000000000001',
     topics: [
       '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-      '0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac',
-      '0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac',
+      '0x00000000000000000000000015cc3c03994db5b0d9a5eedd10cabab0813678ac',
+      '0x00000000000000000000000015cc3c03994db5b0d9a5eedd10cabab0813678ac',
     ],
     networkId: accounts[0].netId,
   })
@@ -79,11 +79,11 @@ test('named args: Transfer(address,address,uint256)', () => {
     eventName: 'Transfer',
     args: {
       from: hexAddressToBase32({
-        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        hexAddress: '0x15cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
         networkId: accounts[0].netId,
       }),
       to: hexAddressToBase32({
-        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        hexAddress: '0x15cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
         networkId: accounts[0].netId,
       }),
       tokenId: 1n,
@@ -118,8 +118,8 @@ test('named args with a missing name: Transfer(address,address,uint256)', () => 
     data: '0x0000000000000000000000000000000000000000000000000000000000000001',
     topics: [
       '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-      '0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac',
-      '0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac',
+      '0x00000000000000000000000015cc3c03994db5b0d9a5eedd10cabab0813678ac',
+      '0x00000000000000000000000015cc3c03994db5b0d9a5eedd10cabab0813678ac',
     ],
     networkId: accounts[0].netId,
   })
@@ -130,11 +130,11 @@ test('named args with a missing name: Transfer(address,address,uint256)', () => 
   expect(event).toEqual({
     args: [
       hexAddressToBase32({
-        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        hexAddress: '0x15cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
         networkId: accounts[0].netId,
       }),
       hexAddressToBase32({
-        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        hexAddress: '0x15cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
         networkId: accounts[0].netId,
       }),
       1n,
@@ -168,8 +168,8 @@ test('unnamed args: Transfer(address,address,uint256)', () => {
     data: '0x0000000000000000000000000000000000000000000000000000000000000001',
     topics: [
       '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-      '0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac',
-      '0x000000000000000000000000a5cc3c03994db5b0d9a5eedd10cabab0813678ac',
+      '0x00000000000000000000000015cc3c03994db5b0d9a5eedd10cabab0813678ac',
+      '0x00000000000000000000000015cc3c03994db5b0d9a5eedd10cabab0813678ac',
     ],
     networkId: accounts[0].netId,
   })
@@ -180,11 +180,11 @@ test('unnamed args: Transfer(address,address,uint256)', () => {
   expect(event).toEqual({
     args: [
       hexAddressToBase32({
-        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        hexAddress: '0x15cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
         networkId: accounts[0].netId,
       }),
       hexAddressToBase32({
-        hexAddress: '0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
+        hexAddress: '0x15cc3c03994DB5b0d9A5eEdD10CabaB0813678AC',
         networkId: accounts[0].netId,
       }),
       1n,
@@ -314,8 +314,8 @@ test('args: data – named (address,address,uint256)', () => {
     data: '0x0000000000000000000000000000000000000000000000000000000000000001',
     topics: [
       '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-      '0x000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045',
-      '0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+      '0x00000000000000000000000018da6bf26964af9d7eed9e03e53415d37aa96045',
+      '0x000000000000000000000000139fd6e51aad88f6f4ce6ab8827279cfffb92266',
     ],
     networkId: accounts[0].netId,
   })
@@ -331,11 +331,11 @@ test('args: data – named (address,address,uint256)', () => {
     eventName: 'Transfer',
     args: {
       from: hexAddressToBase32({
-        hexAddress: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
+        hexAddress: '0x18da6bf26964af9d7eed9e03e53415d37aa96045',
         networkId: accounts[0].netId,
       }),
       to: hexAddressToBase32({
-        hexAddress: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+        hexAddress: '0x139fd6e51aad88f6f4ce6ab8827279cfffb92266',
         networkId: accounts[0].netId,
       }),
       tokenId: 1n,
@@ -369,8 +369,8 @@ test('args: data – unnamed (address,address,uint256)', () => {
     eventName: 'Transfer',
     topics: [
       '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-      '0x000000000000000000000000d8da6bf26964af9d7eed9e03e53415d37aa96045',
-      '0x000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+      '0x00000000000000000000000018da6bf26964af9d7eed9e03e53415d37aa96045',
+      '0x000000000000000000000000139fd6e51aad88f6f4ce6ab8827279cfffb92266',
     ],
     networkId: accounts[0].netId,
   })
@@ -382,11 +382,11 @@ test('args: data – unnamed (address,address,uint256)', () => {
     eventName: 'Transfer',
     args: [
       hexAddressToBase32({
-        hexAddress: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
+        hexAddress: '0x18da6bf26964af9d7eed9e03e53415d37aa96045',
         networkId: accounts[0].netId,
       }),
       hexAddressToBase32({
-        hexAddress: '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+        hexAddress: '0x139fd6e51aad88f6f4ce6ab8827279cfffb92266',
         networkId: accounts[0].netId,
       }),
       1n,

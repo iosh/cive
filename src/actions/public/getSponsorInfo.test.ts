@@ -42,7 +42,6 @@ test('default', async () => {
   const SponsorWhitelistControlAddress = hexAddressToBase32({
     hexAddress: SponsorWhitelistControlHexAddress,
     networkId: accounts[0].netId,
-    addressType: 'builtin',
   })
 
   await writeContract(client, {

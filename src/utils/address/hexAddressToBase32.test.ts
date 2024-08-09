@@ -3,6 +3,7 @@ import { describe, expect, test } from 'vitest'
 import { encode } from '@conflux-dev/conflux-address-js'
 import { mainNetworkId, testNetworkId } from '../../constants/networkId.js'
 import { hexAddressToBase32 } from './hexAddressToBase32.js'
+import type { Hex } from '../../types/misc.js'
 
 const addresses = [
   '0xe7c45500C993103B6f55d1f80b98C951EdA35B3c',
@@ -21,130 +22,115 @@ const addresses = [
   '0xb4b0eD95b7060242B6968e0C001756a1e53629c9',
 ] as const
 
+const addressesWith0x1 = addresses.map(
+  (address) => `0x1${address.substring(3)}` as Hex,
+)
+const addressesWith0x8 = addresses.map(
+  (address) => `0x8${address.substring(3)}` as Hex,
+)
+
 describe('cover hex address to base32', () => {
   test('user address and main network', () => {
-    for (let index = 0; index < addresses.length; index++) {
-      const hexAddress = addresses[index]
-      const userHexAddress = `1${hexAddress.slice(3)}`
-      const hexBuffer = Buffer.from(userHexAddress, 'hex')
+    for (let index = 0; index < addressesWith0x1.length; index++) {
+      const hexAddress = addressesWith0x1[index]
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
           networkId: mainNetworkId,
-          addressType: 'user',
         }),
-      ).toEqual(encode(hexBuffer, mainNetworkId))
+      ).toEqual(encode(hexAddress, mainNetworkId))
     }
   })
 
   test('user address and test network', () => {
-    for (let index = 0; index < addresses.length; index++) {
-      const hexAddress = addresses[index]
-      const userHexAddress = `1${hexAddress.slice(3)}`
-      const hexBuffer = Buffer.from(userHexAddress, 'hex')
+    for (let index = 0; index < addressesWith0x1.length; index++) {
+      const hexAddress = addressesWith0x1[index]
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
           networkId: testNetworkId,
-          addressType: 'user',
         }),
-      ).toEqual(encode(hexBuffer, testNetworkId))
+      ).toEqual(encode(hexAddress, testNetworkId))
     }
   })
 
   test('contract address and main network', () => {
-    for (let index = 0; index < addresses.length; index++) {
-      const hexAddress = addresses[index]
-      const contractHexAddress = `8${hexAddress.slice(3)}`
-      const hexBuffer = Buffer.from(contractHexAddress, 'hex')
+    for (let index = 0; index < addressesWith0x8.length; index++) {
+      const hexAddress = addressesWith0x8[index]
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
           networkId: mainNetworkId,
-          addressType: 'contract',
         }),
-      ).toEqual(encode(hexBuffer, mainNetworkId))
+      ).toEqual(encode(hexAddress, mainNetworkId))
     }
   })
 
   test('contract address and test network', () => {
-    for (let index = 0; index < addresses.length; index++) {
-      const hexAddress = addresses[index]
-      const contractHexAddress = `8${hexAddress.slice(3)}`
-      const hexBuffer = Buffer.from(contractHexAddress, 'hex')
-
+    for (let index = 0; index < addressesWith0x8.length; index++) {
+      const hexAddress = addressesWith0x8[index]
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
           networkId: testNetworkId,
-          addressType: 'contract',
         }),
-      ).toEqual(encode(hexBuffer, testNetworkId))
+      ).toEqual(encode(hexAddress, testNetworkId))
     }
   })
 })
 
 describe('cover hex address to base32 with verbose', () => {
   test('user address and main network', () => {
-    for (let index = 0; index < addresses.length; index++) {
-      const hexAddress = addresses[index]
-      const userHexAddress = `1${hexAddress.slice(3)}`
-      const hexBuffer = Buffer.from(userHexAddress, 'hex')
+    for (let index = 0; index < addressesWith0x1.length; index++) {
+      const hexAddress = addressesWith0x1[index]
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
           networkId: mainNetworkId,
-          addressType: 'user',
           verbose: true,
         }),
-      ).toEqual(encode(hexBuffer, mainNetworkId, true))
+      ).toEqual(encode(hexAddress, mainNetworkId, true))
     }
   })
 
   test('user address and test network', () => {
-    for (let index = 0; index < addresses.length; index++) {
-      const hexAddress = addresses[index]
-      const userHexAddress = `1${hexAddress.slice(3)}`
-      const hexBuffer = Buffer.from(userHexAddress, 'hex')
+    for (let index = 0; index < addressesWith0x1.length; index++) {
+      const hexAddress = addressesWith0x1[index]
+
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
           networkId: testNetworkId,
-          addressType: 'user',
           verbose: true,
         }),
-      ).toEqual(encode(hexBuffer, testNetworkId, true))
+      ).toEqual(encode(hexAddress, testNetworkId, true))
     }
   })
 
   test('contract address and main network', () => {
-    for (let index = 0; index < addresses.length; index++) {
-      const hexAddress = addresses[index]
-      const contractHexAddress = `8${hexAddress.slice(3)}`
-      const hexBuffer = Buffer.from(contractHexAddress, 'hex')
+    for (let index = 0; index < addressesWith0x8.length; index++) {
+      const hexAddress = addressesWith0x8[index]
+
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
           networkId: mainNetworkId,
-          addressType: 'contract',
           verbose: true,
         }),
-      ).toEqual(encode(hexBuffer, mainNetworkId, true))
+      ).toEqual(encode(hexAddress, mainNetworkId, true))
     }
   })
   test('contract address and test network', () => {
-    for (let index = 0; index < addresses.length; index++) {
-      const hexAddress = addresses[index]
-      const contractHexAddress = `8${hexAddress.slice(3)}`
-      const hexBuffer = Buffer.from(contractHexAddress, 'hex')
+    for (let index = 0; index < addressesWith0x8.length; index++) {
+      const hexAddress = addressesWith0x8[index]
+
       expect(
         hexAddressToBase32({
           hexAddress: hexAddress,
           networkId: testNetworkId,
-          addressType: 'contract',
           verbose: true,
         }),
-      ).toEqual(encode(hexBuffer, testNetworkId, true))
+      ).toEqual(encode(hexAddress, testNetworkId, true))
     }
   })
 })

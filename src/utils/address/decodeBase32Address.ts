@@ -56,7 +56,7 @@ export type DecodeBase32AddressParameters<
 
 export type DecodeBase32AddressReturnType = {
   address: HexAddress
-  type: AddressType
+  type: AddressType | 'unknown'
   networkId: number
 }
 

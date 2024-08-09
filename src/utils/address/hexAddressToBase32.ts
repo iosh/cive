@@ -3,32 +3,16 @@ import type { Address, AddressType } from '../../accounts/types.js'
 import { convertBit } from './convertBit.js'
 import { getNetworkPrefixByNetworkId } from './getNetworkIdPrefixByNetworkId.js'
 import { polyMod } from './polyMod.js'
+import { getAddressTypeByHexAddress } from './getAddressType.js'
 
 export const VERSION_BYTE = 0
 
-const typeMapToHex: Record<AddressType, `0x${string}`> = {
-  builtin: '0x0',
-  user: '0x1',
-  contract: '0x8',
-  null: '0x0',
-}
-
-export function replaceHexPrefixByType(
-  address: string,
-  type: AddressType,
-): Hex {
-  const typeHex = typeMapToHex[type]
-  return `${typeHex}${address.slice(3)}`
-}
-
 export type HexAddressToBase32Parameters<
   TNetworkId extends number = number,
-  TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined,
 > = {
   hexAddress: Hex
   networkId: TNetworkId
-  addressType?: TAddressType | undefined
   verbose?: TVerbose | undefined
 }
 
@@ -41,15 +25,15 @@ export function hexAddressToBase32<
 >({
   hexAddress,
   networkId,
-  addressType = 'user',
   verbose = false,
-}: HexAddressToBase32Parameters<TNetworkId, TAddressType, TVerbose>): Address<
+}: HexAddressToBase32Parameters<TNetworkId, TVerbose>): Address<
   TNetworkId,
   TAddressType,
   TVerbose
 > {
-  const typedAddress = replaceHexPrefixByType(hexAddress, addressType)
-  const hexBuffer = hexToBytes(typedAddress)
+  const addressType = getAddressTypeByHexAddress(hexToBytes(hexAddress))
+
+  const hexBuffer = hexToBytes(hexAddress)
   const netName = getNetworkPrefixByNetworkId(networkId).toUpperCase()
 
   const netName5Bits = stringToBytes(netName).map((_byte) => _byte & 31)

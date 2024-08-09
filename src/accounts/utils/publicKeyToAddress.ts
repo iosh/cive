@@ -5,12 +5,10 @@ import type { Address, AddressType } from '../types.js'
 
 export type PublicKeyToAddressParameters<
   TNetworkId extends number = number,
-  TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined,
 > = {
   publicKey: Hex
   networkId: TNetworkId
-  addressType?: TAddressType
   verbose?: TVerbose
 }
 
@@ -23,14 +21,12 @@ export function publicKeyToAddress<
 >({
   publicKey,
   networkId,
-  addressType = 'user',
   verbose = false,
-}: PublicKeyToAddressParameters<TNetworkId, TAddressType, TVerbose>) {
+}: PublicKeyToAddressParameters<TNetworkId, TVerbose>) {
   const address = keccak256(`0x${publicKey.substring(4)}`).substring(26)
   return hexAddressToBase32({
-    hexAddress: `0x${address}`,
+    hexAddress: `0x1${address.substring(1)}`,
     networkId,
-    addressType,
     verbose,
   }) as Address<TNetworkId, TAddressType, TVerbose>
 }
