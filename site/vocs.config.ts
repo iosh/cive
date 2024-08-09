@@ -340,6 +340,10 @@ export default defineConfig({
               { text: 'getStorageAt', link: '/docs/contract/getStorageAt' },
               { text: 'getStorageRoot', link: '/docs/contract/getStorageRoot' },
               { text: 'getSponsorInfo', link: '/docs/contract/getSponsorInfo' },
+              {
+                text: 'estimateContractGasAndCollateral',
+                link: '/docs/contract/estimateContractGasAndCollateral',
+              },
               { text: 'deployContract', link: '/docs/contract/deployContract' },
               {
                 text: 'createContractEventFilter',

@@ -127,20 +127,6 @@ const estimate = await publicClient.estimateGasAndCollateral({
 });
 ```
 
-### factoryData (optional)
-
-- **Type:**
-
-estimateGasAndCollateraldata to execute on the factory to deploy the contract.
-
-```ts
-const estimate = await publicClient.estimateGasAndCollateral({
-  account: "cfx:...",
-  data: "0x", // [!code focus]
-  to: "cfx:...",
-});
-```
-
 ### nonce (optional)
 
 - **Type:** `bigint`
