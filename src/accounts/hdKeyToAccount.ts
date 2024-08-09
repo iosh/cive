@@ -6,7 +6,7 @@ import type { ErrorType } from '../errors/utils.js'
 
 import type { PrivateKeyToAccountErrorType } from 'viem/accounts'
 import { privateKeyToAccount } from './privateKeyToAccount.js'
-import type { AddressType, HDAccount, HDOptions } from './types.js'
+import type { HDAccount, HDOptions } from './types.js'
 
 export type HDKeyToAccountErrorType =
   | PrivateKeyToAccountErrorType
@@ -26,10 +26,8 @@ export function hdKeyToAccount(
     addressIndex = 0,
     changeIndex = 0,
     path,
-    addressType = 'user',
     verbose = false,
   }: HDOptions & {
-    addressType?: AddressType | undefined
     verbose?: boolean | undefined
   },
 ): HDAccount {
@@ -39,7 +37,6 @@ export function hdKeyToAccount(
   )
   const account = privateKeyToAccount(toHex(hdKey.privateKey!), {
     networkId,
-    addressType,
     verbose,
   })
   return {

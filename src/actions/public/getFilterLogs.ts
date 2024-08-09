@@ -11,9 +11,9 @@ import type { Filter } from '../../types/filter.js'
 import type { Log } from '../../types/log.js'
 import { formatLog } from '../../utils/formatters/log.js'
 
+import { ChainIdNotFoundError } from '../../errors/chain.js'
 import type { Chain } from '../../types/chain.js'
 import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
-import { ChainIdNotFoundError } from '../../errors/chain.js'
 export type GetFilterLogsParameters<
   TAbi extends Abi | readonly unknown[] | undefined = undefined,
   TEventName extends string | undefined = undefined,

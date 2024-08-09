@@ -23,19 +23,13 @@ export function privateKeyToAddress<
   TNetworkId extends number = number,
   TAddressType extends AddressType | undefined = undefined,
   TVerbose extends boolean | undefined = undefined,
->({
-  privateKey,
-  networkId,
-  addressType = 'user',
-  verbose = false,
-}: PrivateKeyToAddressParameters) {
+>({ privateKey, networkId, verbose = false }: PrivateKeyToAddressParameters) {
   const publicKey = bytesToHex(
     secp256k1.getPublicKey(privateKey.slice(2), false),
   )
   return publicKeyToAddress({
     publicKey,
     networkId,
-    addressType,
     verbose,
   }) as Address<TNetworkId, TAddressType, TVerbose>
 }

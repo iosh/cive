@@ -2,8 +2,8 @@ import { describe, expect, test } from 'vitest'
 
 import { encode } from '@conflux-dev/conflux-address-js'
 import { mainNetworkId, testNetworkId } from '../../constants/networkId.js'
-import { hexAddressToBase32 } from './hexAddressToBase32.js'
 import type { Hex } from '../../types/misc.js'
+import { hexAddressToBase32 } from './hexAddressToBase32.js'
 
 const addresses = [
   '0xe7c45500C993103B6f55d1f80b98C951EdA35B3c',

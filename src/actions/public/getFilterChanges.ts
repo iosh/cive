@@ -6,6 +6,7 @@ import type {
 } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
 import type { Client } from '../../clients/createClient.js'
+import { ChainIdNotFoundError } from '../../errors/chain.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Abi, AbiEvent, ExtractAbiEvent } from '../../types/abitype.js'
 import type { Chain } from '../../types/chain.js'
@@ -14,7 +15,6 @@ import type { Log } from '../../types/log.js'
 import type { RpcLog } from '../../types/rpc.js'
 import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'
 import { formatLog } from '../../utils/formatters/log.js'
-import { ChainIdNotFoundError } from '../../errors/chain.js'
 
 export type GetFilterChangesParameters<
   TFilterType extends FilterType = FilterType,

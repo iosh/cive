@@ -1,9 +1,9 @@
 import { type Hex, hexToBytes, padHex, stringToBytes, toHex } from 'viem'
 import type { Address, AddressType } from '../../accounts/types.js'
 import { convertBit } from './convertBit.js'
+import { getAddressTypeByHexAddress } from './getAddressType.js'
 import { getNetworkPrefixByNetworkId } from './getNetworkIdPrefixByNetworkId.js'
 import { polyMod } from './polyMod.js'
-import { getAddressTypeByHexAddress } from './getAddressType.js'
 
 export const VERSION_BYTE = 0
 
@@ -32,7 +32,7 @@ export function hexAddressToBase32<
   TVerbose
 > {
   const hexBuffer = hexToBytes(hexAddress)
-  
+
   const addressType = getAddressTypeByHexAddress(hexBuffer)
 
   const netName = getNetworkPrefixByNetworkId(networkId).toUpperCase()
