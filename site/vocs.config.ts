@@ -277,6 +277,7 @@ export default defineConfig({
       },
       {
         text: 'Wallet Actions',
+        collapsed: true,
         items: [
           { text: 'Introduction', link: '/docs/actions/wallet/introduction' },
           {
@@ -291,6 +292,7 @@ export default defineConfig({
       },
       {
         text: 'Accounts',
+        collapsed: true,
         items: [
           {
             text: 'Local Accounts',
@@ -328,6 +330,7 @@ export default defineConfig({
       },
       {
         text: 'Contract',
+        collapsed: true,
         items: [
           {
             text: 'Actions',
