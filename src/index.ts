@@ -89,6 +89,13 @@ export { parseCFX } from './utils/unit/parseCFX.js'
 export { parseGDrip } from './utils/unit/parseGDrip.js'
 export { parseUnits } from './utils/unit/parseUnits.js'
 
+export {
+  getContract,
+  type GetContractErrorType,
+  type GetContractParameters,
+  type GetContractReturnType,
+} from './actions/getContract.js'
+
 export { toHex } from 'viem/utils'
 
 export type {
