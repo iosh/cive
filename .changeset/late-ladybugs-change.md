@@ -1,5 +1,0 @@
----
-"cive": minor
----
-
-Added getContractEvents
