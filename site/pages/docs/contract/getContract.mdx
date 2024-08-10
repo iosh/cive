@@ -1,0 +1,277 @@
+# Contract Instances
+
+A Contract Instance is a type-safe interface for performing contract-related actions with a specific ABI and address, created by the `getContract` function.
+
+## Import
+
+```ts
+import { getContract } from "cive";
+```
+
+## Usage
+
+You can create a Contract Instance with the `getContract` function by passing in a [ABI](#TODO), address, and [Public](/docs/clients/public) and/or [Wallet Client](/docs/clients/wallet). Once created, you can call contract methods, fetch for events, listen to events, etc.
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { getContract } from "cive";
+import { Abi } from "./abi";
+import { publicClient, walletClient } from "./client";
+
+// 1. Create contract instance
+const contract = getContract({
+  address: "cfx:...",
+  abi: Abi,
+  // 1a. Insert a single client
+  client: publicClient,
+  // 1b. Or public and/or wallet clients
+  // client: { public: publicClient, wallet: walletClient },
+});
+
+// 2. Call contract methods, fetch events, listen to events, etc.
+const result = await contract.read.totalSupply();
+```
+
+```ts [client.ts] filename="client.ts"
+import { createPublicClient, createWalletClient, http, custom } from "cive";
+import { mainnet } from "cive/chains";
+import { privateKeyToAccount } from "cive/accounts";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
+
+export const walletClient = createWalletClient({
+  chain: mainnet,
+  transport: http(),
+  account,
+});
+```
+
+```ts [abi.ts] filename="abi.ts"
+export const Abi = [
+  {
+    inputs: [],
+    name: "totalSupply",
+    outputs: [{ type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    name: "Transfer",
+    type: "event",
+    inputs: [
+      {
+        indexed: true,
+        name: "from",
+        type: "address",
+      },
+      { indexed: true, name: "to", type: "address" },
+      {
+        indexed: true,
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+  },
+] as const;
+```
+
+:::
+
+Using Contract Instances can make it easier to work with contracts if you don't want to pass the `abi` and `address` properties every time you perform contract actions, e.g. [`readContract`](/docs/contract/readContract), [`writeContract`](/docs/contract/writeContract), [`estimateContractGasAndCollateral`](/docs/contract/estimateContractGasAndCollateral), etc. Switch between the tabs below to see the difference between standalone Contract Actions and Contract Instance Actions:
+
+:::code-group
+
+```ts [contract-instance.ts]
+import { getContract } from "cive";
+import { Abi } from "./abi";
+import { publicClient, walletClient } from "./client";
+
+const contract = getContract({
+  address: "cfx:...",
+  abi: Abi,
+  client: {
+    public: publicClient,
+    wallet: walletClient,
+  },
+});
+
+const balance = await contract.read.balanceOf(["cfx:..."]);
+const hash = await contract.write.mint(["cfx:...", 69420n]);
+const logs = await contract.getEvents.Transfer();
+```
+
+```ts [contract-actions.ts]
+import { Abi } from "./abi";
+import { publicClient, walletClient } from "./client";
+
+const balance = await publicClient.readContract({
+  address: "cfx:...",
+  abi: Abi,
+  functionName: "balanceOf",
+  args: ["cfx:..."],
+});
+const hash = await walletClient.writeContract({
+  address: "cfx:...",
+  abi: Abi,
+  functionName: "mint",
+  args: ["cfx:...", 69420n],
+});
+```
+
+```ts [abi.ts]
+export const Abi = [
+  {
+    inputs: [],
+    name: "totalSupply",
+    outputs: [{ type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    name: "Transfer",
+    type: "event",
+    inputs: [
+      {
+        indexed: true,
+        name: "from",
+        type: "address",
+      },
+      { indexed: true, name: "to", type: "address" },
+      {
+        indexed: true,
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
+        type: "address",
+      },
+    ],
+    name: "balanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "mint",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+] as const;
+```
+
+:::
+:::tip
+While Contract Instances are great for reducing code duplication, they pull in multiple contract actions (e.g. `createContractEventFilter`, `estimateContractGasAndCollateral`, `readContract`,`simulateContract`, `writeContract`), so they can be a bit heavier than individual calls. If you only need a couple contract methods and you care about minimizing bundle size to the fullest extent, you may want to use individual calls instead.
+:::
+
+## Return Value
+
+Contract instance object. Type is inferred.
+
+Depending on if you create a contract instance with a Public Client, Wallet Client, or both, the methods available on the contract instance will vary.
+
+#### With Public Client
+
+If you pass in a [`publicClient`](/docs/clients/public), the following methods are available:
+
+- [`createEventFilter`](/docs/contract/createContractEventFilter)
+- [`estimateContractGasAndCollateral`](/docs/contract/estimateContractGasAndCollateral)
+- [`getEvents`](/docs/contract/getContractEvents)
+- [`read`](/docs/contract/readContract)
+- [`simulate`](/docs/contract/simulateContract)
+- [`watchEvent TODO`](#TODO)
+
+#### With Wallet Client
+
+If you pass in a [`walletClient`](/docs/clients/wallet), the following methods are available:
+
+- [`estimateContractGasAndCollateral`](/docs/contract/estimateContractGasAndCollateral)
+- [`write`](/docs/contract/writeContract)
+
+## Parameters
+
+### address
+
+- **Type:** [`Address`](#TODO)
+
+The contract address.
+
+```ts
+const contract = getContract({
+  address: "cfx:..", // [!code focus]
+  abi: Abi,
+  client: publicClient,
+});
+```
+
+### abi
+
+- **Type:** [`Abi`](#TODO)
+
+The contract's ABI.
+
+```ts
+const contract = getContract({
+  address: "cfx:..",
+  abi: Abi, // [!code focus]
+  client: publicClient,
+});
+```
+
+### client
+
+- **Type:** [`Client | { public: Client; wallet: Client }`](/docs/clients/public)
+
+The Client used for performing [contract actions](/docs/contract/getContract#return-value).
+
+```ts
+const contract = getContract({
+  address: "cfx:..",
+  abi: Abi,
+  client: publicClient, // [!code focus]
+});
+```
+
+You can also pass in multiple clients (ie. a Wallet Client and a Public Client):
+
+```ts
+const contract = getContract({
+  address: "cfx:...",
+  abi: Abi,
+  client: {
+    // [!code focus]
+    public: publicClient, // [!code focus]
+    wallet: walletClient, // [!code focus]
+  }, // [!code focus]
+});
+```

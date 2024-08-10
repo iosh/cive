@@ -49,7 +49,7 @@ For example, the `constructor` below requires an **address** argument, and it is
 
 ```ts [example.ts]
 import { encodeDeployData } from "cive";
-import { wagmiAbi } from "./abi";
+import { Abi } from "./abi";
 
 const data = encodeDeployData({
   abi: Abi,
@@ -61,7 +61,7 @@ const data = encodeDeployData({
 ```
 
 ```ts [abi.ts]
-export const wagmiAbi = [
+export const Abi = [
   {
     inputs: [{ name: "owner", type: "address" }],
     stateMutability: "nonpayable",

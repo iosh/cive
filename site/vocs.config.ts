@@ -333,6 +333,10 @@ export default defineConfig({
         collapsed: true,
         items: [
           {
+            text: 'Contract Instances',
+            link: '/docs/contract/getContract',
+          },
+          {
             text: 'Actions',
             items: [
               { text: 'getAdmin', link: '/docs/contract/getAdmin' },
