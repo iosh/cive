@@ -261,7 +261,7 @@ describe('poll', () => {
     unwatch1()
     unwatch2()
     unwatch3()
-    expect(epochNumbers.length).toMatchInlineSnapshot(`36`)
+    expect(epochNumbers.length).toMatchInlineSnapshot('36')
 
     epochNumbers = []
 
