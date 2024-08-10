@@ -37,6 +37,22 @@ const epochNumber = await publicClient.getEpochNumber({
 });
 ```
 
+### cacheTime (optional)
+
+- **Type:** `number`
+- **Default:** [Client's `cacheTime`](/clients/public#cachetimeoptional)
+
+Time (in ms) that cached block number will remain in memory. If you don't want to cache, set it to `0`.
+
+```ts
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const epochNumber = await publicClient.getEpochNumber({
+  epochTag: "latest_state",
+  cacheTime: 4_000, // [!code focus]
+});
+```
+
 ## JSON-RPC Method
 
 [`cfx_epochNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_epochnumber)

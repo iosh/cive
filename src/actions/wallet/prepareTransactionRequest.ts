@@ -262,7 +262,7 @@ export async function prepareTransactionRequest<
         client,
         getEpochNumber,
         'getEpochNumber',
-      )({})
+      )({ cacheTime: 0 })
     }
   }
 
