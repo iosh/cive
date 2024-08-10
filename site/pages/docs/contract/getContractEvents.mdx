@@ -1,0 +1,393 @@
+# getContractEvents
+
+Returns a list of contract **event logs** matching the provided parameters.
+
+## Usage
+
+By default, `getContractEvents` returns all matched events on the ABI. In practice, you must use scoping to filter for specific events.
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+import { erc20Abi } from "./abi";
+
+// Fetch event logs for every event on every ERC-20 contract. // [!code focus:99]
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+});
+// [{ ... }, { ... }, { ... }]
+```
+
+```ts [abi.ts] filename="abi.ts"
+export const erc20Abi = [
+  {
+    type: "event",
+    name: "Transfer",
+    inputs: [
+      {
+        indexed: true,
+        name: "from",
+        type: "address",
+      },
+      {
+        indexed: true,
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
+        name: "value",
+        type: "uint256",
+      },
+    ],
+  },
+] as const;
+```
+
+```ts [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Scoping
+
+You can also scope to a set of given attributes.
+
+:::code-group
+
+```ts [example.ts]
+import { parseAbiItem } from "cive";
+import { publicClient } from "./client";
+import { erc20Abi } from "./abi";
+
+const logs = await publicClient.getContractEvents({
+  address: "cfx:...",
+  abi: erc20Abi,
+  eventName: "Transfer",
+  args: {
+    from: "cfx:...",
+    to: "cfx:...",
+  },
+  fromEpoch: 1n,
+  toEpoch: 100n,
+});
+```
+
+```ts [abi.ts]
+export const erc20Abi = [
+  {
+    type: "event",
+    name: "Transfer",
+    inputs: [
+      {
+        indexed: true,
+        name: "from",
+        type: "address",
+      },
+      {
+        indexed: true,
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
+        name: "value",
+        type: "uint256",
+      },
+    ],
+  },
+] as const;
+```
+
+```ts [client.ts]
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+### Address
+
+Logs can be scoped to an **address**:
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  address: "cfx:...", // [!code focus]
+});
+```
+
+### Event
+
+Logs can be scoped to an **event**.
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  address: "cfx:...",
+  eventName: "Transfer", // [!code focus]
+});
+```
+
+### Arguments
+
+Logs can be scoped to given **_indexed_ arguments**:
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  address: "cfx:...",
+  eventName: "Transfer", // [!code focus]
+  args: {
+    // [!code focus:4]
+    from: "cfx:...",
+    to: "cfx:...",
+  },
+});
+```
+
+Only indexed arguments in `event` are candidates for `args`.
+
+An argument can also be an array to indicate that other values can exist in the position:
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  address: "cfx:...",
+  eventName: "Transfer",
+  args: {
+    // [!code focus:8]
+    // '0xd8da...' OR '0xa5cc...' OR '0xa152...'
+    from: ["cfx:...", "cfx:...", "cfx:..."],
+  },
+});
+```
+
+### Block Range
+
+Logs can be scoped to a **block range**:
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  address: "cfx:...",
+  eventName: "Transfer",
+  fromBlock: 16330000n, // [!code focus]
+  toBlock: 16330050n, // [!code focus]
+});
+```
+
+### Epoch Range
+
+Logs can be scoped to a **epoch range**:
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  address: "cfx:...",
+  eventName: "Transfer",
+  fromEpoch: 16330000n, // [!code focus]
+  toEpoch: 16330050n, // [!code focus]
+});
+```
+
+### Epoch Tag
+
+- **Type:** "latest_state" | "latest_confirmed" | "latest_checkpoint" | "earliest"
+- **Defaut:** fromEpoch "latest_checkpoint" toEpoch 'latest_state'
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  address: "cfx:...",
+  eventName: "Transfer",
+  fromEpoch: "earliest", // [!code focus]
+  toEpoch: "latest_state", // [!code focus]
+});
+```
+
+### Strict Mode
+
+By default, `getContractEvents` will include logs that [do not conform](#TODO) to the indexed & non-indexed arguments on the `event`.
+viem will not return a value for arguments that do not conform to the ABI, thus, some arguments on `args` may be undefined.
+
+```ts twoslash
+import { publicClient } from "./client";
+import { erc20Abi } from "./abi";
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  eventName: "Transfer",
+});
+
+logs[0].args; // [!code focus]
+//      ^? 
+
+
+
+
+
+
+
+```
+
+You can turn on `strict` mode to only return logs that conform to the indexed & non-indexed arguments on the `event`, meaning that `args` will always be defined. The trade-off is that non-conforming logs will be filtered out.
+
+```ts twoslash
+import { publicClient } from "./client";
+import { erc20Abi } from "./abi";
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  eventName: "Transfer",
+  strict: true,
+});
+
+logs[0].args // [!code focus]
+//      ^? 
+
+
+
+
+
+
+
+
+```
+
+
+## Returns
+
+[`Log[]`](#TODO)
+
+A list of event logs.
+
+
+## Parameters
+
+### abi
+
+- **Type:** [`Abi`](#TODO)
+
+The contract's ABI.
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi, // [!code focus]
+})
+```
+
+### address
+
+- **Type:** [`Address | Address[]`](#TODO)
+
+A contract address or a list of contract addresses. Only logs originating from the contract(s) will be included in the result.
+
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  address: 'cfx:...', // [!code focus]
+})
+```
+
+### eventName
+
+- **Type:** `string`
+
+An event name on the `abi`.
+
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  eventName: 'Transfer' // [!code focus]
+})
+```
+
+### args
+
+- **Type:** Inferred.
+
+A list of _indexed_ event arguments.
+```ts
+const logs = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  eventName: 'Transfer',
+  args: { // [!code focus:4]
+    from: 'cfx:...',
+    to: 'cfx:...'
+  },
+})
+```
+
+### fromEpoch(number)
+
+- **Type:** `bigint`
+
+
+```ts
+const filter = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  fromEpoch: 69420n // [!code focus]
+})
+```
+
+### toEpoch(number)
+
+- **Type:** `bigint`
+
+```ts
+const filter = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  toEpoch: 69420n // [!code focus]
+})
+```
+
+
+### fromEpoch(tag)
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_checkpoint`
+
+```ts
+const filter = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  fromEpoch: 'latest_checkpoint' // [!code focus]
+})
+```
+
+### toEpoch(tag)
+
+- **Type:** `latest_state`| `latest_confirmed`| `latest_checkpoint` | `earliest`
+- **Defaut:** `latest_state`
+
+```ts
+const filter = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  toEpoch: 'latest_state' // [!code focus]
+})
+```
+
+
+### blockHashes
+
+- **Type:** `hash[]`
+
+
+```ts
+const filter = await publicClient.getContractEvents({
+  abi: erc20Abi,
+  blockHashes: ["0x..."], // [!code focus]
+});
+
+```

@@ -341,6 +341,10 @@ export default defineConfig({
               { text: 'getStorageRoot', link: '/docs/contract/getStorageRoot' },
               { text: 'getSponsorInfo', link: '/docs/contract/getSponsorInfo' },
               {
+                text: 'getContractEvents',
+                link: '/docs/contract/getContractEvents',
+              },
+              {
                 text: 'estimateContractGasAndCollateral',
                 link: '/docs/contract/estimateContractGasAndCollateral',
               },
