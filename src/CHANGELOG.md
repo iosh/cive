@@ -1,5 +1,19 @@
 # cive
 
+## 0.1.0
+
+### Minor Changes
+
+- 8334e24: Removed the addressType parameter from the hexAddressToBase32 function. The function now determines the base32 address type based on the prefix of the hex address passed in (0x1, 0x8, or 0x0).
+- de5928c: Added estimateContractGasAndCollateral
+- 74edcd6: Added getContractEvents
+- cadba6b: Added getContract
+
+### Patch Changes
+
+- 01d06bc: Reexported vite utils functions
+- a5ccd1c: Added chain for export
+
 ## 0.0.4
 
 ### Patch Changes
