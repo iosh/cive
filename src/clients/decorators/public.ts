@@ -305,6 +305,11 @@ import {
   uninstallFilter,
 } from '../../actions/public/uninstallFilter.js'
 import {
+  type WatchEpochNumberParameters,
+  type WatchEpochNumberReturnType,
+  watchEpochNumber,
+} from '../../actions/public/watchEpochNumber.js'
+import {
   type SendRawTransactionParameters,
   type SendRawTransactionReturnType,
   sendRawTransaction,
@@ -1006,6 +1011,14 @@ export type PublicActions<
       chain
     >,
   ) => Promise<EstimateContractGasAndCollateralReturnType>
+
+  /**
+   * @param args - {@link WatchEpochNumberParameters}
+   * @returns  - {@link WatchEpochNumberReturnType}
+   */
+  watchEpochNumber: (
+    args: WatchEpochNumberParameters,
+  ) => WatchEpochNumberReturnType
 }
 
 export function publicActions<
@@ -1089,5 +1102,6 @@ export function publicActions<
     getContractEvents: (args) => getContractEvents(client, args),
     estimateContractGasAndCollateral: (args) =>
       estimateContractGasAndCollateral(client, args as any),
+    watchEpochNumber: (args) => watchEpochNumber(client, args),
   }
 }
