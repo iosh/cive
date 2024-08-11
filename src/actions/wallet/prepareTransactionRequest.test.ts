@@ -4,7 +4,7 @@ import { accounts, getTestAccount } from '~test/src/constants.js'
 
 import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { parseGDrip } from '../../utils/unit/parseGDrip.js'
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
+import { mine } from '../localNode/mine.js'
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import * as getBlock from '../public/getBlock.js'
 import { prepareTransactionRequest } from './prepareTransactionRequest.js'
@@ -14,7 +14,6 @@ const client = devConflux.getClient({ account: sourceAccount })
 beforeAll(async () => {
   await devConflux.start()
   await sayHelloLocalNode(client)
-  await generateEmptyLocalNodeBlocks(client, { numBlocks: 10 })
 })
 
 afterAll(async () => {
@@ -44,21 +43,21 @@ test('default', async () => {
       },
       "chainId": 201029,
       "data": undefined,
-      "epochHeight": 10n,
+      "epochHeight": 0n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
-      "maxFeePerGas": 1n,
-      "maxPriorityFeePerGas": 0n,
+      "gasPrice": 1200000000n,
       "storageLimit": 0n,
       "to": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
-      "type": "eip1559",
+      "type": "legacy",
       "value": 1000000000000000000n,
     }
   `)
 })
 
 test('1559', async () => {
-  await generateEmptyLocalNodeBlocks(client, { numBlocks: 10 })
+  await mine(client, { blocks: 5 })
+  await mine(client, { blocks: 5 })
   const block = await getBlock.getBlock(client)
   const {
     maxFeePerGas,
@@ -77,7 +76,7 @@ test('1559', async () => {
       "accessList": undefined,
       "chainId": 201029,
       "data": undefined,
-      "epochHeight": 20n,
+      "epochHeight": 10n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
       "storageLimit": 0n,
@@ -113,7 +112,7 @@ test('args: account', async () => {
       },
       "chainId": 201029,
       "data": undefined,
-      "epochHeight": 20n,
+      "epochHeight": 10n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
       "maxPriorityFeePerGas": 0n,
@@ -149,7 +148,7 @@ test('args: chain', async () => {
       },
       "chainId": 201029,
       "data": undefined,
-      "epochHeight": 20n,
+      "epochHeight": 10n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
       "maxPriorityFeePerGas": 0n,
@@ -186,7 +185,7 @@ test('args: chainId', async () => {
       },
       "chainId": 69,
       "data": undefined,
-      "epochHeight": 20n,
+      "epochHeight": 10n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
       "maxPriorityFeePerGas": 0n,
@@ -220,7 +219,7 @@ test('args: nonce', async () => {
       },
       "chainId": 201029,
       "data": undefined,
-      "epochHeight": 20n,
+      "epochHeight": 10n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
       "maxPriorityFeePerGas": 0n,
@@ -259,7 +258,7 @@ test('args: gasPrice', async () => {
       },
       "chainId": 201029,
       "data": undefined,
-      "epochHeight": 20n,
+      "epochHeight": 10n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
       "gasPrice": 10000000000n,
@@ -295,7 +294,7 @@ test('args: gasPrice (on chain w/ block.baseFeePerGas)', async () => {
       },
       "chainId": 201029,
       "data": undefined,
-      "epochHeight": 20n,
+      "epochHeight": 10n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
       "gasPrice": 10000000000n,
@@ -328,7 +327,7 @@ test('args: maxFeePerGas', async () => {
       },
       "chainId": 201029,
       "data": undefined,
-      "epochHeight": 20n,
+      "epochHeight": 10n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
       "maxFeePerGas": 100000000000n,
