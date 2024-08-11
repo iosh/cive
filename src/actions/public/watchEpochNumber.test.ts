@@ -52,6 +52,31 @@ describe('poll', () => {
     `)
   })
 
+  test('epoch tag', async () => {
+    const epochNumbers: OnEpochNumberParameter[] = []
+
+    const unwatch = watchEpochNumber(client, {
+      onEpochNumber: (epochNumber) => {
+        epochNumbers.push(epochNumber)
+      },
+      poll: true,
+      pollingInterval: 100,
+      epochTag: 'earliest',
+    })
+
+    await mine(client, { blocks: 1 })
+    await wait(110)
+    await mine(client, { blocks: 1 })
+    await wait(110)
+    unwatch()
+    expect(epochNumbers).toMatchInlineSnapshot(`
+      [
+        0n,
+        0n,
+      ]
+    `)
+  })
+
   test('emitMissed', async () => {
     const epochNumbers: OnEpochNumberParameter[] = []
     const unwatch = watchEpochNumber(client, {
@@ -68,8 +93,8 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
-        8n,
-        9n,
+        10n,
+        11n,
       ]
     `)
   })
@@ -94,10 +119,10 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
-        9n,
-        10n,
         11n,
         12n,
+        13n,
+        14n,
       ]
     `)
   })
@@ -122,8 +147,8 @@ describe('poll', () => {
 
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
-        14n,
-        15n,
+        16n,
+        17n,
       ]
     `)
   })
@@ -146,11 +171,9 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
-        15n,
-        16n,
-        16n,
         17n,
-        17n,
+        18n,
+        19n,
       ]
     `)
   })
@@ -172,12 +195,8 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
-        19n,
-        19n,
-        19n,
-        20n,
-        20n,
-        20n,
+        21n,
+        22n,
       ]
     `)
   })
@@ -197,14 +216,8 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
-        21n,
-        21n,
-        21n,
-        21n,
-        22n,
-        22n,
-        22n,
-        22n,
+        23n,
+        24n,
       ]
     `)
     epochNumbers = []
@@ -221,16 +234,8 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
-        23n,
-        23n,
-        23n,
-        23n,
-        23n,
-        24n,
-        24n,
-        24n,
-        24n,
-        24n,
+        25n,
+        26n,
       ]
     `)
   })
@@ -261,7 +266,16 @@ describe('poll', () => {
     unwatch1()
     unwatch2()
     unwatch3()
-    expect(epochNumbers.length).toMatchInlineSnapshot('36')
+    expect(epochNumbers).toMatchInlineSnapshot(`
+      [
+        27n,
+        27n,
+        27n,
+        28n,
+        28n,
+        28n,
+      ]
+    `)
 
     epochNumbers = []
 
@@ -289,7 +303,16 @@ describe('poll', () => {
     unwatch1()
     unwatch2()
     unwatch3()
-    expect(epochNumbers.length).toMatchInlineSnapshot('42')
+    expect(epochNumbers).toMatchInlineSnapshot(`
+      [
+        29n,
+        29n,
+        29n,
+        30n,
+        30n,
+        30n,
+      ]
+    `)
   })
 
   test('immediately unwatch', async () => {

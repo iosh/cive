@@ -9,6 +9,7 @@ import { getAction } from '../../utils/getAction.js'
 import { type PollErrorType, poll } from '../../utils/poll.js'
 import { stringify } from '../../utils/stringify.js'
 import {
+  type GetEpochNumberParameters,
   type GetEpochNumberReturnType,
   getEpochNumber,
 } from './getEpochNumber.js'
@@ -26,6 +27,7 @@ export type WatchEpochNumberParameters<
   onEpochNumber: OnEpochNumberFn
   /** The callback to call when an error occurred when trying to get for a new Epoch. */
   onError?: ((error: Error) => void) | undefined
+  epochTag?: GetEpochNumberParameters['epochTag']
 } & (
   | (HasTransportType<transport, 'webSocket'> extends true
       ? {
@@ -63,6 +65,7 @@ export function watchEpochNumber<
     onError,
     poll: poll_,
     pollingInterval = client.pollingInterval,
+    epochTag,
   }: WatchEpochNumberParameters<transport>,
 ): WatchEpochNumberReturnType {
   const enablePolling = (() => {
@@ -86,7 +89,7 @@ export function watchEpochNumber<
       pollingInterval,
     ])
 
-    return observe(observerId, { onEpochNumber, onError }, (emit) => {
+    return observe(observerId, { onEpochNumber, onError }, (emit) =>
       poll(
         async () => {
           try {
@@ -94,16 +97,14 @@ export function watchEpochNumber<
               client,
               getEpochNumber,
               'getEpochNumber',
-            )({ cacheTime: 0 })
+            )({ cacheTime: 0, epochTag })
             if (prevEpochNumber) {
               // If the current epoch number is the same as the previous,
               // we can skip.
-
               if (epochNumber === prevEpochNumber) return
 
-              // If we have missed out on some previous epoch, and the
-              // `emitMissed` flag is truthy, let's emit those epoch.
-
+              // If we have missed out on some previous epochs, and the
+              // `emitMissed` flag is truthy, let's emit those epochs.
               if (epochNumber - prevEpochNumber > 1 && emitMissed) {
                 for (let i = prevEpochNumber + 1n; i < epochNumber; i++) {
                   emit.onEpochNumber(i, prevEpochNumber)
@@ -125,8 +126,8 @@ export function watchEpochNumber<
           emitOnBegin,
           interval: pollingInterval,
         },
-      )
-    })
+      ),
+    )
   }
 
   const subscribeEpochNumber = () => {
@@ -158,9 +159,9 @@ export function watchEpochNumber<
             params: ['newHeads'],
             onData(data: any) {
               if (!active) return
-              const EpochNumber = hexToBigInt(data.result?.number)
-              emit.onEpochNumber(EpochNumber, prevEpochNumber)
-              prevEpochNumber = EpochNumber
+              const epochNumber = hexToBigInt(data.result?.number)
+              emit.onEpochNumber(epochNumber, prevEpochNumber)
+              prevEpochNumber = epochNumber
             },
             onError(error: Error) {
               emit.onError?.(error)
