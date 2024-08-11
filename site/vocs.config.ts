@@ -97,6 +97,10 @@ export default defineConfig({
                 text: 'getPoSRewards',
                 link: '/docs/actions/public/getPoSRewards',
               },
+              {
+                text: 'watchEpochNumber',
+                link: '/docs/actions/public/watchEpochNumber',
+              },
             ],
           },
           {

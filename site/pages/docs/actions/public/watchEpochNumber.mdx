@@ -1,0 +1,131 @@
+# watchEpochNumber
+
+Watches and returns incoming epoch numbers.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const unwatch = publicClient.watchEpochNumber({
+  onEpochNumber: (epochNumber) => {
+    console.log(epochNumber);
+  },
+});
+
+// @log: > 102224432n
+// @log: > 102224435n
+// @log: > 102224438n
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Listener
+
+`(blockNumber: bigint) => void`
+
+The block number.
+
+## Returns
+
+`UnwatchFn`
+
+A function that can be invoked to stop watching for new block numbers.
+
+## Parameters
+
+### epochTag (optional)
+
+- **Type** `latest_mined`| `latest_state` | `latest_confirmed` | `latest_checkpoint` | `earliest`
+- **Defaut** `latest_mined`
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const unwatch = publicClient.watchEpochNumber({
+  epochTag: 'latest_mined', // [!code focus]
+  onEpochNumber: (epochNumber) => {
+    console.log(epochNumber);
+  },
+});
+```
+### emitMissed (optional)
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+Whether or not to emit missed block numbers to the callback.
+
+Missed block numbers may occur in instances where internet connection is lost, or the block time is lesser than the [polling interval](/docs/clients/public#pollingintervaloptional) of the client.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const unwatch = publicClient.watchEpochNumber({
+  emitMissed: true, // [!code focus]
+  onEpochNumber: (epochNumber) => {
+    console.log(epochNumber);
+  },
+});
+````
+
+### emitOnBegin (optional)
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+Whether or not to emit the latest block number to the callback when the subscription opens.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const unwatch = publicClient.watchEpochNumber({
+  emitMissed: true,
+  emitOnBegin: true, // [!code focus]
+  onEpochNumber: (epochNumber) => {
+    console.log(epochNumber);
+  },
+});
+```
+
+### poll (optional)
+
+- **Type:** `boolean`
+- **Default:** `false` for WebSocket Transports, `true` for non-WebSocket Transports
+
+Whether or not to use a polling mechanism to check for new block numbers instead of a WebSocket subscription.
+
+This option is only configurable for Clients with a [WebSocket Transport](#TODO).
+
+TODO
+
+### pollingInterval (optional)
+
+- **Type:** `number`
+
+Polling frequency (in ms). Defaults to Client's `pollingInterval` config.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const unwatch = publicClient.watchEpochNumber({
+  emitMissed: true,
+  emitOnBegin: true,
+  pollingInterval: 12_000, // [!code focus]
+  onEpochNumber: (epochNumber) => {
+    console.log(epochNumber);
+  },
+});
+```
