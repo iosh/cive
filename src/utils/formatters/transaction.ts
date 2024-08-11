@@ -19,7 +19,7 @@ export const transactionType = {
 
 export type FormattedTransaction<
   TChain extends Chain | undefined = undefined,
-  TEpochTag extends EpochTag = EpochTag,
+  TEpochTag extends EpochTag | undefined = undefined,
   _FormatterReturnType = ExtractChainFormatterReturnType<
     TChain,
     'transaction',

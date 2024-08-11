@@ -13,7 +13,9 @@ import {
 
 export type GetBlockParameters<
   TIncludeTransactions extends boolean = false,
-  TEpochTag extends Exclude<EpochTag, 'latest_finalized'> = 'latest_state',
+  TEpochTag extends
+    | Exclude<EpochTag, 'latest_finalized'>
+    | undefined = undefined,
 > = {
   includeTransactions?: TIncludeTransactions | undefined
 } & (
@@ -49,14 +51,16 @@ export type GetBlockParameters<
 export type GetBlockReturnType<
   TChain extends Chain | undefined = undefined,
   TIncludeTransactions extends boolean = false,
-  TEpochTag extends EpochTag = 'latest_state',
+  TEpochTag extends EpochTag | undefined = undefined,
 > = Prettify<FormattedBlock<TChain, TIncludeTransactions, TEpochTag>>
 
 export async function getBlock<
   TChain extends Chain | undefined,
   TAccount extends Account | undefined,
   TIncludeTransactions extends boolean = false,
-  TEpochTag extends Exclude<EpochTag, 'latest_finalized'> = 'latest_state',
+  TEpochTag extends
+    | Exclude<EpochTag, 'latest_finalized'>
+    | undefined = undefined,
 >(
   client: Client<Transport, TChain, TAccount>,
   {

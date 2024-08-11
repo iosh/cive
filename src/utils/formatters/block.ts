@@ -14,7 +14,7 @@ type BlockPendingDependencies = 'gasUsed' | 'posReference' | 'baseFeePerGas'
 export type FormattedBlock<
   TChain extends Chain | undefined = undefined,
   TIncludeTransactions extends boolean = boolean,
-  TEpochTag extends EpochTag = EpochTag,
+  TEpochTag extends EpochTag | undefined = undefined,
   _FormatterReturnType = ExtractChainFormatterReturnType<
     TChain,
     'block',

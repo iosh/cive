@@ -14,7 +14,7 @@ export type FormattedTransactionReceipt<
 > = ExtractChainFormatterReturnType<
   TChain,
   'transactionReceipt',
-  RpcTransactionReceipt
+  TransactionReceipt
 >
 
 export const receiptOutcomeStatuses = {

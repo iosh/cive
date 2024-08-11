@@ -5,7 +5,7 @@ import type { Transaction } from './transaction.js'
 export type Block<
   TQuantity = bigint,
   _TIncludeTransactions extends boolean = boolean,
-  TEpochTag extends EpochTag = EpochTag,
+  TEpochTag extends EpochTag | undefined = undefined,
   _TTransaction = Transaction<
     bigint,
     number,

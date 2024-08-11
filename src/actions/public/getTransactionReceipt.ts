@@ -1,11 +1,10 @@
-import {
-  type Hash,
-  TransactionReceiptNotFoundError,
-  type TransactionReceiptNotFoundErrorType,
-  type Transport,
-} from 'viem'
+import type { Hash, Transport } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
 import type { Client } from '../../clients/createClient.js'
+import {
+  TransactionReceiptNotFoundError,
+  type TransactionReceiptNotFoundErrorType,
+} from '../../errors/transaction.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Chain } from '../../types/chain.js'
 import {
