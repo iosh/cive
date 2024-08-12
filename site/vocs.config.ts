@@ -223,6 +223,10 @@ export default defineConfig({
                 text: 'getPoSTransactionByNumber',
                 link: '/docs/actions/public/getPoSTransactionByNumber',
               },
+              {
+                text: 'waitForTransactionReceipt',
+                link: '/docs/actions/public/waitForTransactionReceipt',
+              },
             ],
           },
           {

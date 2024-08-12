@@ -1,0 +1,158 @@
+# waitForTransactionReceipt
+
+Waits for the [Transaction](#TODO) to be included on a [Block](#TODO) (one confirmation), and then returns the [Transaction Receipt](#TODO).
+
+The `waitForTransactionReceipt` action additionally supports Replacement detection (e.g. sped up Transactions).
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { publicClient } from "./client";
+
+const transaction = await publicClient.waitForTransactionReceipt(
+  // [!code focus:10]
+  { hash: "0x..." }
+);
+// @log: {
+// @log:  type: 'legacy',
+// @log:  transactionHash: '0x...',
+// @log:  from: 'cfx:...',
+// @log:  ...
+// @log:  outcomeStatus: 'success',
+// @log: }
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+import { createPublicClient, http } from "cive";
+import { mainnet } from "cive/chains";
+
+export const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`TransactionReceipt`](#TODO)
+
+The transaction receipt.
+
+The transaction receipt.
+
+## Parameters
+
+### confirmations (optional)
+
+- **Type:** `number`
+- **Default:** `1`
+
+The number of confirmations (blocks that have passed) to wait before resolving.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const transaction = await publicClient.waitForTransactionReceipt({
+  confirmations: 1, // [!code focus:1]
+  hash: "0x...",
+});
+```
+
+### onReplaced (optional)
+
+- **Type:** `({ reason: 'replaced' | 'repriced' | 'cancelled', replacedTransaction: Transaction, transaction: Transaction, transactionReceipt: TransactionReceipt }) => void`
+
+Optional callback to emit if the transaction has been replaced.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const transaction = await publicClient.waitForTransactionReceipt({
+  hash: "0x...",
+  onReplaced: (replacement) => console.log(replacement), // [!code focus:1]
+});
+```
+
+### pollingInterval (optional)
+
+- **Type:** `number`
+
+Polling frequency (in ms). Defaults to the Client's `pollingInterval` config.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const transaction = await publicClient.waitForTransactionReceipt({
+  hash: "0x..",
+  pollingInterval: 12_000, // [!code focus:1]
+});
+```
+
+### retryCount (optional)
+
+- **Type:** `number`
+- **Default:** `6`
+
+:::tip
+After Conflux Core Space transactions are packaged into a block, there is a delay before they are executed, typically spanning [several epochs](https://doc.confluxnetwork.org/docs/core/core-space-basics/transactions/lifecycle#4-deferring-5-epochs---executed). If you encounter a `WaitForTransactionReceiptTimeoutError`, you can try increasing the value of `retryCount`.
+:::
+
+Number of times to retry if the transaction or block is not found.
+
+```ts
+const transaction = await publicClient.waitForTransactionReceipt({
+  hash: "0x...",
+  retryCount: 10, // [!code focus:1]
+});
+```
+
+### retryDelay (optional)
+
+- **Type:** `number | (({ count: number; error: Error }) => number)`
+- **Default:** `({ count }) => ~~(1 << count) * 200` (exponential backoff)
+
+Time to wait (in ms) between retries.
+
+```ts
+const transaction = await publicClient.waitForTransactionReceipt({
+  hash: "0x...",
+  retryDelay: 10_000, // [!code focus:1]
+});
+```
+
+### timeout (optional)
+
+- **Type:** `number`
+
+Optional timeout (in milliseconds) to wait before stopping polling.
+
+```ts twoslash
+// [!include ~/snippets/publicClient.ts]
+// ---cut---
+const transaction = await publicClient.waitForTransactionReceipt({
+  hash: "0x...",
+  timeout: 60_000, // [!code focus:1]
+});
+```
+
+### Notes
+
+- Transactions can be replaced when a user modifies their transaction in their wallet (to speed up or cancel). Transactions are replaced when they are sent from the same nonce.
+- There are 3 types of Transaction Replacement reasons:
+  - `repriced`: The gas price has been modified (ie. different `maxFeePerGas`)
+  - `cancelled`: The Transaction has been cancelled (ie. `value === 0n`)
+  - `replaced`: The Transaction has been replaced (ie. different `value` or `data`)
+
+## JSON-RPC Methods
+
+- Polls [`cfx_getTransactionReceipt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionreceipt)
+
+- If a Transaction has been replaced:
+  - Calls [`cfx_getBlockByEpochNumber`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_getblockbyepochnumber)
+ and extracts the transactions
+  - Checks if one of the Transactions is a replacement
+  - If so, calls [`cfx_getTransactionReceipt`](https://doc.confluxnetwork.org/docs/core/build/json-rpc/cfx-namespace#cfx_gettransactionreceipt)
