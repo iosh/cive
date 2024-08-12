@@ -305,6 +305,11 @@ import {
   uninstallFilter,
 } from '../../actions/public/uninstallFilter.js'
 import {
+  type WaitForTransactionReceiptParameters,
+  type WaitForTransactionReceiptReturnType,
+  waitForTransactionReceipt,
+} from '../../actions/public/waitForTransactionReceipt.js'
+import {
   type WatchEpochNumberParameters,
   type WatchEpochNumberReturnType,
   watchEpochNumber,
@@ -1019,6 +1024,14 @@ export type PublicActions<
   watchEpochNumber: (
     args: WatchEpochNumberParameters,
   ) => WatchEpochNumberReturnType
+
+  /**
+   * @param args - {@link WaitForTransactionReceiptParameters}
+   * @returns - {@link WaitForTransactionReceiptReturnType}
+   */
+  waitForTransactionReceipt: (
+    args: WaitForTransactionReceiptParameters,
+  ) => Promise<WaitForTransactionReceiptReturnType>
 }
 
 export function publicActions<
@@ -1103,5 +1116,7 @@ export function publicActions<
     estimateContractGasAndCollateral: (args) =>
       estimateContractGasAndCollateral(client, args as any),
     watchEpochNumber: (args) => watchEpochNumber(client, args),
+    waitForTransactionReceipt: (args) =>
+      waitForTransactionReceipt(client, args),
   }
 }
