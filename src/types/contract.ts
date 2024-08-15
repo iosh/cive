@@ -134,9 +134,11 @@ export type Widen<type> =
   | (type extends string
       ? type extends Hex
         ? Hex
-        : type extends ResolvedRegister['bytesType']['inputs']
-          ? ResolvedRegister['bytesType']
-          : string
+        : type extends ResolvedRegister['addressType']
+          ? ResolvedRegister['addressType']
+          : type extends ResolvedRegister['bytesType']['inputs']
+            ? ResolvedRegister['bytesType']
+            : string
       : never)
   | (type extends readonly [] ? readonly [] : never)
   | (type extends Record<string, unknown>
