@@ -8,7 +8,7 @@ import { polyMod } from './polyMod.js'
 export const VERSION_BYTE = 0
 
 export type HexAddressToBase32Parameters<
-  TNetworkId extends number = number,
+  TNetworkId extends number | undefined = undefined,
   TVerbose extends boolean | undefined = undefined,
 > = {
   hexAddress: Hex
@@ -25,7 +25,7 @@ export function hexAddressToBase32<
 >({
   hexAddress,
   networkId,
-  verbose = false,
+  verbose,
 }: HexAddressToBase32Parameters<TNetworkId, TVerbose>): Address<
   TNetworkId,
   TAddressType,

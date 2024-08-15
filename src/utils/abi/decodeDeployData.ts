@@ -1,4 +1,4 @@
-import type { Abi } from 'abitype'
+import type { Abi } from '../../types/abitype.js'
 
 import type { ContractConstructorArgs } from '../../types/contract.js'
 import type { Hex } from '../../types/misc.js'
