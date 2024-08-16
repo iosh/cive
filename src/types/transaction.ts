@@ -66,7 +66,7 @@ export type TransactionReceipt<
   /**
    * address of the contract created. null when it is not a contract deployment transaction.
    */
-  contractCreated: Address | null
+  contractCreated: Address<undefined, 'contract'> | null
 
   /**
    * hash of the state root after the execution of the corresponding block. 0 if the state root is not available.

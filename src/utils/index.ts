@@ -160,6 +160,14 @@ export {
   hexAddressToBase32,
 } from './address/hexAddressToBase32.js'
 
+export {
+  type GetCreateAddressOptions,
+  type GetCreate2AddressOptions,
+  type GetContractAddressOptions,
+  type GetCreateAddressErrorType,
+  getContractAddress,
+} from './address/getContractAddress.js'
+
 export { formatCFX } from './unit/formatCFX.js'
 export { formatGDrip } from './unit/formatGDrip.js'
 export { formatUnits } from './unit/formatUnits.js'

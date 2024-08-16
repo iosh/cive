@@ -12,6 +12,7 @@ import type { Chain } from '~cive/types/chain.js'
 import { getBalance } from '../../src/actions/public/getBalance.js'
 import { prepareTransactionRequest } from '../../src/actions/wallet/prepareTransactionRequest.js'
 import { accounts } from './constants.js'
+import { Create2Factory } from './contracts/Create2Factory.js'
 import { Multicall3 } from './contracts/Multicall3.js'
 import { Test20 } from './contracts/Test20.js'
 
@@ -46,5 +47,14 @@ export async function deployMulticall3(
   return deploy(client, {
     abi: Multicall3.abi,
     bytecode: Multicall3.bytecode.object,
+  })
+}
+
+export async function deployCreate2Factory(
+  client: Client<Transport, Chain, Account>,
+) {
+  return deploy(client, {
+    abi: Create2Factory.abi,
+    bytecode: Create2Factory.bytecode,
   })
 }
