@@ -1,4 +1,5 @@
 // biome-ignore lint/performance/noBarrelFile: entrypoint module
+export { defineChain } from './chain/defineChain.js'
 export {
   type DomainSeparatorErrorType,
   type SerializeTypedDataErrorType,
