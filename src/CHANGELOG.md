@@ -1,5 +1,20 @@
 # cive
 
+## 0.2.0
+
+### Minor Changes
+
+- a05940f: Added cacheTime option to getEpochNumber
+- c96878b: Added waitForTransactionReceipt
+- 52e83aa: Added watchEpochNumber
+- c755385: Added getContractAddress
+
+### Patch Changes
+
+- 37fe445: Updated simulateContract and writeContract type
+- 677effe: Added public action for export
+- 10b6b25: Fixed contract address calculation in the getContractAddress function
+
 ## 0.1.0
 
 ### Minor Changes
