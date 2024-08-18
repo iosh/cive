@@ -14,7 +14,9 @@ import { prepareTransactionRequest } from '../../src/actions/wallet/prepareTrans
 import { accounts } from './constants.js'
 import { Create2Factory } from './contracts/Create2Factory.js'
 import { Multicall3 } from './contracts/Multicall3.js'
+import { Simple } from './contracts/Simple.js'
 import { Test20 } from './contracts/Test20.js'
+import { Test721 } from './contracts/Test721.js'
 
 export async function deploy<const abi extends Abi | readonly unknown[]>(
   client: Client<Transport, Chain, Account>,
@@ -40,7 +42,16 @@ export async function deployTest20(
     args: [account.base32Address],
   })
 }
-
+export async function deployTest721(
+  client: Client<Transport, Chain, Account>,
+  account = accounts[0],
+) {
+  return deploy(client, {
+    abi: Test721.abi,
+    bytecode: Test721.bytecode,
+    args: [account.base32Address],
+  })
+}
 export async function deployMulticall3(
   client: Client<Transport, Chain, Account>,
 ) {
@@ -56,5 +67,12 @@ export async function deployCreate2Factory(
   return deploy(client, {
     abi: Create2Factory.abi,
     bytecode: Create2Factory.bytecode,
+  })
+}
+
+export async function deploySimple(client: Client<Transport, Chain, Account>) {
+  return deploy(client, {
+    abi: Simple.abi,
+    bytecode: Simple.bytecode,
   })
 }

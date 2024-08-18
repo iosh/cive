@@ -1,4 +1,4 @@
-export const Test712 = {
+export const Test721 = {
   _format: 'hh-sol-artifact-1',
   contractName: 'Test721',
   sourceName: 'contracts/test721.sol',
