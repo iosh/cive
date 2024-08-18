@@ -4,7 +4,7 @@ import type {
   ToBytesErrorType,
   ToRlpErrorType,
 } from 'viem'
-import { encodePacked, isHex, keccak256, toHex } from 'viem/utils'
+import { encodePacked, isHex, keccak256, toBytes, toHex } from 'viem/utils'
 import type { Address, HexAddress } from '../../accounts/types.js'
 import { create2FactoryAddress } from '../../constants/contract.js'
 import type { ErrorType } from '../../errors/utils.js'
@@ -24,7 +24,6 @@ export type GetCreateAddressOptions = {
 )
 
 export type GetCreate2AddressOptions = {
-  from: Address
   salt: bigint
   /**
    * @description the address of the create2Factory contract
@@ -69,7 +68,13 @@ export function getContractAddress<
       return toHex(opts.bytecodeHash)
     }
 
-    return keccak256(opts.bytecode, 'hex')
+    return keccak256(
+      encodePacked(
+        ['bytes'],
+        [isHex(opts.bytecode) ? opts.bytecode : toHex(opts.bytecode)],
+      ),
+      'hex',
+    )
   })()
 
   const hexAddress = (() => {
@@ -88,7 +93,9 @@ export function getContractAddress<
       [
         opts.opcode === 'CREATE2' ? '0xff' : '0x00',
         hexAddress,
-        toHex(opts.opcode === 'CREATE2' ? opts.salt : opts.nonce, { size: 32 }),
+        opts.opcode === 'CREATE2'
+          ? toHex(opts.salt, { size: 32 })
+          : toHex(toBytes(opts.nonce).reverse(), { size: 32 }),
         bytecodeHash,
       ],
     ),

@@ -2,14 +2,20 @@ import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import { devConflux } from '../../../test/src/conflux/client.js'
 import { accounts, getTestAccount } from '../../../test/src/constants.js'
 import { Create2Factory } from '../../../test/src/contracts/Create2Factory.js'
+import { Simple } from '../../../test/src/contracts/Simple.js'
 import { Test20 } from '../../../test/src/contracts/Test20.js'
-import { Test712 } from '../../../test/src/contracts/Test721.js'
-import { Test1155 } from '../../../test/src/contracts/Test1155.js'
-import { deployCreate2Factory, deployTest20 } from '../../../test/src/utils.js'
+import { Test721 } from '../../../test/src/contracts/Test721.js'
+import {
+  deployCreate2Factory,
+  deploySimple,
+  deployTest20,
+  deployTest721,
+} from '../../../test/src/utils.js'
 import { getNextNonce, simulateContract } from '../../actions/index.js'
 import { sayHelloLocalNode } from '../../actions/localNode/sayHelloLocalNode.js'
 import { create2FactoryAddress } from '../../constants/contract.js'
 import { encodeDeployData } from '../abi/encodeDeployData.js'
+import { wait } from '../wait.js'
 import { getContractAddress } from './getContractAddress.js'
 import { hexAddressToBase32 } from './hexAddressToBase32.js'
 
@@ -21,6 +27,7 @@ const client = devConflux.getClient({
 beforeAll(async () => {
   await devConflux.start()
   await sayHelloLocalNode(client)
+  await wait(1000)
 })
 
 afterAll(async () => {
@@ -28,7 +35,22 @@ afterAll(async () => {
 })
 
 describe('create', () => {
-  test('deploy contract', async () => {
+  test('deploy contract simple', async () => {
+    const nonce = await getNextNonce(client, { address: sourceAccount.address })
+
+    const contractAddress = getContractAddress({
+      from: sourceAccount.address,
+      bytecode: Simple.bytecode,
+      nonce,
+      networkId: accounts[0].netId,
+      verbose: true,
+    })
+
+    const { contractCreated } = await deploySimple(client)
+
+    expect(contractAddress).toEqual(contractCreated)
+  })
+  test('deploy contract 20', async () => {
     const nonce = await getNextNonce(client, { address: sourceAccount.address })
 
     const contractAddress = getContractAddress({
@@ -44,6 +66,27 @@ describe('create', () => {
     })
 
     const { contractCreated } = await deployTest20(client)
+
+    expect(contractAddress).toEqual(contractCreated)
+  })
+
+  test('deploy contract 721', async () => {
+    const nonce = await getNextNonce(client, { address: sourceAccount.address })
+
+    const contractAddress = getContractAddress({
+      from: sourceAccount.address,
+      bytecode: encodeDeployData({
+        abi: Test721.abi,
+        bytecode: Test721.bytecode,
+        args: [sourceAccount.address],
+      }),
+      nonce,
+      networkId: accounts[0].netId,
+      verbose: true,
+    })
+
+    const { contractCreated } = await deployTest721(client)
+
     expect(contractAddress).toEqual(contractCreated)
   })
 
@@ -51,62 +94,35 @@ describe('create', () => {
     expect(
       getContractAddress({
         from: sourceAccount.address,
-        bytecode: encodeDeployData({
-          abi: Test20.abi,
-          bytecode: Test20.bytecode,
-          args: [sourceAccount.address],
-        }),
+        bytecode: Simple.bytecode,
         nonce: 1,
         networkId: accounts[0].netId,
         verbose: true,
       }),
     ).toMatchInlineSnapshot(
-      `"NET201029:TYPE.CONTRACT:ACGN3EWKZ66RTH0UVJC25R3VRUJEBC71DP16X2UBY7"`,
+      `"NET201029:TYPE.CONTRACT:ACDUT7Y6R8AAKK6UA25XFFSFNB7A4C8PKEGRBVTN2W"`,
     )
     expect(
       getContractAddress({
         from: sourceAccount.address,
-        bytecode: encodeDeployData({
-          abi: Test712.abi,
-          bytecode: Test712.bytecode,
-          args: [sourceAccount.address],
-        }),
-        nonce: 2,
+        bytecode: Simple.bytecode,
+        nonce: 100,
         networkId: accounts[0].netId,
         verbose: true,
       }),
     ).toMatchInlineSnapshot(
-      `"NET201029:TYPE.CONTRACT:ACDX8JGH6T2UUB5J3G3F3YBKX03EKW55J63HDNMKFJ"`,
+      `"NET201029:TYPE.CONTRACT:ACGR21YUPRFM3CFDPUTMXN2S5Z68R0GMMJCBHZ1UWG"`,
     )
     expect(
       getContractAddress({
         from: sourceAccount.address,
-        bytecode: encodeDeployData({
-          abi: Test1155.abi,
-          bytecode: Test1155.bytecode,
-          args: [sourceAccount.address],
-        }),
-        nonce: 3,
+        bytecode: Simple.bytecode,
+        nonce: 100000,
         networkId: accounts[0].netId,
         verbose: true,
       }),
     ).toMatchInlineSnapshot(
-      `"NET201029:TYPE.CONTRACT:ACB9P2SHBXR8S22E0WJCY9DMK9SNF7766U8YDW96S9"`,
-    )
-    expect(
-      getContractAddress({
-        from: sourceAccount.address,
-        bytecode: encodeDeployData({
-          abi: Test20.abi,
-          bytecode: Test20.bytecode,
-          args: [sourceAccount.address],
-        }),
-        nonce: 4,
-        networkId: accounts[0].netId,
-        verbose: true,
-      }),
-    ).toMatchInlineSnapshot(
-      `"NET201029:TYPE.CONTRACT:ACHR66JYCR2KH3NYR3947KHZJ219R1A92PYJU66J6Y"`,
+      `"NET201029:TYPE.CONTRACT:ACFMW194P9JW4RBN55NCNBDC8H9VECF68A3S4UE5UY"`,
     )
   })
 })
@@ -126,7 +142,6 @@ describe('create2', () => {
     const contractAddress = getContractAddress({
       opcode: 'CREATE2',
       salt: salt,
-      from: sourceAccount.address,
       bytecode: Create2Factory.bytecode,
       networkId: accounts[0].netId,
       create2FactoryAddress: create2FactoryAddress!,
@@ -155,7 +170,6 @@ describe('create2', () => {
     const contractAddress = getContractAddress({
       opcode: 'CREATE2',
       salt: salt,
-      from: sourceAccount.address,
       bytecode: data,
       networkId: accounts[0].netId,
     })
