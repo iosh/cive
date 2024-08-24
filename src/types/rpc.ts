@@ -1,4 +1,5 @@
 import type { Index, Quantity } from 'viem'
+import type { Address } from '../accounts/types.js'
 import type { AccountPending, AccountPendingTransaction } from './account.js'
 import type { Block, EpochNumber, EpochTag } from './block.js'
 import type { ChainAccount } from './chainAccount.js'
@@ -6,6 +7,7 @@ import type { Deposit } from './deposit.js'
 import type { FeeHistory, FeeValues, GasAndCollateral } from './fee.js'
 import type { LogFilter } from './filter.js'
 import type { Log } from './log.js'
+import type { Hex } from './misc.js'
 import type { NodeState } from './node.js'
 import type {
   PoSAccount,
@@ -31,8 +33,6 @@ import type {
 } from './transaction.js'
 import type { OneOf, UnionOmit } from './utils.js'
 import type { Vote } from './vote.js'
-import type { Hex } from './misc.js'
-import type { Address } from '../accounts/types.js'
 
 export type { Quantity }
 export type OutcomeStatus = '0x0' | '0x1' | '0x2'

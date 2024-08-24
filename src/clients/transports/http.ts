@@ -1,20 +1,20 @@
-import { getHttpRpcClient, type HttpRpcClientOptions } from 'viem/utils'
+import { type HttpRpcClientOptions, getHttpRpcClient } from 'viem/utils'
 import type { ErrorType } from '../../errors/utils.js'
 
 import { createBatchScheduler } from '../../utils/promise/createBatchScheduler.js'
 
-import {
-  type CreateTransportErrorType,
-  type Transport,
-  type TransportConfig,
-  createTransport,
-} from './createTransport.js'
 import {
   RpcRequestError,
   UrlRequiredError,
   type UrlRequiredErrorType,
 } from 'viem'
 import type { RpcRequest } from '../../types/rpc.js'
+import {
+  type CreateTransportErrorType,
+  type Transport,
+  type TransportConfig,
+  createTransport,
+} from './createTransport.js'
 
 export type HttpTransportConfig = {
   /**
