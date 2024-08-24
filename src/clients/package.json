@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "types": "../_types/accounts/index.d.ts",
-  "module": "../_esm/accounts/index.js",
-  "main": "../_cjs/accounts/index.js"
+  "types": "../_types/clients/index.d.ts",
+  "module": "../_esm/clients/index.js",
+  "main": "../_cjs/clients/index.js"
 }
