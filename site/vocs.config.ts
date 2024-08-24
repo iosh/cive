@@ -28,6 +28,10 @@ export default defineConfig({
                 text: 'HTTP',
                 link: '/docs/clients/transports/http',
               },
+              {
+                text: 'Fallback',
+                link: '/docs/clients/transports/fallback',
+              },
             ],
           },
         ],
