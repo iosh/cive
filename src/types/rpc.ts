@@ -31,6 +31,8 @@ import type {
 } from './transaction.js'
 import type { OneOf, UnionOmit } from './utils.js'
 import type { Vote } from './vote.js'
+import type { Hex } from './misc.js'
+import type { Address } from '../accounts/types.js'
 
 export type { Quantity }
 export type OutcomeStatus = '0x0' | '0x1' | '0x2'
@@ -112,3 +114,64 @@ export type RpcPoSTransaction = PoSTransaction<Quantity>
 export type RpcTraceBlock = TraceBlock<Quantity>
 
 export type RpcTrace = Trace<Quantity>
+
+type SuccessResult<result> = {
+  method?: undefined
+  result: result
+  error?: undefined
+}
+type ErrorResult<error> = {
+  method?: undefined
+  result?: undefined
+  error: error
+}
+type Subscription<result, error> = {
+  method: 'eth_subscription'
+  error?: undefined
+  result?: undefined
+  params:
+    | {
+        subscription: string
+        result: result
+        error?: undefined
+      }
+    | {
+        subscription: string
+        result?: undefined
+        error: error
+      }
+}
+
+export type RpcRequest = {
+  jsonrpc?: '2.0' | undefined
+  method: string
+  params?: any | undefined
+  id?: number | undefined
+}
+
+export type RpcResponse<result = any, error = any> = {
+  jsonrpc: `${number}`
+  id: number
+} & (SuccessResult<result> | ErrorResult<error> | Subscription<result, error>)
+
+/** A key-value mapping of slot and storage values (supposedly 32 bytes each) */
+export type RpcStateMapping = {
+  [slots: Hex]: Hex
+}
+
+export type RpcAccountStateOverride = {
+  /** Fake balance to set for the account before executing the call. <32 bytes */
+  balance?: Hex | undefined
+  /** Fake nonce to set for the account before executing the call. <8 bytes */
+  nonce?: Hex | undefined
+  /** Fake EVM bytecode to inject into the account before executing the call. */
+  code?: Hex | undefined
+  /** Fake key-value mapping to override all slots in the account storage before executing the call. */
+  state?: RpcStateMapping | undefined
+  /** Fake key-value mapping to override individual slots in the account storage before executing the call. */
+  stateDiff?: RpcStateMapping | undefined
+}
+
+export type RpcStateOverride = {
+  [address: Address]: RpcAccountStateOverride
+}
