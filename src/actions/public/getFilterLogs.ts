@@ -1,8 +1,4 @@
-import type {
-  DecodeEventLogErrorType,
-  FormatLogErrorType,
-  Transport,
-} from 'viem'
+import type { DecodeEventLogErrorType, FormatLogErrorType } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
 import type { Client } from '../../clients/createClient.js'
 import type { ErrorType } from '../../errors/utils.js'
@@ -11,6 +7,7 @@ import type { Filter } from '../../types/filter.js'
 import type { Log } from '../../types/log.js'
 import { formatLog } from '../../utils/formatters/log.js'
 
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { ChainIdNotFoundError } from '../../errors/chain.js'
 import type { Chain } from '../../types/chain.js'
 import { parseEventLogs } from '../../utils/abi/parseEventLogs.js'

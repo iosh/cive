@@ -1,4 +1,4 @@
-import { type NumberToHexErrorType, type Transport, numberToHex } from 'viem'
+import { type NumberToHexErrorType, numberToHex } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
 import {
   type Account,
@@ -6,6 +6,7 @@ import {
   parseAccount,
 } from '../../accounts/index.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { AccountNotFoundError } from '../../errors/account.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { GetAccountParameter } from '../../types/account.js'

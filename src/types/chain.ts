@@ -1,9 +1,9 @@
-import type { Transport } from 'viem'
 import type { EstimateFeesPerGasReturnType } from '../actions/public/estimateFeesPerGas.js'
 import type { PrepareTransactionRequestParameters } from '../actions/wallet/prepareTransactionRequest.js'
 import type { Client } from '../clients/createClient.js'
 
 import type { Address } from '../accounts/types.js'
+import type { Transport } from '../clients/transports/createTransport.js'
 import type { Account } from '../types/account.js'
 import type { FeeValuesType } from '../types/fee.js'
 import type {

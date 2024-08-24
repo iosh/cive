@@ -1,5 +1,6 @@
-import type { BaseError, GetContractErrorReturnType, Transport } from 'viem'
+import type { BaseError, GetContractErrorReturnType } from 'viem'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { ChainIdNotFoundError } from '../../errors/chain.js'
 import { getContractError } from '../../errors/getContractError.js'
 import type { Abi } from '../../types/abitype.js'

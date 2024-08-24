@@ -1,15 +1,14 @@
-import {
-  type EncodeEventTopicsErrorType,
-  type Hash,
-  type Hex,
-  type NumberToHexErrorType,
-  type Transport,
-  encodeEventTopics,
-  numberToHex,
+import type {
+  EncodeEventTopicsErrorType,
+  Hash,
+  Hex,
+  NumberToHexErrorType,
 } from 'viem'
+import { encodeEventTopics, numberToHex } from 'viem/utils'
 import type { RequestErrorType } from 'viem/utils'
 import type { Address } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { AbiEvent } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'

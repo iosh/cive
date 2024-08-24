@@ -1,6 +1,7 @@
-import { type Transport, numberToHex } from 'viem'
+import { numberToHex } from 'viem/utils'
 import type { Address } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import type { AccountPendingTransaction } from '../../types/account.js'
 import type { Chain } from '../../types/chain.js'
 import { formatAccountPendingTransaction } from '../../utils/formatters/account.js'

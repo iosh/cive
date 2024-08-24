@@ -1,14 +1,9 @@
-import {
-  http,
-  type EIP1193RequestFn,
-  createTransport,
-  custom,
-  webSocket,
-} from 'viem'
+import { http, custom, webSocket } from 'viem'
 import { assertType, describe, expect, test, vi } from 'vitest'
 import { localhostNode } from '../chains/definitions/localhost.js'
-import type { PublicRpcSchema } from '../types/eip1193.js'
+import type { EIP1193RequestFn, PublicRpcSchema } from '../types/eip1193.js'
 import { createPublicClient } from './createPublicClient.js'
+import { createTransport } from './transports/createTransport.js'
 
 const mockTransport = () =>
   createTransport({

@@ -1,19 +1,14 @@
-import {
-  http,
-  type EIP1193RequestFn,
-  createTransport,
-  custom,
-  webSocket,
-} from 'viem'
+import { http, custom, webSocket } from 'viem'
 import { assertType, describe, expect, test, vi } from 'vitest'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import type { PrivateKeyAccount } from '../accounts/index.js'
 import { privateKeyToAccount } from '../accounts/privateKeyToAccount.js'
 import { localhostNode } from '../chains/definitions/localhost.js'
-import type { WalletRpcSchema } from '../types/eip1193.js'
+import type { EIP1193RequestFn, WalletRpcSchema } from '../types/eip1193.js'
 import { createWalletClient } from './createWalletClient.js'
 import { localNodeActions } from './decorators/localNode.js'
 import { publicActions } from './decorators/public.js'
+import { createTransport } from './transports/createTransport.js'
 const sourceAccount = getTestAccount(accounts[0])
 const mockTransport = () =>
   createTransport({

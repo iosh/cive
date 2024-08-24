@@ -1,3 +1,4 @@
-import { http, type Transport, webSocket } from 'viem'
+import { http, webSocket } from 'viem'
+import type { Transport } from './createTransport.js'
 
-export { type Transport, http, webSocket }
+export { http, type Transport, webSocket }

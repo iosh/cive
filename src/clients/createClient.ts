@@ -1,21 +1,19 @@
-import type {
-  CcipRequestParameters,
-  EIP1193RequestFn,
-  ExactPartial,
-  Hex,
-  RpcSchema,
-  Transport,
-} from 'viem'
+import type { CcipRequestParameters, ExactPartial, Hex } from 'viem'
 import type { Prettify } from 'viem/chains'
 import type { ParseAccountErrorType } from 'viem/utils'
 import type { Account, Address, JsonRpcAccount } from '../accounts/types.js'
 import { parseAccount } from '../accounts/utils/parseAccount.js'
 import type { ErrorType } from '../errors/utils.js'
 import type { Chain } from '../types/chain.js'
-import type { EIP1474Methods } from '../types/eip1193.js'
+import type {
+  EIP1193RequestFn,
+  EIP1474Methods,
+  RpcSchema,
+} from '../types/eip1193.js'
 import { uid } from '../utils/uid.js'
 import type { PublicActions } from './decorators/public.js'
 import type { WalletActions } from './decorators/wallet.js'
+import type { Transport } from './transports/createTransport.js'
 
 export type ClientConfig<
   transport extends Transport = Transport,

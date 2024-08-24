@@ -4,7 +4,7 @@ import { accounts } from '~test/src/constants.js'
 
 import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 
-import type { EIP1193RequestFn } from 'viem'
+import type { EIP1193RequestFn } from '../../types/eip1193.js'
 import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
 import { createEventFilter } from './createEventFilter.js'
 

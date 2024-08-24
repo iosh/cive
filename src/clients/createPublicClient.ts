@@ -1,12 +1,13 @@
-import type { CreateClientErrorType, RpcSchema, Transport } from 'viem'
+import type { CreateClientErrorType } from 'viem'
 import type { Prettify } from 'viem/chains'
 import type { Account, Address } from '../accounts/types.js'
 import type { ErrorType } from '../errors/utils.js'
 import type { ParseAccount } from '../types/account.js'
 import type { Chain } from '../types/chain.js'
-import type { PublicRpcSchema } from '../types/eip1193.js'
+import type { PublicRpcSchema, RpcSchema } from '../types/eip1193.js'
 import { type Client, type ClientConfig, createClient } from './createClient.js'
 import { type PublicActions, publicActions } from './decorators/public.js'
+import type { Transport } from './transports/createTransport.js'
 
 export type PublicClientConfig<
   transport extends Transport = Transport,

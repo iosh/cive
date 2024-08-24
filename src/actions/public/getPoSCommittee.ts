@@ -1,5 +1,6 @@
-import { type Transport, numberToHex } from 'viem'
+import { numberToHex } from 'viem/utils'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import type { Chain } from '../../types/chain.js'
 import type { PoSCommittee } from '../../types/pos.js'
 import { formatPoSCommittee } from '../../utils/formatters/pos.js'

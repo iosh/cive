@@ -1,4 +1,3 @@
-import type { Transport } from 'viem'
 import type { Account, Address } from '../../accounts/types.js'
 import {
   type CallParameters,
@@ -330,6 +329,7 @@ import type {
   MaybeExtractEventArgsFromAbi,
 } from '../../types/contract.js'
 import type { Client } from '../createClient.js'
+import type { Transport } from '../transports/createTransport.js'
 
 export type PublicActions<
   _TTransport extends Transport = Transport,

@@ -1,6 +1,7 @@
-import type { EstimateGasErrorType, Transport } from 'viem'
+import type { EstimateGasErrorType } from 'viem'
 import type { Account } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import {
   type GetContractErrorReturnType,
   getContractError,

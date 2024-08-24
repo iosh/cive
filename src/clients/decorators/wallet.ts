@@ -1,6 +1,5 @@
 import type {
   GetPermissionsReturnType,
-  Transport,
   WatchAssetParameters,
   WatchAssetReturnType,
 } from 'viem'
@@ -82,6 +81,7 @@ import type {
   ContractFunctionArgs,
   ContractFunctionName,
 } from '../../types/contract.js'
+import type { Transport } from '../transports/createTransport.js'
 
 export type WalletActions<
   TChain extends Chain | undefined = Chain | undefined,

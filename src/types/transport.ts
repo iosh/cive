@@ -1,6 +1,6 @@
-import type { FallbackTransport, Transport } from 'viem'
+import type { Transport } from '../clients/transports/createTransport.js'
+import type { FallbackTransport } from '../clients/transports/fallback.js'
 import type { Some } from './utils.js'
-
 export type GetTransportConfig<transport extends Transport> =
   ReturnType<transport>['config']
 

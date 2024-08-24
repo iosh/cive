@@ -17,8 +17,9 @@ import {
   encodeEventTopics,
 } from '../../utils/abi/encodeEventTopics.js'
 
-import { type Transport, numberToHex } from 'viem'
+import { numberToHex } from 'viem/utils'
 import type { NumberToHexErrorType, RequestErrorType } from 'viem/utils'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import { createFilterRequestScope } from '../../utils/filters/createFilterRequestScope.js'
 

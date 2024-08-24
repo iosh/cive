@@ -1,5 +1,5 @@
-import type { Transport } from 'viem'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import type { Chain } from '../../types/chain.js'
 import type { Supply } from '../../types/supply.js'
 import { formatSupply } from '../../utils/formatters/supply.js'

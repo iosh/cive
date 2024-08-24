@@ -1,6 +1,7 @@
-import type { Hex, Transport } from 'viem'
+import type { Hex } from 'viem'
 import type { Account } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Abi } from '../../types/abitype.js'
 import type { Chain, GetChainParameter } from '../../types/chain.js'

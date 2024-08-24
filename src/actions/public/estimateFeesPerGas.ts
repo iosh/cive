@@ -4,9 +4,9 @@ import {
   Eip1559FeesNotSupportedError,
   type Eip1559FeesNotSupportedErrorType,
   type EstimateMaxPriorityFeePerGasErrorType,
-  type Transport,
 } from 'viem'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Block } from '../../types/block.js'
 import type {

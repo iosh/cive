@@ -9,7 +9,6 @@ import {
   type Hex,
   type NumberToHexErrorType,
   RawContractError,
-  type Transport,
   multicall3Abi,
   numberToHex,
 } from 'viem'
@@ -20,6 +19,7 @@ import {
   parseAccount,
 } from '../../accounts/utils/parseAccount.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { aggregate3Signature } from '../../constants/contract.js'
 import { ChainIdNotFoundError } from '../../errors/chain.js'
 import type { ErrorType } from '../../errors/utils.js'

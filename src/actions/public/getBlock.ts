@@ -1,6 +1,7 @@
-import { type Hash, type Transport, numberToHex } from 'viem'
+import { type Hash, numberToHex } from 'viem'
 import type { Account } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { BlockNotFoundError } from '../../errors/block.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'

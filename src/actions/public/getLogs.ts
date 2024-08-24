@@ -1,15 +1,15 @@
-import {
-  type DecodeEventLogErrorType,
-  type EncodeEventTopicsErrorType,
-  type FormatLogErrorType,
-  type Hash,
-  type NumberToHexErrorType,
-  type Transport,
-  numberToHex,
+import type {
+  DecodeEventLogErrorType,
+  EncodeEventTopicsErrorType,
+  FormatLogErrorType,
+  Hash,
+  NumberToHexErrorType,
 } from 'viem'
+import { numberToHex } from 'viem/utils'
 import type { RequestErrorType } from 'viem/utils'
 import type { Address } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { ChainIdNotFoundError } from '../../errors/chain.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { AbiEvent } from '../../types/abitype.js'

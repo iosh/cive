@@ -2,7 +2,6 @@ import {
   Eip1559FeesNotSupportedError,
   type GetTransactionRequestKzgParameter,
   MaxFeePerGasTooLowError,
-  type Transport,
 } from 'viem'
 import {
   type ParseAccountErrorType,
@@ -10,6 +9,7 @@ import {
 } from '../../accounts/index.js'
 import type { Account, Address } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import {
   transactionGas,
   transactionStorageLimit,

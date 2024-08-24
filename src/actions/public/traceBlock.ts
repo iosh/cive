@@ -1,5 +1,6 @@
-import type { Hash, Transport } from 'viem'
+import type { Hash } from 'viem'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { BlockNotFoundError } from '../../errors/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { TraceBlock } from '../../types/tract.js'

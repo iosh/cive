@@ -1,4 +1,4 @@
-import type { Transport, WatchContractEventParameters } from 'viem'
+import type { WatchContractEventParameters } from 'viem'
 import type { Account } from '../accounts/types.js'
 import type { Client } from '../clients/createClient.js'
 import type {
@@ -29,6 +29,7 @@ import type {
   UnionOmit,
 } from '../types/utils.js'
 
+import type { Transport } from '../clients/transports/createTransport.js'
 import type { ErrorType } from '../errors/utils.js'
 import { getAction } from '../utils/getAction.js'
 import {

@@ -1,5 +1,5 @@
-import type { Transport } from 'viem'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { Abi, Address } from '../../types/abitype.js'
 import type { EpochNumber, EpochTag } from '../../types/block.js'

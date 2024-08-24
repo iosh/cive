@@ -1,11 +1,4 @@
 import type {
-  EIP1193Events,
-  EIP1193RequestFn,
-  ExactPartial,
-  Hash,
-  Hex,
-} from 'viem'
-import type {
   Quantity,
   RpcAccountPending,
   RpcAccountPendingTransaction,
@@ -33,10 +26,12 @@ import type {
   RpcVote,
 } from './rpc.js'
 
+import type { EIP1193Events } from 'viem'
 import type { Address, HexAddress } from '../accounts/types.js'
 import type { Block, EpochTag } from './block.js'
+import type { Hash, Hex } from './misc.js'
 import type { RpcEpochNumber, RpcTransaction as Transaction } from './rpc.js'
-import type { Prettify } from './utils.js'
+import type { ExactPartial, Prettify } from './utils.js'
 
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
 
@@ -798,3 +793,68 @@ export type LocalNodeRpcSchema = [
     ReturnType: Hash[]
   },
 ]
+
+export type RpcSchema = readonly {
+  Method: string
+  Parameters?: unknown | undefined
+  ReturnType: unknown
+}[]
+
+export type RpcSchemaOverride = Omit<RpcSchema[number], 'Method'>
+
+export type EIP1193Parameters<
+  rpcSchema extends RpcSchema | undefined = undefined,
+> = rpcSchema extends RpcSchema
+  ? {
+      [K in keyof rpcSchema]: Prettify<
+        {
+          method: rpcSchema[K] extends rpcSchema[number]
+            ? rpcSchema[K]['Method']
+            : never
+        } & (rpcSchema[K] extends rpcSchema[number]
+          ? rpcSchema[K]['Parameters'] extends undefined
+            ? { params?: undefined }
+            : { params: rpcSchema[K]['Parameters'] }
+          : never)
+      >
+    }[number]
+  : {
+      method: string
+      params?: unknown | undefined
+    }
+
+export type EIP1193RequestOptions = {
+  // Deduplicate in-flight requests.
+  dedupe?: boolean | undefined
+  // The base delay (in ms) between retries.
+  retryDelay?: number | undefined
+  // The max number of times to retry.
+  retryCount?: number | undefined
+  /** Unique identifier for the request. */
+  uid?: string | undefined
+}
+
+type DerivedRpcSchema<
+  rpcSchema extends RpcSchema | undefined,
+  rpcSchemaOverride extends RpcSchemaOverride | undefined,
+> = rpcSchemaOverride extends RpcSchemaOverride
+  ? [rpcSchemaOverride & { Method: string }]
+  : rpcSchema
+
+export type EIP1193RequestFn<
+  rpcSchema extends RpcSchema | undefined = undefined,
+> = <
+  rpcSchemaOverride extends RpcSchemaOverride | undefined = undefined,
+  _parameters extends EIP1193Parameters<
+    DerivedRpcSchema<rpcSchema, rpcSchemaOverride>
+  > = EIP1193Parameters<DerivedRpcSchema<rpcSchema, rpcSchemaOverride>>,
+  _returnType = DerivedRpcSchema<rpcSchema, rpcSchemaOverride> extends RpcSchema
+    ? Extract<
+        DerivedRpcSchema<rpcSchema, rpcSchemaOverride>[number],
+        { Method: _parameters['method'] }
+      >['ReturnType']
+    : unknown,
+>(
+  args: _parameters,
+  options?: EIP1193RequestOptions | undefined,
+) => Promise<_returnType>

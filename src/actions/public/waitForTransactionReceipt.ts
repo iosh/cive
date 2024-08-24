@@ -1,5 +1,5 @@
-import type { Transport } from 'viem'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { BlockNotFoundError } from '../../errors/block.js'
 import {
   TransactionNotFoundError,

@@ -1,4 +1,3 @@
-import type { Transport } from 'viem'
 import type { Account } from '../../accounts/types.js'
 import { clearTxpool } from '../../actions/localNode/clearTxpool.js'
 import {
@@ -33,6 +32,7 @@ import {
 } from '../../actions/localNode/unlockLocalNodeAccount.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
+import type { Transport } from '../transports/createTransport.js'
 
 export type LocalNodeActions = {
   clearTxpool: () => Promise<void>

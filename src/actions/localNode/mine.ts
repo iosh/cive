@@ -1,5 +1,5 @@
-import type { Transport } from 'viem'
 import type { LocalNodeClient } from '../../clients/createLocalClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { deferredStateEpochCount } from '../../constants/epoch.js'
 import type { Account } from '../../types/account.js'
 import type { Chain } from '../../types/chain.js'

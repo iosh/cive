@@ -1,4 +1,4 @@
-import { type ToHexErrorType, type Transport, stringToHex, toHex } from 'viem'
+import { type ToHexErrorType, stringToHex, toHex } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
 import {
   type Account,
@@ -7,6 +7,7 @@ import {
 } from '../../accounts/index.js'
 import type { SignMessageErrorType as SignMessageErrorType_account } from '../../accounts/utils/signMessage.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { AccountNotFoundError } from '../../errors/account.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { GetAccountParameter } from '../../types/account.js'

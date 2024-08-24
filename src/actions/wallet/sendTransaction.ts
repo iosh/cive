@@ -6,7 +6,6 @@ import type {
   Hash,
   PrepareTransactionRequestErrorType,
   SendRawTransactionErrorType,
-  Transport,
 } from 'viem'
 import type { SignTransactionErrorType } from 'viem/accounts'
 
@@ -17,6 +16,7 @@ import {
 } from '../../accounts/index.js'
 import type { Account } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { AccountNotFoundError } from '../../errors/account.js'
 import type { ErrorType } from '../../errors/utils.js'
 import type { GetAccountParameter } from '../../types/account.js'

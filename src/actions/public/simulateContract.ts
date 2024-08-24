@@ -1,10 +1,11 @@
-import type { BaseError, Transport } from 'viem'
+import type { BaseError } from 'viem'
 import {
   type ParseAccountErrorType,
   parseAccount,
 } from '../../accounts/index.js'
 import type { Account } from '../../accounts/types.js'
 import type { Client } from '../../clients/createClient.js'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import { ChainIdNotFoundError } from '../../errors/chain.js'
 import {
   type GetContractErrorReturnType,

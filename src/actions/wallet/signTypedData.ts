@@ -16,8 +16,9 @@ import type { Chain } from '../../types/chain.js'
 import type { Hex } from '../../types/misc.js'
 import type { TypedDataDefinition } from '../../types/typedData.js'
 
-import type { IsHexErrorType, StringifyErrorType, Transport } from 'viem'
+import type { IsHexErrorType, StringifyErrorType } from 'viem'
 import type { RequestErrorType } from 'viem/utils'
+import type { Transport } from '../../clients/transports/createTransport.js'
 import {
   type GetTypesForCIP23DomainErrorType,
   type SerializeTypedDataErrorType,
