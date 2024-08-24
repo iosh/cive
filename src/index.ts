@@ -38,6 +38,12 @@ export {
 } from './types/abitype.js'
 
 export { http, webSocket, type Transport } from './clients/transports/index.js'
+export {
+  fallback,
+  type FallbackTransportConfig,
+  type FallbackTransport,
+  type FallbackTransportErrorType,
+} from './clients/transports/fallback.js'
 export { custom } from 'viem'
 export { mainnet, testnet } from './chains/index.js'
 
