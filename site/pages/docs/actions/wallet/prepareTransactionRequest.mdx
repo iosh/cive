@@ -115,11 +115,11 @@ The price (in drip) to pay per gas. Only applies to [Legacy Transactions](#TODO)
 ```ts twoslash
 // [!include config.ts]
 // ---cut---
-import { parseCFX, parseDrip } from "cive";
+import { parseCFX, parseGDrip } from "cive";
 
 const request = await walletClient.prepareTransactionRequest({
   account,
-  gasPrice: parseDrip("20"), // [!code focus]
+  gasPrice: parseGDrip("20"), // [!code focus]
   to: "cfx:...",
   value: parseCFX("1"),
 });
@@ -134,11 +134,11 @@ Total fee per gas (in drip), inclusive of `maxPriorityFeePerGas`. Only applies t
 ```ts twoslash
 // [!include config.ts]
 // ---cut---
-import { parseCFX, parseDrip } from "cive";
+import { parseCFX, parseGDrip } from "cive";
 
 const request = await walletClient.prepareTransactionRequest({
   account,
-  maxFeePerGas: parseDrip("20"), // [!code focus]
+  maxFeePerGas: parseGDrip("20"), // [!code focus]
   to: "cfx:...",
   value: parseCFX("1"),
 });
@@ -153,12 +153,12 @@ Max priority fee per gas (in wei). Only applies to [EIP-1559 Transactions](#TODO
 ```ts twoslash
 // [!include config.ts]
 // ---cut---
-import { parseCFX, parseDrip } from "cive";
+import { parseCFX, parseGDrip } from "cive";
 
 const request = await walletClient.prepareTransactionRequest({
   account,
-  maxFeePerGas: parseDrip("20"),
-  maxPriorityFeePerGas: parseDrip("2"), // [!code focus]
+  maxFeePerGas: parseGDrip("20"),
+  maxPriorityFeePerGas: parseGDrip("2"), // [!code focus]
   to: "cfx:...",
   value: parseCFX("1"),
 });

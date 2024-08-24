@@ -2,4 +2,4 @@
 "cive": minor
 ---
 
-Updated Transport type
+Updated Transport type from viem

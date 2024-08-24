@@ -21,11 +21,11 @@ const hash = await walletClient.sendRawTransaction({ serializedTransaction }); /
 ```
 
 ```ts twoslash [config.ts] filename="config.ts"
-import {privateKeyToAccount} from "cive";
+import {privateKeyToAccount} from "cive/accounts";
 // [!include ~/snippets/walletClient.ts]
 
 
-export const account = privateKeyToAccount('0x...')
+export const account = privateKeyToAccount("0x...", { networkId: mainnet.id });
 // @log: ↑ Local Account
 ```
 

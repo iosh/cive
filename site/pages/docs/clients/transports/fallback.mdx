@@ -174,9 +174,10 @@ const backupRPC = http("");
 // ---cut---
 const transport = fallback([mainRPC, backupRPC], {
   rank: {
-    // [!code focus:3]
-    latency: 0.4,
-    stability: 0.6,
+    weights: {
+      latency: 0.4, // [!code focus:3]
+      stability: 0.6,
+    },
   },
 });
 ```
@@ -196,9 +197,10 @@ const backupRPC = http("");
 // ---cut---
 const transport = fallback([mainRPC, backupRPC], {
   rank: {
-    // [!code focus:3]
-    latency: 0.4,
-    stability: 0.6, // [!code focus:3]
+    weights: {
+      latency: 0.4,
+      stability: 0.6, // [!code focus:3]
+    },
   },
 });
 ```

@@ -44,7 +44,7 @@ export {
   type FallbackTransport,
   type FallbackTransportErrorType,
 } from './clients/transports/fallback.js'
-export { custom } from 'viem'
+export { custom } from './clients/transports/custom.js'
 export { mainnet, testnet } from './chains/index.js'
 
 export type {
