@@ -307,6 +307,10 @@ export default defineConfig({
         collapsed: true,
         items: [
           {
+            text: 'JSON-RPC Account',
+            link: '/docs/accounts/json-rpcAccount',
+          },
+          {
             text: 'Local Accounts',
             link: '/docs/accounts/localAccounts',
             items: [

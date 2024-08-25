@@ -1,0 +1,25 @@
+# JSON-RPC Account
+
+A JSON-RPC Account is an Account whose signing keys are stored on the external Wallet. It **defers** signing of transactions & messages to the target Wallet over JSON-RPC.
+
+## Usage
+
+A JSON-RPC Account can just be initialized as an [Address](#TODO) string, In the usage below, we are extracting the address from a Browser Extension Wallet (e.g. Fluent) with the `window.fluent` Provider via `cfx_chainId`:
+
+```ts twoslash
+// @noErrors
+import "cive/window";
+import { createWalletClient, custom } from "cive";
+import { mainnet } from "cive/chains";
+
+const [address] = await window.fluent.request({
+  // [!code focus:3]
+  method: "cfx_requestAccounts",
+});
+
+const client = createWalletClient({
+  account: address, // [!code focus]
+  chain: mainnet,
+  transport: custom(window.fluent!),
+});
+```
