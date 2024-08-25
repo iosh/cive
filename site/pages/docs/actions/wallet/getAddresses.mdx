@@ -1,0 +1,30 @@
+# getAddresses
+
+Returns a list of account addresses owned by the wallet or client.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { walletClient } from "./client";
+
+const accounts = await walletClient.getAddresses(); // [!code focus:99]
+// ['cfx:...', 'cfx:...']
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/walletClient.ts]
+```
+
+:::
+
+## Returns
+
+[`Address[]`](#TODO)
+
+A list of checksummed addresses.
+
+## JSON-RPC Methods
+
+[`cfx_accounts`](#TODO)
