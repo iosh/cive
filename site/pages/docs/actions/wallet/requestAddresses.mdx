@@ -1,0 +1,32 @@
+# requestAddresses
+
+Requests a list of accounts managed by a wallet.
+
+`requestAddresses` sends a request to the wallet, asking for permission to access the user's accounts. After the user accepts the request, it will return a list of accounts (addresses).
+
+This API can be useful for dapps that need to access the user's accounts in order to execute transactions or interact with smart contracts.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { walletClient } from "./client";
+
+const accounts = await walletClient.requestAddresses(); // [!code focus:99]
+// ['cfx:...', 'cfx:...']
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/walletClient.ts]
+```
+
+:::
+
+## Returns
+
+[`Address[]`](#TODO)
+
+## JSON-RPC Methods
+
+[`cfx_requestAccounts`](#TODo)

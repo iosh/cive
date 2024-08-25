@@ -297,6 +297,10 @@ export default defineConfig({
             link: '/docs/actions/wallet/getAddresses',
           },
           {
+            text: 'requestAddresses',
+            link: '/docs/actions/wallet/requestAddresses',
+          },
+          {
             text: 'sendRawTransaction',
             link: '/docs/actions/wallet/sendRawTransaction',
           },
