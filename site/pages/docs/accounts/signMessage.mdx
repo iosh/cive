@@ -1,6 +1,6 @@
 # signMessage (Local Account)
 
-Calculates an Ethereum-specific signature in [cip-23 format](https://github.com/Conflux-Chain/CIPs/blob/master/CIPs/cip-23.md): `keccak256("\x19Conflux  Signed Message:\n" + len(message) + message))`.
+Calculates an Ethereum-specific signature in [CIP-23 format](https://github.com/Conflux-Chain/CIPs/blob/master/CIPs/cip-23.md): `keccak256("\x19Conflux  Signed Message:\n" + len(message) + message))`.
 
 - use [`verifyMessage`](#TODO) to verify the signature,
 - use [`recoverMessageAddress`](#TODO) to recover the signing address from a signature.

@@ -1,0 +1,141 @@
+# signMessage
+
+Calculates an Ethereum-specific signature in [CIP-23 format](https://github.com/Conflux-Chain/CIPs/blob/master/CIPs/cip-23.md): `keccak256("\x19Conflux  Signed Message:\n" + len(message) + message))`.
+
+- use [`verifyMessage`](#TODO) to verify the signature,
+- use [`recoverMessageAddress`](#TODO) to recover the signing address from a signature.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { account, walletClient } from "./config";
+
+const signature_1 = await walletClient.signMessage({
+  // [!code focus:99]
+  account,
+  message: "hello world",
+});
+// @log: Output: "0x7faf17ad6b7e74e4ec5fc47a9845d9cfe260c14b293308f6942ea202588073df4801eb7a2877ccb895bf42d57644c3818eded847bc03edd63fb36574df90699801"
+
+const signature_2 = await walletClient.signMessage({
+  account,
+  // Hex data representation of message.
+  message: { raw: "0x68656c6c6f20776f726c64" },
+});
+// @log: Output: "0x7faf17ad6b7e74e4ec5fc47a9845d9cfe260c14b293308f6942ea202588073df4801eb7a2877ccb895bf42d57644c3818eded847bc03edd63fb36574df90699801"
+```
+
+```ts twoslash [config.ts] filename="client.ts"
+// [!include ~/snippets/walletClient.ts]
+
+export const [account] = await walletClient.getAddresses();
+// @log: ↑ JSON-RPC Account
+
+// export const account = privateKeyToAccount(...)
+// @log: ↑ Local Account
+```
+
+:::
+
+### Account Hoisting
+
+If you do not wish to pass an `account` to every `signMessage`, you can also hoist the Account on the Wallet Client (see `config.ts`).
+
+[Learn more](/docs/clients/wallet#withaccount).
+
+:::code-group
+
+```ts [example.ts]
+import { walletClient } from "./config";
+
+const signature = await walletClient.signMessage({
+  // [!code focus:99]
+  message: "hello world",
+});
+// @log: "0x7faf17ad6b7e74e4ec5fc47a9845d9cfe260c14b293308f6942ea202588073df4801eb7a2877ccb895bf42d57644c3818eded847bc03edd63fb36574df90699801"
+```
+
+```ts [JSON-RPC Account]
+import { createWalletClient, custom } from "cive";
+
+// Retrieve Account from an EIP-1193 Provider.
+const [account] = await window.ethereum.request({
+  method: "eth_requestAccounts",
+});
+
+export const walletClient = createWalletClient({
+  account,
+  transport: custom(window.ethereum!),
+});
+```
+
+```ts [Local Account]
+import { createWalletClient, http } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+
+export const walletClient = createWalletClient({
+  account: privateKeyToAccount("0x...", { networkId: mainnet.id }),
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`Hex`](#TODO)
+
+The signed message.
+
+### account
+
+- **Type:** `Account | Address`
+
+Account to use for signing.
+
+Accepts a [JSON-RPC Account](/docs/clients/wallet#json-rpc-accounts) or [Local Account (Private Key, etc)](/docs/clients/wallet#local-accounts-private-key-mnemonic-etc).
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+const signature = await walletClient.signMessage({
+  account: "cfx:...", // [!code focus:1]
+  message: "hello world",
+});
+```
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+import { privateKeyToAccount } from "cive/accounts";
+const signature = await walletClient.signMessage({
+  account: privateKeyToAccount("0x...", { networkId: mainnet.id }), // [!code focus:1]
+  message: "hello world",
+});
+```
+
+### message
+
+- **Type:** `string | { raw: Hex | ByteArray }`
+
+Message to sign.
+
+By default, viem signs the UTF-8 representation of the message.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+const signature = await walletClient.signMessage({
+  account: "cfx:...",
+  message: "hello world", // [!code focus:1]
+});
+```
+
+## JSON-RPC Methods
+
+- JSON-RPC Accounts:
+  - [`personal_sign`](#TODO)
+- Local Accounts
+  - Signs locally. No JSON-RPC request.

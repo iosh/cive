@@ -315,6 +315,15 @@ export default defineConfig({
             ],
           },
           {
+            text: 'Data',
+            items: [
+              {
+                text: 'signMessage',
+                link: '/docs/actions/wallet/signMessage',
+              },
+            ],
+          },
+          {
             text: 'Transaction',
             items: [
               {
