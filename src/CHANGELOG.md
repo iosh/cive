@@ -1,5 +1,18 @@
 # cive
 
+## 0.3.0
+
+### Minor Changes
+
+- a97b4ad: Added custom function from viem
+- db328b4: Updated Transport type from viem
+- 201e365: Update http function from viem
+
+### Patch Changes
+
+- 8eab43c: Updated viem version
+- ea50656: Added fallback to export
+
 ## 0.2.0
 
 ### Minor Changes
