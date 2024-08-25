@@ -293,20 +293,30 @@ export default defineConfig({
         items: [
           { text: 'Introduction', link: '/docs/actions/wallet/introduction' },
           {
-            text: 'getAddresses',
-            link: '/docs/actions/wallet/getAddresses',
+            text: 'Account',
+            items: [
+              {
+                text: 'getAddresses',
+                link: '/docs/actions/wallet/getAddresses',
+              },
+              {
+                text: 'requestAddresses',
+                link: '/docs/actions/wallet/requestAddresses',
+              },
+            ],
           },
           {
-            text: 'requestAddresses',
-            link: '/docs/actions/wallet/requestAddresses',
-          },
-          {
-            text: 'sendRawTransaction',
-            link: '/docs/actions/wallet/sendRawTransaction',
-          },
-          {
-            text: 'prepareTransactionRequest',
-            link: '/docs/actions/wallet/prepareTransactionRequest',
+            text: 'Transaction',
+            items: [
+              {
+                text: 'sendRawTransaction',
+                link: '/docs/actions/wallet/sendRawTransaction',
+              },
+              {
+                text: 'prepareTransactionRequest',
+                link: '/docs/actions/wallet/prepareTransactionRequest',
+              },
+            ],
           },
         ],
       },
