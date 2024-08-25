@@ -1,0 +1,30 @@
+# switchChain
+
+Switch the target chain in a wallet.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { testnet } from "cive/chains";
+import { walletClient } from "./client";
+
+await walletClient.switchChain({ id: testnet.id }); // [!code focus]
+```
+
+```ts twoslash [client.ts] filename="client.ts"
+// [!include ~/snippets/walletClient.ts]
+```
+
+## Parameters
+
+### id
+
+- **Type:** `number`
+
+The Chain ID.
+
+## JSON-RPC Methods
+
+[`wallet_switchConfluxChain`](#TODO)

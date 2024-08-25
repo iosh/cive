@@ -306,6 +306,15 @@ export default defineConfig({
             ],
           },
           {
+            text: 'Chain',
+            items: [
+              {
+                text: 'switchChain',
+                link: '/docs/actions/wallet/switchChain',
+              },
+            ],
+          },
+          {
             text: 'Transaction',
             items: [
               {
