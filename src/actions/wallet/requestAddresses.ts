@@ -17,7 +17,7 @@ export async function requestAddresses<
   client: Client<Transport, TChain, TAccount>,
 ): Promise<RequestAddressesReturnType> {
   const addresses = await client.request(
-    { method: 'eth_requestAccounts' },
+    { method: 'cfx_requestAccounts' },
     { dedupe: true, retryCount: 0 },
   )
   return addresses.map((address) => getAddress(address))

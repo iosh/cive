@@ -693,7 +693,7 @@ export type WalletRpcSchema = [
     ReturnType: Quantity
   },
   {
-    Method: 'eth_requestAccounts'
+    Method: 'cfx_requestAccounts'
     Parameters?: undefined
     ReturnType: Address[]
   },
