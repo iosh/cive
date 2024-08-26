@@ -321,6 +321,10 @@ export default defineConfig({
                 text: 'signMessage',
                 link: '/docs/actions/wallet/signMessage',
               },
+              {
+                text: 'signTypedData',
+                link: '/docs/actions/wallet/signTypedData',
+              },
             ],
           },
           {
