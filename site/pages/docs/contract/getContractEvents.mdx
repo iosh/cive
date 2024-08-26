@@ -222,7 +222,7 @@ const logs = await publicClient.getContractEvents({
 ### Strict Mode
 
 By default, `getContractEvents` will include logs that [do not conform](#TODO) to the indexed & non-indexed arguments on the `event`.
-viem will not return a value for arguments that do not conform to the ABI, thus, some arguments on `args` may be undefined.
+cive will not return a value for arguments that do not conform to the ABI, thus, some arguments on `args` may be undefined.
 
 ```ts twoslash
 import { publicClient } from "./client";
