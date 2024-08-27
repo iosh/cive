@@ -1,0 +1,129 @@
+# Custom Transport
+
+The `custom` Transport accepts an request function as a parameter, This transport is useful for integrating with injected wallets. or even providing your own custom request function.
+
+## Import
+
+```ts twoslash
+import { custom } from "cive";
+```
+
+## Usage
+
+```ts twoslash
+import "cive/window";
+// ---cut---
+import { createWalletClient, custom } from "cive";
+import { mainnet } from "cive/chains";
+
+const client = createWalletClient({
+  chain: mainnet,
+  transport: custom(window.fluent!),
+});
+```
+
+Or you can define your own:
+
+```ts twoslash
+import { createWalletClient, custom } from "cive";
+import { mainnet } from "cive/chains";
+
+const client = createWalletClient({
+  chain: mainnet,
+  transport: custom({
+    async request({ method, params }) {
+      const response = await fetch("https:/...");
+      return response;
+    },
+  }),
+});
+```
+
+## Parameters
+
+### provider
+
+- **Type:** `custom`
+
+```ts twoslash
+import { createWalletClient, custom } from "cive";
+import { mainnet } from "cive/chains";
+
+const client = createWalletClient({
+  chain: mainnet,
+  transport: custom({
+    async request({ method, params }) {
+      const response = await fetch("https:/...");
+      return response;
+    },
+  }),
+});
+```
+
+### key (optional)
+
+- **Type:** `string`
+- **Default:** `"custom"`
+
+A key for the Transport.
+
+```ts twoslash
+import "cive/window";
+import { custom } from "cive";
+// ---cut---
+const transport = custom(window.fluent!, {
+  key: "windowProvider", // [!code focus]
+});
+```
+
+### name (optional)
+
+- **Type:** `string`
+- **Default:** `"Provider"`
+
+A name for the Transport
+
+```ts twoslash
+import "cive/window";
+import { custom } from "cive";
+// ---cut---
+const transport = custom(window.fluent!, {
+  name: "Window  Provider", // [!code focus]
+});
+```
+
+### retryCount (optional)
+
+- **Type:** `number`
+- **Default:** `3`
+
+The max number of times to retry when a request fails.
+
+```ts twoslash
+import "cive/window";
+import { custom } from "cive";
+// ---cut---
+const transport = custom(window.fluent!, {
+  retryCount: 5, // [!code focus]
+});
+```
+
+### retryDelay (optional)
+
+- **Type:** `number`
+- **Default:** `150`
+
+The base delay (in ms) between retries. By default, the Transport will use [exponential backoff](https://en.wikipedia.org/wiki/Exponential_backoff) (`~~(1 << count) * retryDelay`), which means the time between retries is not constant.
+
+```ts twoslash
+import "cive/window";
+import { custom } from "cive";
+// ---cut---
+const transport = custom(window.fluent!, {
+  retryDelay: 100, // [!code focus]
+});
+```
+
+## Gotchas
+
+- If you are pairing the `custom` Transport with a [Public Client](/docs/clients/public), ensure that your provider supports [Public Actions](/docs/actions/public/introduction).

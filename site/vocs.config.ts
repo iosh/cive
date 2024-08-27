@@ -32,6 +32,10 @@ export default defineConfig({
                 text: 'Fallback',
                 link: '/docs/clients/transports/fallback',
               },
+              {
+                text: 'custom',
+                link: '/docs/clients/transports/custom',
+              },
             ],
           },
         ],
