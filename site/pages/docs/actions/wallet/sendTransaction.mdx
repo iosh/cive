@@ -1,0 +1,269 @@
+# sendTransaction
+
+Creates, signs, and sends a new transaction to the network.
+
+## Usage
+
+:::code-group
+
+```ts twoslash [example.ts]
+import { account, walletClient } from "./config";
+
+const hash = await walletClient.sendTransaction({
+  // [!code focus:99]
+  account,
+  to: "cfx:...",
+  value: 1000000000000000000n,
+});
+// '0x...'
+```
+
+```ts twoslash [config.ts] filename="config.ts"
+// [!include ~/snippets/walletClient.ts]
+
+export const [account] = await walletClient.getAddresses();
+// @log: ↑ JSON-RPC Account
+
+// export const account = privateKeyToAccount("0x...", {networkId: mainnet.id});
+// @log: ↑ Local Account
+```
+
+:::
+
+### Account Hoisting
+
+If you do not wish to pass an `account` to every `sendTransaction`, you can also hoist the Account on the Wallet Client (see `config.ts`).
+
+[Learn more](/docs/clients/wallet#account).
+
+:::code-group
+
+```ts twoslash [example]
+import { walletClient } from "./client";
+
+const hash = await walletClient.sendTransaction({
+  // [!code focus:99]
+  to: "cfx:...",
+  value: 1000000000000000000n,
+});
+// '0x...'
+```
+
+```ts [client.ts (JSON-RPC Account)]
+import { createWalletClient, custom } from "cive";
+
+const [account] = await window.fluent.request({
+  method: "cfx_requestAccounts",
+});
+
+export const walletClient = createWalletClient({
+  account,
+  transport: custom(window.fluent!),
+});
+```
+
+```ts twoslash [client.ts (Local Account)] filename="client.ts"
+import { createWalletClient, http } from "cive";
+import { privateKeyToAccount } from "cive/accounts";
+import { mainnet } from "cive/chains";
+
+export const walletClient = createWalletClient({
+  account: privateKeyToAccount("0x...", { networkId: mainnet.id }),
+  transport: http(),
+});
+```
+
+:::
+
+## Returns
+
+[`Hash`](#TODO)
+
+The [Transaction](#TODO) hash.
+
+## Parameters
+
+### account
+
+- **Type:** `Account | Address`
+
+The Account to send the transaction from.
+
+Accepts a [JSON-RPC Account](/docs/clients/wallet#json-rpc-accounts) or [Local Account (Private Key, etc)](/docs/clients/wallet#local-accounts-private-key-mnemonic-etc).
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+// @noErrors
+const hash = await walletClient.sendTransaction({
+  account: "cfx:...", // [!code focus]
+  to: "cfx:...",
+  value: 1000000000000000000n,
+});
+```
+
+### to
+
+- **Type:** `0x${string}`
+
+The transaction recipient or contract address.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+// @noErrors
+const hash = await walletClient.sendTransaction({
+  account,
+  to: "cfx:...", // [!code focus]
+  value: 1000000000000000000n,
+  nonce: 1,
+});
+```
+
+### accessList (optional)
+
+- **Type:** [`AccessList`](#TODO)
+
+The access list.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+// @noErrors
+const hash = await walletClient.sendTransaction({
+  accessList: [
+    // [!code focus:6]
+    {
+      address: "0x1",
+      storageKeys: ["0x1"],
+    },
+  ],
+  account,
+  to: "cfx:...",
+});
+```
+
+### data (optional)
+
+- **Type:** `0x${string}`
+
+A contract hashed method call with encoded args.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+// @noErrors
+const hash = await walletClient.sendTransaction({
+  data: "cfx:...", // [!code focus]
+  account,
+  to: "cfx:...",
+  value: 1000000000000000000n,
+});
+```
+
+### gasPrice (optional)
+
+- **Type:** `bigint`
+
+The price (in wei) to pay per gas. Only applies to [Legacy Transactions](#TODO).
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+// @noErrors
+import { parseGDrip, parseCFX } from "cive/utils";
+
+const hash = await walletClient.sendTransaction({
+  account,
+  gasPrice: parseGDrip("20"), // [!code focus]
+  to: "cfx:...",
+  value: parseCFX("1"),
+});
+```
+
+### maxFeePerGas (optional)
+
+- **Type:** `bigint`
+
+Total fee per gas (in wei), inclusive of `maxPriorityFeePerGas`. Only applies to [EIP-1559 Transactions](#TODO)
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+// @noErrors
+import { parseGDrip, parseCFX } from "cive/utils";
+const hash = await walletClient.sendTransaction({
+  account,
+  maxFeePerGas: parseGDrip("20"), // [!code focus]
+  to: "cfx:...",
+  value: parseCFX("1"),
+});
+```
+
+### maxPriorityFeePerGas (optional)
+
+- **Type:** `bigint`
+
+Max priority fee per gas (in wei). Only applies to [EIP-1559 Transactions](#TODO)
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+// @noErrors
+import { parseGDrip, parseCFX } from "cive/utils";
+const hash = await walletClient.sendTransaction({
+  account,
+  maxFeePerGas: parseGDrip("20"),
+  maxPriorityFeePerGas: parseGDrip("2"), // [!code focus]
+  to: "cfx:...",
+  value: parseCFX("1"),
+});
+```
+
+### nonce (optional)
+
+- **Type:** `number`
+
+Unique number identifying this transaction.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+// @noErrors
+const hash = await walletClient.sendTransaction({
+  account,
+  to: "cfx:...",
+  value: 1000000000000000000n,
+  nonce: 1, // [!code focus]
+});
+```
+
+### value (optional)
+
+- **Type:** `bigint`
+
+Value in wei sent with this transaction.
+
+```ts twoslash
+// [!include ~/snippets/walletClient.ts]
+// ---cut---
+// @noErrors
+import { parseGDrip, parseCFX } from "cive/utils";
+const hash = await walletClient.sendTransaction({
+  account,
+  to: "cfx",
+  value: parseCFX("1"), // [!code focus]
+  nonce: 1,
+});
+```
+
+## Tips
+
+- For dapps: When using this action, it is assumed that the user has connected to their wallet (e.g. given permission for the dapp to access their accounts via [`requestAddresses`](/docs/actions/wallet/requestAddresses)). You can also check if the user has granted access to their accounts via [`getAddresses`](/docs/actions/wallet/getAddresses)
+
+## JSON-RPC Methods
+
+- JSON-RPC Accounts:
+  - [`cfx_sendTransaction`](#TODO)
+- Local Accounts:
+  - [`cfx_sendRawTransaction`](#TODO)
