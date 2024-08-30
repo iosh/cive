@@ -1,13 +1,26 @@
 # CIVE
+
 Cive is an interface for the Conflux Core Space, built on Viem.
 
-
 ## Install
+
+Use `npm`
+
+```bash
+npm install cive
+```
+
+Or `pnpm`
 
 ```bash
 pnpm add cive
 ```
 
+Or `yarn`
+
+```bash
+yarn add cive
+```
 
 ## Usage
 
@@ -24,7 +37,6 @@ const publicClient = createPublicClient({
 
 // 3. consume an action
 const block = await publicClient.getBlock();
-
 ```
 
 ## Docs
