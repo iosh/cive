@@ -58,5 +58,14 @@
       "import": "./_esm/utils/index.js",
       "default": "./_cjs/utils/index.js"
     }
+  },
+  "typesVersions": {
+    "*": {
+      "accounts": ["./_types/accounts/index.d.ts"],
+      "actions": ["./_types/actions/index.d.ts"],
+      "chains": ["./_types/chains/index.d.ts"],
+      "window": ["./_types/window/index.d.ts"],
+      "utils": ["./_types/utils/index.d.ts"]
+    }
   }
 }
