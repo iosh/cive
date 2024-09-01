@@ -1,5 +1,11 @@
 # cive
 
+## 0.3.1
+
+### Patch Changes
+
+- cbd103a: Added typesVersions to package.json
+
 ## 0.3.0
 
 ### Minor Changes

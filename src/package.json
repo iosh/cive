@@ -1,6 +1,6 @@
 {
   "name": "cive",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "",
   "type": "module",
   "main": "./_cjs/index.js",
@@ -61,11 +61,21 @@
   },
   "typesVersions": {
     "*": {
-      "accounts": ["./_types/accounts/index.d.ts"],
-      "actions": ["./_types/actions/index.d.ts"],
-      "chains": ["./_types/chains/index.d.ts"],
-      "window": ["./_types/window/index.d.ts"],
-      "utils": ["./_types/utils/index.d.ts"]
+      "accounts": [
+        "./_types/accounts/index.d.ts"
+      ],
+      "actions": [
+        "./_types/actions/index.d.ts"
+      ],
+      "chains": [
+        "./_types/chains/index.d.ts"
+      ],
+      "window": [
+        "./_types/window/index.d.ts"
+      ],
+      "utils": [
+        "./_types/utils/index.d.ts"
+      ]
     }
   }
 }
