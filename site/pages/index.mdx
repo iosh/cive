@@ -2,7 +2,7 @@
 layout: landing
 ---
 
-import { HomePage } from "vocs/components";
+import { HomePage, Button } from "vocs/components";
 
 <HomePage.Root>
   <HomePage.Logo />
@@ -21,4 +21,21 @@ import { HomePage } from "vocs/components";
       GitHub
     </HomePage.Button>
   </HomePage.Buttons>
+
+  <div className="w-full"> 
+    <span className="text-xl">Useful packages</span>
+    
+    <div className="flex  justify-center mt-5 gap-5">
+      <div className="flex items-center flex-col gap-2">
+        <span>Cive plugin for Hardhat</span>
+        <Button href="https://www.npmjs.com/package/@civex/hardhat-cive">@civex/hardhat-cive</Button>
+       </div>
+
+      <div className="flex items-center flex-col gap-2">
+        <span>Run conflux in Nodejs</span>
+        <Button href="https://www.npmjs.com/package/@xcfx/node">@xcfx/node</Button>
+      </div>
+     </div>
+
+  </div>
 </HomePage.Root>
