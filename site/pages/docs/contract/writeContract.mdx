@@ -17,7 +17,7 @@ The `writeContract` internally sends a transaction – it **does not** validate 
 import { account, publicClient, walletClient } from "./config";
 import { Abi } from "./abi";
 
-const { request } = await walletClient.writeContract({
+const { request } = await publicClient.simulateContract({
   account,
   address: "cfx:...",
   abi: Abi,
