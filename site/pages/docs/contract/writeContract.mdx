@@ -77,7 +77,7 @@ For example, the `mint` function name below requires a **tokenId** argument, and
 import { account, walletClient } from "./client";
 import { Abi } from "./abi";
 
-const { request } = await walletClient.writeContract({
+const { request } = await publicClient.simulateContract({
   address: "0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2",
   abi: Abi,
   functionName: "mint",
