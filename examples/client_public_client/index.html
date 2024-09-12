@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .item {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Public Client Example</h1>
+    <div class="item">
+      <button id="getEpochNumber">Get Epoch Number</button
+      ><span>epochNumber:</span> <span id="epochNumber" />
+    </div>
+
+    <div class="item">
+      <button id="getBlock">Get Block</button>
+      <span>Block:</span>
+      <div id="block"></div>
+    </div>
+
+    <div class="item">
+      <button id="getClientVersion">Get Client Version</button>
+      <span>Client Version:</span><span id="clientVersion" />
+    </div>
+
+    <div class="item">
+      <button id="getGasPrice">Get Gas Price</button>
+      <span>Gas Price:</span><span id="gasPrice" />
+    </div>
+
+    <div class="item">
+      <button id="getSupplyInfo">Get Supply Info</button>
+      <span>Supply Info:</span>
+      <div id="supplyInfo" />
+    </div>
+
+    <div class="item">
+      <button id="getStatus">Get Status</button>
+      <span>Status:</span>
+      <div id="status" />
+    </div>
+    <script type="module">
+      import "./index.ts";
+    </script>
+  </body>
+</html>

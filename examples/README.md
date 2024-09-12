@@ -7,7 +7,7 @@ The `examples/` directory is a growing & living folder, and open for contributio
   - [ ] Fetching Epoch
   - [ ] Watching Epoch
 - Clients
-  - [ ] Public (w/ HTTP, WebSocket, Fallback)
+  - [x] Public (w/ HTTP, WebSocket, Fallback)
   - [ ] Wallet – JSON-RPC Account (`window.fluent`)
   - [ ] Wallet - JSON-RPC Account (WalletConnect v2)
 - Contracts
