@@ -5,7 +5,13 @@ export default defineConfig({
   baseUrl: 'https://cive.zyx.ee',
   titleTemplate: '%s · Cive',
   description: 'Build Conflux core space apps with Cive',
-  topNav: [{ text: 'Docs', link: '/docs/getting-started', match: '/docs' }],
+  topNav: [
+    { text: 'Docs', link: '/docs/getting-started', match: '/docs' },
+    {
+      text: 'Examples',
+      link: 'https://github.com/iosh/cive/tree/main/examples',
+    },
+  ],
   sidebar: {
     '/docs/': [
       {
