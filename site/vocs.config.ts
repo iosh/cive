@@ -35,6 +35,10 @@ export default defineConfig({
                 link: '/docs/clients/transports/http',
               },
               {
+                text: 'WebSocket',
+                link: '/docs/clients/transports/webSocket',
+              },
+              {
                 text: 'Fallback',
                 link: '/docs/clients/transports/fallback',
               },
