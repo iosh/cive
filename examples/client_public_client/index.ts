@@ -1,6 +1,6 @@
-import { createPublicClient, http, testnet } from 'cive'
+import { createPublicClient, fallback, http, testnet, webSocket } from 'cive'
 
-const client = createPublicClient({
+const httpClient = createPublicClient({
   chain: testnet,
   transport: http(),
 })
@@ -39,7 +39,7 @@ async function render(
 async function getEpochNumber() {
   await render('#getEpochNumber', '#epochNumber', async () => {
     // you can set the epochTag , if you don't want to use cache you can set cacheTime to 0, the default cacheTime is `client.cacheTime`
-    return await client.getEpochNumber({
+    return await httpClient.getEpochNumber({
       epochTag: 'latest_mined',
       cacheTime: 0,
     })
@@ -54,7 +54,7 @@ async function getBlock() {
   await render('#getBlock', '#block', async () => {
     // also you can use the blockNumber to get the block
     //   const block = await client.getBlock({ blockNumber: 1 })
-    return await client.getBlock({ epochTag: 'latest_state' })
+    return await httpClient.getBlock({ epochTag: 'latest_state' })
   })
 }
 const getBlockButton = document.querySelector<HTMLButtonElement>('#getBlock')!
@@ -64,7 +64,7 @@ getBlockButton.addEventListener('click', getBlock)
 
 async function getClientVersion() {
   await render('#getClientVersion', '#clientVersion', async () => {
-    return await client.getClientVersion()
+    return await httpClient.getClientVersion()
   })
 }
 const getClientVersionButton =
@@ -75,7 +75,7 @@ getClientVersionButton.addEventListener('click', getClientVersion)
 // getGasPrice doc:https://cive.zyx.ee/docs/actions/public/getGasPrice
 async function getGasPrice() {
   await render('#getGasPrice', '#gasPrice', async () => {
-    return await client.getGasPrice()
+    return await httpClient.getGasPrice()
   })
 }
 const getGasPriceButton =
@@ -85,7 +85,7 @@ getGasPriceButton.addEventListener('click', getGasPrice)
 // getSupplyInfo doc:https://cive.zyx.ee/docs/actions/public/getSupplyInfo
 async function getSupplyInfo() {
   await render('#getSupplyInfo', '#supplyInfo', async () => {
-    return await client.getSupplyInfo()
+    return await httpClient.getSupplyInfo()
   })
 }
 const getSupplyInfoButton =
@@ -96,7 +96,7 @@ getSupplyInfoButton.addEventListener('click', getSupplyInfo)
 // getStatus doc:https://cive.zyx.ee/docs/actions/public/getStatus
 async function getStatus() {
   await render('#getStatus', '#status', async () => {
-    return await client.getStatus()
+    return await httpClient.getStatus()
   })
 }
 const getStatusButton = document.querySelector<HTMLButtonElement>('#getStatus')!
@@ -106,11 +106,46 @@ getStatusButton.addEventListener('click', getStatus)
  * Websocket
  */
 
-// TODO
+const webSocketClient = createPublicClient({
+  chain: testnet,
+  transport: webSocket('wss://test.confluxrpc.org/ws'),
+})
 
+async function wsGetEpochNumber() {
+  await render('#wsGetEpochNumber', '#wsEpochNumber', async () => {
+    // you can set the epochTag , if you don't want to use cache you can set cacheTime to 0, the default cacheTime is `client.cacheTime`
+    return await webSocketClient.getEpochNumber({
+      epochTag: 'latest_mined',
+      cacheTime: 0,
+    })
+  })
+}
+const wsEpochNumberButton =
+  document.querySelector<HTMLButtonElement>('#wsGetEpochNumber')!
+wsEpochNumberButton.addEventListener('click', wsGetEpochNumber)
 
 /**
  * Fallback
  */
 
-// TODO
+const fallbackClient = createPublicClient({
+  chain: testnet,
+  transport: fallback([
+    // The client will try to use http first and fallback to next.
+    http('http://fake.example.com'),
+    http('https://test.confluxrpc.com'),
+  ]),
+})
+
+async function fallbackGetEpochNumber() {
+  await render('#fallbackGetEpochNumber', '#fallbackEpochNumber', async () => {
+    // you can set the epochTag , if you don't want to use cache you can set cacheTime to 0, the default cacheTime is `client.cacheTime`
+    return await fallbackClient.getEpochNumber({
+      epochTag: 'latest_mined',
+      cacheTime: 0,
+    })
+  })
+}
+const fallbackEpochNumberButton =
+  document.querySelector<HTMLButtonElement>('#fallbackGetEpochNumber')!
+fallbackEpochNumberButton.addEventListener('click', fallbackGetEpochNumber)

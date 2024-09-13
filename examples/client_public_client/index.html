@@ -11,6 +11,7 @@
   </head>
   <body>
     <h1>Public Client Example</h1>
+    <p>HTTP Client</p>
     <div class="item">
       <button id="getEpochNumber">Get Epoch Number</button
       ><span>epochNumber:</span> <span id="epochNumber" />
@@ -43,6 +44,20 @@
       <span>Status:</span>
       <div id="status" />
     </div>
+
+    <p>Websocket Client</p>
+
+    <div class="item">
+      <button id="wsGetEpochNumber">Get Epoch Number</button
+      ><span>epochNumber:</span> <span id="wsEpochNumber" />
+    </div>
+
+    <p>Fallback Client</p>
+    <div class="item">
+      <button id="fallbackGetEpochNumber">Get Epoch Number</button
+      ><span>epochNumber:</span> <span id="fallbackEpochNumber" />
+    </div>
+
     <script type="module">
       import "./index.ts";
     </script>
