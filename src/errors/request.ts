@@ -1,7 +1,6 @@
 import { BaseError } from 'viem'
 import { stringify } from '../utils/stringify.js'
 
-
 import { getUrl } from './utils.js'
 
 export type HttpRequestErrorType = HttpRequestError & {

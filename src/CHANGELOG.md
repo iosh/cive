@@ -1,5 +1,15 @@
 # cive
 
+## 0.4.0
+
+### Minor Changes
+
+- 3f0bb14: Added websocet to client transport
+
+### Patch Changes
+
+- 0518000: Fixed testnet websocket endpoint
+
 ## 0.3.1
 
 ### Patch Changes
