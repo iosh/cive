@@ -12,7 +12,7 @@ export const testnet = defineChain({
     default: {
       http: ['https://test.confluxrpc.com', 'https://test.confluxrpc.org'],
       webSocket: [
-        'wss://test.confluxrpc.org/com',
+        'wss://test.confluxrpc.com/ws',
         'wss://test.confluxrpc.org/ws',
       ],
     },
