@@ -146,6 +146,7 @@ async function fallbackGetEpochNumber() {
     })
   })
 }
-const fallbackEpochNumberButton =
-  document.querySelector<HTMLButtonElement>('#fallbackGetEpochNumber')!
+const fallbackEpochNumberButton = document.querySelector<HTMLButtonElement>(
+  '#fallbackGetEpochNumber',
+)!
 fallbackEpochNumberButton.addEventListener('click', fallbackGetEpochNumber)

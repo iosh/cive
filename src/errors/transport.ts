@@ -1,4 +1,4 @@
-import { BaseError } from "viem"
+import { BaseError } from 'viem'
 
 export type UrlRequiredErrorType = UrlRequiredError & {
   name: 'UrlRequiredError'
