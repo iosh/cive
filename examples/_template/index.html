@@ -8,10 +8,7 @@
     <h1>_REPLACE ME_ Example</h1>
     <div id="app">Loading...</div>
     <script type="module">
-      import out from './index.ts';
-      document.querySelector('#app').innerHTML = Array.isArray(out)
-        ? out.map(x => `<div style="margin-bottom: 16px;">${x}</div>`).join('')
-        : out;
+      import './index.tsx';
     </script>
   </body>
 </html>
