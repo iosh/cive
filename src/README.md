@@ -42,3 +42,12 @@ const block = await publicClient.getBlock();
 ## Docs
 
 [Head to the documentation](https://cive.zyx.ee/) to read and learn more about cive.
+
+## Licenses
+
+This project is licensed under the [MIT License](LICENSE).
+
+This project also partially contains code derived or copied from the following projects:
+
+- [Viem(MIT)](https://github.com/wevm/viem)
+- [Abitype(MIT)](https://github.com/wevm/abitype)
