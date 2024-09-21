@@ -1,6 +1,17 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
-  "files": { "include": ["**/*.ts"] },
+  "files": {
+    "ignore": [
+      "_cjs",
+      "_esm",
+      "_types",
+      ".next",
+      "CHANGELOG.md",
+      "tsconfig.json",
+      "tsconfig.*.json",
+      "site/dist"
+    ]
+  },
   "organizeImports": {
     "enabled": true
   },
