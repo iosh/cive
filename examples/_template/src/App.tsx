@@ -16,9 +16,9 @@ export default function App() {
   }, [])
 
   return (
-    <div>
-      <button onClick={handleClick}>get current epoch number</button>
-      <span>{epochNumber}</span>
+    <div className='block'>
+      <button className='button' onClick={handleClick}>Get current epoch number</button>
+      <span className='is-size-5'>{epochNumber}</span>
     </div>
   )
 }
