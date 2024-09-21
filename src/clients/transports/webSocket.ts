@@ -1,8 +1,8 @@
 import {
-  getSocket,
-  type SocketRpcClient,
-  getWebSocketRpcClient,
   type GetSocketRpcClientParameters,
+  type SocketRpcClient,
+  getSocket,
+  getWebSocketRpcClient,
 } from 'viem/utils'
 import { RpcRequestError } from '../../errors/request.js'
 import {

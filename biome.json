@@ -9,7 +9,8 @@
       "CHANGELOG.md",
       "tsconfig.json",
       "tsconfig.*.json",
-      "site/dist"
+      "site/dist",
+      "coverage"
     ]
   },
   "organizeImports": {

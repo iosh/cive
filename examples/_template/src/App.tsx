@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react'
 import { http, createPublicClient } from 'cive'
 import { mainnet } from 'cive/chains'
+import React, { useCallback, useState } from 'react'
 
 export default function App() {
   const [epochNumber, setEpochNumber] = useState('')
@@ -16,9 +16,11 @@ export default function App() {
   }, [])
 
   return (
-    <div className='block'>
-      <button className='button' onClick={handleClick}>Get current epoch number</button>
-      <span className='is-size-5'>{epochNumber}</span>
+    <div className="block">
+      <button className="button" onClick={handleClick}>
+        Get current epoch number
+      </button>
+      <span className="is-size-5">{epochNumber}</span>
     </div>
   )
 }

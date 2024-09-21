@@ -2,9 +2,6 @@ import React from 'react'
 import App from './src/App'
 import 'bulma/css/bulma.css'
 
-
-
-
 // /**
 //  * Websocket
 //  */
