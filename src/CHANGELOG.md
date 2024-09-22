@@ -1,5 +1,12 @@
 # cive
 
+## 0.4.1
+
+### Patch Changes
+
+- f484fe1: Added wallet action to export
+- 68dd2a6: Fixed EIP1193EventMap Address type
+
 ## 0.4.0
 
 ### Minor Changes

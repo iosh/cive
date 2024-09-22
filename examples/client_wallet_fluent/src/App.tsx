@@ -6,16 +6,16 @@ import {
   custom,
   parseCFX,
   SignMessageErrorType,
-} from "cive";
-import { mainnet, testnet } from "cive/chains";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import "cive/window";
-import type { SendTransactionErrorType } from "../../../src/_types/actions/wallet/sendTransaction";
+} from 'cive'
+import { mainnet, testnet } from 'cive/chains'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import 'cive/window'
+import type { SendTransactionErrorType } from '../../../src/_types/actions/wallet/sendTransaction'
 
 export default function App() {
-  const [account, setAccount] = useState<Address>();
-  const [transaction, setTransaction] = useState<string>();
-  const [signMessage, setSignMessage] = useState<string>();
+  const [account, setAccount] = useState<Address>()
+  const [transaction, setTransaction] = useState<string>()
+  const [signMessage, setSignMessage] = useState<string>()
 
   const walletClient = useMemo(
     () =>
@@ -23,13 +23,13 @@ export default function App() {
         chain: testnet,
         transport: custom(window.fluent!),
       }),
-    []
-  );
+    [],
+  )
 
   const connect = useCallback(async () => {
-    const [address] = await walletClient.requestAddresses();
-    setAccount(address);
-  }, [walletClient]);
+    const [address] = await walletClient.requestAddresses()
+    setAccount(address)
+  }, [walletClient])
 
   const handleSendTransaction = useCallback(async () => {
     if (account) {
@@ -37,47 +37,47 @@ export default function App() {
         const hash = await walletClient.sendTransaction({
           account,
           to: account,
-          value: parseCFX("0.01"),
-        });
-        setTransaction(`successful: ${hash}`);
+          value: parseCFX('0.01'),
+        })
+        setTransaction(`successful: ${hash}`)
       } catch (error: unknown) {
-        const err = error as SendTransactionErrorType;
-        setTransaction(err.name);
+        const err = error as SendTransactionErrorType
+        setTransaction(err.name)
       }
     }
-  }, [walletClient, account]);
+  }, [walletClient, account])
 
   const handleSignMessage = useCallback(async () => {
     if (account) {
       try {
         const signature = await walletClient.signMessage({
           account,
-          message: "hello world",
-        });
-        setSignMessage(`successful: ${signature}`);
+          message: 'hello world',
+        })
+        setSignMessage(`successful: ${signature}`)
       } catch (error: unknown) {
-        const err = error as SignMessageErrorType;
+        const err = error as SignMessageErrorType
 
-        setSignMessage(err.name);
+        setSignMessage(err.name)
       }
     }
-  }, [walletClient, account]);
+  }, [walletClient, account])
 
   const handleSwitchChain = useCallback(async () => {
     if (account) {
-      await walletClient.switchChain({ id: testnet.id });
+      await walletClient.switchChain({ id: testnet.id })
     }
-  }, [walletClient, account]);
+  }, [walletClient, account])
   useEffect(() => {
-    window?.fluent?.on("accountsChanged", (accounts: Address[]) => {
+    window?.fluent?.on('accountsChanged', (accounts: Address[]) => {
       if (accounts.length > 0) {
-        setAccount(accounts[0]);
+        setAccount(accounts[0])
       } else {
-        setAccount(undefined);
+        setAccount(undefined)
       }
-    });
-    window?.fluent?.on("disconnect", () => setAccount(undefined));
-  }, []);
+    })
+    window?.fluent?.on('disconnect', () => setAccount(undefined))
+  }, [])
 
   return (
     <div className="box">
@@ -120,5 +120,5 @@ export default function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
