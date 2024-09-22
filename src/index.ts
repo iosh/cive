@@ -635,3 +635,86 @@ export {
   type WatchEpochNumberErrorType,
   watchEpochNumber,
 } from './actions/public/watchEpochNumber.js'
+
+export {
+  type DeployContractParameters,
+  type DeployContractReturnType,
+  type DeployContractErrorType,
+  deployContract,
+} from './actions/wallet/deployContract.js'
+
+export {
+  type GetAddressesReturnType,
+  type GetAddressesErrorType,
+  getAddresses,
+} from './actions/wallet/getAddresses.js'
+
+export {
+  type PrepareTransactionRequestParameterType,
+  type PrepareTransactionRequestRequest,
+  type PrepareTransactionRequestParameters,
+  type PrepareTransactionRequestReturnType,
+  type PrepareTransactionRequestErrorType,
+  prepareTransactionRequest,
+} from './actions/wallet/prepareTransactionRequest.js'
+
+export {
+  type RequestAddressesReturnType,
+  type RequestAddressesErrorType,
+  requestAddresses,
+} from './actions/wallet/requestAddresses.js'
+
+export {
+  type RequestPermissionsParameters,
+  type RequestPermissionsReturnType,
+  type RequestPermissionsErrorType,
+  requestPermissions,
+} from './actions/wallet/requestPermissions.js'
+
+export {
+  type SendRawTransactionParameters,
+  type SendRawTransactionReturnType,
+  type SendRawTransactionErrorType,
+  sendRawTransaction,
+} from './actions/wallet/sendRawTransaction.js'
+
+export {
+  type SendTransactionRequest,
+  type SendTransactionParameters,
+  type SendTransactionReturnType,
+  type SendTransactionErrorType,
+  sendTransaction,
+} from './actions/wallet/sendTransaction.js'
+
+export {
+  type SignMessageParameters,
+  type SignMessageReturnType,
+  type SignMessageErrorType,
+  signMessage,
+} from './actions/wallet/signMessage.js'
+
+export {
+  type SignTransactionParameters,
+  type SignTransactionErrorType,
+  signTransaction,
+} from './actions/wallet/signTransaction.js'
+
+export {
+  type SignTypedDataParameters,
+  type SignTypedDataReturnType,
+  type SignTypedDataErrorType,
+  signTypedData,
+} from './actions/wallet/signTypedData.js'
+
+export {
+  type SwitchChainParameters,
+  type SwitchChainErrorType,
+  switchChain,
+} from './actions/wallet/switchChain.js'
+
+export {
+  type WriteContractParameters,
+  type WriteContractReturnType,
+  type WriteContractErrorType,
+  writeContract,
+} from './actions/wallet/writeContract.js'
