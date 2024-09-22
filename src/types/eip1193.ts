@@ -26,7 +26,6 @@ import type {
   RpcVote,
 } from './rpc.js'
 
-import type { EIP1193Events } from 'viem'
 import type { Address, HexAddress } from '../accounts/types.js'
 import type { Block, EpochTag } from './block.js'
 import type { Hash, Hex } from './misc.js'
@@ -34,6 +33,54 @@ import type { RpcEpochNumber, RpcTransaction as Transaction } from './rpc.js'
 import type { ExactPartial, Prettify } from './utils.js'
 
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
+
+//////////////////////////////////////////////////
+// Errors
+
+export type ProviderRpcErrorType = ProviderRpcError & {
+  name: 'ProviderRpcError'
+}
+export class ProviderRpcError extends Error {
+  code: number
+  details: string
+
+  constructor(code: number, message: string) {
+    super(message)
+    this.code = code
+    this.details = message
+  }
+}
+
+//////////////////////////////////////////////////
+// Provider Events
+
+export type ProviderConnectInfo = {
+  chainId: string
+}
+
+export type ProviderMessage = {
+  type: string
+  data: unknown
+}
+
+export type EIP1193EventMap = {
+  accountsChanged(accounts: Address[]): void
+  chainChanged(chainId: string): void
+  connect(connectInfo: ProviderConnectInfo): void
+  disconnect(error: ProviderRpcError): void
+  message(message: ProviderMessage): void
+}
+
+export type EIP1193Events = {
+  on<event extends keyof EIP1193EventMap>(
+    event: event,
+    listener: EIP1193EventMap[event],
+  ): void
+  removeListener<event extends keyof EIP1193EventMap>(
+    event: event,
+    listener: EIP1193EventMap[event],
+  ): void
+}
 
 export type EIP1193Provider = Prettify<
   EIP1193Events & {
