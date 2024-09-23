@@ -12,6 +12,32 @@ import {
 } from 'cive'
 import { useCallback, useMemo, useState } from 'react'
 import 'cive/window'
+
+const httpClient = createPublicClient({
+  chain: testnet,
+  transport: http(),
+})
+
+const webSocketClient = createPublicClient({
+  chain: testnet,
+  transport: webSocket(),
+})
+
+const fallbackClient = createPublicClient({
+  chain: testnet,
+  transport: fallback([
+    // the first transport is fake so will fallback to the second
+    http('http://fake.example.com'),
+    http('https://test.confluxrpc.org'),
+    webSocket(),
+  ]),
+})
+
+const customClient = createPublicClient({
+  chain: testnet,
+  transport: custom(window.fluent!),
+})
+
 export default function App() {
   const [epochNumber, setEpochNumber] = useState('')
   const [block, setBlock] = useState<null | GetBlockReturnType>(null)
@@ -32,46 +58,6 @@ export default function App() {
     },
     [],
   )
-  const httpClient = useMemo(
-    () =>
-      createPublicClient({
-        chain: testnet,
-        transport: http(),
-      }),
-    [],
-  )
-
-  const webSocketClient = useMemo(
-    () =>
-      createPublicClient({
-        chain: testnet,
-        transport: webSocket(),
-      }),
-    [],
-  )
-
-  const fallbackClient = useMemo(
-    () =>
-      createPublicClient({
-        chain: testnet,
-        transport: fallback([
-          // the first transport is fake so will fallback to the second
-          http('http://fake.example.com'),
-          http('https://test.confluxrpc.org'),
-          webSocket(),
-        ]),
-      }),
-    [],
-  )
-
-  const customClient = useMemo(
-    () =>
-      createPublicClient({
-        chain: testnet,
-        transport: custom(window.fluent!),
-      }),
-    [],
-  )
 
   const client = useMemo(() => {
     if (currentClient === 'websocket') {
@@ -84,7 +70,7 @@ export default function App() {
       return customClient
     }
     return httpClient
-  }, [currentClient, customClient, fallbackClient, httpClient, webSocketClient])
+  }, [currentClient])
 
   // getEpochNumber doc: https://cive.zyx.ee/docs/actions/public/getEpochNumber
   const handleGetEpochNumber = useCallback(async () => {

@@ -1,16 +1,15 @@
 import { http, createPublicClient } from 'cive'
 import { mainnet } from 'cive/chains'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
+const client = createPublicClient({
+  chain: mainnet,
+  transport: http(),
+})
 export default function App() {
   const [epochNumber, setEpochNumber] = useState('')
 
   const handleClick = useCallback(async () => {
-    const client = createPublicClient({
-      chain: mainnet,
-      transport: http(),
-    })
-
     const epochNumber = await client.getEpochNumber()
     setEpochNumber(`${epochNumber}`)
   }, [])

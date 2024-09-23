@@ -1,35 +1,29 @@
 import {
-  http,
   type Address,
-  createPublicClient,
+  type SignMessageErrorType,
   createWalletClient,
   custom,
   parseCFX,
-  SignMessageErrorType,
 } from 'cive'
-import { mainnet, testnet } from 'cive/chains'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { testnet } from 'cive/chains'
+import { useCallback, useEffect, useState } from 'react'
 import 'cive/window'
 import type { SendTransactionErrorType } from '../../../src/_types/actions/wallet/sendTransaction'
+
+const walletClient = createWalletClient({
+  chain: testnet,
+  transport: custom(window.fluent!),
+})
 
 export default function App() {
   const [account, setAccount] = useState<Address>()
   const [transaction, setTransaction] = useState<string>()
   const [signMessage, setSignMessage] = useState<string>()
 
-  const walletClient = useMemo(
-    () =>
-      createWalletClient({
-        chain: testnet,
-        transport: custom(window.fluent!),
-      }),
-    [],
-  )
-
   const connect = useCallback(async () => {
     const [address] = await walletClient.requestAddresses()
     setAccount(address)
-  }, [walletClient])
+  }, [])
 
   const handleSendTransaction = useCallback(async () => {
     if (account) {
@@ -45,7 +39,7 @@ export default function App() {
         setTransaction(err.name)
       }
     }
-  }, [walletClient, account])
+  }, [account])
 
   const handleSignMessage = useCallback(async () => {
     if (account) {
@@ -61,13 +55,13 @@ export default function App() {
         setSignMessage(err.name)
       }
     }
-  }, [walletClient, account])
+  }, [account])
 
   const handleSwitchChain = useCallback(async () => {
     if (account) {
       await walletClient.switchChain({ id: testnet.id })
     }
-  }, [walletClient, account])
+  }, [account])
   useEffect(() => {
     window?.fluent?.on('accountsChanged', (accounts: Address[]) => {
       if (accounts.length > 0) {
