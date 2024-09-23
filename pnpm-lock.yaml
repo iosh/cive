@@ -54,7 +54,7 @@ importers:
         version: 1.0.2
       cive:
         specifier: latest
-        version: 0.4.0(typescript@5.6.2)(zod@3.23.8)
+        version: 0.4.1(typescript@5.6.2)(zod@3.23.8)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -85,7 +85,7 @@ importers:
         version: 1.0.2
       cive:
         specifier: latest
-        version: 0.4.0(typescript@5.6.2)(zod@3.23.8)
+        version: 0.4.1(typescript@5.6.2)(zod@3.23.8)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -116,7 +116,7 @@ importers:
         version: 1.0.2
       cive:
         specifier: latest
-        version: 0.4.0(typescript@5.6.2)(zod@3.23.8)
+        version: 0.4.1(typescript@5.6.2)(zod@3.23.8)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1715,8 +1715,8 @@ packages:
   cipher-base@1.0.4:
     resolution: {integrity: sha512-Kkht5ye6ZGmwv40uUDZztayT2ThLQGfnj/T71N/XzeZeo3nf8foyW7zGTsPYkEya3m5f3cAypH+qe7YOrM1U2Q==}
 
-  cive@0.4.0:
-    resolution: {integrity: sha512-3h+ru+NAVuz0jQbG2PspJo90dIjcJ6uuKf0phvZ6om+EDisYSZs5oPPWpt8F+1Yh8XnGAmkMIo/HnIZzy3YYnw==}
+  cive@0.4.1:
+    resolution: {integrity: sha512-ggpNTd8qJwiqiRJ1MM4e3dOphCF6gVNeAM/j1dUu0uqdsSdcDb01UuwprpQjkA+PvH7wDLUs1jfRBcEXecq8Qw==}
 
   cli-cursor@4.0.0:
     resolution: {integrity: sha512-VGtlMu3x/4DOtIUwEkRezxUZ2lBacNJCHash0N0WeZDBS+7Ux1dm3XWAgWYxLJFMMdOeXMHXorshEFhbMSGelg==}
@@ -2113,6 +2113,7 @@ packages:
 
   formidable@1.2.6:
     resolution: {integrity: sha512-KcpbcpuLNOwrEjnbpMC0gS+X8ciDoZE1kkqzat4a8vrprf+s9pKNQ/QIwWfbfs4ltgmFl3MD177SNTkve3BwGQ==}
+    deprecated: 'Please upgrade to latest, formidable@v2 or formidable@v3! Check these notes: https://bit.ly/2ZEqIau'
 
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
@@ -2784,6 +2785,10 @@ packages:
     resolution: {integrity: sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==}
     hasBin: true
 
+  node-gyp-build@4.8.2:
+    resolution: {integrity: sha512-IRUxE4BVsHWXkV/SFOut4qTlagw2aM8T5/vnTsmrHJvVoKueJHRc/JaFND7QDDc61kLYUJ6qlZM3sqTSyx2dTw==}
+    hasBin: true
+
   node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
 
@@ -3390,6 +3395,7 @@ packages:
   superagent@6.1.0:
     resolution: {integrity: sha512-OUDHEssirmplo3F+1HWKUrUjvnQuA+nZI6i/JJBdXb5eq9IyEQwPyPpqND+SSsxf6TygpBEkUjISVRN4/VOpeg==}
     engines: {node: '>= 7.0.0'}
+    deprecated: Please upgrade to v9.0.0+ as we have fixed a public vulnerability with formidable dependency. Note that v9.0.0+ requires Node.js v14.18.0+. See https://github.com/ladjs/superagent/pull/1800 for insight. This project is supported and maintained by the team at Forward Email @ https://forwardemail.net
 
   superstruct@0.10.13:
     resolution: {integrity: sha512-W4SitSZ9MOyMPbHreoZVEneSZyPEeNGbdfJo/7FkJyRs/M3wQRFzq+t3S/NBwlrFSWdx1ONLjLb9pB+UKe4IqQ==}
@@ -5361,7 +5367,7 @@ snapshots:
       inherits: 2.0.4
       safe-buffer: 5.2.1
 
-  cive@0.4.0(typescript@5.6.2)(zod@3.23.8):
+  cive@0.4.1(typescript@5.6.2)(zod@3.23.8):
     dependencies:
       '@noble/curves': 1.4.2
       '@noble/hashes': 1.4.0
@@ -6834,6 +6840,9 @@ snapshots:
 
   node-gyp-build@4.8.1: {}
 
+  node-gyp-build@4.8.2:
+    optional: true
+
   node-releases@2.0.14: {}
 
   normalize-path@3.0.0: {}
@@ -7733,7 +7742,7 @@ snapshots:
 
   utf-8-validate@6.0.4:
     dependencies:
-      node-gyp-build: 4.8.1
+      node-gyp-build: 4.8.2
     optional: true
 
   util-deprecate@1.0.2: {}
