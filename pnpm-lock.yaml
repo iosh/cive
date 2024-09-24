@@ -171,6 +171,37 @@ importers:
         specifier: ^5.4.4
         version: 5.4.4(@types/node@20.14.10)
 
+  examples/epoch_watch_epoch_number:
+    dependencies:
+      bulma:
+        specifier: ^1.0.2
+        version: 1.0.2
+      cive:
+        specifier: latest
+        version: 0.4.1(typescript@5.6.2)(zod@3.23.8)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.3.8
+        version: 18.3.8
+      '@types/react-dom':
+        specifier: ^18.3.0
+        version: 18.3.0
+      '@vitejs/plugin-react':
+        specifier: ^4.3.1
+        version: 4.3.1(vite@5.4.4(@types/node@20.14.10))
+      typescript:
+        specifier: ^5.6.2
+        version: 5.6.2
+      vite:
+        specifier: ^5.4.4
+        version: 5.4.4(@types/node@20.14.10)
+
   site:
     dependencies:
       '@types/react':
