@@ -14,7 +14,7 @@ The `examples/` directory is a growing & living folder, and open for contributio
 - Contracts
   - [x] Deploying
   - [x] Reading
-  - [ ] Writing
+  - [x] Writing
   - [ ] Multicall
   - [ ] Call
   - [ ] Events
