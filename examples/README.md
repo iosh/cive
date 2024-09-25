@@ -12,8 +12,8 @@ The `examples/` directory is a growing & living folder, and open for contributio
   - [x] Wallet – JSON-RPC Account (`window.fluent`)
   - [ ] Wallet - JSON-RPC Account (WalletConnect v2)
 - Contracts
-  - [ ] Deploying
-  - [ ] Reading
+  - [x] Deploying
+  - [x] Reading
   - [ ] Writing
   - [ ] Multicall
   - [ ] Call
