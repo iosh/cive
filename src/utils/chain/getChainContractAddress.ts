@@ -25,15 +25,15 @@ export function getChainContractAddress({
 
   if (
     epochNumber &&
-    contract.blockCreated &&
-    contract.blockCreated > epochNumber
+    contract.epochCreated &&
+    contract.epochCreated > epochNumber
   )
     throw new ChainDoesNotSupportContract({
       epochNumber,
       chain,
       contract: {
         name,
-        blockCreated: contract.blockCreated,
+        blockCreated: contract.epochCreated,
       },
     })
 

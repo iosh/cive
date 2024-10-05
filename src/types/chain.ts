@@ -237,7 +237,7 @@ type ChainBlockExplorer = {
 
 export type ChainContract = {
   address: Address
-  blockCreated?: number | undefined
+  epochCreated?: number | undefined
 }
 
 type ChainNativeCurrency = {

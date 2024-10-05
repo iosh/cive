@@ -23,4 +23,10 @@ export const mainnet = defineChain({
       url: 'https://confluxscan.io',
     },
   },
+  contracts: {
+    multicall3: {
+      address:"cfx:acevn2d3dr6vh4jca28c6cmvkktsg7r8n25vp9hnmw",
+      epochCreated: 106_231_941
+    }
+  }
 })

@@ -23,5 +23,11 @@ export const testnet = defineChain({
       url: 'https://testnet.confluxscan.io',
     },
   },
+  contracts: {
+    multicall3: {
+      address: 'cfxtest:acay1u1fj9bz93334efs447tx1x6y5p61a944zyy47',
+      epochCreated: 190_369_991,
+    },
+  },
   testnet: true,
 })
