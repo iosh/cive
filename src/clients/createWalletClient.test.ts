@@ -65,6 +65,7 @@ test('creates', () => {
       },
       "type": "walletClient",
       "watchAsset": [Function],
+      "writeContract": [Function],
     }
   `)
 })
@@ -126,6 +127,7 @@ describe('args: account', () => {
         },
         "type": "walletClient",
         "watchAsset": [Function],
+        "writeContract": [Function],
       }
     `)
   })
@@ -175,6 +177,7 @@ describe('args: transport', () => {
         },
         "type": "walletClient",
         "watchAsset": [Function],
+        "writeContract": [Function],
       }
     `)
   })
@@ -224,6 +227,7 @@ describe('args: transport', () => {
         },
         "type": "walletClient",
         "watchAsset": [Function],
+        "writeContract": [Function],
       }
     `)
   })
@@ -296,6 +300,7 @@ describe('args: transport', () => {
         },
         "type": "walletClient",
         "watchAsset": [Function],
+        "writeContract": [Function],
       }
     `)
   })
@@ -350,10 +355,12 @@ describe('args: transport', () => {
         "checkBalanceAgainstTransaction": [Function],
         "clearTxpool": [Function],
         "createBlockFilter": [Function],
+        "createContractEventFilter": [Function],
         "createEventFilter": [Function],
         "createLocalNodeAccount": [Function],
         "createPendingTransactionFilter": [Function],
         "deployContract": [Function],
+        "estimateContractGasAndCollateral": [Function],
         "estimateGasAndCollateral": [Function],
         "estimateMaxPriorityFeePerGas": [Function],
         "extend": [Function],
@@ -377,6 +384,7 @@ describe('args: transport', () => {
         "getCollateralForStorage": [Function],
         "getCollateralInfo": [Function],
         "getConfirmationRiskByHash": [Function],
+        "getContractEvents": [Function],
         "getDepositList": [Function],
         "getEpochNumber": [Function],
         "getEpochReceipts": [Function],
@@ -413,9 +421,11 @@ describe('args: transport', () => {
         "key": "wallet",
         "lockLocalNodeAccount": [Function],
         "mine": [Function],
+        "multicall": [Function],
         "name": "Wallet Client",
         "pollingInterval": 4000,
         "prepareTransactionRequest": [Function],
+        "readContract": [Function],
         "request": [Function],
         "requestAddresses": [Function],
         "requestPermissions": [Function],
@@ -424,6 +434,7 @@ describe('args: transport', () => {
         "signMessage": [Function],
         "signTransaction": [Function],
         "signTypedData": [Function],
+        "simulateContract": [Function],
         "switchChain": [Function],
         "traceBlock": [Function],
         "traceTransaction": [Function],
@@ -441,7 +452,10 @@ describe('args: transport', () => {
         "type": "walletClient",
         "uninstallFilter": [Function],
         "unlockLocalNodeAccount": [Function],
+        "waitForTransactionReceipt": [Function],
         "watchAsset": [Function],
+        "watchEpochNumber": [Function],
+        "writeContract": [Function],
       }
     `)
   })

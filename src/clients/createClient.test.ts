@@ -495,8 +495,10 @@ describe('extends', () => {
         },
         "checkBalanceAgainstTransaction": [Function],
         "createBlockFilter": [Function],
+        "createContractEventFilter": [Function],
         "createEventFilter": [Function],
         "createPendingTransactionFilter": [Function],
+        "estimateContractGasAndCollateral": [Function],
         "estimateGasAndCollateral": [Function],
         "estimateMaxPriorityFeePerGas": [Function],
         "extend": [Function],
@@ -517,6 +519,7 @@ describe('extends', () => {
         "getCollateralForStorage": [Function],
         "getCollateralInfo": [Function],
         "getConfirmationRiskByHash": [Function],
+        "getContractEvents": [Function],
         "getDepositList": [Function],
         "getEpochNumber": [Function],
         "getEpochReceipts": [Function],
@@ -549,10 +552,13 @@ describe('extends', () => {
         "getTxPoolNextNonce": [Function],
         "getVoteList": [Function],
         "key": "base",
+        "multicall": [Function],
         "name": "Base Client",
         "pollingInterval": 4000,
+        "readContract": [Function],
         "request": [Function],
         "sendRawTransaction": [Function],
+        "simulateContract": [Function],
         "traceBlock": [Function],
         "traceTransaction": [Function],
         "transport": {
@@ -568,6 +574,8 @@ describe('extends', () => {
         },
         "type": "base",
         "uninstallFilter": [Function],
+        "waitForTransactionReceipt": [Function],
+        "watchEpochNumber": [Function],
       }
     `)
   })
