@@ -279,6 +279,11 @@ import {
   getVoteList,
 } from '../../actions/public/getVoteList.js'
 import {
+  type MulticallParameters,
+  type MulticallReturnType,
+  multicall,
+} from '../../actions/public/multicall.js'
+import {
   type ReadContractParameters,
   type ReadContractReturnType,
   readContract,
@@ -1032,6 +1037,19 @@ export type PublicActions<
   waitForTransactionReceipt: (
     args: WaitForTransactionReceiptParameters,
   ) => Promise<WaitForTransactionReceiptReturnType>
+
+  /**
+   *
+   * Similar to [`readContract`] but batches up multiple functions on a contract in a single RPC call via the [`multicall3` contract](https://github.com/mds1/multicall).
+   * @param args
+   * @returns
+   */
+  multicall: <
+    const contracts extends readonly unknown[],
+    allowFailure extends boolean = true,
+  >(
+    args: MulticallParameters<contracts, allowFailure>,
+  ) => Promise<MulticallReturnType<contracts, allowFailure>>
 }
 
 export function publicActions<
@@ -1118,5 +1136,6 @@ export function publicActions<
     watchEpochNumber: (args) => watchEpochNumber(client, args),
     waitForTransactionReceipt: (args) =>
       waitForTransactionReceipt(client, args),
+    multicall: (args) => multicall(client, args),
   }
 }
