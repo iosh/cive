@@ -637,6 +637,12 @@ export {
 } from './actions/public/watchEpochNumber.js'
 
 export {
+  type MulticallParameters,
+  type MulticallReturnType,
+  type MulticallErrorType,
+  multicall,
+} from './actions/public/multicall.js'
+export {
   type DeployContractParameters,
   type DeployContractReturnType,
   type DeployContractErrorType,
