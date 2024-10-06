@@ -1,5 +1,15 @@
 # cive
 
+## 0.5.0
+
+### Minor Changes
+
+- a1d7d29: Add multicall action
+
+### Patch Changes
+
+- 3c84c15: Added multicall3 contract
+
 ## 0.4.1
 
 ### Patch Changes
