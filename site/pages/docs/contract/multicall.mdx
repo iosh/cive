@@ -1,0 +1,252 @@
+# multicall
+
+Similar to [`readContract`](/docs/contract/readContract), but batches up multiple functions on a contract in a single RPC call via the [`multicall3` contract](https://github.com/mds1/multicall). 
+
+## Usage
+
+:::code-group
+
+```ts [example.ts]
+import { publicClient } from './client'
+import { test20TokenAbi } from './abi'
+
+const test20Token = {
+  address: 'cfxtest:acfrcwu7yn4ysjybux326my6a743zw2zwjps5had1g',
+  abi: test20TokenAbi
+} as const
+
+const results = await publicClient.multicall({
+  contracts: [
+    {
+      ...test20Token,
+      functionName: 'totalSupply',
+    },
+    {
+      ...test20Token,
+      functionName: 'ownerOf',
+      args: [69420n]
+    },
+    {
+      ...test20Token,
+      functionName: 'mint'
+    }
+  ]
+})
+
+```
+
+```ts [abi.ts]
+export const test20TokenAbi = [
+  ...
+  {
+    inputs: [],
+    name: "totalSupply",
+    outputs: [{ name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ name: "tokenId", type: "uint256" }],
+    name: "ownerOf",
+    outputs: [{ name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "mint",
+    outputs: [],
+    stateMutability: "view",
+    type: "function",
+  },
+  ...
+] as const;
+```
+
+```ts [client.ts]
+import { createPublicClient, http } from 'cive'
+import { testnet } from 'viem/chains'
+
+export const publicClient = createPublicClient({
+  chain: testnet,
+  transport: http()
+})
+```
+
+:::
+
+## Return Value
+
+`({ data: <inferred>, status: 'success' } | { error: string, status: 'reverted' })[]`
+
+An array of results with accompanying status.
+
+Additionally, when [`allowFailure`](#allowfailure-optional) is set to `false`, it directly returns an array of inferred data:
+
+`(<inferred>)[]`
+
+
+## Parameters
+
+### contracts.address
+
+- **Type:** [`Address`](#TODO)
+
+
+```ts
+const results = await publicClient.multicall({
+  contracts: [
+    {
+      address: 'cfxtest:...', // [!code focus]
+      abi: contractAbi,
+      functionName: 'totalSupply',
+    },
+    ...
+  ]
+})
+```
+
+### contracts.abi
+
+- **Type:** [`Abi`](#TODO)
+
+The contract ABI.
+
+```ts
+const results = await publicClient.multicall({
+  contracts: [
+    {
+      address: 'cfxtest:...',
+      abi: contractAbi, // [!code focus]
+      functionName: 'totalSupply',
+    },
+    ...
+  ]
+})
+```
+
+
+### contracts.functionName
+
+- **Type**: `string`
+
+The function name to call.
+
+```ts
+const results = await publicClient.multicall({
+  contracts: [
+    {
+      address: 'cfxtest:...',
+      abi: contractAbi,
+      functionName: 'totalSupply', // [!code focus]
+    },
+    ...
+  ]
+})
+```
+
+
+### contracts.args (optional)
+
+- **Type:** Inferred from ABI.
+
+Arguments to pass to function call.
+
+```ts
+const results = await publicClient.multicall({
+  contracts: [
+    {
+      address: 'cfxtest:...',
+      abi: contractAbi,
+      functionName: 'balanceOf',
+      args: ['cfxtest:...'] // [!code focus]
+    },
+    ...
+  ]
+})
+```
+
+### allowFailure (optional)
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+Whether or not the `multicall` function should throw if a call reverts. If set to `true` (default), and a call reverts, then `multicall` will fail silently and its error will be logged in the `results` array.
+
+```ts
+const results = await publicClient.multicall({
+  contracts: [
+    {
+      address: 'cfxtest:...',
+      abi: contractAbi,
+      functionName: 'totalSupply',
+    },
+    ...
+  ],
+  allowFailure: false // [!code focus]
+})
+```
+
+### batchSize (optional)
+
+- **Type:** `number`
+- **Default:** [`client.batch.multicall.batchSize`](/docs/clients/public#batch-multicall-batchsize-optional) (if set) or `1024`
+
+The maximum size (in bytes) for each calldata chunk. Set to `0` to disable the size limit.
+
+> Note: Some RPC Providers limit the amount of calldata (`data`) that can be sent in a single `cfx_call` request. It is best to check with your RPC Provider to see if there are any calldata size limits to `cfx_call` requests.
+
+```ts
+const results = await publicClient.multicall({
+  contracts: [
+    {
+      address: 'cfxtest:...',
+      abi: contractAbi,
+      functionName: 'totalSupply',
+    },
+    ...
+  ],
+  batchSize: 4096 // 4kB // [!code focus]
+})
+```
+
+### epochNumber (optional)
+
+- **Type:** `number`
+
+The block number to perform the read against.
+
+```ts
+const results = await publicClient.multicall({
+  contracts: [
+    {
+      address: 'cfxtest:...',
+      abi: contractAbi,
+      functionName: 'totalSupply',
+    },
+    ...
+  ],
+  epochNumber: 15121123, // [!code focus]
+})
+```
+
+### multicallAddress (optional)
+
+- **Type:** [`Address`](#TODO)
+- **Default:** `client.chain.contracts.multicall3.address`
+
+Address of Multicall Contract.
+
+```ts
+const results = await publicClient.multicall({
+  contracts: [
+    {
+      address: 'cfxtest:...',
+      abi: contractAbi,
+      functionName: 'totalSupply',
+    },
+    ...
+  ],
+  multicallAddress: 'cfxtest:...' // [!code focus]
+})
+```

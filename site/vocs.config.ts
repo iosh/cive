@@ -432,6 +432,10 @@ export default defineConfig({
                 link: '/docs/contract/createContractEventFilter',
               },
               {
+                text: 'multicall',
+                link: '/docs/contract/multicall'
+              },
+              {
                 text: 'readContract',
                 link: '/docs/contract/readContract',
               },
