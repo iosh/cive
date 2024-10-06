@@ -1,4 +1,5 @@
 import { afterAll, beforeAll, expect, test, vi } from 'vitest'
+import type { Address } from '../../accounts/types.js'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { Test20 } from '~test/src/contracts/Test20.js'
@@ -8,7 +9,6 @@ import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
 import { getBlock } from './getBlock.js'
 import { multicall } from './multicall.js'
 import * as readContract from './readContract.js'
-import type { Address } from '~cive/accounts/types.js'
 
 const sourceAccount = getTestAccount(accounts[0])
 const client = devConflux.getClient({ account: sourceAccount })
