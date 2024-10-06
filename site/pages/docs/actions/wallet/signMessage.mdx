@@ -57,17 +57,18 @@ const signature = await walletClient.signMessage({
 // @log: "0x7faf17ad6b7e74e4ec5fc47a9845d9cfe260c14b293308f6942ea202588073df4801eb7a2877ccb895bf42d57644c3818eded847bc03edd63fb36574df90699801"
 ```
 
-```ts [JSON-RPC Account]
+```ts [JSON-RPC Account] [filename="config.ts"]
 import { createWalletClient, custom } from "cive";
+import "cive/window";
 
 // Retrieve Account from an EIP-1193 Provider.
-const [account] = await window.ethereum.request({
-  method: "eth_requestAccounts",
+const [account] = await window.fluent!.request({
+  method: "cfx_requestAccounts",
 });
 
 export const walletClient = createWalletClient({
   account,
-  transport: custom(window.ethereum!),
+  transport: custom(window.fluent!),
 });
 ```
 
