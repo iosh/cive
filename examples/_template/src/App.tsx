@@ -15,11 +15,15 @@ export default function App() {
   }, [])
 
   return (
-    <div className="block">
-      <button className="button" onClick={handleClick}>
-        Get current epoch number
-      </button>
-      <span className="is-size-5">{epochNumber}</span>
+    <div className="box">
+      <div className="columns is-3 ">
+        <div className="column">
+          <button className="button" onClick={handleClick}>
+            Get current epoch number
+          </button>
+          <span className="is-size-5">{epochNumber}</span>
+        </div>
+      </div>
     </div>
   )
 }
