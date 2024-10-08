@@ -15,8 +15,8 @@ The `examples/` directory is a growing & living folder, and open for contributio
   - [x] Deploying
   - [x] Reading
   - [x] Writing
-  - [ ] Multicall
-  - [ ] Call
+  - [x] Multicall
+  - [x] Call
   - [ ] Events
   - [x] Simulating Method Calls
 - Filters & Logs
