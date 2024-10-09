@@ -22,7 +22,7 @@ The `examples/` directory is a growing & living folder, and open for contributio
 - Filters & Logs
   - [ ] Blocks
   - [ ] Pending Transactions
-  - [ ] Events
+  - [x] Events
 - Signatures
   - [ ] Sign typed data
     - [ ] + verify/recover address
