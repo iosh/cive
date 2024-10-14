@@ -433,7 +433,7 @@ export default defineConfig({
               },
               {
                 text: 'multicall',
-                link: '/docs/contract/multicall'
+                link: '/docs/contract/multicall',
               },
               {
                 text: 'readContract',

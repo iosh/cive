@@ -1,8 +1,8 @@
 import {
   http,
   createPublicClient,
-  encodeFunctionData,
   decodeFunctionResult,
+  encodeFunctionData,
 } from 'cive'
 import { testnet } from 'cive/chains'
 import { useCallback, useState } from 'react'

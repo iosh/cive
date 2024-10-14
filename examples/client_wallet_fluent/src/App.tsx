@@ -8,7 +8,7 @@ import {
 import { testnet } from 'cive/chains'
 import { useCallback, useEffect, useState } from 'react'
 import 'cive/window'
-import type { SendTransactionErrorType } from '../../../src/_types/actions/wallet/sendTransaction'
+import type { SendTransactionErrorType } from 'cive'
 
 const walletClient = createWalletClient({
   chain: testnet,

@@ -20,14 +20,14 @@ The `examples/` directory is a growing & living folder, and open for contributio
   - [ ] Events
   - [x] Simulating Method Calls
 - Filters & Logs
-  - [ ] Blocks
+  - [x] Blocks
   - [ ] Pending Transactions
   - [x] Events
 - Signatures
   - [ ] Sign typed data
     - [ ] + verify/recover address
-  - [ ] Sign message (+ recover message address)
-    - [ ] + verify/recover address
+  - [x] Sign message (+ recover message address)
+    - [x] + verify/recover address
 - Transactions
   - [ ] Fetching Transactions & Receipts
   - [ ] Transaction Types (EIP-1559, Legacy, etc)
