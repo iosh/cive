@@ -1,6 +1,5 @@
 import {
   http,
-  type Chain,
   type GetBlockReturnType,
   type GetStatusReturnType,
   type GetSupplyInfoReturnType,

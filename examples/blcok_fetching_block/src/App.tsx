@@ -5,7 +5,7 @@ import {
   createPublicClient,
 } from 'cive'
 import { mainnet } from 'cive/chains'
-import React, { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 const client = createPublicClient({
   chain: mainnet,
