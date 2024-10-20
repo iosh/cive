@@ -309,6 +309,11 @@ import {
   uninstallFilter,
 } from '../../actions/public/uninstallFilter.js'
 import {
+  type VerifyMessageParameters,
+  type VerifyMessageReturnType,
+  verifyMessage,
+} from '../../actions/public/verifyMessage.js'
+import {
   type WaitForTransactionReceiptParameters,
   type WaitForTransactionReceiptReturnType,
   waitForTransactionReceipt,
@@ -318,6 +323,7 @@ import {
   type WatchEpochNumberReturnType,
   watchEpochNumber,
 } from '../../actions/public/watchEpochNumber.js'
+
 import {
   type SendRawTransactionParameters,
   type SendRawTransactionReturnType,
@@ -1041,8 +1047,8 @@ export type PublicActions<
   /**
    *
    * Similar to [`readContract`] but batches up multiple functions on a contract in a single RPC call via the [`multicall3` contract](https://github.com/mds1/multicall).
-   * @param args
-   * @returns
+   * @param args - {@link MulticallParameters}
+   * @returns - {@link MulticallReturnType}
    */
   multicall: <
     const contracts extends readonly unknown[],
@@ -1050,6 +1056,15 @@ export type PublicActions<
   >(
     args: MulticallParameters<contracts, allowFailure>,
   ) => Promise<MulticallReturnType<contracts, allowFailure>>
+
+  /**
+   * Verify that a message was signed by the provided address.
+   * @param args - {@link VerifyMessageParameters}
+   * @returns  - {@link VerifyMessageReturnType}
+   */
+  verifyMessage: (
+    args: VerifyMessageParameters,
+  ) => Promise<VerifyMessageReturnType>
 }
 
 export function publicActions<
@@ -1137,5 +1152,6 @@ export function publicActions<
     waitForTransactionReceipt: (args) =>
       waitForTransactionReceipt(client, args),
     multicall: (args) => multicall(client, args),
+    verifyMessage: (args) => verifyMessage(client, args),
   }
 }

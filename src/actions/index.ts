@@ -355,6 +355,19 @@ export {
   watchEpochNumber,
 } from './public/watchEpochNumber.js'
 
+export {
+  type VerifyHashParameters,
+  type VerifyHashReturnType,
+  type VerifyHashErrorType,
+  verifyHash,
+} from './public/verifyHash.js'
+export {
+  type VerifyMessageParameters,
+  type VerifyMessageReturnType,
+  type VerifyMessageErrorType,
+  verifyMessage,
+} from './public/verifyMessage.js'
+
 // wallet
 
 export {
