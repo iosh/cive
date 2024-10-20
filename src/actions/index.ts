@@ -368,6 +368,12 @@ export {
   verifyMessage,
 } from './public/verifyMessage.js'
 
+export {
+  type VerifyTypedDataParameters,
+  type VerifyTypedDataReturnType,
+  type VerifyTypedDataErrorType,
+  verifyTypedData,
+} from './public/verifyTypedData.js'
 // wallet
 
 export {

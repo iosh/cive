@@ -314,6 +314,11 @@ import {
   verifyMessage,
 } from '../../actions/public/verifyMessage.js'
 import {
+  type VerifyTypedDataParameters,
+  type VerifyTypedDataReturnType,
+  verifyTypedData,
+} from '../../actions/public//verifyTypedData.js'
+import {
   type WaitForTransactionReceiptParameters,
   type WaitForTransactionReceiptReturnType,
   waitForTransactionReceipt,
@@ -1065,6 +1070,16 @@ export type PublicActions<
   verifyMessage: (
     args: VerifyMessageParameters,
   ) => Promise<VerifyMessageReturnType>
+
+  /**
+   * Verify that typed data was signed by the provided address.
+   *
+   * @param parameters - {@link VerifyTypedDataParameters}
+   * @returns Whether or not the signature is valid. {@link VerifyTypedDataReturnType}
+   */
+  verifyTypedData: (
+    args: VerifyTypedDataParameters,
+  ) => Promise<VerifyTypedDataReturnType>
 }
 
 export function publicActions<
@@ -1153,5 +1168,6 @@ export function publicActions<
       waitForTransactionReceipt(client, args),
     multicall: (args) => multicall(client, args),
     verifyMessage: (args) => verifyMessage(client, args),
+    verifyTypedData: (args) => verifyTypedData(client, args),
   }
 }
