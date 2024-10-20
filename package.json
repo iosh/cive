@@ -16,8 +16,7 @@
     "format": "biome format --write",
     "docs:dev": "pnpm --filter site dev",
     "docs:build": "pnpm --filter site build",
-    "prepublishOnly": "bun ./scripts/prepublishOnly.ts",
-    "postinstall": "bun ./scripts/overLoadAbitype.ts"
+    "prepublishOnly": "bun ./scripts/prepublishOnly.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
@@ -29,12 +28,6 @@
     "cip-23": "^0.2.0",
     "js-conflux-sdk": "^2.4.7",
     "typescript": "^5.5.3",
-    "vitest": "^2.1.3",
-    "zod": "^3.23.8"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "abitype@0.0.0-canary-20240628164201": "patches/abitype@0.0.0-canary-20240628164201.patch"
-    }
+    "vitest": "^2.1.3"
   }
 }

@@ -11,7 +11,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["conflux", "cspace"],
+  "keywords": [
+    "conflux",
+    "cspace"
+  ],
   "author": "",
   "license": "MIT",
   "homepage": "https://cive.zyx.ee",
@@ -22,7 +25,8 @@
     "@scure/bip32": "^1.4.0",
     "@scure/bip39": "^1.3.0",
     "abitype": "0.0.0-canary-20240628164201",
-    "viem": "^2.20.0"
+    "viem": "^2.20.0",
+    "zod": "^3.23.8"
   },
   "exports": {
     ".": {
@@ -58,11 +62,21 @@
   },
   "typesVersions": {
     "*": {
-      "accounts": ["./_types/accounts/index.d.ts"],
-      "actions": ["./_types/actions/index.d.ts"],
-      "chains": ["./_types/chains/index.d.ts"],
-      "window": ["./_types/window/index.d.ts"],
-      "utils": ["./_types/utils/index.d.ts"]
+      "accounts": [
+        "./_types/accounts/index.d.ts"
+      ],
+      "actions": [
+        "./_types/actions/index.d.ts"
+      ],
+      "chains": [
+        "./_types/chains/index.d.ts"
+      ],
+      "window": [
+        "./_types/window/index.d.ts"
+      ],
+      "utils": [
+        "./_types/utils/index.d.ts"
+      ]
     }
   }
 }

@@ -23,7 +23,7 @@ import type { SerializeTransactionFn } from '../utils/transaction/serializeTrans
 export type NetworkNameType =
   | MainnetNameType
   | TestnetNameType
-  | PrivatenetNameType
+  | `${PrivatenetNameType}${number}`
 
 export type AddressUserType = 'user'
 export type AddressContractType = 'contract'
@@ -48,12 +48,18 @@ type NetworkName<
   ?
       | NetworkTypeName<MainnetNameType, Upcase>
       | NetworkTypeName<TestnetNameType, Upcase>
-      | `${NetworkTypeName<PrivatenetNameType, Upcase>}${string}`
+      | `${NetworkTypeName<
+          PrivatenetNameType,
+          Upcase
+        >}${TNetworkId extends undefined ? string : TNetworkId}`
   : TNetworkId extends mainNetworkIdType
     ? NetworkTypeName<MainnetNameType, Upcase>
     : TNetworkId extends testNetworkIdType
       ? NetworkTypeName<TestnetNameType, Upcase>
-      : `${NetworkTypeName<PrivatenetNameType, Upcase>}${string}`
+      : `${NetworkTypeName<
+          PrivatenetNameType,
+          Upcase
+        >}${TNetworkId extends undefined ? string : TNetworkId}`
 
 type FullAddressType<
   TNetworkId extends number | undefined = undefined,
