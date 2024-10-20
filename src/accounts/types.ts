@@ -5,9 +5,9 @@ import type {
   testNetworkIdType,
 } from '../constants/networkId.js'
 import type {
-  mainNetworkNameType,
-  otherNetworkNameType,
-  testNetworkNameType,
+  mainNetworkNameType as MainnetNameType,
+  otherNetworkNameType as PrivatenetNameType,
+  testNetworkNameType as TestnetNameType,
 } from '../constants/networkName.js'
 import type { TypedData } from '../types/abitype.js'
 import type { SignableMessage } from '../types/misc.js'
@@ -21,23 +21,23 @@ import type { GetTransactionType } from '../utils/transaction/getTransactionType
 import type { SerializeTransactionFn } from '../utils/transaction/serializeTransaction.js'
 
 export type NetworkNameType =
-  | mainNetworkNameType
-  | testNetworkNameType
-  | `${otherNetworkNameType}${number}`
+  | MainnetNameType
+  | TestnetNameType
+  | PrivatenetNameType
 
-export type AddressTypeUser = 'user'
-export type AddressTypeContract = 'contract'
-export type AddressTypeBuiltin = 'builtin'
-export type AddressTypeNull = 'null'
+export type AddressUserType = 'user'
+export type AddressContractType = 'contract'
+export type AddressBuiltinType = 'builtin'
+export type AddressNullType = 'null'
 
 export type AddressType =
-  | AddressTypeUser
-  | AddressTypeContract
-  | AddressTypeBuiltin
-  | AddressTypeNull
+  | AddressUserType
+  | AddressContractType
+  | AddressBuiltinType
+  | AddressNullType
 
-type SingleNetworkTypeName<
-  T extends mainNetworkNameType | testNetworkNameType | otherNetworkNameType,
+type NetworkTypeName<
+  T extends MainnetNameType | TestnetNameType | PrivatenetNameType,
   Upcase extends boolean | undefined = undefined,
 > = Upcase extends undefined ? T : Uppercase<T>
 
@@ -46,20 +46,14 @@ type NetworkName<
   Upcase extends boolean | undefined = undefined,
 > = TNetworkId extends undefined
   ?
-      | SingleNetworkTypeName<mainNetworkNameType, Upcase>
-      | SingleNetworkTypeName<testNetworkNameType, Upcase>
-      | `${SingleNetworkTypeName<
-          otherNetworkNameType,
-          Upcase
-        >}${TNetworkId extends undefined ? string : TNetworkId}`
+      | NetworkTypeName<MainnetNameType, Upcase>
+      | NetworkTypeName<TestnetNameType, Upcase>
+      | `${NetworkTypeName<PrivatenetNameType, Upcase>}${string}`
   : TNetworkId extends mainNetworkIdType
-    ? SingleNetworkTypeName<mainNetworkNameType, Upcase>
+    ? NetworkTypeName<MainnetNameType, Upcase>
     : TNetworkId extends testNetworkIdType
-      ? SingleNetworkTypeName<testNetworkNameType, Upcase>
-      : `${SingleNetworkTypeName<
-          otherNetworkNameType,
-          Upcase
-        >}${TNetworkId extends undefined ? string : TNetworkId}`
+      ? NetworkTypeName<TestnetNameType, Upcase>
+      : `${NetworkTypeName<PrivatenetNameType, Upcase>}${string}`
 
 type FullAddressType<
   TNetworkId extends number | undefined = undefined,
@@ -69,14 +63,14 @@ type FullAddressType<
   true
 >}:${Uppercase<`TYPE.${TAddressType extends undefined
   ? AddressType
-  : TAddressType extends AddressTypeUser
-    ? Uppercase<AddressTypeUser>
-    : TAddressType extends AddressTypeContract
-      ? Uppercase<AddressTypeContract>
-      : TAddressType extends AddressTypeBuiltin
-        ? Uppercase<AddressTypeBuiltin>
-        : TAddressType extends AddressTypeNull
-          ? Uppercase<AddressTypeNull>
+  : TAddressType extends AddressUserType
+    ? Uppercase<AddressUserType>
+    : TAddressType extends AddressContractType
+      ? Uppercase<AddressContractType>
+      : TAddressType extends AddressBuiltinType
+        ? Uppercase<AddressBuiltinType>
+        : TAddressType extends AddressNullType
+          ? Uppercase<AddressNullType>
           : never}`>}:${string}`
 
 export type Address<
@@ -90,6 +84,7 @@ export type Address<
   : TVerbose extends true
     ? FullAddressType<TNetworkId, TAddressType>
     : `${NetworkName<TNetworkId>}:${string}`
+
 export type Account<TAddress extends Address = Address> = OneOf<
   JsonRpcAccount<TAddress> | LocalAccount<string, TAddress>
 >
