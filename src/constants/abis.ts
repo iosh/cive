@@ -42,3 +42,27 @@ export const multicall3Abi = [
     type: 'function',
   },
 ] as const
+
+// ERC-6492 - universal deployless signature validator contract
+// constructor(address _signer, bytes32 _hash, bytes _signature) → bytes4 returnValue
+// returnValue is either 0x1 (valid) or 0x0 (invalid)
+export const universalSignatureValidatorAbi = [
+  {
+    inputs: [
+      {
+        name: '_signer',
+        type: 'address',
+      },
+      {
+        name: '_hash',
+        type: 'bytes32',
+      },
+      {
+        name: '_signature',
+        type: 'bytes',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+  },
+] as const

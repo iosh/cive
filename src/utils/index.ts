@@ -152,6 +152,18 @@ export {
 } from './signature/verifyMessage.js'
 
 export {
+  parseSignature,
+  type ParseSignatureErrorType,
+} from './signature/parseSignature.js'
+
+export {
+  type SerializeErc6492SignatureParameters,
+  type SerializeErc6492SignatureReturnType,
+  type SerializeErc6492SignatureErrorType,
+  serializeErc6492Signature,
+} from './signature/serializeErc6492Signature.js'
+
+export {
   type Base32AddressToHexParameters,
   base32AddressToHex,
 } from './address/base32AddressToHex.js'
