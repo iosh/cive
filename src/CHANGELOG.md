@@ -1,5 +1,17 @@
 # cive
 
+## 0.6.0
+
+### Minor Changes
+
+- d012f90: Added verifyMessage action
+- d78897a: Added verifyTypedData
+- 8ad9d2d: Added verifyHash
+
+### Patch Changes
+
+- 2bec220: Added abitype
+
 ## 0.5.0
 
 ### Minor Changes
