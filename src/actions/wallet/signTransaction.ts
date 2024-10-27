@@ -31,9 +31,9 @@ import {
   type AssertRequestErrorType,
   assertRequest,
 } from '../../utils/transaction/assertRequest.js'
+import type { GetTransactionType } from '../../utils/transaction/getTransactionType.js'
 import { type GetChainIdErrorType, getChainId } from '../public/getChainId.js'
-
-type SignTransactionRequest<
+export type SignTransactionRequest<
   chain extends Chain | undefined = Chain | undefined,
 > = UnionOmit<FormattedTransactionRequest<chain>, 'from'>
 
@@ -42,7 +42,10 @@ export type SignTransactionParameters<
   account extends Account | undefined,
   request extends SignTransactionRequest<chain> = SignTransactionRequest<chain>,
 > = request & GetAccountParameter<account> & GetChainParameter<chain>
-export type SignTransactionReturnType = TransactionSerialized
+
+export type SignTransactionReturnType<
+  request extends SignTransactionRequest = SignTransactionRequest,
+> = TransactionSerialized<GetTransactionType<request>>
 
 export type SignTransactionErrorType =
   | ParseAccountErrorType
@@ -61,7 +64,7 @@ export async function signTransaction<
 >(
   client: Client<Transport, chain, account>,
   parameters: SignTransactionParameters<chain, account, request>,
-): Promise<SignTransactionReturnType> {
+): Promise<SignTransactionReturnType<request>> {
   const {
     account: account_ = client.account,
     chain = client.chain,
@@ -97,7 +100,7 @@ export async function signTransaction<
         chainId,
       } as TransactionSerializable,
       { serializer: client.chain?.serializers?.transaction },
-    ) as Promise<SignTransactionReturnType>
+    ) as Promise<SignTransactionReturnType<request>>
   }
 
   return await client.request(

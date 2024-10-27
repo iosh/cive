@@ -60,6 +60,7 @@ import {
 
 import {
   type SignTransactionParameters,
+  type SignTransactionRequest,
   type SignTransactionReturnType,
   signTransaction,
 } from '../../actions/wallet/signTransaction.js'
@@ -135,9 +136,12 @@ export type WalletActions<
   signMessage: (
     args: SignMessageParameters<TAccount>,
   ) => Promise<SignMessageReturnType>
-  signTransaction: (
-    args: SignTransactionParameters<TChain, TAccount>,
-  ) => Promise<SignTransactionReturnType>
+  signTransaction: <
+    const request extends
+      SignTransactionRequest<TChain> = SignTransactionRequest<TChain>,
+  >(
+    args: SignTransactionParameters<TChain, TAccount, request>,
+  ) => Promise<SignTransactionReturnType<request>>
   signTypedData: <
     const TTypedData extends TypedData | { [key: string]: unknown },
     TPrimaryType extends string,
