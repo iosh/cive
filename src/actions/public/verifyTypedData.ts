@@ -8,13 +8,13 @@ import type { Chain } from '../../types/chain.js'
 import type { ByteArray, Hex, Signature } from '../../types/misc.js'
 import type { TypedDataDefinition } from '../../types/typedData.js'
 import {
-  hashTypedData,
   type HashTypedDataErrorType,
+  hashTypedData,
 } from '../../utils/signature/hashTypedData.js'
 import {
-  verifyHash,
   type VerifyHashErrorType,
   type VerifyHashParameters,
+  verifyHash,
 } from './verifyHash.js'
 
 export type VerifyTypedDataParameters<
