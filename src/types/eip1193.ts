@@ -31,6 +31,7 @@ import type { Block, EpochTag } from './block.js'
 import type { Hash, Hex } from './misc.js'
 import type { RpcEpochNumber, RpcTransaction as Transaction } from './rpc.js'
 import type { ExactPartial, Prettify } from './utils.js'
+import type { PhaseNameType } from './phase.js'
 
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
 
@@ -786,7 +787,7 @@ export type WalletRpcSchema = [
   },
 ]
 
-export type LocalNodeRpcSchema = [
+export type TestRpcSchema = [
   {
     Method: 'txpool_clear'
     Parameters: undefined
@@ -838,6 +839,11 @@ export type LocalNodeRpcSchema = [
     Method: 'generate_empty_blocks'
     Parameters: [numBlocks: number]
     ReturnType: Hash[]
+  },
+  {
+    Method: 'current_sync_phase'
+    Parameters: undefined
+    ReturnType: PhaseNameType
   },
 ]
 

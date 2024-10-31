@@ -1,4 +1,3 @@
-import { http, custom, webSocket } from 'viem'
 import { assertType, describe, expect, test, vi } from 'vitest'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import type { PrivateKeyAccount } from '../accounts/index.js'
@@ -6,9 +5,12 @@ import { privateKeyToAccount } from '../accounts/privateKeyToAccount.js'
 import { localhostNode } from '../chains/definitions/localhost.js'
 import type { EIP1193RequestFn, WalletRpcSchema } from '../types/eip1193.js'
 import { createWalletClient } from './createWalletClient.js'
-import { localNodeActions } from './decorators/localNode.js'
+import { testActions } from './decorators/test.js'
 import { publicActions } from './decorators/public.js'
 import { createTransport } from './transports/createTransport.js'
+import { custom } from './transports/custom.js'
+import { http } from './transports/http.js'
+import { webSocket } from './transports/webSocket.js'
 const sourceAccount = getTestAccount(accounts[0])
 const mockTransport = () =>
   createTransport({
@@ -312,7 +314,7 @@ describe('args: transport', () => {
       transport: http(),
     })
       .extend(publicActions)
-      .extend(localNodeActions)
+      .extend(testActions)
 
     expect(client).toMatchInlineSnapshot(`
       {

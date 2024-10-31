@@ -1,4 +1,40 @@
 // biome-ignore lint/performance/noBarrelFile: entrypoint module
+export { clearTxpool } from './test/clearTxpool.js'
+
+export {
+  type CreateLocalNodeAccountParameters,
+  type CreateLocalNodeAccountReturnType,
+  createLocalNodeAccount,
+} from './test/createLocalNodeAccount.js'
+
+export {
+  type GenerateEmptyLocalNodeBlocksParameters,
+  type GenerateEmptyLocalNodeBlocksReturnType,
+  generateEmptyLocalNodeBlocks,
+} from './test/generateEmptyLocalNodeBlocks.js'
+
+export {
+  type GenerateLocalNodeBlockParameters,
+  type GenerateLocalNodeBlockReturnTYpe,
+  generateLocalNodeBlock,
+} from './test/generateLocalNodeBlock.js'
+
+export {
+  type GetLocalNodeAddressesReturnType,
+  getLocalNodeAddresses,
+} from './test/getLocalNodeAddresses.js'
+
+export {
+  type LockLocalNodeAccountParameters,
+  type LockLocalNodeAccountReturnType,
+  lockLocalNodeAccount,
+} from './test/lockLocalNodeAccount.js'
+
+export {
+  type GetCurrentSyncPhaseReturnType,
+  getCurrentSyncPhase,
+} from './test/getCurrentSyncPhase.js'
+
 export {
   type CallParameters,
   type CallReturnType,

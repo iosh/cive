@@ -4,7 +4,7 @@ import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '../../../test/src/constants.js'
 
 import { deployTest20 } from '../../../test/src/utils.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { checkBalanceAgainstTransaction } from './checkBalanceAgainstTransaction.js'
 
 const sourceAccount = getTestAccount(accounts[0])

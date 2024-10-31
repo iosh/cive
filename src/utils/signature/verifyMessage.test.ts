@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
-import { sayHelloLocalNode } from '../../actions/localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../../actions/test/sayHelloLocalNode.js'
 import { signMessage } from '../../actions/wallet/signMessage.js'
 import { verifyMessage } from './verifyMessage.js'
 

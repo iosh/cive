@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount, typedData } from '~test/src/constants.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { verifyTypedData } from './verifyTypedData.js'
 
 const sourceAccount = getTestAccount(accounts[0])

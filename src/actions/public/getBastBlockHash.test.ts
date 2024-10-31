@@ -1,8 +1,8 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
+import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
 import { getBastBlockHash } from './getBastBlockHash.js'
 
 const client = devConflux.getClient()

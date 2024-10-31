@@ -7,7 +7,7 @@ import { Test20 } from '../../../test/src/contracts/Test20.js'
 import { deployMulticall3, deployTest20 } from '../../../test/src/utils.js'
 import { encodeFunctionData } from '../../utils/abi/encodeFunctionData.js'
 import { wait } from '../../utils/wait.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { call } from './call.js'
 
 const sourceAccount = getTestAccount(accounts[0])

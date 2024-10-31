@@ -5,8 +5,8 @@ import { accounts, getTestAccount } from '~test/src/constants.js'
 import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
 import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { parseGDrip } from '../../utils/unit/parseGDrip.js'
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { estimateGasAndCollateral } from './estimateGasAndCollateral.js'
 
 const sourceAccount = getTestAccount(accounts[0])

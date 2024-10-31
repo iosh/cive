@@ -1,12 +1,12 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { getBalance } from './getBalance.js'
 import { getBlock } from './getBlock.js'
 
 import { parseCFX } from '../../utils/unit/parseCFX.js'
-import { mine } from '../localNode/mine.js'
+import { mine } from '../test/mine.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 
 const sourceAccount = getTestAccount(accounts[0])

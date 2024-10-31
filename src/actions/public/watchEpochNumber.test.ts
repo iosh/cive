@@ -3,8 +3,8 @@ import { devConflux } from '~test/src/conflux/client.js'
 
 import { describe } from 'node:test'
 import { wait } from '../../utils/wait.js'
-import { mine } from '../localNode/mine.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { mine } from '../test/mine.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import {
   type OnEpochNumberParameter,
   watchEpochNumber,

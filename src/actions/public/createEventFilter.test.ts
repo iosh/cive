@@ -2,10 +2,10 @@ import { afterAll, assertType, beforeAll, describe, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts } from '~test/src/constants.js'
 
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 
 import type { EIP1193RequestFn } from '../../types/eip1193.js'
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
+import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
 import { createEventFilter } from './createEventFilter.js'
 
 const client = devConflux.getClient()

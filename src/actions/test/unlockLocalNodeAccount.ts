@@ -1,6 +1,6 @@
 import { numberToHex } from 'viem/utils'
 import type { Account, Address } from '../../accounts/types.js'
-import type { LocalNodeClient } from '../../clients/createLocalClient.js'
+import type { TestClient } from '../../clients/createTestClient.js'
 import type { Transport } from '../../clients/transports/createTransport.js'
 import type { Chain } from '../../types/chain.js'
 
@@ -19,7 +19,7 @@ export async function unlockLocalNodeAccount<
   TChain extends Chain | undefined,
   TAccount extends Account | undefined,
 >(
-  client: LocalNodeClient<Transport, TChain, TAccount, false>,
+  client: TestClient<Transport, TChain, TAccount, false>,
   { address, password, duration = 300 }: UnlockLocalNodeAccountParameters,
 ): Promise<UnlockLocalNodeAccountReturnType> {
   const duration_ = numberToHex(duration)

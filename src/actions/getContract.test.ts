@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 
-import { sayHelloLocalNode } from './localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from './test/sayHelloLocalNode.js'
 
 import { parseUnits } from 'viem'
 import { accounts, getTestAccount } from '../../test/src/constants.js'
@@ -9,7 +9,7 @@ import { Test20 } from '../../test/src/contracts/Test20.js'
 import { deployTest20 } from '../../test/src/utils.js'
 import type { Address } from '../accounts/types.js'
 import { getContract } from './getContract.js'
-import { mine } from './localNode/mine.js'
+import { mine } from './test/mine.js'
 import { writeContract } from './wallet/writeContract.js'
 
 const client = devConflux.getClient({ account: getTestAccount(accounts[0]) })

@@ -1,8 +1,8 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { wait } from '../../utils/wait.js'
-import { mine } from '../localNode/mine.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { mine } from '../test/mine.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { getEpochNumber } from './getEpochNumber.js'
 
 const client = devConflux.getClient()

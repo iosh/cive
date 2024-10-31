@@ -5,7 +5,7 @@ import { accounts, getTestAccount } from '../../../test/src/constants.js'
 import { Test20 } from '../../../test/src/contracts/Test20.js'
 import { deployTest20 } from '../../../test/src/utils.js'
 import type { Address } from '../../accounts/types.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { estimateContractGasAndCollateral } from './estimateContractGasAndCollateral.js'
 
 const client = devConflux.getClient({ account: getTestAccount(accounts[0]) })

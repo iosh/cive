@@ -10,7 +10,7 @@ import type {
   TransactionRequestLegacy,
 } from '../../types/transaction.js'
 import { parseGDrip } from '../../utils/index.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { signTransaction } from './signTransaction.js'
 
 const client = devConflux.getClient()

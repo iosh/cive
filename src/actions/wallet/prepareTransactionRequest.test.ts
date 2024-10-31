@@ -4,8 +4,8 @@ import { accounts, getTestAccount } from '~test/src/constants.js'
 
 import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { parseGDrip } from '../../utils/unit/parseGDrip.js'
-import { mine } from '../localNode/mine.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { mine } from '../test/mine.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import * as getBlock from '../public/getBlock.js'
 import { prepareTransactionRequest } from './prepareTransactionRequest.js'
 

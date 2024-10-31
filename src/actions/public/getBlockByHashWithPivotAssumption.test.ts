@@ -1,8 +1,8 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
-import { generateEmptyLocalNodeBlocks } from '../localNode/generateEmptyLocalNodeBlocks.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
+import { generateLocalNodeBlock } from '../test/generateLocalNodeBlock.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { getBlock } from './getBlock.js'
 import { getBlockByHashWithPivotAssumption } from './getBlockByHashWithPivotAssumption.js'
 

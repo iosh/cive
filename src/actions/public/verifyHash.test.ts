@@ -7,7 +7,7 @@ import { accounts, getTestAccount } from '../../../test/src/constants.js'
 import { hashMessage } from '../../utils/index.js'
 import { parseSignature } from '../../utils/signature/parseSignature.js'
 
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { signMessage } from '../wallet/signMessage.js'
 import { verifyHash } from './verifyHash.js'
 

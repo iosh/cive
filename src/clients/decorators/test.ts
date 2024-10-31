@@ -1,40 +1,44 @@
 import type { Account } from '../../accounts/types.js'
-import { clearTxpool } from '../../actions/localNode/clearTxpool.js'
+import {
+  getCurrentSyncPhase,
+  type GetCurrentSyncPhaseReturnType,
+} from '../../actions/index.js'
+import { clearTxpool } from '../../actions/test/clearTxpool.js'
 import {
   type CreateLocalNodeAccountParameters,
   type CreateLocalNodeAccountReturnType,
   createLocalNodeAccount,
-} from '../../actions/localNode/createLocalNodeAccount.js'
+} from '../../actions/test/createLocalNodeAccount.js'
 import {
   type GenerateEmptyLocalNodeBlocksParameters,
   type GenerateEmptyLocalNodeBlocksReturnType,
   generateEmptyLocalNodeBlocks,
-} from '../../actions/localNode/generateEmptyLocalNodeBlocks.js'
+} from '../../actions/test/generateEmptyLocalNodeBlocks.js'
 import {
   type GenerateLocalNodeBlockParameters,
   type GenerateLocalNodeBlockReturnTYpe,
   generateLocalNodeBlock,
-} from '../../actions/localNode/generateLocalNodeBlock.js'
+} from '../../actions/test/generateLocalNodeBlock.js'
 import {
   type GetLocalNodeAddressesReturnType,
   getLocalNodeAddresses,
-} from '../../actions/localNode/getLocalNodeAddresses.js'
+} from '../../actions/test/getLocalNodeAddresses.js'
 import {
   type LockLocalNodeAccountParameters,
   type LockLocalNodeAccountReturnType,
   lockLocalNodeAccount,
-} from '../../actions/localNode/lockLocalNodeAccount.js'
-import { type MineParameters, mine } from '../../actions/localNode/mine.js'
+} from '../../actions/test/lockLocalNodeAccount.js'
+import { type MineParameters, mine } from '../../actions/test/mine.js'
 import {
   type UnlockLocalNodeAccountParameters,
   type UnlockLocalNodeAccountReturnType,
   unlockLocalNodeAccount,
-} from '../../actions/localNode/unlockLocalNodeAccount.js'
+} from '../../actions/test/unlockLocalNodeAccount.js'
 import type { Chain } from '../../types/chain.js'
 import type { Client } from '../createClient.js'
 import type { Transport } from '../transports/createTransport.js'
 
-export type LocalNodeActions = {
+export type TestActions = {
   clearTxpool: () => Promise<void>
   getLocalNodeAddresses: () => Promise<GetLocalNodeAddressesReturnType>
   createLocalNodeAccount: (
@@ -53,13 +57,14 @@ export type LocalNodeActions = {
     args: GenerateEmptyLocalNodeBlocksParameters,
   ) => Promise<GenerateEmptyLocalNodeBlocksReturnType>
   mine: (args: MineParameters) => Promise<void>
+  getCurrentSyncPhase: () => Promise<GetCurrentSyncPhaseReturnType>
 }
 
-export function localNodeActions<
+export function testActions<
   TTransport extends Transport = Transport,
   TChain extends Chain | undefined = Chain | undefined,
   TAccount extends Account | undefined = Account | undefined,
->(client: Client<TTransport, TChain, TAccount>): LocalNodeActions {
+>(client: Client<TTransport, TChain, TAccount>): TestActions {
   return {
     clearTxpool: () => clearTxpool(client),
     getLocalNodeAddresses: () => getLocalNodeAddresses(client),
@@ -70,5 +75,6 @@ export function localNodeActions<
     generateEmptyLocalNodeBlocks: (args) =>
       generateEmptyLocalNodeBlocks(client, args),
     mine: (args) => mine(client, args),
+    getCurrentSyncPhase: () => getCurrentSyncPhase(client),
   }
 }

@@ -1,4 +1,4 @@
-import { mine } from '~cive/actions/localNode/mine.js'
+import { mine } from '~cive/actions/test/mine.js'
 import { getTransactionReceipt } from '~cive/actions/public/getTransactionReceipt.js'
 import {
   type DeployContractParameters,

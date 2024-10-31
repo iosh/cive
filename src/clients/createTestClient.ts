@@ -2,7 +2,7 @@ import type { Account, Address } from '../accounts/types.js'
 import type { ErrorType } from '../errors/utils.js'
 import type { ParseAccount } from '../types/account.js'
 import type { Chain } from '../types/chain.js'
-import type { LocalNodeRpcSchema, RpcSchema } from '../types/eip1193.js'
+import type { TestRpcSchema, RpcSchema } from '../types/eip1193.js'
 import type { Prettify } from '../types/utils.js'
 import {
   type Client,
@@ -11,12 +11,12 @@ import {
   createClient,
 } from './createClient.js'
 import {
-  type LocalNodeActions,
-  localNodeActions,
-} from './decorators/localNode.js'
+  type TestActions,
+  testActions,
+} from './decorators/test.js'
 import type { Transport } from './transports/createTransport.js'
 
-export type LocalClientConfig<
+export type TestClientConfig<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   accountOrAddress extends Account | Address | undefined =
@@ -38,7 +38,7 @@ export type LocalClientConfig<
   >
 >
 
-export type LocalNodeClient<
+export type TestClient<
   transport extends Transport = Transport,
   chain extends Chain | undefined = Chain | undefined,
   account extends Account | undefined = Account | undefined,
@@ -50,22 +50,22 @@ export type LocalNodeClient<
     chain,
     account,
     rpcSchema extends RpcSchema
-      ? [...LocalNodeRpcSchema, ...rpcSchema]
-      : LocalNodeRpcSchema,
-    includeActions extends true ? LocalNodeActions : Record<string, unknown>
+      ? [...TestRpcSchema, ...rpcSchema]
+      : TestRpcSchema,
+    includeActions extends true ? TestActions : Record<string, unknown>
   >
 >
 
-export type CreateLocalNodeClientErrorType = CreateClientErrorType | ErrorType
+export type CreateTestClientErrorType = CreateClientErrorType | ErrorType
 
-export function createLocalNodeClient<
+export function createTestClient<
   transport extends Transport,
   chain extends Chain | undefined = undefined,
   accountOrAddress extends Account | Address | undefined = undefined,
   rpcSchema extends RpcSchema | undefined = undefined,
 >(
-  parameters: LocalClientConfig<transport, chain, accountOrAddress, rpcSchema>,
-): LocalNodeClient<
+  parameters: TestClientConfig<transport, chain, accountOrAddress, rpcSchema>,
+): TestClient<
   transport,
   chain,
   ParseAccount<accountOrAddress>,
@@ -73,17 +73,17 @@ export function createLocalNodeClient<
   rpcSchema
 >
 
-export function createLocalNodeClient(
-  parameters: LocalClientConfig,
-): LocalNodeClient {
-  const { key = 'localNode', name = 'Local Node Client' } = parameters
+export function createTestClient(
+  parameters: TestClientConfig,
+): TestClient {
+  const { key = 'test', name = 'Test Client' } = parameters
   const client = createClient({
     ...parameters,
     key,
     name,
-    type: 'LocalNodeClient',
+    type: 'TestClient',
   })
   return client.extend((config) => ({
-    ...localNodeActions(config),
+    ...testActions(config),
   }))
 }

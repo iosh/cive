@@ -1,8 +1,8 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { BlockNotFoundError } from '../../errors/block.js'
-import { generateLocalNodeBlock } from '../localNode/generateLocalNodeBlock.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { generateLocalNodeBlock } from '../test/generateLocalNodeBlock.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { traceBlock } from './traceBlock.js'
 
 const client = devConflux.getClient()

@@ -73,6 +73,8 @@ export {
 } from './clients/createClient.js'
 
 export { publicActions } from './clients/decorators/public.js'
+export { walletActions } from './clients/decorators/wallet.js'
+export { testActions } from './clients/decorators/test.js'
 
 export {
   type PublicClient,
@@ -87,6 +89,13 @@ export {
   type CreateWalletClientErrorType,
   createWalletClient,
 } from './clients/createWalletClient.js'
+
+export {
+  type TestClientConfig,
+  type TestClient,
+  type CreateTestClientErrorType,
+  createTestClient,
+} from './clients/createTestClient.js'
 
 export { formatCFX } from './utils/unit/formatCFX.js'
 export { formatGDrip } from './utils/unit/formatGDrip.js'
@@ -279,6 +288,50 @@ export {
   type ParseEventLogsReturnType,
   parseEventLogs,
 } from './utils/abi/parseEventLogs.js'
+
+export { clearTxpool } from './actions/test/clearTxpool.js'
+
+export {
+  type CreateLocalNodeAccountParameters,
+  type CreateLocalNodeAccountReturnType,
+  createLocalNodeAccount,
+} from './actions/test/createLocalNodeAccount.js'
+
+export {
+  type GenerateEmptyLocalNodeBlocksParameters,
+  type GenerateEmptyLocalNodeBlocksReturnType,
+  generateEmptyLocalNodeBlocks,
+} from './actions/test/generateEmptyLocalNodeBlocks.js'
+
+export {
+  type GenerateLocalNodeBlockParameters,
+  type GenerateLocalNodeBlockReturnTYpe,
+  generateLocalNodeBlock,
+} from './actions/test/generateLocalNodeBlock.js'
+
+export {
+  type GetLocalNodeAddressesReturnType,
+  getLocalNodeAddresses,
+} from './actions/test/getLocalNodeAddresses.js'
+
+export {
+  type LockLocalNodeAccountParameters,
+  type LockLocalNodeAccountReturnType,
+  lockLocalNodeAccount,
+} from './actions/test/lockLocalNodeAccount.js'
+
+export {
+  type GetCurrentSyncPhaseReturnType,
+  getCurrentSyncPhase,
+} from './actions/test/getCurrentSyncPhase.js'
+
+export { type MineParameters, mine } from './actions/test/mine.js'
+
+export {
+  type UnlockLocalNodeAccountParameters,
+  type UnlockLocalNodeAccountReturnType,
+  unlockLocalNodeAccount,
+} from './actions/test/unlockLocalNodeAccount.js'
 
 export {
   type CallParameters,

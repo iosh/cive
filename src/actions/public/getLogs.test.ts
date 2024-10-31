@@ -15,8 +15,8 @@ import { Test20 } from '../../../test/src/contracts/Test20.js'
 import { deployTest20 } from '../../../test/src/utils.js'
 import type { Address } from '../../accounts/types.js'
 
-import { mine } from '../localNode/mine.js'
-import { sayHelloLocalNode } from '../localNode/sayHelloLocalNode.js'
+import { mine } from '../test/mine.js'
+import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 
 import type { Log } from '../../types/log.js'
 import { writeContract } from '../wallet/writeContract.js'
