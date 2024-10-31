@@ -10,10 +10,7 @@ import {
   type CreateClientErrorType,
   createClient,
 } from './createClient.js'
-import {
-  type TestActions,
-  testActions,
-} from './decorators/test.js'
+import { type TestActions, testActions } from './decorators/test.js'
 import type { Transport } from './transports/createTransport.js'
 
 export type TestClientConfig<
@@ -65,17 +62,9 @@ export function createTestClient<
   rpcSchema extends RpcSchema | undefined = undefined,
 >(
   parameters: TestClientConfig<transport, chain, accountOrAddress, rpcSchema>,
-): TestClient<
-  transport,
-  chain,
-  ParseAccount<accountOrAddress>,
-  true,
-  rpcSchema
->
+): TestClient<transport, chain, ParseAccount<accountOrAddress>, true, rpcSchema>
 
-export function createTestClient(
-  parameters: TestClientConfig,
-): TestClient {
+export function createTestClient(parameters: TestClientConfig): TestClient {
   const { key = 'test', name = 'Test Client' } = parameters
   const client = createClient({
     ...parameters,

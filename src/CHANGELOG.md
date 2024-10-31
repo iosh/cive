@@ -1,5 +1,11 @@
 # cive
 
+## 0.7.0
+
+### Minor Changes
+
+- cca897c: Added test client and action
+
 ## 0.6.0
 
 ### Minor Changes
