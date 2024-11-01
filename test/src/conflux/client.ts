@@ -20,6 +20,7 @@ type DefineConfluxParameters<chain extends Chain> = {
   chain: chain
   port: number
   wsPort: number
+  udpAndTcpPort: number
 }
 
 type DefineConfluxReturnType<chain extends Chain> = {
@@ -58,7 +59,7 @@ type DefineConfluxReturnType<chain extends Chain> = {
 function defineConflux<const chain extends Chain>(
   parameters: DefineConfluxParameters<chain>,
 ): DefineConfluxReturnType<chain> {
-  const { chain: chain_, port, wsPort } = parameters
+  const { chain: chain_, port, wsPort, udpAndTcpPort } = parameters
 
   const rpcUrl = {
     http: `http://127.0.0.1:${port}`,
@@ -124,6 +125,7 @@ function defineConflux<const chain extends Chain>(
       return createNode({
         httpPort: port,
         wsPort,
+        udpAndTcpPort,
       })
     },
   } as const
@@ -133,6 +135,7 @@ export const poolId = Number(process.env.VITEST_POOL_ID ?? 1)
 
 export const devConflux = defineConflux({
   chain: localhostNode,
-  port: 12539 + poolId * 10,
-  wsPort: 12540 + poolId * 10,
+  port: 12339 + poolId * 10,
+  wsPort: 12440 + poolId * 10,
+  udpAndTcpPort: 12541 + poolId * 10,
 })

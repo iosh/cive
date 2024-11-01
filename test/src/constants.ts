@@ -1,5 +1,21 @@
 import { privateKeyToAccount } from '~cive/accounts/privateKeyToAccount.js'
 
+export const TEST_CHAIN_ID = 201029
+export const TEST_EVM_CHAIN_ID = 201030
+
+export const TEST_GENESIS_SECRETS = [
+  '34fce6e29a7b0dbd92f51a3d0a3d4db83f55958ff6552e6f0d4ee3ef21cd2d3e',
+  'd6a7c99b9036ab9fda511a49e8401783f00960103622659b381dd0174f63880c',
+  '306c52752a5b6169606f20e61d1c7c192cfb7342d55b2b737c639309918c6a59',
+  'aac8c722ef208be93da651876c0df21b7f837d65e381ca335cab15e069ce8861',
+  '6e87d48346aeae3456037263ac2df038339ee0a8493cc007cb9f3c0d3f3aadab',
+  '64ffb5a4a0dba5bc8a2783e701c7466a80e2e266613b63fd47dc6bf03f89581b',
+  'dec3911f8beaa9995f61b0a41f6834bc7f3da62f1da6d09c49bdb34576644d8d',
+  '6624e0de6a6407809b1f91fa21fd673d5664c61b581114a4f9600ed6d2327f46',
+  '041816c55f0f6e295ee9faf56335db23bbce65274de7c7f715c28da2be485030',
+  'f4e88fd5c0fda9f96df2c238190e0869e6a520cb0ac51c5eaf3814828004707a',
+]
+
 export const accounts = [
   {
     privateKey:
