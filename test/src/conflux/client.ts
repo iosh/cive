@@ -14,7 +14,12 @@ import type { ParseAccount } from '~cive/types/account.js'
 import type { Chain } from '~cive/types/chain.js'
 import type { ExactPartial } from '~cive/types/utils.js'
 import { accounts } from '../constants.js'
-import { createNode, remove } from './docker.js'
+import { createNode, remove } from './node.js'
+import {
+  type Config,
+  type CreateServerReturnType,
+  createServer,
+} from '@xcfx/node'
 
 type DefineConfluxParameters<chain extends Chain> = {
   chain: chain
@@ -53,7 +58,7 @@ type DefineConfluxReturnType<chain extends Chain> = {
     ws: string
   }
   stop(): Promise<void>
-  start(): Promise<void>
+  start(config?: Config): Promise<void>
 }
 
 function defineConflux<const chain extends Chain>(
@@ -121,8 +126,9 @@ function defineConflux<const chain extends Chain>(
     async stop() {
       await remove()
     },
-    async start() {
+    async start(config) {
       return createNode({
+        ...config,
         httpPort: port,
         wsPort,
         udpAndTcpPort,
