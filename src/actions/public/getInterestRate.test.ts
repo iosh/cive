@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
-import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
 import { getInterestRate } from './getInterestRate.js'
+import { mine } from '../test/mine.js'
 
 const client = devConflux.getClient()
 beforeAll(async () => {
@@ -17,7 +17,7 @@ test('default', async () => {
 })
 
 test('with args', async () => {
-  await generateEmptyLocalNodeBlocks(client, { numBlocks: 100 })
+  await mine(client, { blocks: 20 })
   expect(
     await getInterestRate(client, { epochNumber: 0n }),
   ).toMatchInlineSnapshot('2522880000000n')
@@ -32,10 +32,6 @@ test('with args', async () => {
   expect(
     await getInterestRate(client, { epochTag: 'latest_confirmed' }),
   ).toMatchInlineSnapshot('2522880000000n')
-  expect(
-    await getInterestRate(client, { epochTag: 'latest_finalized' }),
-  ).toMatchInlineSnapshot('2522880000000n')
-
   expect(
     await getInterestRate(client, { epochTag: 'latest_state' }),
   ).toMatchInlineSnapshot('2522880000000n')

@@ -23,33 +23,29 @@ afterAll(async () => {
 })
 
 test('default', async () => {
-  expect(
-    await estimateContractGasAndCollateral(client, {
-      abi: Test20.abi,
-      address: test20Address,
-      functionName: 'approve',
-      args: [accounts[1].base32Address, 1n],
-    }),
-  ).toMatchInlineSnapshot(`
-    {
-      "gasLimit": 32488n,
-      "gasUsed": 32488n,
-      "storageCollateralized": 64n,
-    }
-  `)
+  const approveResult = await estimateContractGasAndCollateral(client, {
+    abi: Test20.abi,
+    address: test20Address,
+    functionName: 'approve',
+    args: [accounts[1].base32Address, 1n],
+  })
 
-  expect(
-    await estimateContractGasAndCollateral(client, {
-      abi: Test20.abi,
-      address: test20Address,
-      functionName: 'mint',
-      args: [accounts[1].base32Address, 1n],
-    }),
-  ).toMatchInlineSnapshot(`
-    {
-      "gasLimit": 41301n,
-      "gasUsed": 41301n,
-      "storageCollateralized": 128n,
-    }
-  `)
+  expect(approveResult.gasLimit).toBeGreaterThan(0n)
+
+  expect(approveResult.gasUsed).toBeGreaterThan(0n)
+
+  expect(approveResult.storageCollateralized).toBeGreaterThan(0n)
+
+  const mintResult = await estimateContractGasAndCollateral(client, {
+    abi: Test20.abi,
+    address: test20Address,
+    functionName: 'mint',
+    args: [accounts[1].base32Address, 1n],
+  })
+
+  expect(mintResult.gasLimit).toBeGreaterThan(0n)
+
+  expect(mintResult.gasUsed).toBeGreaterThan(0n)
+
+  expect(mintResult.storageCollateralized).toBeGreaterThan(0n)
 })

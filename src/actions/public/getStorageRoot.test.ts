@@ -35,7 +35,7 @@ test('default', async () => {
 
 test('epoch tag', async () => {
   const { contractCreated } = await deployTest20(client)
-  await mine(client, { blocks: 1000 })
+  await mine(client, { blocks: 100 })
   expect(
     await GetStorageRoot(client, {
       address: contractCreated!,

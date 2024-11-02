@@ -52,7 +52,7 @@ test('with cache time', async () => {
   await mine(client, { blocks: 1 })
   await mine(client, { blocks: 1 })
 
-  expect(await getEpochNumber(client)).toBe(epochNumber)
+  expect(await getEpochNumber(client, { cacheTime: 1_000 })).toBe(epochNumber)
   await wait(1_000)
 
   const epochNumberWithoutCache = await getEpochNumber(client, {

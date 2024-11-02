@@ -21,13 +21,12 @@ afterAll(async () => {
 describe('poll', () => {
   test('default', async () => {
     const epochNumbers: OnEpochNumberParameter[] = []
-
     const unwatch = watchEpochNumber(client, {
       onEpochNumber: (epochNumber) => epochNumbers.push(epochNumber),
       poll: true,
       pollingInterval: 100,
     })
-
+    await wait(110)
     await mine(client, { blocks: 1 })
     await wait(110)
     await mine(client, { blocks: 1 })
@@ -41,6 +40,7 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        0n,
         1n,
         2n,
         3n,
@@ -52,7 +52,6 @@ describe('poll', () => {
 
   test('epoch tag', async () => {
     const epochNumbers: OnEpochNumberParameter[] = []
-
     const unwatch = watchEpochNumber(client, {
       onEpochNumber: (epochNumber) => {
         epochNumbers.push(epochNumber)
@@ -61,8 +60,6 @@ describe('poll', () => {
       pollingInterval: 100,
       epochTag: 'earliest',
     })
-
-    await mine(client, { blocks: 1 })
     await wait(110)
     await mine(client, { blocks: 1 })
     await wait(110)
@@ -83,7 +80,7 @@ describe('poll', () => {
       pollingInterval: 100,
       poll: true,
     })
-
+    await wait(110)
     await mine(client, { blocks: 3 })
     await wait(110)
     await mine(client, { blocks: 1 })
@@ -91,8 +88,11 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        6n,
+        7n,
+        8n,
+        9n,
         10n,
-        11n,
       ]
     `)
   })
@@ -113,10 +113,11 @@ describe('poll', () => {
     await mine(client, { blocks: 1 })
     await wait(110)
     await mine(client, { blocks: 1 })
-
+    await wait(110)
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        10n,
         11n,
         12n,
         13n,
@@ -136,7 +137,7 @@ describe('poll', () => {
       onEpochNumber: (epochNumber) => epochNumbers.push(epochNumber),
       poll: true,
     })
-
+    await wait(210)
     await mine(client_2, { blocks: 1 })
     await wait(210)
     await mine(client_2, { blocks: 1 })
@@ -145,8 +146,9 @@ describe('poll', () => {
 
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        14n,
+        15n,
         16n,
-        17n,
       ]
     `)
   })
@@ -169,9 +171,9 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        16n,
         17n,
         18n,
-        19n,
       ]
     `)
   })
@@ -184,17 +186,17 @@ describe('poll', () => {
       poll: true,
       pollingInterval: 100,
     })
-
+    await wait(110)
     await mine(client, { blocks: 1 })
     await wait(110)
-
     await mine(client, { blocks: 1 })
     await wait(110)
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        19n,
+        20n,
         21n,
-        22n,
       ]
     `)
   })
@@ -207,6 +209,7 @@ describe('poll', () => {
       poll: true,
       pollingInterval: 100,
     })
+    await wait(110)
     await mine(client, { blocks: 1 })
     await wait(110)
     await mine(client, { blocks: 1 })
@@ -214,8 +217,9 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        21n,
+        22n,
         23n,
-        24n,
       ]
     `)
     epochNumbers = []
@@ -225,6 +229,7 @@ describe('poll', () => {
       poll: true,
       pollingInterval: 100,
     })
+    await wait(110)
     await mine(client, { blocks: 1 })
     await wait(110)
     await mine(client, { blocks: 1 })
@@ -232,8 +237,9 @@ describe('poll', () => {
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        23n,
+        24n,
         25n,
-        26n,
       ]
     `)
   })
@@ -255,7 +261,7 @@ describe('poll', () => {
       poll: true,
       pollingInterval: 100,
     })
-
+    await wait(110)
     await mine(client, { blocks: 1 })
     await wait(110)
     await mine(client, { blocks: 1 })
@@ -266,12 +272,15 @@ describe('poll', () => {
     unwatch3()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        25n,
+        25n,
+        25n,
+        26n,
+        26n,
+        26n,
         27n,
         27n,
         27n,
-        28n,
-        28n,
-        28n,
       ]
     `)
 
@@ -292,7 +301,7 @@ describe('poll', () => {
       poll: true,
       pollingInterval: 100,
     })
-
+    await wait(110)
     await mine(client, { blocks: 1 })
     await wait(110)
     await mine(client, { blocks: 1 })
@@ -303,12 +312,15 @@ describe('poll', () => {
     unwatch3()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
+        27n,
+        27n,
+        27n,
+        28n,
+        28n,
+        28n,
         29n,
         29n,
         29n,
-        30n,
-        30n,
-        30n,
       ]
     `)
   })
