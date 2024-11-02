@@ -8,7 +8,6 @@ import type { Address } from '../../types/abitype.js'
 import { hexAddressToBase32 } from '../../utils/address/hexAddressToBase32.js'
 import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { writeContract } from '../wallet/writeContract.js'
 import { GetSponsorInfo } from './getSponsorInfo.js'
 
@@ -16,7 +15,6 @@ let test20Address: Address
 const client = devConflux.getClient({ account: getTestAccount(accounts[0]) })
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   const { contractCreated } = await deployTest20(client)
   test20Address = contractCreated!
 })

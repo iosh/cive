@@ -4,7 +4,6 @@ import { accounts, getTestAccount } from '~test/src/constants.js'
 import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { getBalance } from '../public/getBalance.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { sendTransaction } from './sendTransaction.js'
 
 const client = devConflux.getClient()
@@ -12,7 +11,6 @@ const sourceAccount = accounts[0]
 const targetAccount = accounts[1]
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

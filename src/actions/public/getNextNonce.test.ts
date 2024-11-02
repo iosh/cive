@@ -3,7 +3,6 @@ import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { getBlock } from './getBlock.js'
 import { getNextNonce } from './getNextNonce.js'
@@ -12,7 +11,6 @@ const sourceAccount = getTestAccount(accounts[0])
 const client = devConflux.getClient()
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

@@ -6,7 +6,6 @@ import { privateKeyToAccount } from '../../accounts/privateKeyToAccount.js'
 import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { parseGDrip } from '../../utils/unit/parseGDrip.js'
 import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { estimateGasAndCollateral } from './estimateGasAndCollateral.js'
 
 const sourceAccount = getTestAccount(accounts[0])
@@ -14,7 +13,7 @@ const targetAccount = getTestAccount(accounts[1])
 const client = devConflux.getClient()
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
+
   await generateEmptyLocalNodeBlocks(client, { numBlocks: 10 })
 })
 

@@ -4,7 +4,6 @@ import { devConflux } from '~test/src/conflux/client.js'
 import { toHex } from 'viem'
 import { accounts, getTestAccount } from '../../../test/src/constants.js'
 
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { signMessage } from '../wallet/signMessage.js'
 
 import { verifyMessage } from './verifyMessage.js'
@@ -16,7 +15,6 @@ const client = devConflux.getClient({
 
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

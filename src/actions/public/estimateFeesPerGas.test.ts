@@ -2,7 +2,6 @@ import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 
 import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import {
   estimateFeesPerGas,
   internal_estimateFeesPerGas,
@@ -12,7 +11,6 @@ import { getBlock } from './getBlock.js'
 const client = devConflux.getClient()
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   await generateEmptyLocalNodeBlocks(client, { numBlocks: 10 })
 })
 

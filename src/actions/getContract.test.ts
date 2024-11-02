@@ -1,8 +1,6 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 
-import { sayHelloLocalNode } from './test/sayHelloLocalNode.js'
-
 import { parseUnits } from 'viem'
 import { accounts, getTestAccount } from '../../test/src/constants.js'
 import { Test20 } from '../../test/src/contracts/Test20.js'
@@ -17,7 +15,6 @@ const client = devConflux.getClient({ account: getTestAccount(accounts[0]) })
 let test20Address: Address
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   const { contractCreated } = await deployTest20(client)
   test20Address = contractCreated!
 })

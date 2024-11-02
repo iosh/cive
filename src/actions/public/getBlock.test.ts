@@ -5,14 +5,12 @@ import type { Block } from '../../types/block.js'
 import type { Chain } from '../../types/chain.js'
 import type { Hex } from '../../types/misc.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { type GetBlockReturnType, getBlock } from './getBlock.js'
 
 const client = devConflux.getClient()
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

@@ -4,7 +4,6 @@ import { accounts, getTestAccount } from '../../../test/src/constants.js'
 import { deployTest20 } from '../../../test/src/utils.js'
 
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { getBlock } from './getBlock.js'
 import { GetStorageRoot } from './getStorageRoot.js'
 
@@ -13,7 +12,6 @@ const client = devConflux.getClient({
 })
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

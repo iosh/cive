@@ -1,11 +1,10 @@
-import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest'
+import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '../../../test/src/constants.js'
 import { WaitForTransactionReceiptTimeoutError } from '../../errors/transaction.js'
 import { parseCFX, parseGDrip } from '../../utils/index.js'
 import { wait } from '../../utils/wait.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { getNextNonce } from './getNextNonce.js'
 import { waitForTransactionReceipt } from './waitForTransactionReceipt.js'
@@ -16,7 +15,6 @@ const targetAccount = accounts[1]
 let id: Timer
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   await mine(client, { blocks: 10 })
   setInterval(() => mine(client, { blocks: 1 }), 120)
 })

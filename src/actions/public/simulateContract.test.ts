@@ -4,7 +4,6 @@ import { accounts, getTestAccount } from '~test/src/constants.js'
 import { Test20 } from '../../../test/src/contracts/Test20.js'
 import { deployTest20 } from '../../../test/src/utils.js'
 import type { Address } from '../../accounts/types.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { simulateContract } from './simulateContract.js'
 
 const sourceAccount = getTestAccount(accounts[0])
@@ -12,7 +11,6 @@ const client = devConflux.getClient({ account: sourceAccount })
 let Test20Address: Address
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   const { contractCreated } = await deployTest20(client)
   Test20Address = contractCreated!
 })

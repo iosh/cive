@@ -2,17 +2,14 @@ import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 
-import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
-
 import { parseAbi } from 'viem'
+import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
 import { deployContract } from './deployContract.js'
 
 const sourceAccount = getTestAccount(accounts[0])
 const client = devConflux.getClient({ account: sourceAccount })
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   await generateEmptyLocalNodeBlocks(client, { numBlocks: 10 })
 })
 

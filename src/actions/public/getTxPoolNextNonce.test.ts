@@ -2,7 +2,6 @@ import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { getNextNonce } from './getNextNonce.js'
 import { getTxPoolNextNonce } from './getTxPoolNextNonce.js'
@@ -10,7 +9,6 @@ import { getTxPoolNextNonce } from './getTxPoolNextNonce.js'
 const client = devConflux.getClient()
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

@@ -4,9 +4,9 @@ import { accounts, getTestAccount } from '../../../test/src/constants.js'
 import { Test20 } from '../../../test/src/contracts/Test20.js'
 import { deployTest20 } from '../../../test/src/utils.js'
 import type { Address } from '../../accounts/types.js'
-import { formatGDrip, formatUnits, parseUnits } from '../../utils/index.js'
+import { parseUnits } from '../../utils/index.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
+
 import { writeContract } from '../wallet/writeContract.js'
 import { getContractEvents } from './getContractEvents.js'
 
@@ -14,7 +14,6 @@ let test20Address: Address
 const client = devConflux.getClient({ account: getTestAccount(accounts[0]) })
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   const { contractCreated } = await deployTest20(client)
   test20Address = contractCreated!
   await writeContract(client, {

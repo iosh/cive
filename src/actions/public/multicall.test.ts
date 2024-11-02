@@ -5,7 +5,6 @@ import { Test20 } from '~test/src/contracts/Test20.js'
 import { deployMulticall3, deployTest20 } from '~test/src/utils.js'
 import type { Address } from '../../accounts/types.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { getBlock } from './getBlock.js'
 import { multicall } from './multicall.js'
 import * as readContract from './readContract.js'
@@ -17,7 +16,6 @@ let test20: { contractCreated: Address | null }
 let test20Other: { contractCreated: Address | null }
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   const { contractCreated } = await deployMulticall3(client)
   const block = await getBlock(client)
   client.chain.contracts = {

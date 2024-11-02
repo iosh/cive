@@ -4,7 +4,6 @@ import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '../../../test/src/constants.js'
 
 import { deployTest20 } from '../../../test/src/utils.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { checkBalanceAgainstTransaction } from './checkBalanceAgainstTransaction.js'
 
 const sourceAccount = getTestAccount(accounts[0])
@@ -12,7 +11,6 @@ const client = devConflux.getClient()
 
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

@@ -3,13 +3,11 @@ import { devConflux } from '~test/src/conflux/client.js'
 
 import { accounts, getTestAccount } from '../../../test/src/constants.js'
 import { deployTest20 } from '../../../test/src/utils.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { getCode } from './getCode.js'
 
 const client = devConflux.getClient({ account: getTestAccount(accounts[0]) })
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

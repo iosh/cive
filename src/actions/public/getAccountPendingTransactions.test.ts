@@ -2,7 +2,6 @@ import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { parseCFX } from '../../utils/unit/parseCFX.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { getAccountPendingTransactions } from './getAccountPendingTransactions.js'
 
@@ -11,7 +10,6 @@ const client = devConflux.getClient({ account: sourceAccount })
 
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 
   await sendTransaction(client, {
     to: sourceAccount.address,

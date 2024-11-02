@@ -7,14 +7,12 @@ import { deployTest20 } from '../../../test/src/utils.js'
 import { encodeFunctionData } from '../../utils/abi/encodeFunctionData.js'
 import { call } from '../public/call.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { writeContract } from './writeContract.js'
 
 const sourceAccount = getTestAccount(accounts[0])
 const client = devConflux.getClient({ account: sourceAccount })
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

@@ -1,7 +1,6 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { getBalance } from './getBalance.js'
 import { getBlock } from './getBlock.js'
 
@@ -14,7 +13,6 @@ const targetAccount = getTestAccount(accounts[1])
 const client = devConflux.getClient()
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

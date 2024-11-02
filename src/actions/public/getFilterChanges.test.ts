@@ -19,14 +19,12 @@ import type { Log } from '../../types/log.js'
 import type { Hash } from '../../types/misc.js'
 import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
 import { writeContract } from '../wallet/writeContract.js'
 import { createBlockFilter } from './createBlockFilter.js'
 import { createContractEventFilter } from './createContractEventFilter.js'
 import { createEventFilter } from './createEventFilter.js'
 import { createPendingTransactionFilter } from './createPendingTransactionFilter.js'
-import { getBalance } from './getBalance.js'
 import { getBlock } from './getBlock.js'
 import { getFilterChanges } from './getFilterChanges.js'
 const sourceAccount = getTestAccount(accounts[0])
@@ -34,7 +32,6 @@ const client = devConflux.getClient({ account: sourceAccount })
 let Test20Address: Address
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   const { contractCreated } = await deployTest20(client)
   Test20Address = contractCreated!
   await writeContract(client, {

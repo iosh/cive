@@ -5,7 +5,6 @@ import { Test20 } from '../../../test/src/contracts/Test20.js'
 import { deployTest20 } from '../../../test/src/utils.js'
 import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { writeContract } from '../wallet/writeContract.js'
 import { GetStorageAt } from './getStorageAt.js'
 
@@ -14,7 +13,6 @@ const client = devConflux.getClient({
 })
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

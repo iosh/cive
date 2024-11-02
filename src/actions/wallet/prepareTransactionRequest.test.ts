@@ -6,14 +6,12 @@ import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { parseGDrip } from '../../utils/unit/parseGDrip.js'
 import * as getBlock from '../public/getBlock.js'
 import { mine } from '../test/mine.js'
-import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { prepareTransactionRequest } from './prepareTransactionRequest.js'
 
 const sourceAccount = getTestAccount(accounts[0])
 const client = devConflux.getClient({ account: sourceAccount })
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
 })
 
 afterAll(async () => {

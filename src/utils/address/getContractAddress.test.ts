@@ -12,7 +12,6 @@ import {
   deployTest721,
 } from '../../../test/src/utils.js'
 import { getNextNonce, simulateContract } from '../../actions/index.js'
-import { sayHelloLocalNode } from '../../actions/test/sayHelloLocalNode.js'
 import { create2FactoryAddress } from '../../constants/contract.js'
 import { encodeDeployData } from '../abi/encodeDeployData.js'
 import { wait } from '../wait.js'
@@ -26,7 +25,6 @@ const client = devConflux.getClient({
 
 beforeAll(async () => {
   await devConflux.start()
-  await sayHelloLocalNode(client)
   await wait(1000)
 })
 
