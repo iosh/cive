@@ -4,8 +4,6 @@ import { deferredStateEpochCount } from '../../constants/epoch.js'
 import type { Account } from '../../types/account.js'
 import type { Chain } from '../../types/chain.js'
 import { getAction } from '../../utils/getAction.js'
-import { wait } from '../../utils/wait.js'
-import { getBastBlockHash } from '../public/getBastBlockHash.js'
 import { generateEmptyLocalNodeBlocks } from './generateEmptyLocalNodeBlocks.js'
 import { generateLocalNodeBlock } from './generateLocalNodeBlock.js'
 
@@ -40,20 +38,11 @@ export async function mine<
       generateLocalNodeBlock,
       'generateLocalNodeBlock',
     )
-    const baseBlock = getAction(client, getBastBlockHash, 'getBastBlockHash')
     for (let i = 0; i < deferredStateEpochCount; i++) {
-      const generatedHash = await generateOneBlock({
+      await generateOneBlock({
         numTxs,
         blockSizeLimit,
       })
-      while (true) {
-        const hash = await baseBlock({})
-        if (hash !== generatedHash) {
-          await wait(10)
-        } else {
-          break
-        }
-      }
     }
   }
 }

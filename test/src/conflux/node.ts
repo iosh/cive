@@ -1,4 +1,8 @@
-import { type Config, type CreateServerReturnType, createServer } from '@xcfx/node'
+import {
+  type Config,
+  type CreateServerReturnType,
+  createServer,
+} from '@xcfx/node'
 import {
   TEST_CHAIN_ID,
   TEST_EVM_CHAIN_ID,

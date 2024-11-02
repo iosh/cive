@@ -1,3 +1,6 @@
+import {
+  type Config,
+} from '@xcfx/node'
 import type { Account, Address } from '~cive/accounts/types.js'
 import { localhostNode } from '~cive/chains/definitions/localhost.js'
 import {
@@ -15,11 +18,6 @@ import type { Chain } from '~cive/types/chain.js'
 import type { ExactPartial } from '~cive/types/utils.js'
 import { accounts } from '../constants.js'
 import { createNode, remove } from './node.js'
-import {
-  type Config,
-  type CreateServerReturnType,
-  createServer,
-} from '@xcfx/node'
 
 type DefineConfluxParameters<chain extends Chain> = {
   chain: chain
