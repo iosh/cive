@@ -30,7 +30,7 @@ test('default', async () => {
 
   const receipt = await getTransactionReceipt(client, { hash })
 
-  expect(Object.keys(receipt)).toMatchInlineSnapshot(`
+  expect(Object.keys(receipt).sort()).toMatchInlineSnapshot(`
     [
       "blockHash",
       "burntGasFee",

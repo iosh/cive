@@ -4,9 +4,9 @@ import { accounts, getTestAccount } from '~test/src/constants.js'
 
 import { parseCFX } from '../../utils/unit/parseCFX.js'
 import { parseGDrip } from '../../utils/unit/parseGDrip.js'
+import * as getBlock from '../public/getBlock.js'
 import { mine } from '../test/mine.js'
 import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
-import * as getBlock from '../public/getBlock.js'
 import { prepareTransactionRequest } from './prepareTransactionRequest.js'
 
 const sourceAccount = getTestAccount(accounts[0])

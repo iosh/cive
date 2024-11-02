@@ -2,9 +2,9 @@ import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
 import { parseCFX } from '../../utils/unit/parseCFX.js'
+import { getBalance } from '../public/getBalance.js'
 import { mine } from '../test/mine.js'
 import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
-import { getBalance } from '../public/getBalance.js'
 import { sendTransaction } from './sendTransaction.js'
 
 const client = devConflux.getClient()

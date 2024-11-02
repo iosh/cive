@@ -1,7 +1,7 @@
 import type { Account } from '../../accounts/types.js'
 import {
-  getCurrentSyncPhase,
   type GetCurrentSyncPhaseReturnType,
+  getCurrentSyncPhase,
 } from '../../actions/index.js'
 import { clearTxpool } from '../../actions/test/clearTxpool.js'
 import {

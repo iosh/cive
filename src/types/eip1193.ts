@@ -29,9 +29,9 @@ import type {
 import type { Address, HexAddress } from '../accounts/types.js'
 import type { Block, EpochTag } from './block.js'
 import type { Hash, Hex } from './misc.js'
+import type { PhaseNameType } from './phase.js'
 import type { RpcEpochNumber, RpcTransaction as Transaction } from './rpc.js'
 import type { ExactPartial, Prettify } from './utils.js'
-import type { PhaseNameType } from './phase.js'
 
 export type EIP1474Methods = [...PublicRpcSchema, ...WalletRpcSchema]
 

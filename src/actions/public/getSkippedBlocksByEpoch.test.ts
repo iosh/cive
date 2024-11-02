@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
-import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
+import { mine } from '../test/mine.js'
 import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
 import { getSkippedBlocksByEpoch } from './getSkippedBlocksByEpoch.js'
 
@@ -15,7 +15,7 @@ afterAll(async () => {
 })
 
 test('default', async () => {
-  await generateEmptyLocalNodeBlocks(client, { numBlocks: 500 })
+  await mine(client, { blocks: 35 })
   expect(await getSkippedBlocksByEpoch(client)).toBeDefined()
 })
 
@@ -28,10 +28,10 @@ test('epochNumber', async () => {
     await getSkippedBlocksByEpoch(client, { epochNumber: 10n }),
   ).toBeDefined()
   expect(
-    await getSkippedBlocksByEpoch(client, { epochNumber: 50n }),
+    await getSkippedBlocksByEpoch(client, { epochNumber: 20n }),
   ).toBeDefined()
   expect(
-    await getSkippedBlocksByEpoch(client, { epochNumber: 100n }),
+    await getSkippedBlocksByEpoch(client, { epochNumber: 30n }),
   ).toBeDefined()
 })
 

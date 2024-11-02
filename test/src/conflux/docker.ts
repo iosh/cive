@@ -1,5 +1,9 @@
-import { createServer, type CreateServerReturnType } from '@xcfx/node'
-import { TEST_CHAIN_ID, TEST_EVM_CHAIN_ID, TEST_GENESIS_SECRETS } from '../constants.js'
+import { type CreateServerReturnType, createServer } from '@xcfx/node'
+import {
+  TEST_CHAIN_ID,
+  TEST_EVM_CHAIN_ID,
+  TEST_GENESIS_SECRETS,
+} from '../constants.js'
 
 export type NodeOptions = {
   httpPort: number
@@ -26,6 +30,8 @@ export async function createNode({
     genesisSecrets: TEST_GENESIS_SECRETS,
     tcpPort: udpAndTcpPort,
     udpPort: udpAndTcpPort,
+    pollLifetimeInSeconds: 20,
+    getLogsFilterMaxLimit: 500,
   })
 
   await node.start()

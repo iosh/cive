@@ -5,9 +5,9 @@ import { accounts, getTestAccount } from '~test/src/constants.js'
 import { Test20 } from '../../../test/src/contracts/Test20.js'
 import { deployTest20 } from '../../../test/src/utils.js'
 import { encodeFunctionData } from '../../utils/abi/encodeFunctionData.js'
+import { call } from '../public/call.js'
 import { mine } from '../test/mine.js'
 import { sayHelloLocalNode } from '../test/sayHelloLocalNode.js'
-import { call } from '../public/call.js'
 import { writeContract } from './writeContract.js'
 
 const sourceAccount = getTestAccount(accounts[0])

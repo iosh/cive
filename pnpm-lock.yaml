@@ -487,8 +487,8 @@ importers:
   test:
     dependencies:
       '@xcfx/node':
-        specifier: ^0.3.1
-        version: 0.3.1(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@6.0.4)
+        specifier: ^0.3.2
+        version: 0.3.2(typescript@5.6.3)
     devDependencies:
       '@types/dockerode':
         specifier: ^3.3.29
@@ -1889,32 +1889,32 @@ packages:
   '@vitest/utils@2.1.3':
     resolution: {integrity: sha512-xpiVfDSg1RrYT0tX6czgerkpcKFmFOF/gCr30+Mve5V2kewCy4Prn1/NDMSRwaSmT7PRaOF83wu+bEtsY1wrvA==}
 
-  '@xcfx/node-darwin-arm64@0.3.0':
-    resolution: {integrity: sha512-qzQN6KegTpV7yPjF8vTNxLmfviuKVK4xJxnzC1WrJnjJw7Ly9KcN3ytnMPvtc0NZKQfpqqfo9O+B+80+/0nWWQ==}
+  '@xcfx/node-darwin-arm64@0.3.1':
+    resolution: {integrity: sha512-AfeacrsYVi0dcMoJj7wixvFHC/A9+16kL1C7fLp6ooVlSl8Ej7vij7vkd/242d1LetM0G/FIejqi/8wcmTRn4Q==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@xcfx/node-darwin-x64@0.3.0':
-    resolution: {integrity: sha512-tmCWId4PrGXCFKjS5BwFLGRjdB34UXJN+OYf+wkJqNN17r/HwJyNAcAXIkio0bU1ibaTolsXywTNU6yBES4kmA==}
+  '@xcfx/node-darwin-x64@0.3.1':
+    resolution: {integrity: sha512-YXblHjUjvOEcNJildgmBorrdUC4ymMnsGy/m8OH5wbjjzWeDkbCj8S7v6wH4EIqGLm2RL0J983essa8ZpcdJRg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-  '@xcfx/node-linux-x64-gnu@0.3.0':
-    resolution: {integrity: sha512-2x8+Q98pZqP6wxf5JnMNzr57i3PiNMXKsDlqwpvzOUUzIZmYX8CVFI9652E6wfKwEd4NJ8SV92AvEL0To+vbmg==}
+  '@xcfx/node-linux-x64-gnu@0.3.1':
+    resolution: {integrity: sha512-lIIgMiD30Si7rP5uFMrmBaOXFyYO7zkxuCYNLYpqfdovnxGKX6VgkfEfBTU0YbFA+CEJoftj8Dord4TC+5wL7w==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@xcfx/node-win32-x64-msvc@0.3.0':
-    resolution: {integrity: sha512-FmDMrv586s71SDHYFOabQQ2rTo2opEfL0UF/U8eyMqNX+yZj79BbXJ7FfbBUlrcRJdjxBmNrn8q4bLqfbWjY0g==}
+  '@xcfx/node-win32-x64-msvc@0.3.1':
+    resolution: {integrity: sha512-BqfiIUVNCVJ/8/GhCle01FPdkOPRNBk3hgN3iS+TwSjkZHZXdLaQDPZ9oXct3VRNtgCHSPsIwCommY+ojOg7IA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
 
-  '@xcfx/node@0.3.1':
-    resolution: {integrity: sha512-JisgZNfBg/J0qefGR35PZm3xQKufPxuDHBvWHQAVYEuWXfxhN8lD4Q6ER2muROagXcHtAy9h4rOQG7aQRxfjBQ==}
+  '@xcfx/node@0.3.2':
+    resolution: {integrity: sha512-e68GFLPRuVLsyGAFlK/hNFgDSiQDg+Mx0O2gsuz60Tv4PggP7RrhO1B2A6dpmAqnoxVrwKR464DYMDLRjdm6Mg==}
     engines: {node: '>= 10'}
 
   abi-util-lite@0.1.0:
@@ -5730,26 +5730,26 @@ snapshots:
       loupe: 3.1.2
       tinyrainbow: 1.2.0
 
-  '@xcfx/node-darwin-arm64@0.3.0':
+  '@xcfx/node-darwin-arm64@0.3.1':
     optional: true
 
-  '@xcfx/node-darwin-x64@0.3.0':
+  '@xcfx/node-darwin-x64@0.3.1':
     optional: true
 
-  '@xcfx/node-linux-x64-gnu@0.3.0':
+  '@xcfx/node-linux-x64-gnu@0.3.1':
     optional: true
 
-  '@xcfx/node-win32-x64-msvc@0.3.0':
+  '@xcfx/node-win32-x64-msvc@0.3.1':
     optional: true
 
-  '@xcfx/node@0.3.1(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@6.0.4)':
+  '@xcfx/node@0.3.2(typescript@5.6.3)':
     dependencies:
       cive: 0.7.0(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@6.0.4)
     optionalDependencies:
-      '@xcfx/node-darwin-arm64': 0.3.0
-      '@xcfx/node-darwin-x64': 0.3.0
-      '@xcfx/node-linux-x64-gnu': 0.3.0
-      '@xcfx/node-win32-x64-msvc': 0.3.0
+      '@xcfx/node-darwin-arm64': 0.3.1
+      '@xcfx/node-darwin-x64': 0.3.1
+      '@xcfx/node-linux-x64-gnu': 0.3.1
+      '@xcfx/node-win32-x64-msvc': 0.3.1
     transitivePeerDependencies:
       - bufferutil
       - typescript

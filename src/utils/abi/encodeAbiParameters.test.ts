@@ -346,7 +346,7 @@ describe('static', () => {
         `
         [AbiEncodingBytesSizeMismatchError: Size of bytes "0x0000000000000000000000000000000000000000000000000000000000000000000000000123456789abcdef" (bytes44) does not match expected size (bytes8).
 
-        Version: viem@2.17.3]
+        Version: viem@2.21.32]
       `,
       )
     })
@@ -386,7 +386,7 @@ describe('static', () => {
         `
         [AbiEncodingBytesSizeMismatchError: Size of bytes "0x000000000000000000000000000000000000000000000000000000000000000420" (bytes33) does not match expected size (bytes16).
 
-        Version: viem@2.17.3]
+        Version: viem@2.21.32]
       `,
       )
     })
@@ -545,7 +545,7 @@ describe('static', () => {
   describe('struct: (uint256,bool,address)', () => {
     test('default', () => {
       expect(
-        // cast abi-encode "a((uint256,bool,address))" "(420,true,0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC)"
+        // cast abi-encode "a((uint256,bool,address))" "(420,true,0x15cc3c03994DB5b0d9A5eEdD10CabaB0813678AC)"
         encodeAbiParameters(
           [
             {
@@ -584,7 +584,7 @@ describe('static', () => {
   describe('struct: (uint256,bool,address)', () => {
     test('default', () => {
       expect(
-        // cast abi-encode "a((uint256,bool,address))" "(420,true,0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC)"
+        // cast abi-encode "a((uint256,bool,address))" "(420,true,0x15cc3c03994DB5b0d9A5eEdD10CabaB0813678AC)"
         encodeAbiParameters(
           [
             {
@@ -614,7 +614,7 @@ describe('static', () => {
   describe('struct: ((uint256,bool,address),(uint256,bool,address),uint8[2])', () => {
     test('default', () => {
       expect(
-        // cast abi-encode "a(((uint256,bool,address),(uint256,bool,address),uint8[2]))" "((420,true,0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC),(69,false,0xc961145a54C96E3aE9bAA048c4F4D6b04C13916b),[1,2])"
+        // cast abi-encode "a(((uint256,bool,address),(uint256,bool,address),uint8[2]))" "((420,true,0x15cc3c03994DB5b0d9A5eEdD10CabaB0813678AC),(69,false,0x1961145a54c96e3ae9baa048c4f4d6b04c13916b),[1,2])"
         encodeAbiParameters(
           [
             {
