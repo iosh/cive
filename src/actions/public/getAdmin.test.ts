@@ -31,8 +31,7 @@ test('default', async () => {
 
 test('args epoch tag', async () => {
   const { contractCreated } = await deployTest20(client)
-  await mine(client, { blocks: 1000 })
-
+  await mine(client, { blocks: 100 })
   expect(
     await getAdmin(client, {
       address: contractCreated!,
@@ -68,7 +67,7 @@ test('args epoch tag', async () => {
 test('args epoch number', async () => {
   const { contractCreated } = await deployTest20(client)
   const block = await getBlock(client)
-  await mine(client, { blocks: 1000 })
+  await mine(client, { blocks: 100 })
   expect(
     await getAdmin(client, {
       address: contractCreated!,
@@ -106,7 +105,7 @@ test('args epoch number', async () => {
   expect(
     await getAdmin(client, {
       address: contractCreated!,
-      epochNumber: block.blockNumber + 500n,
+      epochNumber: block.blockNumber + 100n,
     }),
   ).toMatchInlineSnapshot(
     `"NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X"`,

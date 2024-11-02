@@ -1,7 +1,6 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
-
-import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
+import { mine } from '../test/mine.js'
 import { getParamsFromVote } from './getParamsFromVote.js'
 
 const client = devConflux.getClient()
@@ -25,7 +24,7 @@ test('default', async () => {
 })
 
 test('with epoch tag', async () => {
-  await generateEmptyLocalNodeBlocks(client, { numBlocks: 100 })
+  await mine(client, { blocks: 60 })
   expect(
     await getParamsFromVote(client, { epochTag: 'earliest' }),
   ).toMatchInlineSnapshot(`
@@ -52,67 +51,67 @@ test('with epoch tag', async () => {
     await getParamsFromVote(client, { epochTag: 'latest_confirmed' }),
   ).toMatchInlineSnapshot(`
     {
-      "baseFeeShareProp": 1000000000000000000n,
+      "baseFeeShareProp": 0n,
       "interestRate": 40000n,
-      "powBaseReward": 2000000000000000000n,
-      "storagePointProp": 1000000000000000000n,
+      "powBaseReward": 0n,
+      "storagePointProp": 0n,
     }
   `)
 
   expect(
     await getParamsFromVote(client, { epochTag: 'latest_state' }),
   ).toMatchInlineSnapshot(`
-    {
-      "baseFeeShareProp": 1000000000000000000n,
-      "interestRate": 40000n,
-      "powBaseReward": 2000000000000000000n,
-      "storagePointProp": 1000000000000000000n,
-    }
-  `)
+        {
+          "baseFeeShareProp": 0n,
+          "interestRate": 40000n,
+          "powBaseReward": 0n,
+          "storagePointProp": 0n,
+        }
+      `)
 })
 
 test('with epoch number', async () => {
   expect(
     await getParamsFromVote(client, { epochNumber: 0n }),
   ).toMatchInlineSnapshot(`
-    {
-      "baseFeeShareProp": 1000000000000000000n,
-      "interestRate": 40000n,
-      "powBaseReward": 2000000000000000000n,
-      "storagePointProp": 1000000000000000000n,
-    }
-  `)
+        {
+          "baseFeeShareProp": 0n,
+          "interestRate": 40000n,
+          "powBaseReward": 0n,
+          "storagePointProp": 0n,
+        }
+      `)
 
   expect(
     await getParamsFromVote(client, { epochNumber: 1n }),
   ).toMatchInlineSnapshot(`
-    {
-      "baseFeeShareProp": 1000000000000000000n,
-      "interestRate": 40000n,
-      "powBaseReward": 2000000000000000000n,
-      "storagePointProp": 1000000000000000000n,
-    }
-  `)
+        {
+          "baseFeeShareProp": 0n,
+          "interestRate": 40000n,
+          "powBaseReward": 0n,
+          "storagePointProp": 0n,
+        }
+      `)
 
   expect(
     await getParamsFromVote(client, { epochNumber: 10n }),
   ).toMatchInlineSnapshot(`
-    {
-      "baseFeeShareProp": 1000000000000000000n,
-      "interestRate": 40000n,
-      "powBaseReward": 2000000000000000000n,
-      "storagePointProp": 1000000000000000000n,
-    }
-  `)
+        {
+          "baseFeeShareProp": 0n,
+          "interestRate": 40000n,
+          "powBaseReward": 0n,
+          "storagePointProp": 0n,
+        }
+      `)
 
   expect(
     await getParamsFromVote(client, { epochNumber: 50n }),
   ).toMatchInlineSnapshot(`
-    {
-      "baseFeeShareProp": 1000000000000000000n,
-      "interestRate": 40000n,
-      "powBaseReward": 2000000000000000000n,
-      "storagePointProp": 1000000000000000000n,
-    }
-  `)
+        {
+          "baseFeeShareProp": 0n,
+          "interestRate": 40000n,
+          "powBaseReward": 0n,
+          "storagePointProp": 0n,
+        }
+      `)
 })

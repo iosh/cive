@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
-import { getInterestRate } from './getInterestRate.js'
 import { mine } from '../test/mine.js'
+import { getInterestRate } from './getInterestRate.js'
 
 const client = devConflux.getClient()
 beforeAll(async () => {

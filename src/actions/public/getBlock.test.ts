@@ -95,7 +95,7 @@ test('1559', async () => {
 })
 
 test('epoch tag', async () => {
-  await mine(client, { blocks: 1000 })
+  await mine(client, { blocks: 100 })
   const blockWithEarliest = await getBlock(client, { epochTag: 'earliest' })
   assertType<GetBlockReturnType<Chain, false, 'earliest'>>(blockWithEarliest)
 

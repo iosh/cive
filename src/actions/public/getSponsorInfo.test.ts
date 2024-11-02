@@ -64,8 +64,8 @@ test('default', async () => {
     await GetSponsorInfo(client, { address: test20Address }),
   ).toMatchInlineSnapshot(`
     {
-      "availableStoragePoints": 7680n,
-      "sponsorBalanceForCollateral": 7500000000000000000n,
+      "availableStoragePoints": 0n,
+      "sponsorBalanceForCollateral": 15000000000000000000n,
       "sponsorBalanceForGas": 100000000000000000000n,
       "sponsorForCollateral": "NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X",
       "sponsorForGas": "NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X",
@@ -131,8 +131,8 @@ test('epochTag', async () => {
     }),
   ).toMatchInlineSnapshot(`
     {
-      "availableStoragePoints": 7680n,
-      "sponsorBalanceForCollateral": 7500000000000000000n,
+      "availableStoragePoints": 0n,
+      "sponsorBalanceForCollateral": 15000000000000000000n,
       "sponsorBalanceForGas": 100000000000000000000n,
       "sponsorForCollateral": "NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X",
       "sponsorForGas": "NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X",
@@ -151,8 +151,8 @@ test('epochNumber', async () => {
     }),
   ).toMatchInlineSnapshot(`
     {
-      "availableStoragePoints": 7680n,
-      "sponsorBalanceForCollateral": 7500000000000000000n,
+      "availableStoragePoints": 0n,
+      "sponsorBalanceForCollateral": 15000000000000000000n,
       "sponsorBalanceForGas": 100000000000000000000n,
       "sponsorForCollateral": "NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X",
       "sponsorForGas": "NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X",
@@ -168,8 +168,8 @@ test('epochNumber', async () => {
     }),
   ).toMatchInlineSnapshot(`
     {
-      "availableStoragePoints": 7680n,
-      "sponsorBalanceForCollateral": 7500000000000000000n,
+      "availableStoragePoints": 0n,
+      "sponsorBalanceForCollateral": 15000000000000000000n,
       "sponsorBalanceForGas": 100000000000000000000n,
       "sponsorForCollateral": "NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X",
       "sponsorForGas": "NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X",

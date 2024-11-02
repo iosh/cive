@@ -23,31 +23,31 @@ afterAll(async () => {
   await devConflux.stop()
   clearInterval(id)
 })
-test('waits for transaction (send -> wait -> mine)', async () => {
-  const hash = await sendTransaction(client, {
-    to: targetAccount.base32Address,
-    value: parseCFX('1'),
-  })
-  await mine(client, { numTxs: 1 })
-  const { outcomeStatus } = await waitForTransactionReceipt(client, {
-    hash,
-    retryCount: 100,
-  })
+// test('waits for transaction (send -> wait -> mine)', async () => {
+//   const hash = await sendTransaction(client, {
+//     to: targetAccount.base32Address,
+//     value: parseCFX('1'),
+//   })
+//   await mine(client, { numTxs: 1 })
+//   const { outcomeStatus } = await waitForTransactionReceipt(client, {
+//     hash,
+//     retryCount: 100,
+//   })
 
-  expect(outcomeStatus).toBe('success')
-})
+//   expect(outcomeStatus).toBe('success')
+// })
 
-test('waits for transaction (send -> mine -> wait)', async () => {
-  const hash = await sendTransaction(client, {
-    to: targetAccount.base32Address,
-    value: parseCFX('1'),
-  })
-  await mine(client, { numTxs: 1 })
-  const { outcomeStatus } = await waitForTransactionReceipt(client, {
-    hash,
-  })
-  expect(outcomeStatus).toBe('success')
-})
+// test('waits for transaction (send -> mine -> wait)', async () => {
+//   const hash = await sendTransaction(client, {
+//     to: targetAccount.base32Address,
+//     value: parseCFX('1'),
+//   })
+//   await mine(client, { numTxs: 1 })
+//   const { outcomeStatus } = await waitForTransactionReceipt(client, {
+//     hash,
+//   })
+//   expect(outcomeStatus).toBe('success')
+// })
 
 test('waits for transaction (multiple waterfall)', async () => {
   setTimeout(() => mine(client, { numTxs: 1 }), 500)

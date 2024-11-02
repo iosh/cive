@@ -42,7 +42,7 @@ test('default', async () => {
 
   expect(logs[0].args).toMatchInlineSnapshot(`
     {
-      "from": "net201029:aajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadput7khz",
+      "from": "net201029:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwnf1hcg",
       "to": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "value": 1000000000000000000000n,
     }
@@ -80,7 +80,7 @@ test('args: address', async () => {
   expect(logs[0].eventName).toMatchInlineSnapshot(`"Transfer"`)
   expect(logs[0].args).toMatchInlineSnapshot(`
     {
-      "from": "net201029:aajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadput7khz",
+      "from": "net201029:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwnf1hcg",
       "to": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "value": 1000000000000000000000n,
     }
