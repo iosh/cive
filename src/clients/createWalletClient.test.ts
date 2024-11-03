@@ -388,6 +388,7 @@ describe('args: transport', () => {
         "getConfirmationRiskByHash": [Function],
         "getContractEvents": [Function],
         "getCurrentSyncPhase": [Function],
+        
         "getDepositList": [Function],
         "getEpochNumber": [Function],
         "getEpochReceipts": [Function],
