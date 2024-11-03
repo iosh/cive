@@ -1,9 +1,12 @@
-import { http, custom, webSocket } from 'viem'
+
 import { assertType, describe, expect, test, vi } from 'vitest'
 import { localhostNode } from '../chains/definitions/localhost.js'
 import type { EIP1193RequestFn, PublicRpcSchema } from '../types/eip1193.js'
 import { createPublicClient } from './createPublicClient.js'
 import { createTransport } from './transports/createTransport.js'
+import { http } from './transports/http.js'
+import { webSocket } from './transports/webSocket.js'
+import { custom } from './transports/custom.js'
 
 const mockTransport = () =>
   createTransport({
@@ -108,6 +111,8 @@ test('creates', () => {
       },
       "type": "publicClient",
       "uninstallFilter": [Function],
+      "verifyMessage": [Function],
+      "verifyTypedData": [Function],
       "waitForTransactionReceipt": [Function],
       "watchEpochNumber": [Function],
     }
@@ -267,6 +272,8 @@ describe('transports', () => {
         },
         "type": "publicClient",
         "uninstallFilter": [Function],
+        "verifyMessage": [Function],
+        "verifyTypedData": [Function],
         "waitForTransactionReceipt": [Function],
         "watchEpochNumber": [Function],
       }
@@ -390,6 +397,8 @@ describe('transports', () => {
         },
         "type": "publicClient",
         "uninstallFilter": [Function],
+        "verifyMessage": [Function],
+        "verifyTypedData": [Function],
         "waitForTransactionReceipt": [Function],
         "watchEpochNumber": [Function],
       }
@@ -489,6 +498,8 @@ describe('transports', () => {
         },
         "type": "publicClient",
         "uninstallFilter": [Function],
+        "verifyMessage": [Function],
+        "verifyTypedData": [Function],
         "waitForTransactionReceipt": [Function],
         "watchEpochNumber": [Function],
       }

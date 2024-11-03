@@ -16,41 +16,41 @@ let id: Timer
 beforeAll(async () => {
   await devConflux.start()
   await mine(client, { blocks: 10 })
-  setInterval(() => mine(client, { blocks: 1 }), 120)
+  setInterval(() => mine(client, { blocks: 1 }), 150)
 })
 
 afterAll(async () => {
   await devConflux.stop()
   clearInterval(id)
 })
-// test('waits for transaction (send -> wait -> mine)', async () => {
-//   const hash = await sendTransaction(client, {
-//     to: targetAccount.base32Address,
-//     value: parseCFX('1'),
-//   })
-//   await mine(client, { numTxs: 1 })
-//   const { outcomeStatus } = await waitForTransactionReceipt(client, {
-//     hash,
-//     retryCount: 100,
-//   })
+test('waits for transaction (send -> wait -> mine)', async () => {
+  setTimeout(() => mine(client, { numTxs: 1 }), 200)
+  const hash = await sendTransaction(client, {
+    to: targetAccount.base32Address,
+    value: parseCFX('1'),
+  })
 
-//   expect(outcomeStatus).toBe('success')
-// })
+  const { outcomeStatus } = await waitForTransactionReceipt(client, {
+    hash,
+    retryCount: 30,
+  })
+  expect(outcomeStatus).toBe('success')
+})
 
-// test('waits for transaction (send -> mine -> wait)', async () => {
-//   const hash = await sendTransaction(client, {
-//     to: targetAccount.base32Address,
-//     value: parseCFX('1'),
-//   })
-//   await mine(client, { numTxs: 1 })
-//   const { outcomeStatus } = await waitForTransactionReceipt(client, {
-//     hash,
-//   })
-//   expect(outcomeStatus).toBe('success')
-// })
+test('waits for transaction (send -> mine -> wait)', async () => {
+  const hash = await sendTransaction(client, {
+    to: targetAccount.base32Address,
+    value: parseCFX('1'),
+  })
+  await mine(client, { numTxs: 1 })
+  const { outcomeStatus } = await waitForTransactionReceipt(client, {
+    hash,
+  })
+  expect(outcomeStatus).toBe('success')
+})
 
 test('waits for transaction (multiple waterfall)', async () => {
-  setTimeout(() => mine(client, { numTxs: 1 }), 500)
+  setTimeout(() => mine(client, { numTxs: 1 }), 200)
 
   const hash = await sendTransaction(client, {
     to: targetAccount.base32Address,
@@ -76,7 +76,7 @@ test('waits for transaction (multiple waterfall)', async () => {
 })
 
 test('waits for transaction (multiple parallel)', async () => {
-  setTimeout(() => mine(client, { numTxs: 1 }), 500)
+  setTimeout(() => mine(client, { numTxs: 1 }), 200)
   const hash = await sendTransaction(client, {
     to: targetAccount.base32Address,
     value: parseCFX('1'),
@@ -122,10 +122,10 @@ describe('replaced transactions', () => {
       waitForTransactionReceipt(client, {
         hash,
         onReplaced: (replacement_) => (replacement = replacement_),
-        retryCount: 10,
+        retryCount: 15,
       }),
       (async () => {
-        await wait(100)
+        await wait(50)
 
         // speed up
         await sendTransaction(client, {
@@ -159,7 +159,7 @@ describe('replaced transactions', () => {
     const [receipt] = await Promise.all([
       waitForTransactionReceipt(client, {
         hash,
-        retryCount: 15,
+        retryCount: 25,
       }),
       (async () => {
         // speed up
@@ -216,7 +216,7 @@ describe('replaced transactions', () => {
 
 describe('args: confirmations', () => {
   test('waits for confirmations', async () => {
-    setTimeout(() => mine(client, { numTxs: 1 }), 500)
+    setTimeout(() => mine(client, { numTxs: 1 }), 200)
     const hash = await sendTransaction(client, {
       to: targetAccount.base32Address,
       value: parseCFX('1'),

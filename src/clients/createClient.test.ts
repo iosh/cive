@@ -1,10 +1,12 @@
-import { http, custom, webSocket } from 'viem'
 import { assertType, describe, expect, test, vi } from 'vitest'
 import { localhostNode } from '../chains/definitions/localhost.js'
 import type { EIP1193RequestFn, EIP1474Methods } from '../types/eip1193.js'
 import { createClient } from './createClient.js'
 import { publicActions } from './decorators/public.js'
 import { createTransport } from './transports/createTransport.js'
+import { http } from './transports/http.js'
+import { webSocket } from './transports/webSocket.js'
+import { custom } from './transports/custom.js'
 
 test('creates', () => {
   const mockTransport = () =>
@@ -574,6 +576,8 @@ describe('extends', () => {
         },
         "type": "base",
         "uninstallFilter": [Function],
+        "verifyMessage": [Function],
+        "verifyTypedData": [Function],
         "waitForTransactionReceipt": [Function],
         "watchEpochNumber": [Function],
       }

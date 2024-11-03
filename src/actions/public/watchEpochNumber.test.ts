@@ -168,12 +168,14 @@ describe('poll', () => {
     await mine(client, { blocks: 1 })
     await wait(110)
     await mine(client, { blocks: 1 })
+    await wait(110)
     unwatch()
     expect(epochNumbers).toMatchInlineSnapshot(`
       [
         16n,
         17n,
         18n,
+        19n,
       ]
     `)
   })
