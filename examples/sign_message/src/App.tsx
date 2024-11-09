@@ -120,7 +120,9 @@ export default function App() {
                   </button>
                 </div>
                 <p>
-                  {isValidWithAction === null ? '...' : `message is valid: ${isValidWithAction}`}
+                  {isValidWithAction === null
+                    ? '...'
+                    : `message is valid: ${isValidWithAction}`}
                 </p>
               </div>
             </div>

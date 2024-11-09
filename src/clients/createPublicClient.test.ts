@@ -1,4 +1,3 @@
-
 import { assertType, describe, expect, test, vi } from 'vitest'
 import { localhostNode } from '../chains/definitions/localhost.js'
 import type { EIP1193RequestFn, PublicRpcSchema } from '../types/eip1193.js'
