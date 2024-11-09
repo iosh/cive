@@ -66,7 +66,7 @@ test('default', async () => {
   )
 
   expect(receipt.transactionHash).toMatchInlineSnapshot(
-    `"0x2e277f2031cb9dcb57d174b99e1f33f4f0141f5bd2e6ddbfa9675ddbedff164b"`,
+    `"0x2544af3be3c64246d01e2c38372f34135a55baefa90477d5e70ab2296065416e"`,
   )
 
   expect(receipt.epochNumber).toMatchInlineSnapshot('1n')

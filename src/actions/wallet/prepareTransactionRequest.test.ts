@@ -44,7 +44,7 @@ test('default', async () => {
       "epochHeight": 0n,
       "from": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "gas": 21000n,
-      "gasPrice": 1200000000n,
+      "gasPrice": 1000000000n,
       "storageLimit": 0n,
       "to": "net201029:aam085e78n2f8hy6c02u5tz7vbj6xreef6a6stzj3x",
       "type": "legacy",

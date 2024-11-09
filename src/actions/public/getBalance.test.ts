@@ -56,7 +56,7 @@ test('gets balance when transaction', async () => {
 
   expect(
     await getBalance(client, { address: sourceAccount.address }),
-  ).toMatchInlineSnapshot('9989999974800000000000n')
+  ).toMatchInlineSnapshot('9989999979000000000000n')
 
   expect(
     await getBalance(client, { address: targetAccount.address }),

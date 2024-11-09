@@ -58,14 +58,14 @@ test('default', async () => {
     `"NET201029:TYPE.USER:AAM085E78N2F8HY6C02U5TZ7VBJ6XREEF6A6STZJ3X"`,
   )
   expect(tx.hash).toMatchInlineSnapshot(
-    `"0x2e277f2031cb9dcb57d174b99e1f33f4f0141f5bd2e6ddbfa9675ddbedff164b"`,
+    `"0x2544af3be3c64246d01e2c38372f34135a55baefa90477d5e70ab2296065416e"`,
   )
   expect(tx.nonce).toMatchInlineSnapshot('0')
   expect(tx.r).toMatchInlineSnapshot(
-    `"0xcf3f05859dd82398bec754f12f8ba4bf60cf9d98ed6d2a1397a919fd5e69ccc2"`,
+    `"0xa3df516d1c0134073e2247d0e4004bcf9562f4cd0cba705ca04209d816c5b47c"`,
   )
   expect(tx.s).toMatchInlineSnapshot(
-    `"0x491b9484ef00f5e7f4b2e7bd687ccbba5d3b2c7b3bc531fb50468dae9f4e57d2"`,
+    `"0x53ad709a9e8a35428c85de544d964bef07f15c20f0516c523e8aa5565eb27058"`,
   )
 })
 

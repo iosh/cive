@@ -346,7 +346,7 @@ describe('static', () => {
         `
         [AbiEncodingBytesSizeMismatchError: Size of bytes "0x0000000000000000000000000000000000000000000000000000000000000000000000000123456789abcdef" (bytes44) does not match expected size (bytes8).
 
-        Version: viem@2.21.32]
+        Version: viem@2.21.43]
       `,
       )
     })
@@ -386,7 +386,7 @@ describe('static', () => {
         `
         [AbiEncodingBytesSizeMismatchError: Size of bytes "0x000000000000000000000000000000000000000000000000000000000000000420" (bytes33) does not match expected size (bytes16).
 
-        Version: viem@2.21.32]
+        Version: viem@2.21.43]
       `,
       )
     })

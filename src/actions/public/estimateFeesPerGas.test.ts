@@ -23,9 +23,7 @@ test('default', async () => {
   const { maxFeePerGas, maxPriorityFeePerGas } =
     await estimateFeesPerGas(client)
 
-  expect(maxFeePerGas).toBe(
-    (block.baseFeePerGas! * 120n) / 100n + maxPriorityFeePerGas,
-  )
+  expect(maxFeePerGas).toBe(block.baseFeePerGas! + maxPriorityFeePerGas)
   expect(maxPriorityFeePerGas).toBeDefined()
 })
 
@@ -37,9 +35,7 @@ describe('internal_estimateFeesPerGas', () => {
       block: { baseFeePerGas } as any,
       request: { maxPriorityFeePerGas } as any,
     })
-    expect(maxFeePerGas).toBe(
-      (baseFeePerGas * 120n) / 100n + maxPriorityFeePerGas,
-    )
+    expect(maxFeePerGas).toBe(baseFeePerGas + maxPriorityFeePerGas)
   })
 
   test('maxFeePerGas request args', async () => {

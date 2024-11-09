@@ -51,7 +51,7 @@ test('with tx', async () => {
   ).toMatchInlineSnapshot(`
     {
       "localNonce": 0n,
-      "nextPendingTx": 45869683219349642423684220173494286329207765601632196501992601067641417510919n,
+      "nextPendingTx": 34993918322552798075736612473029692312583248690501399920505890097382783775166n,
       "pendingCount": 1n,
       "pendingNonce": 0n,
     }
@@ -67,7 +67,7 @@ test('with tx', async () => {
   ).toMatchInlineSnapshot(`
     {
       "localNonce": 0n,
-      "nextPendingTx": 45869683219349642423684220173494286329207765601632196501992601067641417510919n,
+      "nextPendingTx": 34993918322552798075736612473029692312583248690501399920505890097382783775166n,
       "pendingCount": 2n,
       "pendingNonce": 0n,
     }
@@ -84,7 +84,7 @@ test('with tx', async () => {
   ).toMatchInlineSnapshot(`
     {
       "localNonce": 0n,
-      "nextPendingTx": 45869683219349642423684220173494286329207765601632196501992601067641417510919n,
+      "nextPendingTx": 34993918322552798075736612473029692312583248690501399920505890097382783775166n,
       "pendingCount": 3n,
       "pendingNonce": 0n,
     }
