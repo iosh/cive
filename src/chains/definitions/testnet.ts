@@ -29,5 +29,8 @@ export const testnet = defineChain({
       epochCreated: 190_369_991,
     },
   },
+  fees: {
+    baseFeeMultiplier: 1,
+  },
   testnet: true,
 })

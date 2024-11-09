@@ -91,7 +91,7 @@ export async function internal_estimateFeesPerGas<
         client,
         request,
       } as ChainFeesFnParameters)
-    return chain?.fees?.baseFeeMultiplier ?? 1.2
+    return chain?.fees?.baseFeeMultiplier ?? 1
   })()
   if (baseFeeMultiplier < 1) throw new BaseFeeScalarError()
 

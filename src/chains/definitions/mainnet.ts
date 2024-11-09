@@ -29,4 +29,7 @@ export const mainnet = defineChain({
       epochCreated: 106_231_941,
     },
   },
+  fees: {
+    baseFeeMultiplier: 1
+  }
 })
