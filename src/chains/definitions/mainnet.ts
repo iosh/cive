@@ -30,6 +30,6 @@ export const mainnet = defineChain({
     },
   },
   fees: {
-    baseFeeMultiplier: 1
-  }
+    baseFeeMultiplier: 1,
+  },
 })

@@ -1,5 +1,12 @@
 # cive
 
+## 0.7.1
+
+### Patch Changes
+
+- 6994600: Fixed UniversalSigValidator contract validate error
+- d4e1862: Changed baseFeeMultiplier value to 1
+
 ## 0.7.0
 
 ### Minor Changes
