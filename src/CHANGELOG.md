@@ -1,5 +1,11 @@
 # cive
 
+## 0.8.0
+
+### Minor Changes
+
+- 9ac4a3b: Renamed the updated methods in conflux-rust 2.4.1
+
 ## 0.7.1
 
 ### Patch Changes
