@@ -11,7 +11,7 @@ export async function getLocalNodeAddresses<
   client: TestClient<Transport, TChain, TAccount, false>,
 ): Promise<GetLocalNodeAddressesReturnType> {
   const result = await client.request({
-    method: 'accounts',
+    method: 'cfx_accounts',
   })
   return result
 }

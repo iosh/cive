@@ -24,7 +24,7 @@ export async function unlockLocalNodeAccount<
 ): Promise<UnlockLocalNodeAccountReturnType> {
   const duration_ = numberToHex(duration)
   const result = await client.request({
-    method: 'unlock_account',
+    method: 'cfx_unlockAccount',
     params: [address, password, duration_],
   })
   return result

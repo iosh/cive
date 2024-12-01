@@ -12,7 +12,7 @@ export async function sayHelloLocalNode<
 ): Promise<SayHelloLocalNodeReturnType> {
   const result = await client.request(
     {
-      method: 'sayhello',
+      method: 'test_sayHello',
     },
     {
       retryCount: 30,

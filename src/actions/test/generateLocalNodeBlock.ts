@@ -19,7 +19,7 @@ export async function generateLocalNodeBlock<
   { numTxs, blockSizeLimit }: GenerateLocalNodeBlockParameters,
 ): Promise<GenerateLocalNodeBlockReturnTYpe> {
   const result = await client.request({
-    method: 'generateoneblock',
+    method: 'test_generateOneBlock',
     params: [numTxs, blockSizeLimit],
   })
   return result

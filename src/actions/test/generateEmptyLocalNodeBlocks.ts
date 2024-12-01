@@ -17,7 +17,7 @@ export async function generateEmptyLocalNodeBlocks<
   { numBlocks }: GenerateEmptyLocalNodeBlocksParameters,
 ): Promise<GenerateEmptyLocalNodeBlocksReturnType> {
   const result = await client.request({
-    method: 'generate_empty_blocks',
+    method: 'test_generateEmptyBlocks',
     params: [numBlocks],
   })
   return result

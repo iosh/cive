@@ -17,7 +17,7 @@ export async function createLocalNodeAccount<
   { password }: CreateLocalNodeAccountParameters,
 ): Promise<CreateLocalNodeAccountReturnType> {
   const address = await client.request({
-    method: 'new_account',
+    method: 'cfx_newAccount',
     params: [password],
   })
 

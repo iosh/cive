@@ -13,7 +13,7 @@ export async function getCurrentSyncPhase<
   client: TestClient<Transport, TChain, TAccount, false>,
 ): Promise<GetCurrentSyncPhaseReturnType> {
   const result = await client.request({
-    method: 'current_sync_phase',
+    method: 'debug_currentSyncPhase',
   })
   return result
 }

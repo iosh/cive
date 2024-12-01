@@ -17,7 +17,7 @@ export async function lockLocalNodeAccount<
   { address }: LockLocalNodeAccountParameters,
 ): Promise<LockLocalNodeAccountReturnType> {
   const result = await client.request({
-    method: 'lock_account',
+    method: 'cfx_lockAccount',
     params: [address],
   })
 

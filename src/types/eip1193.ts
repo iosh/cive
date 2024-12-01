@@ -789,7 +789,7 @@ export type WalletRpcSchema = [
 
 export type TestRpcSchema = [
   {
-    Method: 'txpool_clear'
+    Method: 'debug_clearTxPool'
     Parameters: undefined
     ReturnType: undefined
   },
@@ -797,7 +797,7 @@ export type TestRpcSchema = [
    * @description Returns the list of addresses in the local node.
    */
   {
-    Method: 'accounts'
+    Method: 'cfx_accounts'
     Parameters: undefined
     ReturnType: Address[]
   },
@@ -805,7 +805,7 @@ export type TestRpcSchema = [
    * @description Creates a new account in the local node.
    */
   {
-    Method: 'new_account'
+    Method: 'cfx_newAccount'
     Parameters: [password: string]
     ReturnType: Address
   },
@@ -813,7 +813,7 @@ export type TestRpcSchema = [
    * @description Unlocks an account in the local node.
    */
   {
-    Method: 'unlock_account'
+    Method: 'cfx_unlockAccount'
     Parameters: [address: Address, password: string, duration?: Quantity]
     ReturnType: boolean
   },
@@ -821,27 +821,27 @@ export type TestRpcSchema = [
    * @description Locks an account in the local node.
    */
   {
-    Method: 'lock_account'
+    Method: 'cfx_lockAccount'
     Parameters: [address: Address]
     ReturnType: boolean
   },
   {
-    Method: 'generateoneblock'
+    Method: 'test_generateOneBlock'
     Parameters: [numTxs: number, blockSizeLimit: number]
     ReturnType: Hash
   },
   {
-    Method: 'sayhello'
+    Method: 'test_sayHello'
     Parameters: undefined
     ReturnType: string
   },
   {
-    Method: 'generate_empty_blocks'
+    Method: 'test_generateEmptyBlocks'
     Parameters: [numBlocks: number]
     ReturnType: Hash[]
   },
   {
-    Method: 'current_sync_phase'
+    Method: 'debug_currentSyncPhase'
     Parameters: undefined
     ReturnType: PhaseNameType
   },

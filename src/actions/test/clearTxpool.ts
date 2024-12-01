@@ -8,6 +8,6 @@ export async function clearTxpool<
   TAccount extends Account | undefined,
 >(client: TestClient<Transport, TChain, TAccount, false>): Promise<void> {
   await client.request({
-    method: 'txpool_clear',
+    method: 'debug_clearTxPool',
   })
 }
