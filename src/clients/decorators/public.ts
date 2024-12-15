@@ -3,7 +3,7 @@ import {
   type VerifyTypedDataParameters,
   type VerifyTypedDataReturnType,
   verifyTypedData,
-} from '../../actions/public//verifyTypedData.js'
+} from '../../actions/public/verifyTypedData.js'
 import {
   type CallParameters,
   type CallReturnType,
