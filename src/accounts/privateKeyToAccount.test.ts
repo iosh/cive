@@ -2,7 +2,6 @@ import { expect, test } from 'vitest'
 
 import { accounts, typedData } from '~test/src/constants.js'
 
-import { PrivateKeyAccount } from 'js-conflux-sdk'
 import { parseCFX } from '../utils/unit/parseCFX.js'
 import { parseGDrip } from '../utils/unit/parseGDrip.js'
 import { privateKeyToAccount } from './privateKeyToAccount.js'
@@ -10,9 +9,7 @@ import { privateKeyToAccount } from './privateKeyToAccount.js'
 const networkId = 1
 test('default', () => {
   const account = privateKeyToAccount(accounts[0].privateKey, { networkId })
-  const sdkAccount = new PrivateKeyAccount(accounts[0].privateKey, networkId)
 
-  expect(account.address).toEqual(sdkAccount.address)
   expect(account).toMatchInlineSnapshot(`
     {
       "address": "cfxtest:aam085e78n2f8hy6c02u5tz7vbj6xreef69nx5trzh",

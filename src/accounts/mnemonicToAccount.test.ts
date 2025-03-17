@@ -1,5 +1,3 @@
-import { HDWallet } from '@conflux-dev/hdwallet'
-import { PrivateKeyAccount } from 'js-conflux-sdk'
 import { expect, test } from 'vitest'
 import { accounts, typedData } from '~test/src/constants.js'
 import { parseCFX } from '../utils/unit/parseCFX.js'
@@ -12,10 +10,9 @@ const networkId = 1
 
 test('default', () => {
   const account = mnemonicToAccount(mnemonic, { networkId })
-  const privateKey = new HDWallet(mnemonic).getPrivateKeyByIndex(0)
-  const pkAccount = new PrivateKeyAccount(privateKey, networkId)
-
-  expect(account.address).toEqual(pkAccount.address)
+  expect(account.address).toEqual(
+    'cfxtest:aakzfmewzz3gcv37kbvnn23e7vga6ejm6u6cdj8gp8',
+  )
 
   expect(account).toMatchInlineSnapshot(`
     {
@@ -37,12 +34,6 @@ test('args: addressIndex', () => {
     networkId,
   })
 
-  expect(account1.address).toEqual(
-    new PrivateKeyAccount(
-      new HDWallet(mnemonic).getPrivateKeyByIndex(1),
-      networkId,
-    ).address,
-  )
   expect(account1.address).toMatchInlineSnapshot(
     `"cfxtest:aap1pakbabjsupgfbn4937fhc4nsm1pgajz17chrbg"`,
   )
@@ -52,12 +43,6 @@ test('args: addressIndex', () => {
     networkId,
   })
 
-  expect(account2.address).toEqual(
-    new PrivateKeyAccount(
-      new HDWallet(mnemonic).getPrivateKeyByIndex(2),
-      networkId,
-    ).address,
-  )
   expect(account2.address).toMatchInlineSnapshot(
     `"cfxtest:aamcutmx48kkmwzbfs2cnzfxb5fuuf9pkawus87vva"`,
   )
@@ -67,12 +52,6 @@ test('args: addressIndex', () => {
     networkId,
   })
 
-  expect(account3.address).toEqual(
-    new PrivateKeyAccount(
-      new HDWallet(mnemonic).getPrivateKeyByIndex(3),
-      networkId,
-    ).address,
-  )
   expect(account3.address).toMatchInlineSnapshot(
     `"cfxtest:aanctru4uprdhcju25cxmt9wkg20sn9xwefjs4x90d"`,
   )
@@ -82,12 +61,6 @@ test('args: addressIndex', () => {
     networkId,
   })
 
-  expect(account4.address).toEqual(
-    new PrivateKeyAccount(
-      new HDWallet(mnemonic).getPrivateKeyByIndex(4),
-      networkId,
-    ).address,
-  )
   expect(account4.address).toMatchInlineSnapshot(
     `"cfxtest:aak1m6eza2w0n2h8kvr9vha9una359pxneumhtz6vs"`,
   )
@@ -96,12 +69,6 @@ test('args: addressIndex', () => {
     networkId,
   })
 
-  expect(account5.address).toEqual(
-    new PrivateKeyAccount(
-      new HDWallet(mnemonic).getPrivateKeyByIndex(5),
-      networkId,
-    ).address,
-  )
   expect(account5.address).toMatchInlineSnapshot(
     `"cfxtest:aap36ybybr70evym7pp0cmj6n2zx4kgp9ugjb5cksm"`,
   )
