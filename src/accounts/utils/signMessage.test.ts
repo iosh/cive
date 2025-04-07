@@ -1,17 +1,9 @@
 import { expect, test } from 'vitest'
 
-import { PersonalMessage } from 'js-conflux-sdk'
 import { accounts } from '~test/src/constants.js'
 import { signMessage } from './signMessage.js'
 
 test('default', async () => {
-  expect(
-    await signMessage({
-      message: 'hello world',
-      privateKey: accounts[0].privateKey,
-    }),
-  ).toBe(PersonalMessage.sign(accounts[0].privateKey, 'hello world'))
-
   expect(
     await signMessage({
       message: 'hello world',
@@ -26,28 +18,12 @@ test('default', async () => {
       message: '🥰🥰',
       privateKey: accounts[0].privateKey,
     }),
-  ).toBe(PersonalMessage.sign(accounts[0].privateKey, '🥰🥰'))
-
-  expect(
-    await signMessage({
-      message: '🥰🥰',
-      privateKey: accounts[0].privateKey,
-    }),
   ).toMatchInlineSnapshot(
     `"0xf553e1c07e73e5f44b31816f8f0645b7506db84408bec9297fa7b63b4d14db6741092e973859bd2e42061c1c313ebbbe20bd58f12da919003c9eb3f80ac2196400"`,
   )
 })
 
 test('raw', async () => {
-  expect(
-    await signMessage({
-      message: { raw: '0x68656c6c6f20776f726c64' },
-      privateKey: accounts[0].privateKey,
-    }),
-  ).toBe(
-    PersonalMessage.sign(accounts[0].privateKey, '0x68656c6c6f20776f726c64'),
-  )
-
   expect(
     await signMessage({
       message: { raw: '0x68656c6c6f20776f726c64' },

@@ -1,4 +1,3 @@
-import { PrivateKeyAccount } from 'js-conflux-sdk'
 import { expect, test } from 'vitest'
 import { accounts } from '~test/src/constants.js'
 import { privateKeyToAddress } from './privateKeyToAddress.js'
