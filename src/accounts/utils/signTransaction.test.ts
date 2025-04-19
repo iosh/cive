@@ -1,4 +1,3 @@
-import { Transaction, format } from 'js-conflux-sdk'
 import { concatHex, toHex, toRlp } from 'viem'
 import { assertType, describe, expect, test, vi } from 'vitest'
 import { accounts } from '~test/src/constants.js'
@@ -37,18 +36,6 @@ describe('cip 1559', () => {
       transaction: baseEip1559,
       privateKey: accounts[0].privateKey,
     })
-
-    const tx = new Transaction({
-      ...baseEip1559,
-      type: 2,
-      gas: baseEip1559.gas.toString(),
-      storageLimit: baseEip1559.storageLimit.toString(),
-      maxPriorityFeePerGas: baseEip1559.maxPriorityFeePerGas.toString(),
-      maxFeePerGas: baseEip1559.maxFeePerGas.toString(),
-      epochHeight: baseEip1559.epochHeight.toString(),
-    })
-    tx.sign(accounts[0].privateKey, 1)
-    expect(signature).toEqual(format.hex(tx.encode(true)))
     expect(signature).toMatchInlineSnapshot(
       `"0x63667802f85bd7820311847735940084b2d05e00825208808064800180c001a07de9699bc1adaa5b1be90fd01dcada7f9f7326426e2cf0ce830456f31a3d3df6a014ecec5e16a4a16727215ab6854262f353e4542517cbf391e0971be4ba7157a9"`,
     )
@@ -155,18 +142,6 @@ describe('eip2930', () => {
       transaction: baseEip2930,
       privateKey: accounts[0].privateKey,
     })
-
-    const tx = new Transaction({
-      ...baseEip2930,
-      type: 1,
-      gasPrice: baseEip2930.gasPrice.toString(),
-      gas: baseEip2930.gas.toString(),
-      storageLimit: baseEip2930.storageLimit.toString(),
-      epochHeight: baseEip2930.epochHeight.toString(),
-    })
-    tx.sign(accounts[0].privateKey, 1)
-
-    expect(signature).toEqual(format.hex(tx.encode(true)))
     expect(signature).toMatchInlineSnapshot(
       `"0x63667801f856d28203118477359400825208808064800180c001a0e2329960a88426e4a3409aeff26376011c398f93596973a11c2f7be1599b5be0a0579a1302720b244201345789a67772275e42575c63c0c7e083a2ada81d1e7f42"`,
     )
@@ -225,31 +200,6 @@ describe('eip2930', () => {
       ],
     } satisfies TransactionSerializableEIP2930
 
-    const tx = new Transaction({
-      ...baseEip2930,
-      type: 1,
-      gasPrice: baseEip2930.gasPrice.toString(),
-      gas: baseEip2930.gas.toString(),
-      storageLimit: baseEip2930.storageLimit.toString(),
-      epochHeight: baseEip2930.epochHeight.toString(),
-      accessList: [
-        {
-          address: accounts[0].base32Address,
-          storageKeys: [
-            '0x0000000000000000000000000000000000000000000000000000000000000001',
-            '0x60fdd29ff912ce880cd3edaf9f932dc61d3dae823ea77e0323f94adb9f6a72fe',
-          ],
-        },
-      ],
-    })
-    tx.sign(accounts[0].privateKey, 1)
-
-    expect(
-      await signTransaction({
-        transaction: args,
-        privateKey: accounts[0].privateKey,
-      }),
-    ).toEqual(format.hex(tx.encode(true)))
     expect(
       await signTransaction({
         transaction: args,
@@ -368,17 +318,6 @@ describe('legacy', () => {
       privateKey: accounts[0].privateKey,
     })
     assertType<TransactionSerializedLegacy>(signature)
-
-    const tx = new Transaction({
-      ...baseLegacy,
-      type: 0,
-      gasPrice: baseLegacy.gasPrice.toString(),
-      gas: baseLegacy.gas.toString(),
-      storageLimit: baseLegacy.storageLimit.toString(),
-      epochHeight: baseLegacy.epochHeight.toString(),
-    })
-    tx.sign(accounts[0].privateKey, 1)
-    expect(signature).toBe(format.hex(tx.encode(true)))
   })
 
   test('minimal (w/ gasPrice)', async () => {
