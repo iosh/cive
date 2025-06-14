@@ -1,12 +1,8 @@
 import { expect, test } from 'vitest'
 
-import { Drip } from 'js-conflux-sdk'
 import { parseCFX } from './parseCFX.js'
 
 test('converts cfx to drip', () => {
-  expect(parseCFX('6942069420.12345678912345')).toBe(
-    BigInt(Drip.fromCFX('6942069420.12345678912345').toString()),
-  )
   expect(parseCFX('6942069420.12345678912345')).toMatchInlineSnapshot(
     '6942069420123456789123450000n',
   )
@@ -50,9 +46,6 @@ test('converts cfx to drip', () => {
 test('converts cfx to gDrip', () => {
   expect(parseCFX('69420.1234567', 'gDrip')).toMatchInlineSnapshot(
     '69420123456700n',
-  )
-  expect(parseCFX('69420.1234567', 'gDrip')).toBe(
-    BigInt(Drip.fromCFX('69420.1234567').toGDrip()),
   )
   expect(parseCFX('69420', 'gDrip')).toMatchInlineSnapshot('69420000000000n')
   expect(parseCFX('1', 'gDrip')).toMatchInlineSnapshot('1000000000n')
