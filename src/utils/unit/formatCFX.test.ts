@@ -2,12 +2,7 @@ import { expect, test } from 'vitest'
 
 import { formatCFX } from './formatCFX.js'
 
-import { Drip } from 'js-conflux-sdk'
-
 test('converts drip to cfx', () => {
-  expect(formatCFX(46947002750148372109389793665n)).toBe(
-    new Drip(46947002750148372109389793665n).toCFX(),
-  )
   expect(formatCFX(46947002750148372109389793665n)).toMatchInlineSnapshot(
     `"46947002750.148372109389793665"`,
   )
@@ -67,10 +62,6 @@ test('converts drip to cfx', () => {
 })
 
 test('converts gDrip to cfx', () => {
-  expect(formatCFX(82079252892807n, 'gDrip')).toBe(
-    new Drip(82079252892807n).toGDrip(),
-  )
-
   expect(formatCFX(82079252892807n, 'gDrip')).toMatchInlineSnapshot(
     `"82079.252892807"`,
   )

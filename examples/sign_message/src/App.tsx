@@ -1,11 +1,11 @@
 import {
+  http,
   type Address,
   type Hex,
   type SignMessageErrorType,
   createPublicClient,
   createWalletClient,
   custom,
-  http,
 } from 'cive'
 import { testnet } from 'cive/chains'
 import { useCallback, useState } from 'react'

@@ -1,11 +1,8 @@
 import { expect, test } from 'vitest'
 
-import { Drip } from 'js-conflux-sdk'
 import { formatGDrip } from './formatGDrip.js'
 
 test('converts wei to gwei', () => {
-  expect(formatGDrip(82079252892807n)).toBe(new Drip(82079252892807n).toGDrip())
-
   expect(formatGDrip(82079252892807n)).toMatchInlineSnapshot(
     `"82079.252892807"`,
   )

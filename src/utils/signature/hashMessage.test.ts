@@ -4,7 +4,6 @@ import { stringToBytes, stringToHex } from 'viem'
 import { hashMessage } from './hashMessage.js'
 
 test('to hex', () => {
-
   expect(hashMessage('hello world')).toMatchInlineSnapshot(
     `"0x33bfa24b39fec6c4c65bab7884c081feec7776721a83701540a87c90fc3eb9b4"`,
   )
@@ -14,7 +13,6 @@ test('to hex', () => {
   )
 
   const hex = stringToHex('hello world')
-
 
   expect(hashMessage(hex)).toMatchInlineSnapshot(
     `"0x7457b1b16dc2ffbe1233647758087acecd2a76650f422da58dead59310b13b7d"`,

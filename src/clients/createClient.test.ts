@@ -4,9 +4,9 @@ import type { EIP1193RequestFn, EIP1474Methods } from '../types/eip1193.js'
 import { createClient } from './createClient.js'
 import { publicActions } from './decorators/public.js'
 import { createTransport } from './transports/createTransport.js'
+import { custom } from './transports/custom.js'
 import { http } from './transports/http.js'
 import { webSocket } from './transports/webSocket.js'
-import { custom } from './transports/custom.js'
 
 test('creates', () => {
   const mockTransport = () =>

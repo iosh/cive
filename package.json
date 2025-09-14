@@ -26,7 +26,6 @@
     "@types/bun": "^1.1.6",
     "@types/node": "^20.14.10",
     "cip-23": "^0.2.0",
-    "js-conflux-sdk": "^2.4.7",
     "typescript": "^5.5.3",
     "vitest": "^2.1.3"
   }

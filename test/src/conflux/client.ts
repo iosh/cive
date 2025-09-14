@@ -1,4 +1,4 @@
-import { type Config } from '@xcfx/node'
+import type { Config } from '@xcfx/node'
 import type { Account, Address } from '~cive/accounts/types.js'
 import { localhostNode } from '~cive/chains/definitions/localhost.js'
 import {

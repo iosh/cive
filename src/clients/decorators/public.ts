@@ -1,10 +1,5 @@
 import type { Account, Address } from '../../accounts/types.js'
 import {
-  type VerifyTypedDataParameters,
-  type VerifyTypedDataReturnType,
-  verifyTypedData,
-} from '../../actions/public/verifyTypedData.js'
-import {
   type CallParameters,
   type CallReturnType,
   call,
@@ -318,6 +313,11 @@ import {
   type VerifyMessageReturnType,
   verifyMessage,
 } from '../../actions/public/verifyMessage.js'
+import {
+  type VerifyTypedDataParameters,
+  type VerifyTypedDataReturnType,
+  verifyTypedData,
+} from '../../actions/public/verifyTypedData.js'
 import {
   type WaitForTransactionReceiptParameters,
   type WaitForTransactionReceiptReturnType,
