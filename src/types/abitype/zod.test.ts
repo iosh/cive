@@ -79,21 +79,9 @@ describe('AbiSchema', () => {
           type: 'function',
         },
       ]),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      [ZodError: [
-        {
-          "validation": "regex",
-          "code": "invalid_string",
-          "message": "Invalid",
-          "path": [
-            0,
-            "inputs",
-            0,
-            "type"
-          ]
-        }
-      ]]
-    `)
+    ).rejects.toMatchObject({
+      issues: [{ code: 'invalid_union', path: [0] }],
+    })
   })
 
   describe('behavior', () => {
@@ -293,20 +281,9 @@ describe('AbiFunction', () => {
         stateMutability: 'view',
         type: 'function',
       }),
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`
-      [ZodError: [
-        {
-          "validation": "regex",
-          "code": "invalid_string",
-          "message": "Invalid",
-          "path": [
-            "inputs",
-            0,
-            "type"
-          ]
-        }
-      ]]
-    `)
+    ).rejects.toMatchObject({
+      issues: [{ code: 'invalid_union', path: ['inputs', 0] }],
+    })
   })
 
   describe('behavior', () => {

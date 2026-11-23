@@ -4,14 +4,14 @@ description: "Prepare repository and all dependencies"
 runs:
   using: "composite"
   steps:
-    - uses: oven-sh/setup-bun@v2
+    - uses: oven-sh/setup-bun@v2.2.0
       with:
         bun-version: latest
 
     - name: Set up pnpm
-      uses: pnpm/action-setup@v4
+      uses: pnpm/action-setup@v6.1.1
       with:
-        version: 9
+        version: 12.21.0
         run_install: |
           - recursive: true
             args: [--frozen-lockfile, --strict-peer-dependencies]

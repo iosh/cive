@@ -66,7 +66,7 @@ describe('local account', async () => {
       message: 'hello world',
     })
 
-    expect(
+    await expect(
       verifyHash(client, {
         address: sourceAccount.address,
         hash: hashMessage('hello world'),

@@ -18,11 +18,10 @@ test('default', async () => {
 
   expect(await getPoSBlock(client, { blockNumber: 1n })).toBeDefined()
 
-  expect(
-    async () =>
-      await getPoSBlock(client, {
-        blockHash:
-          '0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b',
-      }),
+  await expect(
+    getPoSBlock(client, {
+      blockHash:
+        '0x88df016429689c079f3b2f6ad39fa052532c56795b733da78a91ebe6a713944b',
+    }),
   ).rejects.toThrowError('could not be found')
 })

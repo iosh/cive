@@ -102,7 +102,6 @@ export type GetContractParameters<
    * - [`getEvents`](https://cive.zyx.ee/docs/contract/getContractEvents)
    * - [`read`](http://localhost:5173/docs/contract/readContract#readcontract)
    * - [`simulate`](http://localhost:5173/docs/contract/simulateContract#simulatecontract)
-   * - [`watchEvent`](TODO)
    *
    * If you pass in a [`walletClient`](https://viem.sh/docs/clients/wallet), the following methods are available:
    *

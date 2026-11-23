@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@types/react": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "typescript": "latest",
-    "vocs": "latest",
+    "react": "~19.3.1",
+    "react-dom": "~19.3.1",
+    "typescript": "^5.6.3",
+    "vite": "^8.3.8",
+    "vocs": "^2.14.1",
+    "waku": "1.0.0-rc.5",
     "cive": "workspace:*"
   }
 }

@@ -4,10 +4,10 @@ import { defineConfig } from 'vitest/config'
 export default defineConfig({
   test: {
     alias: {
-      '~cive': join(__dirname, '../src'),
-      '~test': join(__dirname, '.'),
+      '~cive': join(import.meta.dirname, '../src'),
+      '~test': import.meta.dirname,
     },
-    setupFiles: [join(__dirname, './setup.ts')],
+    setupFiles: [join(import.meta.dirname, 'setup.ts')],
     testTimeout: 50000,
     hookTimeout: 50000,
   },

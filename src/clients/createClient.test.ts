@@ -38,7 +38,7 @@ test('creates', () => {
       "transport": {
         "key": "mock",
         "name": "Mock Transport",
-        "request": [MockFunction spy],
+        "request": [MockFunction],
         "retryCount": 3,
         "retryDelay": 150,
         "timeout": undefined,
@@ -226,7 +226,7 @@ describe('config', () => {
         "transport": {
           "key": "mock",
           "name": "Mock Transport",
-          "request": [MockFunction spy],
+          "request": [MockFunction],
           "retryCount": 3,
           "retryDelay": 150,
           "timeout": undefined,
@@ -272,7 +272,7 @@ describe('config', () => {
         "transport": {
           "key": "mock",
           "name": "Mock Transport",
-          "request": [MockFunction spy],
+          "request": [MockFunction],
           "retryCount": 3,
           "retryDelay": 150,
           "timeout": undefined,
@@ -313,7 +313,7 @@ describe('config', () => {
         "transport": {
           "key": "mock",
           "name": "Mock Transport",
-          "request": [MockFunction spy],
+          "request": [MockFunction],
           "retryCount": 3,
           "retryDelay": 150,
           "timeout": undefined,
@@ -354,7 +354,7 @@ describe('config', () => {
         "transport": {
           "key": "mock",
           "name": "Mock Transport",
-          "request": [MockFunction spy],
+          "request": [MockFunction],
           "retryCount": 3,
           "retryDelay": 150,
           "timeout": undefined,
@@ -395,7 +395,7 @@ describe('config', () => {
         "transport": {
           "key": "mock",
           "name": "Mock Transport",
-          "request": [MockFunction spy],
+          "request": [MockFunction],
           "retryCount": 3,
           "retryDelay": 150,
           "timeout": undefined,
@@ -436,7 +436,7 @@ describe('config', () => {
         "transport": {
           "key": "mock",
           "name": "Mock Transport",
-          "request": [MockFunction spy],
+          "request": [MockFunction],
           "retryCount": 3,
           "retryDelay": 150,
           "timeout": undefined,

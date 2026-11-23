@@ -51,6 +51,7 @@ const hash = await walletClient.sendTransaction({
 
 ```ts [client.ts (JSON-RPC Account)]
 import { createWalletClient, custom } from "cive";
+import { mainnet } from "cive/chains";
 
 const [account] = await window.fluent.request({
   method: "cfx_requestAccounts",
@@ -58,6 +59,7 @@ const [account] = await window.fluent.request({
 
 export const walletClient = createWalletClient({
   account,
+  chain: mainnet,
   transport: custom(window.fluent!),
 });
 ```
@@ -69,6 +71,7 @@ import { mainnet } from "cive/chains";
 
 export const walletClient = createWalletClient({
   account: privateKeyToAccount("0x...", { networkId: mainnet.id }),
+  chain: mainnet,
   transport: http(),
 });
 ```

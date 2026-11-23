@@ -55,7 +55,7 @@ import { abiItem } from "./abi.ts";
 
 const value = decodeFunctionResult({
   networkId: mainnet.id,
-  abi: [Abi],
+  abi: [abiItem],
   functionName: "ownerOf", // [!code --]
   data: "0x0000000000000000000000001c2e0c63246a30e121042d7121ee79a6a7012218",
 });
@@ -63,13 +63,13 @@ const value = decodeFunctionResult({
 ```
 
 ```ts [abi.ts] filename="abi.ts"
-const abiItem = {
+export const abiItem = {
   inputs: [{ name: "tokenId", type: "uint256" }],
   name: "ownerOf",
   outputs: [{ name: "", type: "address" }],
   stateMutability: "view",
   type: "function",
-};
+} as const;
 ```
 
 :::

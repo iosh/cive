@@ -18,7 +18,7 @@ test('default', async () => {
     numTxs: 1,
     blockSizeLimit: 1,
   })
-  expect(
-    async () => await traceBlock(client, { blockHash }),
-  ).rejects.toThrowError(BlockNotFoundError)
+  await expect(traceBlock(client, { blockHash })).rejects.toThrowError(
+    BlockNotFoundError,
+  )
 })

@@ -140,7 +140,7 @@ test('args: gas', async () => {
     await estimateGasAndCollateral(client, {
       account: targetAccount.address,
       to: sourceAccount.address,
-      gas: parseGDrip('2'),
+      gas: 100_000n,
       value: parseCFX('1'),
     }),
   ).toMatchInlineSnapshot(`
@@ -233,7 +233,7 @@ describe('local account', () => {
           networkId: accounts[0].netId,
         }),
         to: accounts[1].base32Address,
-        gas: parseGDrip('2'),
+        gas: 100_000n,
         value: parseCFX('1'),
       }),
     ).toMatchInlineSnapshot(`

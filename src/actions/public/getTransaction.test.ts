@@ -1,6 +1,8 @@
+import { numberToHex } from 'viem/utils'
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
+import { parseGDrip } from '../../utils/unit/parseGDrip.js'
 import { generateEmptyLocalNodeBlocks } from '../test/generateEmptyLocalNodeBlocks.js'
 import { mine } from '../test/mine.js'
 import { sendTransaction } from '../wallet/sendTransaction.js'
@@ -71,9 +73,13 @@ test('default', async () => {
 
 test('get transaction 1559', async () => {
   await generateEmptyLocalNodeBlocks(client, { numBlocks: 10 })
+  const maxFeePerGas = parseGDrip('1')
+  const maxPriorityFeePerGas = parseGDrip('0.1')
   const hash = await sendTransaction(client, {
     account: sourceAccount,
     to: sourceAccount.address,
+    maxFeePerGas,
+    maxPriorityFeePerGas,
   })
 
   await mine(client, { numTxs: 1 })
@@ -110,8 +116,8 @@ test('get transaction 1559', async () => {
   expect(tx.type).toMatchInlineSnapshot(`"eip1559"`)
   expect(tx.chainId).toMatchInlineSnapshot('201029')
   expect(tx.data).toMatchInlineSnapshot(`"0x"`)
-  expect(tx.maxFeePerGas).toMatchInlineSnapshot('1n')
-  expect(tx.maxPriorityFeePerGas).toMatchInlineSnapshot('0n')
-  expect(tx.gasPrice).toMatchInlineSnapshot('1n')
-  expect(tx.yParity).toMatchInlineSnapshot(`"0x1"`)
+  expect(tx.maxFeePerGas).toBe(maxFeePerGas)
+  expect(tx.maxPriorityFeePerGas).toBe(maxPriorityFeePerGas)
+  expect(tx.gasPrice).toBe(maxFeePerGas)
+  expect(tx.yParity).toBe(numberToHex(tx.v))
 })

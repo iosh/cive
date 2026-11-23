@@ -4,9 +4,9 @@
   "type": "module",
   "devDependencies": {
     "@types/dockerode": "^3.3.29",
-    "@types/node": "^20.14.5"
+    "@types/node": "^24.0.0"
   },
   "dependencies": {
-    "@xcfx/node": "^0.3.2"
+    "@xcfx/node": "^0.8.0"
   }
 }

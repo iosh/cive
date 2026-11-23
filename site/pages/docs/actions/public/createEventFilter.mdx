@@ -74,7 +74,7 @@ import { parseAbiItem } from "cive"; // [!code focus]
 import { publicClient } from "./client";
 
 const filter = await publicClient.createEventFilter({
-  address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+  address: "cfx:...",
   event: parseAbiItem(
     // [!code focus]
     "event Transfer(address indexed from, address indexed to, uint256 value)" // [!code focus]
@@ -99,11 +99,12 @@ By default, `event` accepts the [`AbiEvent`](#TODO) type:
 ```ts twoslash [example.ts]
 import { publicClient } from "./client";
 
-const filter = await publicClient.createEventFilter(publicClient, {
+const filter = await publicClient.createEventFilter({
   address: "cfx:...",
   event: {
     // [!code focus:99]
     name: "Transfer",
+    type: "event",
     inputs: [
       { type: "address", indexed: true, name: "from" },
       { type: "address", indexed: true, name: "to" },

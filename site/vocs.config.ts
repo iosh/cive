@@ -1,4 +1,4 @@
-import { defineConfig } from 'vocs'
+import { defineConfig } from 'vocs/config'
 
 export default defineConfig({
   title: 'Cive',
@@ -482,5 +482,7 @@ export default defineConfig({
       },
     ],
   },
+  renderStrategy: 'full-static',
   rootDir: '.',
+  srcDir: '.',
 })
