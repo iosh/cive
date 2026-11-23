@@ -29,7 +29,6 @@ jobs:
         uses: actions/setup-node@v7.1.0
         with:
           node-version: 24
-          registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
         uses: ./.github/actions/install-dependencies
@@ -40,5 +39,3 @@ jobs:
           create-github-releases: ${{ github.ref == 'refs/heads/main' }}
           publish-script: pnpm changeset:publish
           version-script: pnpm changeset:version
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

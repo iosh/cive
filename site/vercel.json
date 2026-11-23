@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm run build",
+  "buildCommand": "pnpm --workspace-root build && pnpm build",
   "installCommand": "pnpm install",
   "outputDirectory": "./docs/dist"
 }

@@ -1,6 +1,7 @@
 {
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@12.21.0",
   "scripts": {
     "bench": "vitest bench",
     "test": "pnpm build && vitest -c ./test/vitest.config.ts dev",
