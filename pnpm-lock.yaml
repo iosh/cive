@@ -74,7 +74,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -105,7 +105,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -136,7 +136,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -167,7 +167,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -198,7 +198,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -229,7 +229,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -260,7 +260,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -291,7 +291,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -322,7 +322,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -353,7 +353,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -384,7 +384,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1
@@ -415,7 +415,7 @@ importers:
         specifier: ^1.0.2
         version: 1.0.2
       cive:
-        specifier: ^0.8.1
+        specifier: ^0.8.2
         version: link:../../src
       react:
         specifier: ^18.3.1

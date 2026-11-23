@@ -1,5 +1,11 @@
 # cive
 
+## 0.8.2
+
+### Patch Changes
+
+- 77dfde1: Update dependencies.
+
 ## 0.8.1
 
 ### Patch Changes
