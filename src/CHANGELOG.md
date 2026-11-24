@@ -1,5 +1,11 @@
 # cive
 
+## 0.8.3
+
+### Patch Changes
+
+- b029e3e: Restore ESM output and TypeScript declarations.
+
 ## 0.8.2
 
 ### Patch Changes
