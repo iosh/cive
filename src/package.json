@@ -7,6 +7,22 @@
   "module": "./_esm/index.js",
   "types": "./_types/index.d.ts",
   "typings": "./_types/index.d.ts",
+  "files": [
+    "_cjs",
+    "_esm",
+    "_types",
+    "accounts",
+    "actions",
+    "chains",
+    "clients",
+    "constants",
+    "errors",
+    "types",
+    "utils",
+    "window",
+    "index.ts",
+    "CHANGELOG.md"
+  ],
   "sideEffects": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
