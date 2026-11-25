@@ -169,6 +169,12 @@ export {
 } from './address/base32AddressToHex.js'
 
 export {
+  type DecodeBase32AddressParameters,
+  type DecodeBase32AddressReturnType,
+  decodeBase32Address,
+} from './address/decodeBase32Address.js'
+
+export {
   type HexAddressToBase32Parameters,
   hexAddressToBase32,
 } from './address/hexAddressToBase32.js'
