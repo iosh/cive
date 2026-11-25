@@ -1,6 +1,6 @@
 {
   "name": "cive",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "",
   "type": "module",
   "main": "./_cjs/index.js",

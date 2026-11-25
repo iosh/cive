@@ -1,5 +1,11 @@
 # cive
 
+## 0.8.5
+
+### Patch Changes
+
+- df0fb2d: Fix Core Space message and hash verification.
+
 ## 0.8.4
 
 ### Patch Changes
