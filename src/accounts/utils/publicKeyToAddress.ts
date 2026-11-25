@@ -1,7 +1,8 @@
-import { type Hex, type Keccak256ErrorType, keccak256 } from 'viem'
+import type { Hex, Keccak256ErrorType } from 'viem'
 import type { ErrorType } from '../../errors/utils.js'
 import { hexAddressToBase32 } from '../../utils/address/hexAddressToBase32.js'
 import type { Address, AddressType } from '../types.js'
+import { publicKeyToHexAddress } from './publicKeyToHexAddress.js'
 
 export type PublicKeyToAddressParameters<
   TNetworkId extends number = number,
@@ -23,9 +24,8 @@ export function publicKeyToAddress<
   networkId,
   verbose = false,
 }: PublicKeyToAddressParameters<TNetworkId, TVerbose>) {
-  const address = keccak256(`0x${publicKey.substring(4)}`).substring(26)
   return hexAddressToBase32({
-    hexAddress: `0x1${address.substring(1)}`,
+    hexAddress: publicKeyToHexAddress(publicKey),
     networkId,
     verbose,
   }) as Address<TNetworkId, TAddressType, TVerbose>

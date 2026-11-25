@@ -1,5 +1,10 @@
-import { getAddress as getHexAddress, isAddressEqual } from 'viem'
+import {
+  getAddress as getHexAddress,
+  isAddressEqual,
+  recoverPublicKey,
+} from 'viem'
 import type { Address } from '../../accounts/types.js'
+import { publicKeyToHexAddress } from '../../accounts/utils/publicKeyToHexAddress.js'
 import type {
   ByteArray,
   Hex,
@@ -7,7 +12,7 @@ import type {
   Signature,
 } from '../../types/misc.js'
 import { base32AddressToHex } from '../address/base32AddressToHex.js'
-import { recoverMessageAddress } from './recoverMessageAddress.js'
+import { hashMessage } from './hashMessage.js'
 
 export type VerifyMessageParameters = {
   /** The address that signed the original message. */
@@ -24,8 +29,12 @@ export async function verifyMessage({
   message,
   signature,
 }: VerifyMessageParameters): Promise<VerifyMessageReturnType> {
+  const publicKey = await recoverPublicKey({
+    hash: hashMessage(message),
+    signature,
+  })
   return isAddressEqual(
     getHexAddress(base32AddressToHex({ address: address })),
-    await recoverMessageAddress({ message, signature }),
+    publicKeyToHexAddress(publicKey),
   )
 }

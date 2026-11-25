@@ -1,7 +1,9 @@
 import { afterAll, beforeAll, expect, test } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 import { accounts, getTestAccount } from '~test/src/constants.js'
+import { mnemonicToAccount } from '../../accounts/mnemonicToAccount.js'
 import { signMessage } from '../../actions/wallet/signMessage.js'
+import { hexAddressToBase32 } from '../address/hexAddressToBase32.js'
 import { verifyMessage } from './verifyMessage.js'
 
 const client = devConflux.getClient({ account: getTestAccount(accounts[0]) })
@@ -51,4 +53,40 @@ test('raw message', async () => {
       }),
     }),
   ).toBe(true)
+})
+
+test('signer address', async () => {
+  const account = mnemonicToAccount(
+    'advance income refuse grain method capable upset coast minor situate such library',
+    { networkId: accounts[0].netId },
+  )
+  const signature = await signMessage(client, {
+    account,
+    message: 'hello world',
+  })
+
+  expect(
+    await verifyMessage({
+      address: account.address,
+      message: 'hello world',
+      signature,
+    }),
+  ).toBe(true)
+  expect(
+    await verifyMessage({
+      address: account.address,
+      message: 'hello world1',
+      signature,
+    }),
+  ).toBe(false)
+  expect(
+    await verifyMessage({
+      address: hexAddressToBase32({
+        hexAddress: '0x8352a892ad7261473d4862b5e324ec4c0e110ae4',
+        networkId: accounts[0].netId,
+      }),
+      message: 'hello world',
+      signature,
+    }),
+  ).toBe(false)
 })

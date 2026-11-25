@@ -4,9 +4,10 @@ import {
   isAddressEqual,
   isErc6492Signature,
   isHex,
-  recoverAddress,
+  recoverPublicKey,
 } from 'viem/utils'
 import { serializeSignature } from '../../accounts/index.js'
+import { publicKeyToHexAddress } from '../../accounts/utils/publicKeyToHexAddress.js'
 import type { Client } from '../../clients/createClient.js'
 import type { Transport } from '../../clients/transports/createTransport.js'
 import { universalSignatureValidatorAbi } from '../../constants/abis.js'
@@ -112,9 +113,10 @@ export async function verifyHash<chain extends Chain | undefined>(
   } catch (error) {
     // Fallback attempt to verify the signature via ECDSA recovery.
     try {
+      const publicKey = await recoverPublicKey({ hash, signature })
       const verified = isAddressEqual(
         base32AddressToHex({ address: getAddress(address) }),
-        await recoverAddress({ hash, signature }),
+        publicKeyToHexAddress(publicKey),
       )
       if (verified) return true
     } catch {}

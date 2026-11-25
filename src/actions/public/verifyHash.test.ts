@@ -1,9 +1,10 @@
-import { afterAll, beforeAll, describe, expect, test } from 'vitest'
+import { afterAll, beforeAll, describe, expect, test, vi } from 'vitest'
 import { devConflux } from '~test/src/conflux/client.js'
 
 import { toBytes } from 'viem'
 import { accounts, getTestAccount } from '../../../test/src/constants.js'
 
+import { mnemonicToAccount } from '../../accounts/mnemonicToAccount.js'
 import { hashMessage } from '../../utils/index.js'
 import { parseSignature } from '../../utils/signature/parseSignature.js'
 
@@ -20,6 +21,7 @@ beforeAll(async () => {
 })
 
 afterAll(async () => {
+  vi.restoreAllMocks()
   await devConflux.stop()
 })
 
@@ -71,6 +73,28 @@ describe('local account', async () => {
         address: sourceAccount.address,
         hash: hashMessage('hello world'),
         signature: parseSignature(signature),
+      }),
+    ).resolves.toBe(true)
+  })
+
+  test('ecdsa recovery', async () => {
+    const account = mnemonicToAccount(
+      'advance income refuse grain method capable upset coast minor situate such library',
+      { networkId: accounts[0].netId },
+    )
+    const signature = await signMessage(client, {
+      account,
+      message: 'hello world',
+    })
+    vi.spyOn(client, 'request').mockRejectedValueOnce(
+      new Error('RPC request failed'),
+    )
+
+    await expect(
+      verifyHash(client, {
+        address: account.address,
+        hash: hashMessage('hello world'),
+        signature,
       }),
     ).resolves.toBe(true)
   })
