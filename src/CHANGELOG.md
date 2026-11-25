@@ -1,5 +1,11 @@
 # cive
 
+## 0.8.4
+
+### Patch Changes
+
+- fdbfc83: Expose `decodeBase32Address` from `cive/utils`.
+
 ## 0.8.3
 
 ### Patch Changes
